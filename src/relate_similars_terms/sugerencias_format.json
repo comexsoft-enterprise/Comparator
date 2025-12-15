@@ -1,0 +1,2262 @@
+[
+  {
+    "original": "bottle",
+    "original_normalized": "BOTTLE",
+    "amount": 5165,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "box",
+    "original_normalized": "BOX",
+    "amount": 4405,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bag",
+    "original_normalized": "BAG",
+    "amount": 3657,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pack",
+    "original_normalized": "PACK",
+    "amount": 1976,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "jar",
+    "original_normalized": "JAR",
+    "amount": 1735,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tray",
+    "original_normalized": "TRAY",
+    "amount": 1583,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "can",
+    "original_normalized": "CAN",
+    "amount": 1514,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bulk",
+    "original_normalized": "BULK",
+    "amount": 1141,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tub",
+    "original_normalized": "TUB",
+    "amount": 763,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "package",
+    "original_normalized": "PACKAGE",
+    "amount": 581,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bar",
+    "original_normalized": "BAR",
+    "amount": 398,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "piece",
+    "original_normalized": "PIECE",
+    "amount": 356,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "unit",
+    "original_normalized": "UNIT",
+    "amount": 215,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "carton",
+    "original_normalized": "CARTON",
+    "amount": 192,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "brick",
+    "original_normalized": "BRICK",
+    "amount": 159,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cup",
+    "original_normalized": "CUP",
+    "amount": 125,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "wedge",
+    "original_normalized": "WEDGE",
+    "amount": 119,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "plate",
+    "original_normalized": "PLATE",
+    "amount": 110,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "set",
+    "original_normalized": "SET",
+    "amount": 108,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "blister",
+    "original_normalized": "BLISTER",
+    "amount": 105,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "spray",
+    "original_normalized": "SPRAY",
+    "amount": 93,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "roll",
+    "original_normalized": "ROLL",
+    "amount": 91,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum pack",
+    "original_normalized": "VACUUM PACK",
+    "amount": 85,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "block",
+    "original_normalized": "BLOCK",
+    "amount": 83,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cardboard box",
+    "original_normalized": "CARDBOARD BOX",
+    "amount": 82,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "unpackaged",
+    "original_normalized": "UNPACKAGED",
+    "amount": 82,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "weight",
+    "original_normalized": "WEIGHT",
+    "amount": 81,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "brik",
+    "original_normalized": "BRIK",
+    "amount": 80,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "shrink wrap",
+    "original_normalized": "SHRINK WRAP",
+    "amount": 75,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "container",
+    "original_normalized": "CONTAINER",
+    "amount": 72,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-packed",
+    "original_normalized": "VACUUM - PACKED",
+    "amount": 67,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bowl",
+    "original_normalized": "BOWL",
+    "amount": 62,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "display box",
+    "original_normalized": "DISPLAY BOX",
+    "amount": 57,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "sachet",
+    "original_normalized": "SACHET",
+    "amount": 54,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pan",
+    "original_normalized": "PAN",
+    "amount": 49,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "glass",
+    "original_normalized": "GLASS",
+    "amount": 42,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-sealed",
+    "original_normalized": "VACUUM - SEALED",
+    "amount": 41,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bucket",
+    "original_normalized": "BUCKET",
+    "amount": 39,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "packet",
+    "original_normalized": "PACKET",
+    "amount": 39,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "loaf",
+    "original_normalized": "LOAF",
+    "amount": 35,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tube",
+    "original_normalized": "TUBE",
+    "amount": 34,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "drum",
+    "original_normalized": "DRUM",
+    "amount": 33,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cube",
+    "original_normalized": "CUBE",
+    "amount": 33,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "spray bottle",
+    "original_normalized": "SPRAY BOTTLE",
+    "amount": 31,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pot",
+    "original_normalized": "POT",
+    "amount": 30,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "refill",
+    "original_normalized": "REFILL",
+    "amount": 30,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tablet",
+    "original_normalized": "TABLET",
+    "amount": 29,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-sealed bag",
+    "original_normalized": "VACUUM - SEALED BAG",
+    "amount": 27,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "aerosol",
+    "original_normalized": "AEROSOL",
+    "amount": 26,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum packed",
+    "original_normalized": "VACUUM PACKED",
+    "amount": 25,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pouch",
+    "original_normalized": "POUCH",
+    "amount": 25,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "case",
+    "original_normalized": "CASE",
+    "amount": 25,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bottle pack",
+    "original_normalized": "BOTTLE PACK",
+    "amount": 25,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bunch",
+    "original_normalized": "BUNCH",
+    "amount": 23,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tin",
+    "original_normalized": "TIN",
+    "amount": 23,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "can pack",
+    "original_normalized": "CAN PACK",
+    "amount": 21,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "unpacked",
+    "original_normalized": "UNPACKED",
+    "amount": 20,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "carton box",
+    "original_normalized": "CARTON BOX",
+    "amount": 19,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "doypack",
+    "original_normalized": "DOYPACK",
+    "amount": 18,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "basket",
+    "original_normalized": "BASKET",
+    "amount": 17,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "dish",
+    "original_normalized": "DISH",
+    "amount": 16,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "blister pack",
+    "original_normalized": "BLISTER PACK",
+    "amount": 14,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-sealed pack",
+    "original_normalized": "VACUUM - SEALED PACK",
+    "amount": 14,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "dispenser",
+    "original_normalized": "DISPENSER",
+    "amount": 14,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "sliced",
+    "original_normalized": "SLICED",
+    "amount": 14,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "barrel",
+    "original_normalized": "BARREL",
+    "amount": 13,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "kg",
+    "original_normalized": "KG",
+    "amount": 13,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "slice",
+    "original_normalized": "SLICE",
+    "amount": 12,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "jug",
+    "original_normalized": "JUG",
+    "amount": 11,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bundle",
+    "original_normalized": "BUNDLE",
+    "amount": 10,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "whole",
+    "original_normalized": "WHOLE",
+    "amount": 9,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tarrina",
+    "original_normalized": "TARRINA",
+    "amount": 9,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "sack",
+    "original_normalized": "SACK",
+    "amount": 8,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "saucepan",
+    "original_normalized": "SAUCEPAN",
+    "amount": 8,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "log",
+    "original_normalized": "LOG",
+    "amount": 7,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pad",
+    "original_normalized": "PAD",
+    "amount": 7,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bin",
+    "original_normalized": "BIN",
+    "amount": 7,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "mini bottle",
+    "original_normalized": "MINI BOTTLE",
+    "amount": 6,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pallet",
+    "original_normalized": "PALLET",
+    "amount": 6,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "ring",
+    "original_normalized": "RING",
+    "amount": 6,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "mold",
+    "original_normalized": "MOLD",
+    "amount": 6,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "stick",
+    "original_normalized": "STICK",
+    "amount": 6,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "ud",
+    "original_normalized": "UD",
+    "amount": 6,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "rolls",
+    "original_normalized": "ROLLS",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "wall-mounted",
+    "original_normalized": "WALL - MOUNTED",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bag-in-box",
+    "original_normalized": "BAG - IN - BOX",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "mesh bag",
+    "original_normalized": "MESH BAG",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bag in box",
+    "original_normalized": "BAG IN BOX",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cylinder",
+    "original_normalized": "CYLINDER",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "unknown",
+    "original_normalized": "UNKNOWN",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pair",
+    "original_normalized": "PAIR",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "weight-based",
+    "original_normalized": "WEIGHT - BASED",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "knife",
+    "original_normalized": "KNIFE",
+    "amount": 5,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "capsule",
+    "original_normalized": "CAPSULE",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "set of 6",
+    "original_normalized": "SET OF 6",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "sheet",
+    "original_normalized": "SHEET",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "map",
+    "original_normalized": "MAP",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "half piece",
+    "original_normalized": "HALF PIECE",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "board",
+    "original_normalized": "BOARD",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "display",
+    "original_normalized": "DISPLAY",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum sealed pack",
+    "original_normalized": "VACUUM SEALED PACK",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "capsules",
+    "original_normalized": "CAPSULES",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "canister",
+    "original_normalized": "CANISTER",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "placemat",
+    "original_normalized": "PLACEMAT",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "grinder",
+    "original_normalized": "GRINDER",
+    "amount": 4,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "mesh",
+    "original_normalized": "MESH",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "spray can",
+    "original_normalized": "SPRAY CAN",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "lid",
+    "original_normalized": "LID",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "by weight",
+    "original_normalized": "BY WEIGHT",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-sealed piece",
+    "original_normalized": "VACUUM - SEALED PIECE",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "unspecified",
+    "original_normalized": "UNSPECIFIED",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "book",
+    "original_normalized": "BOOK",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "skewer",
+    "original_normalized": "SKEWER",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cone",
+    "original_normalized": "CONE",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "wok",
+    "original_normalized": "WOK",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "link",
+    "original_normalized": "LINK",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "mat",
+    "original_normalized": "MAT",
+    "amount": 3,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "glass jar",
+    "original_normalized": "GLASS JAR",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-sealed package",
+    "original_normalized": "VACUUM - SEALED PACKAGE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "keg",
+    "original_normalized": "KEG",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "service",
+    "original_normalized": "SERVICE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "unspecified packaging",
+    "original_normalized": "UNSPECIFIED PACKAGING",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pole",
+    "original_normalized": "POLE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "flow pack",
+    "original_normalized": "FLOW PACK",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "wheel",
+    "original_normalized": "WHEEL",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "stand",
+    "original_normalized": "STAND",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cart",
+    "original_normalized": "CART",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "shelf",
+    "original_normalized": "SHELF",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum sealed",
+    "original_normalized": "VACUUM SEALED",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "kilogram",
+    "original_normalized": "KILOGRAM",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "skinpack",
+    "original_normalized": "SKINPACK",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-packed piece",
+    "original_normalized": "VACUUM - PACKED PIECE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "wrap",
+    "original_normalized": "WRAP",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "flat plate",
+    "original_normalized": "FLAT PLATE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum packaging",
+    "original_normalized": "VACUUM PACKAGING",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "shrink-wrapped pack",
+    "original_normalized": "SHRINK - WRAPPED PACK",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cartridge",
+    "original_normalized": "CARTRIDGE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "egg",
+    "original_normalized": "EGG",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "syringe",
+    "original_normalized": "SYRINGE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "device",
+    "original_normalized": "DEVICE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "loose",
+    "original_normalized": "LOOSE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "aerosol can",
+    "original_normalized": "AEROSOL CAN",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "multipack",
+    "original_normalized": "MULTIPACK",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "skillet",
+    "original_normalized": "SKILLET",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "carafe",
+    "original_normalized": "CARAFE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "sausage",
+    "original_normalized": "SAUSAGE",
+    "amount": 2,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "siphon",
+    "original_normalized": "SIPHON",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "per kg",
+    "original_normalized": "PER KG",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "gn pan",
+    "original_normalized": "GN PAN",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bag/jar",
+    "original_normalized": "BAG / JAR",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum sealed bag",
+    "original_normalized": "VACUUM SEALED BAG",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "map-packaged",
+    "original_normalized": "MAP - PACKAGED",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-sealed tray",
+    "original_normalized": "VACUUM - SEALED TRAY",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "hanger",
+    "original_normalized": "HANGER",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "nest",
+    "original_normalized": "NEST",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "fillet",
+    "original_normalized": "FILLET",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bottle case",
+    "original_normalized": "BOTTLE CASE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "handle",
+    "original_normalized": "HANDLE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "flowpack",
+    "original_normalized": "FLOWPACK",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "dispenser bottle",
+    "original_normalized": "DISPENSER BOTTLE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "gn1/1",
+    "original_normalized": "GN1 / 1",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "fresh",
+    "original_normalized": "FRESH",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pieces",
+    "original_normalized": "PIECES",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "map packaging",
+    "original_normalized": "MAP PACKAGING",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cabinet",
+    "original_normalized": "CABINET",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "per piece",
+    "original_normalized": "PER PIECE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "colander",
+    "original_normalized": "COLANDER",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "head",
+    "original_normalized": "HEAD",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "wooden case",
+    "original_normalized": "WOODEN CASE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "paperback",
+    "original_normalized": "PAPERBACK",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "wrapped",
+    "original_normalized": "WRAPPED",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "ball",
+    "original_normalized": "BALL",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "portion",
+    "original_normalized": "PORTION",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "marker",
+    "original_normalized": "MARKER",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "weight article",
+    "original_normalized": "WEIGHT ARTICLE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "netting",
+    "original_normalized": "NETTING",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "unit-dose",
+    "original_normalized": "UNIT - DOSE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "drawer",
+    "original_normalized": "DRAWER",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "whole fish",
+    "original_normalized": "WHOLE FISH",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "monodose",
+    "original_normalized": "MONODOSE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tablecloth",
+    "original_normalized": "TABLECLOTH",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "brine",
+    "original_normalized": "BRINE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "spoon",
+    "original_normalized": "SPOON",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "sachets",
+    "original_normalized": "SACHETS",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "gift box",
+    "original_normalized": "GIFT BOX",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "not packaged",
+    "original_normalized": "NOT PACKAGED",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tube cup",
+    "original_normalized": "TUBE CUP",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "skewers",
+    "original_normalized": "SKEWERS",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-packed half piece",
+    "original_normalized": "VACUUM - PACKED HALF PIECE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "kg/piece",
+    "original_normalized": "KG / PIECE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "packaging not specified",
+    "original_normalized": "PACKAGING NOT SPECIFIED",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "aluminum tray",
+    "original_normalized": "ALUMINUM TRAY",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "display carton",
+    "original_normalized": "DISPLAY CARTON",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "teapot",
+    "original_normalized": "TEAPOT",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "torch",
+    "original_normalized": "TORCH",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "batch",
+    "original_normalized": "BATCH",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "placemats",
+    "original_normalized": "PLACEMATS",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-sealed packs",
+    "original_normalized": "VACUUM - SEALED PACKS",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "coffee pot",
+    "original_normalized": "COFFEE POT",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "rectangle",
+    "original_normalized": "RECTANGLE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "goblet",
+    "original_normalized": "GOBLET",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "hanging",
+    "original_normalized": "HANGING",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "shell",
+    "original_normalized": "SHELL",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "dispensor",
+    "original_normalized": "DISPENSOR",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "slice pack",
+    "original_normalized": "SLICE PACK",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "slab",
+    "original_normalized": "SLAB",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "beaker",
+    "original_normalized": "BEAKER",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tetra brik",
+    "original_normalized": "TETRA BRIK",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "pkg",
+    "original_normalized": "PKG",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "gallon",
+    "original_normalized": "GALLON",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "adapter",
+    "original_normalized": "ADAPTER",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "oval dish",
+    "original_normalized": "OVAL DISH",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "platter",
+    "original_normalized": "PLATTER",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "refill pack",
+    "original_normalized": "REFILL PACK",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "bottle with applicator",
+    "original_normalized": "BOTTLE WITH APPLICATOR",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cut",
+    "original_normalized": "CUT",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "punnets",
+    "original_normalized": "PUNNETS",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "diffuser sticks",
+    "original_normalized": "DIFFUSER STICKS",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "part",
+    "original_normalized": "PART",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "lollipop",
+    "original_normalized": "LOLLIPOP",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "vacuum-packed bag",
+    "original_normalized": "VACUUM - PACKED BAG",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "gasket",
+    "original_normalized": "GASKET",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "roll-on",
+    "original_normalized": "ROLL - ON",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "tetra pak",
+    "original_normalized": "TETRA PAK",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "cloth",
+    "original_normalized": "CLOTH",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  },
+  {
+    "original": "candle",
+    "original_normalized": "CANDLE",
+    "amount": 1,
+    "suggested_standard": null,
+    "rule_type": "UNRESOLVED",
+    "similarity": 0.0,
+    "rationale": "Sin equivalencia clara; requiere revisión.",
+    "status": "PENDING_NO_TARGET"
+  }
+]
