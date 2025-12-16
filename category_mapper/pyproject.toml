@@ -1,0 +1,24 @@
+
+[project]
+name = "category_mapper"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "tokenizers==0.21.2",
+    "torch",
+    "transformers",
+    "sentence-transformers==4.1.0",
+    "rich",
+    "jupyterlab==4.4.3",
+    "prefect==3.4.0",
+    "prefect-aws==0.5.10",
+    "prefect-docker==0.6.4",
+    "deep-translator==1.11.4"
+]
+
+
+[tool.pyright]
+venvPath = "."
+venv = ".direnv"

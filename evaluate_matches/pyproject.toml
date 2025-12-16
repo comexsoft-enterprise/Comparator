@@ -1,0 +1,22 @@
+[project]
+name = "report_evaluate"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "uv",
+    "rich",
+    "debugpy",
+    "pyright",
+    "pytest",
+    "loguru",
+    "prefect==3.4.0",
+    "prefect-aws==0.5.10",
+    "prefect-docker==0.6.4",
+    "pandas==2.3.0"
+]
+
+[tool.pyright]
+venvPath = "."
+venv = ".direnv"

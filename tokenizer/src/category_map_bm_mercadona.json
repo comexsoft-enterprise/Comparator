@@ -1,0 +1,391 @@
+{
+  "source_supermarket": "bm",
+  "target_supermarket": "mercadona",
+  "mapping_results": [
+    {
+      "source_category": "bebidas/agua/agua-con-gas",
+      "matched_target_category": "agua-y-refrescos/refresco-de-te-y-sin-gas",
+      "similarity_score": 0.906
+    },
+    {
+      "source_category": "bebidas/agua/agua-con-sabores",
+      "matched_target_category": "agua-y-refrescos/agua",
+      "similarity_score": 0.9054
+    },
+    {
+      "source_category": "bebidas/agua/agua-sin-gas",
+      "matched_target_category": "agua-y-refrescos/refresco-de-te-y-sin-gas",
+      "similarity_score": 0.9171
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/brandy-y-cognac",
+      "matched_target_category": "bodega/tinto-de-verano-y-sangria",
+      "similarity_score": 0.8938
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/ginebra",
+      "matched_target_category": "bodega/licores",
+      "similarity_score": 0.8946
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/licores-y-cremas",
+      "matched_target_category": "bodega/licores",
+      "similarity_score": 0.9008
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/orujo-y-pacharan",
+      "matched_target_category": "bodega/vino-lambrusco-y-espumoso",
+      "similarity_score": 0.8811
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/ron",
+      "matched_target_category": "bodega/licores",
+      "similarity_score": 0.8939
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/tequila",
+      "matched_target_category": "bodega/licores",
+      "similarity_score": 0.9037
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/vermuts-y-aperitivos",
+      "matched_target_category": "agua-y-refrescos/tonica-y-bitter",
+      "similarity_score": 0.8924
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/vodka",
+      "matched_target_category": "bodega/licores",
+      "similarity_score": 0.9051
+    },
+    {
+      "source_category": "bebidas/alcoholes-y-licores/whisky-y-bourbon",
+      "matched_target_category": "agua-y-refrescos/tonica-y-bitter",
+      "similarity_score": 0.8922
+    },
+    {
+      "source_category": "bebidas/cava-champagne-y-sidra/cava-brut",
+      "matched_target_category": "bodega/sidra-y-cava",
+      "similarity_score": 0.8985
+    },
+    {
+      "source_category": "bebidas/cava-champagne-y-sidra/cava-rosado",
+      "matched_target_category": "bodega/sidra-y-cava",
+      "similarity_score": 0.8972
+    },
+    {
+      "source_category": "bebidas/cava-champagne-y-sidra/cava-seco-semi-seco-y-dulce",
+      "matched_target_category": "bodega/sidra-y-cava",
+      "similarity_score": 0.8866
+    },
+    {
+      "source_category": "bebidas/cava-champagne-y-sidra/champagne",
+      "matched_target_category": "bodega/sidra-y-cava",
+      "similarity_score": 0.9042
+    },
+    {
+      "source_category": "bebidas/cava-champagne-y-sidra/sidra",
+      "matched_target_category": "bodega/sidra-y-cava",
+      "similarity_score": 0.9098
+    },
+    {
+      "source_category": "bebidas/cerveza/con-alcohol/artesanas",
+      "matched_target_category": "bodega/cerveza-sin-alcohol",
+      "similarity_score": 0.9026
+    },
+    {
+      "source_category": "bebidas/cerveza/con-alcohol/especialidades",
+      "matched_target_category": "bodega/cerveza",
+      "similarity_score": 0.9035
+    },
+    {
+      "source_category": "bebidas/cerveza/con-alcohol/importacion-botella",
+      "matched_target_category": "bodega/cerveza-sin-alcohol",
+      "similarity_score": 0.8977
+    },
+    {
+      "source_category": "bebidas/cerveza/con-alcohol/importacion-lata",
+      "matched_target_category": "bodega/cerveza-sin-alcohol",
+      "similarity_score": 0.896
+    },
+    {
+      "source_category": "bebidas/cerveza/con-alcohol/nacional-botella",
+      "matched_target_category": "bodega/cerveza-sin-alcohol",
+      "similarity_score": 0.8993
+    },
+    {
+      "source_category": "bebidas/cerveza/con-alcohol/nacional-lata",
+      "matched_target_category": "bodega/cerveza-sin-alcohol",
+      "similarity_score": 0.898
+    },
+    {
+      "source_category": "bebidas/cerveza/sin-alcohol-y-de-sabores/sabores",
+      "matched_target_category": "bodega/cerveza-sin-alcohol",
+      "similarity_score": 0.9166
+    },
+    {
+      "source_category": "bebidas/cerveza/sin-alcohol-y-de-sabores/sin-alcohol-00-y-09",
+      "matched_target_category": "bodega/cerveza-sin-alcohol",
+      "similarity_score": 0.8927
+    },
+    {
+      "source_category": "bebidas/isotonicas-y-energeticas/botella",
+      "matched_target_category": "agua-y-refrescos/isotonico-y-energetico",
+      "similarity_score": 0.9236
+    },
+    {
+      "source_category": "bebidas/isotonicas-y-energeticas/lata",
+      "matched_target_category": "agua-y-refrescos/isotonico-y-energetico",
+      "similarity_score": 0.9158
+    },
+    {
+      "source_category": "bebidas/refrescos/bitter",
+      "matched_target_category": "agua-y-refrescos/tonica-y-bitter",
+      "similarity_score": 0.9182
+    },
+    {
+      "source_category": "bebidas/refrescos/cola",
+      "matched_target_category": "agua-y-refrescos/refresco-de-cola",
+      "similarity_score": 0.9271
+    },
+    {
+      "source_category": "bebidas/refrescos/gaseosas",
+      "matched_target_category": "agua-y-refrescos/agua",
+      "similarity_score": 0.9158
+    },
+    {
+      "source_category": "bebidas/refrescos/limon",
+      "matched_target_category": "agua-y-refrescos/agua",
+      "similarity_score": 0.9108
+    },
+    {
+      "source_category": "bebidas/refrescos/naranja",
+      "matched_target_category": "zumos/naranja",
+      "similarity_score": 0.9278
+    },
+    {
+      "source_category": "bebidas/refrescos/otros-sabores",
+      "matched_target_category": "zumos/tomate-y-otros-sabores",
+      "similarity_score": 0.9117
+    },
+    {
+      "source_category": "bebidas/refrescos/te-frio",
+      "matched_target_category": "agua-y-refrescos/agua",
+      "similarity_score": 0.9128
+    },
+    {
+      "source_category": "bebidas/refrescos/tonica",
+      "matched_target_category": "agua-y-refrescos/tonica-y-bitter",
+      "similarity_score": 0.9216
+    },
+    {
+      "source_category": "bebidas/vinos/finos-y-dulces/jerez-y-fino",
+      "matched_target_category": "agua-y-refrescos/tonica-y-bitter",
+      "similarity_score": 0.88
+    },
+    {
+      "source_category": "bebidas/vinos/finos-y-dulces/manzanilla",
+      "matched_target_category": "bodega/tinto-de-verano-y-sangria",
+      "similarity_score": 0.881
+    },
+    {
+      "source_category": "bebidas/vinos/finos-y-dulces/moscatel",
+      "matched_target_category": "agua-y-refrescos/tonica-y-bitter",
+      "similarity_score": 0.8747
+    },
+    {
+      "source_category": "bebidas/vinos/finos-y-dulces/vinos-dulces-y-generosos",
+      "matched_target_category": "bodega/vino-lambrusco-y-espumoso",
+      "similarity_score": 0.88
+    },
+    {
+      "source_category": "bebidas/vinos/sangrias-y-combinados-base-vino",
+      "matched_target_category": "bodega/tinto-de-verano-y-sangria",
+      "similarity_score": 0.893
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-castilla-leon/ano",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8799
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-castilla-leon/crianza",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8801
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-cataluna/ano",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8834
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-jumilla/ano",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8915
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-la-mancha/crianza",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.887
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-navarra/ano",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8882
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-navarra/crianza",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8791
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-navarra/reserva",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8877
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-ribera-del-duero/ano",
+      "matched_target_category": "bodega/tinto-de-verano-y-sangria",
+      "similarity_score": 0.8833
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-ribera-del-duero/crianza",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.879
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-ribera-del-duero/reserva",
+      "matched_target_category": "bodega/tinto-de-verano-y-sangria",
+      "similarity_score": 0.8794
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-rioja/ano",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.896
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-rioja/crianza",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8877
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-rioja/gran-reserva",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8857
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-rioja/reserva",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8921
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-valdepenas/ano",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8905
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-valdepenas/crianza",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8895
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/do-valdepenas/reserva",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.8915
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/internacional",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.9051
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/otras-do",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.9086
+    },
+    {
+      "source_category": "bebidas/vinos/vino-tinto/sin-do",
+      "matched_target_category": "bodega/vino-tinto",
+      "similarity_score": 0.9045
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/do-albarino",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.9002
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/do-navarra",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.8935
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/do-rioja",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.8974
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/do-rueda",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.8965
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/do-txakoli",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.898
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/internacional",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.9026
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/nacional",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.9052
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-blancos/otras-do",
+      "matched_target_category": "bodega/vino-blanco",
+      "similarity_score": 0.8998
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-rosados/do-navarra",
+      "matched_target_category": "bodega/vino-rosado",
+      "similarity_score": 0.8954
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-rosados/do-rioja",
+      "matched_target_category": "bodega/vino-rosado",
+      "similarity_score": 0.9057
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-rosados/internacional",
+      "matched_target_category": "bodega/vino-rosado",
+      "similarity_score": 0.907
+    },
+    {
+      "source_category": "bebidas/vinos/vinos-rosados/sin-do",
+      "matched_target_category": "bodega/vino-rosado",
+      "similarity_score": 0.9032
+    },
+    {
+      "source_category": "bebidas/zumos-y-nectares/mosto",
+      "matched_target_category": "zumos/tomate-y-otros-sabores",
+      "similarity_score": 0.9017
+    },
+    {
+      "source_category": "bebidas/zumos-y-nectares/zumos-con-leche",
+      "matched_target_category": "zumos/tomate-y-otros-sabores",
+      "similarity_score": 0.9021
+    },
+    {
+      "source_category": "bebidas/zumos-y-nectares/zumos-no-refrigerados",
+      "matched_target_category": "agua-y-refrescos/refresco-de-te-y-sin-gas",
+      "similarity_score": 0.9044
+    },
+    {
+      "source_category": "bebidas/zumos-y-nectares/zumos-refrigerados",
+      "matched_target_category": "zumos/tomate-y-otros-sabores",
+      "similarity_score": 0.9071
+    }
+  ]
+}

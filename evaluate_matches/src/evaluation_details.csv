@@ -1,0 +1,1871 @@
+Match_Type,Eroski_ID,Eroski_Denomination,Makro_ID,Makro_Denomination,Similarity_Distance,Error_Type
+True Positive,14032049,"Tomate triturado ORLANDO, brik 510 g",123018,N/A,0.015840627253055573,
+True Positive,315044,"Cognac REMY MARTIN, botella 70 cl",323596,N/A,0.016731109470129013,
+True Positive,12310058,"Ginebra LARIOS 12, botella 70 cl",9783,N/A,0.026197442784905434,
+True Positive,146472,"Tomate triturado ORLANDO, lata 400 g",112476,N/A,0.026797324419021606,
+True Positive,22366108,"Tomate pelado MUTTI, lata 400 g",165436,N/A,0.03276507928967476,
+True Positive,315085,"Brandy 5 años TORRES, botella 70 cl",75621,N/A,0.033897023648023605,
+True Positive,12762472,"Ginebra HENDRICKS, botella 70 cl",56802,N/A,0.034918904304504395,
+True Positive,356105,"Caramelo líquido ROYAL, frasco 400 g",160227,N/A,0.04715900495648384,
+True Positive,157115,"Aceite de oliva virgen extra arbequina BORGES, botella 75 cl",483496,N/A,0.05238087475299835,
+True Positive,26593103,"Licor de hierbas LAS CADENAS, botella 70 cl",141762,N/A,0.05659040808677673,
+True Positive,11223427,"Vino Blanco Verdejo PROTOS, botella 75 cl",50597,N/A,0.06377147883176804,
+True Positive,21017611,"Ginebra Flor de Sevilla TANQUERAY, botella 70 cl",173532,N/A,0.06831382215023041,
+True Positive,6302285,"Ginebra RIVES, botella 1 litro",76167,N/A,0.06893055140972137,
+True Positive,24879413,"Bebida de almendras sin azúcar ALPRO, brik 1 litro",212686,N/A,0.07075506448745728,
+True Positive,16127789,"Ginebra LARIOS, botella 1 litro",75283,N/A,0.07465057075023651,
+True Positive,13895172,"Ginebra BROCKMANS, botella 70 cl",111846,N/A,0.07660728693008423,
+True Positive,1381086,"Bonito en aceite de oliva ZALLO, lata 266 g",165398,N/A,0.07827204465866089,
+True Positive,24879298,"Bebida de almendras ALPRO, brik 1 litro",212687,N/A,0.08025002479553223,
+True Positive,423541,"Vino Blanco VIÑA COSTEIRA, botella 75 cl",316810,N/A,0.08316607773303986,
+True Positive,18643197,"Yogur artesano al estilo griego PASTORET, tarrina 500 g",195145,N/A,0.09180504083633423,
+True Positive,24315806,"Ginebra Blackberry PUERTO DE INDIAS, botella 70 cl",201390,N/A,0.09430456161499023,
+True Positive,18395756,"Pulpa de guindilla picante ZUBIA, frasco 60 g",160835,N/A,0.09836824238300323,
+True Positive,12468864,"Chorizo Pamplona GOIKOA, bandeja 70 g",75278,N/A,0.10320644080638885,
+True Positive,15114390,"Té verde con maracuya NESTEA, lata 33 cl",220213,N/A,0.1147930771112442,
+True Positive,16764409,"Concentrado MUTTI, tubo 130 g",150204,N/A,0.12009922415018082,
+True Positive,314682,"Aroma de vainilla VAHINÉ, bote 200 ml",124755,N/A,0.12292337417602539,
+True Positive,1793942,"Cerveza sin alcohol MAHOU, lata 33 cl",821,N/A,0.1302672028541565,
+True Positive,4534103,"Caldo de carne en polvo KNORR, cubeta 1 kg",86521,N/A,0.13687574863433838,
+True Positive,16959553,"Tónica Blue NORDIC MIST, lata 25 cl",194133,N/A,0.1435820758342743,
+True Positive,21759071,"Ginebra japonesa ROKU, botella 70 cl",178072,N/A,0.144922137260437,
+True Positive,844514,"Filete de melva en aceite de girasol UBAGO, lata 115 g",595114,N/A,0.14752092957496643,
+True Positive,15045875,"Cerveza sin alcohol CLAUSTHALER, botellín 33 cl",3746,N/A,0.15530669689178467,
+True Positive,16819138,"Bífidus cremoso sabor lima-limón ACTIVIA, pack 4x115 g",138341,N/A,0.1622934341430664,
+True Positive,23496342,"Margaritas con vegetales GALLO, paquete 450 g",252525,N/A,0.1641727089881897,
+True Positive,14402788,"Ginebra francesa G'VINE, botella 70 cl",77041,N/A,0.1651051938533783,
+True Positive,3315926,"Ron Extra Viejo BRUGAL, botella 70 cl",620958,N/A,0.1660928577184677,
+True Positive,3700218,"Leche de oveja pasteurizada ULTZAMA, botella 1 litro",139873,N/A,0.16822382807731628,
+True Positive,14402762,"Ginebra francesa CITADELLE, botella 70 cl",75325,N/A,0.16953516006469727,
+True Positive,827600,"Cuchillo de mesa Hotel, inox 18/10 JAY, 1 ud",502424,N/A,0.17204046249389648,
+True Positive,19989169,"Tónica Hibiscus SCHWEPPES, botellín 20 cl",156149,N/A,0.17205089330673218,
+True Positive,16090235,"Whisky JOHNNIE WALKER Double Black, botella 70 cl",123194,N/A,0.1731276959180832,
+True Positive,497339,"Yema de espárrago gruesa CARRETILLA, lata 135 g",61449,N/A,0.17701809108257294,
+True Positive,23180706,"Yogur griego de straciatella OIKOS, pack 4x110 g",193178,N/A,0.17830143868923187,
+True Positive,315614,"Whisky JOHNNIE WALKER ETIQUETA NEGRA, botella 70 cl",8723,N/A,0.18040962517261505,
+True Positive,379958,"Whisky 8 años DYC, botella 70 cl",75543,N/A,0.1828399896621704,
+True Positive,324780,"Brandy CARDENAL MENDOZA, botella 70 cl",76011,N/A,0.18329061567783356,
+True Positive,25458803,"Mayonesa PRIMA, pack 12x10 ml",216807,N/A,0.18428082764148712,
+True Positive,20166849,"Chorizo extra de León PALCARSA, sobre 100 g",128204,N/A,0.1888345628976822,
+True Positive,20119731,"Pimiento de cristal en tiras VIUDA DE CAYO, frasco 190 g",179874,N/A,0.1894456148147583,
+True Positive,375881,"Vino Rosado D.O. Navarra GRAN FEUDO, botella 75 cl",606086,N/A,0.1910267472267151,
+True Positive,138909,"Aguardiente de hierbas RUAVIEJA, botella 70 cl",495469,N/A,0.19294482469558716,
+True Positive,19654193,"Vermut Rojo EL BANDARRA, botella 1 litro",182479,N/A,0.19359073042869568,
+True Positive,597518,"Gelatina neutra en polvo ROYAL, caja 20 g",160229,N/A,0.19419044256210327,
+True Positive,8367187,"Actimel para beber natural DANONE, pack 14x100 ml",2002,N/A,0.20670469105243683,
+True Positive,10444164,"Vino Rosado D.O. Navarra INURRIETA, botella 75 cl",91146,N/A,0.21461135149002075,
+True Positive,15737638,"Geles torcida de fresa MIGUELAÑEZ, bolsa 200 g",115820,N/A,0.22023944556713104,
+True Positive,24320137,"Torcidas de fresa FINI, bolsa 150 g",217572,N/A,0.22405028343200684,
+True Positive,15637820,"Tomate doble concentrado HIDA, lata 170 g",139663,N/A,0.22412548959255219,
+True Positive,8552374,"Natillas de chocolate DANONE Danet, pack 8x120 g",217098,N/A,0.2255159318447113,
+True Positive,17723909,"Tónica zero NORDIC MIST, lata 25 cl",192521,N/A,0.22562870383262634,
+True Positive,24879397,"Bebida de avena sin azúcar ALPRO, brik 1 litro",212683,N/A,0.22564256191253662,
+True Positive,52498,"Vino Tinto Joven D.O. Rioja MILFLORES, botella 75 cl",169481,N/A,0.2265806496143341,
+True Positive,540831,"Café molido FORTALEZA G. Orígenes Kenya, caja 250 g",3635,N/A,0.22759032249450684,
+True Positive,3481603,"Atún claro al natural bajo en sal CALVO, pack 3x56 g",174707,N/A,0.23413823544979095,
+True Positive,9495706,"Sangría DON SIMON, botella 1,5 litros",208255,N/A,0.23432308435440063,
+True Positive,24189524,"Vino Tinto Tempranillo MUCHO MAS, botella 75 cl",208270,N/A,0.23777154088020325,
+True Positive,4935573,"Vino Tinto Reserva Rioja AZPILICUETA, botella 75 cl",308620,N/A,0.24150460958480835,
+True Positive,315309,"Brandy CARLOS III, botella 70 cl",593593,N/A,0.2421114146709442,
+True Positive,984034,"Aceite de oliva virgen extra HOJIBLANCA, garrafa 5 litros",132028,N/A,0.24259218573570251,
+True Positive,315283,"Brandy CARLOS I, botella 70 cl",218400,N/A,0.2431718111038208,
+True Positive,22392831,"Vino Tinto Joven D.O.C. Rioja SOLAR DE ESTRAUNZA, botella 75 cl",185338,N/A,0.24789397418498993,
+True Positive,13794508,"Tomate para pizza MUTTI, lata 400 g",75968,N/A,0.2501050531864166,
+True Positive,684571,"Vermouth Blanco CINZANO, botella 1 litro",60229,N/A,0.250258207321167,
+True Positive,14905798,"Yogur sabor melocotón-maracuya PASTORET, tarrina 500 g",113895,N/A,0.25091707706451416,
+True Positive,23887045,"Vino Tinto Reserva D.O.C. Rioja Alavesa REMELLURI, botella 75 cl",2590,N/A,0.26328030228614807,
+True Positive,137950,"Vermouth Rojo CINZANO, botella 1 litro",60216,N/A,0.2634024918079376,
+True Positive,314617,"Aroma de azahar VAHINÉ, bote 200 ml",144653,N/A,0.27510321140289307,
+True Positive,24107625,"Mantequilla con sal KERRYGOLD, pastilla 200 g",200502,N/A,0.2754197418689728,
+True Positive,20244737,"Yogur griego natural azucarado OIKOS, pack 4x110 g",500006,N/A,0.27628183364868164,
+True Positive,25559014,"Licor PLATA O PLOMO, botella 70 cl",208158,N/A,0.2800247073173523,
+True Positive,579359,"Yogur original con fresas DANONE, pack 2x130 g",519285,N/A,0.2876491844654083,
+True Positive,24959165,"Bitter con soda CINZANO, pack 3x20 cl",207268,N/A,0.2913382649421692,
+True Positive,954466,"Vino Rosado D.O. Navarra LAS CAMPANAS, botella 75 cl",1131,N/A,0.29341745376586914,
+True Positive,11016706,"Canónigos EROSKI, bolsa 125 g",73250,N/A,0.29429012537002563,
+True Positive,18409979,"Salmón ahumado Ecobio MARTIKO, sobre 80 g",202274,N/A,0.2945114076137543,
+True Positive,24442469,"Whisky de Malta 15 años GLENFIDDICH, botella 70 cl",462293,N/A,0.29864269495010376,
+True Positive,129254,"Albariño R. Baixas CONDES DE ALBAREI, botella 75 cl",655655,N/A,0.29903942346572876,
+True Positive,20244729,"Yogur griego natural OIKOS, pack 4x110 g",526292,N/A,0.2995620667934418,
+True Positive,22384689,"Vermouth Fiero MARTINI, botella 75 cl",180689,N/A,0.3043300211429596,
+True Positive,20033957,"Mango en dados LA CUERVA, bolsa 300 g",153437,N/A,0.30746176838874817,
+True Positive,647263,"Palo para fregona universal VILEDA, pack 1 ud",117959,N/A,0.30916666984558105,
+True Positive,14218515,"Whisky Premium BUCHANAN¿S, botella 1 litro",12198,N/A,0.31299054622650146,
+True Positive,4381216,"Vino Rosado D.O. Navarra HOMENAJE, botella 75 cl",746317,N/A,0.3133459687232971,
+True Positive,19155787,"Ron Blanco NEGRITA, botella 1 litro",70885,N/A,0.3321875035762787,
+True Positive,24281651,"Piña en rodajas DEL MONTE, pack 3x145 g",150120,N/A,0.3446289598941803,
+True Positive,540856,"Café molido FORTALEZA G. Orígenes Colombia, caja 250 g",3629,N/A,0.34989771246910095,
+True Positive,24112906,"Discos de fresa HARIBO, bolsa 80 g",201491,N/A,0.3579963445663452,
+True Positive,25310897,"Queso de oveja de leche cruda añejo POK, cuña 250 g",61616,N/A,0.3581233024597168,
+True Positive,19699628,"Torrijas caramelizadas CASA ECEIZA, caja 200 g",215227,N/A,0.35854676365852356,
+True Positive,20033932,"Frutos del bosque LA CUERVA, bolsa 300 g",953654,N/A,0.3594585657119751,
+True Positive,19522218,"Chimichurri picante SALSAS ASTURIANAS, frasco 295 g",42751,N/A,0.360129177570343,
+True Positive,48777,"Vino Blanco D.O. Rioja EL COTO, botella 75 cl",44598,N/A,0.3637474775314331,
+True Positive,8469819,"Tónica NORDIC MIST, lata 25 cl",368875,N/A,0.36428892612457275,
+True Positive,23475064,"Salsa ligera EROSKI, bote 430 ml",914251,N/A,0.36455410718917847,
+True Positive,18395848,"Foie de canard ZUBIA, lata 130 g",160692,N/A,0.36550721526145935,
+True Positive,10870483,"Vermouth Rojo Reserva YZAGUIRRE, botella 1 litro",37744,N/A,0.37469571828842163,
+True Positive,8488611,"Sobrasada de Mallorca CRISOL, pack 2x40 g",88573,N/A,0.3825005888938904,
+True Positive,19522168,"Chimichurri SALSAS ASTURIANAS, frasco 295 g",42743,N/A,0.3843596875667572,
+True Positive,17572181,"Chorizo picante ALEJANDRO, sarta 200 g",176832,N/A,0.3915405869483948,
+True Positive,206821,"Albariño Blanco Rías Baixas MARTÍN CÓDAX, botella 75 cl",10920,N/A,0.3943300247192383,
+True Positive,18314724,"Navaja al natural 4/8 piezas CUCA, lata 65 g",689481,N/A,0.39779147505760193,
+True Positive,22384697,"Vermouth Rosso MARTINI, pack 4x6 cl",181045,N/A,0.39978501200675964,
+True Positive,10870475,"Vermouth Blanco YZAGUIRRE, botella 1 litro",37740,N/A,0.4039849042892456,
+True Positive,25613399,"Chorizo extra picante LA GLORIA RIOJANA, sarta 230 g",53048,N/A,0.4195481836795807,
+True Positive,12352613,"Ron ZACAPA, botella 70 cl",625079,N/A,0.42591744661331177,
+True Positive,313577,"Ginebra BEEFEATER, botella 70 cl",821353,N/A,0.43036043643951416,
+True Positive,455725,"Pacharán I.G.P. Navarra BAINES, botella 1 litro",261495,N/A,0.4355018734931946,
+True Positive,12080859,"Ensalada Gourmet Maxi EROSKI, bolsa 320 g",7173,N/A,0.45096004009246826,
+True Positive,13230305,"Salsa bechamel KNORR, brik 500 ml",821210,N/A,0.45317918062210083,
+True Positive,148189,"Caldo vegetal KNORR, 12 pastillas, caja 120 g",160867,N/A,0.46371421217918396,
+True Positive,12788618,"Vino Blanco Rías Baixas MAR DE FRADES, botella 75 cl",41254,N/A,0.47700396180152893,
+True Positive,2501872,"Albariño Rías Baixas TERRAS GAUDA, botella 75 cl",42017,N/A,0.4997141361236572,
+True Positive,25636580,"Azafrán en hebras POTE, tarro 1 g",12022,N/A,0.5060645937919617,
+True Positive,21983804,"Licor de nube BUITRAL, botella 1 litro",166246,N/A,0.5159120559692383,
+True Positive,26253047,"Ginebra ENGINE, botella 70 cl",216290,N/A,0.5206066370010376,
+True Positive,401240,"Txakoli D.O. Araba XARMANT, botella 75 cl",15129,N/A,0.521120548248291,
+True Positive,18911701,"Aceite de girasol KOIPESOL, garrafa 3 litros",178529,N/A,0.5230509638786316,
+True Positive,19793843,"Vino Blanco D.O. Rueda YLLERA, botella 75 cl",102113,N/A,0.5237659811973572,
+True Positive,15350176,"Salsa de pimienta verde GALLINA BLANCA, sobre 50 g",15858,N/A,0.5243553519248962,
+True Positive,308031,"Vino Blanco D.O. Cataluña TORRES VIÑA SOL, botella 75 cl",891709,N/A,0.5258207321166992,
+True Positive,26523332,"Yogur griego natural KAIKU, pack 4x125 g",219222,N/A,0.5298896431922913,
+True Positive,25005844,"Chorizo tradición REVILLA, bandeja 65 g",220698,N/A,0.5311946868896484,
+True Positive,24187403,"Salmón al natural CALVO, pack 3x50 g",218940,N/A,0.5360394716262817,
+True Positive,12526323,"Limpiador SANYTOL, botella 1,2 litros",7454,N/A,0.5413134098052979,
+True Positive,3411378,"Queso fresco sin sal BURGO DE ARIAS, pack 3x72 g",41506,N/A,0.5441198945045471,
+True Positive,18298000,"Acelga EROSKI, bolsa 300 g",275080,N/A,0.5489290952682495,
+True Positive,14339998,"Ginebra inglesa BULLDOG, botella 70 cl",103317,N/A,0.5583241581916809,
+True Positive,2452811,"Vino Tinto Reserva Rioja IMPERIAL, botella 75 cl",740740,N/A,0.5612726211547852,
+True Positive,315168,"Bebida Espirituosa SOBERANO, botella 1 litro",76115,N/A,0.5878422260284424,
+True Positive,17429788,"Whisky Gold Reserva CARDHU, botella 70 cl",149507,N/A,0.590930163860321,
+True Positive,20333449,"Bayeta microfibra para cristales PLA, pack 1 u",166859,N/A,0.5938528776168823,
+True Positive,3913001,"Bebida isotónica Ice Storm POWERADE, botellín 50 cl",217015,N/A,0.5976210832595825,
+True Positive,315341,"Brandy MAGNO, botella 70 cl",504907,N/A,0.6044421195983887,
+True Positive,564187,"Champagne Brut POMMERY, botella 75 cl",88356,N/A,0.6523436903953552,
+True Positive,564500,"Vino Blanco Chardonay VIÑAS DEL VERO, botella 75 cl",132509,N/A,0.6565940380096436,
+True Positive,244327,"Vino Rosado D.O. Navarra PLENO, botella 75 cl",131098,N/A,0.6589394807815552,
+True Positive,13115258,"Corvina EROSKI NATUR GGN, pieza al peso aprox. 2 kg",220585,N/A,0.6602272987365723,
+True Positive,26170613,"Yogur griego natural con azúcar PASTORET, tarrina 125 g",113894,N/A,0.661416232585907,
+True Positive,3209202,"Pacharán IGP Navarra LA NAVARRA, botella 1 litro",202163,N/A,0.6671813726425171,
+True Positive,315366,"Brandy VETERANO, botella 1 litro",76674,N/A,0.6672552227973938,
+True Positive,17141706,"Vino Blanco D.O. Rueda CUNE, botella 75 cl",160331,N/A,0.6677954196929932,
+True Positive,318485,"Vino Blanco Rioja MONOPOLE, botella 75 cl",64909,N/A,0.6680205464363098,
+True Positive,974899,"Ron Imperial BARCELÓ, botella 70 cl",702234,N/A,0.6777206659317017,
+True Positive,24243362,"Tartar de salmón ahumado MARTIKO, pack 2x75 g",210973,N/A,0.6840712428092957,
+True Positive,3209111,"Pacharán IGP Navarra ETXEKO, botella 1 litro",203242,N/A,0.7516248822212219,
+True Positive,23498223,"Multidesinfectante SANICENTRO, pistola 750 ml",141653,N/A,0.7572116255760193,
+True Positive,26154831,"Bebida sin alcohol 0,0 BEEFEATER, botella 70 cl",215723,N/A,0.7731451988220215,
+True Positive,14218069,"Aperitivo APEROL, botella 70 cl",94928,N/A,0.77983558177948,
+True Positive,23633456,"Vermouth Rojo LA COPA, botella 75 cl",162866,N/A,0.9541258811950684,
+True Positive,23689490,"Calabaza limpia en trozos EROSKI, bandeja 750 g",213740,N/A,1.0006296634674072,
+,16036055,"Paté de hígado de oca superior MARTIKO, lata 130 g",545597,N/A,0.025424495339393616,False Positive
+,5001243,"Aceite de oliva virgen extra OLEOESTEPA, botella 1 litro",136457,N/A,0.03685366362333298,False Positive
+,16619744,"Aceite de oliva virgen extra LA ESPAÑOLA, botella 75 cl",68745,N/A,0.04259078949689865,False Positive
+,26399378,"Tónica pink SCHWEPPES ZERO, lata 25 cl",217515,N/A,0.050844185054302216,False Positive
+,9143769,"Ginebra TANQUERAY, botella 1 litro",561379,N/A,0.05333935096859932,False Positive
+,16012437,"Bonito del norte en aceite de oliva ARROYABE, lata 900 g",103994,N/A,0.061750710010528564,False Positive
+,8661282,"Ginebra GORDON`S, botella 1 litros",42265,N/A,0.06451014429330826,False Positive
+,228049,"Mayonesa YBARRA, frasco 225 ml",23728,N/A,0.06674143671989441,False Positive
+,12206371,"Mayonesa HELLMANN'S, frasco 825 ml",52204,N/A,0.07301272451877594,False Positive
+,591750,"Refresco de té al limón sin azúcar NESTEA, lata 33 cl",220215,N/A,0.07984627038240433,False Positive
+,23456866,"Yogur artesano sabor frambuesa PASTORET, tarrina 125 g",211298,N/A,0.08260223269462585,False Positive
+,394007,"Espárrago 8/12 piezas CARRETILLA, lata 150 g",2850,N/A,0.08919152617454529,False Positive
+,360883,"Whisky FOUR ROSES BOURBON, botella 70 cl",90097,N/A,0.09723911434412003,False Positive
+,25213596,"Cacao soluble turbo COLA CAO, maleta 2,5 kg + Regalo",891475,N/A,0.10258771479129791,False Positive
+,15211717,"Huevo sorpresa KINDER JOY, pack 6x20 g",345137,N/A,0.10480047762393951,False Positive
+,26705814,"Refresco de té al limón NESTEA, pack 12x33 cl",220218,N/A,0.10512559860944748,False Positive
+,300269,"Barrita de chocolate con leche TOBLERONE, pack 3x50 g",68715,N/A,0.10598550736904144,False Positive
+,25925983,"Margarina vegetal con sal y sin palma TULIPÁN, tarrina 225 g",204703,N/A,0.1078682392835617,False Positive
+,6606255,"Whisky escocés JB, botella 1 litro",247000,N/A,0.1162499487400055,False Positive
+,17365370,"Ginebra Strawberry PUERTO DE INDIAS, botella 70 cl",201389,N/A,0.11887955665588379,False Positive
+,17680406,"Mayonesa HELLMANN'S, bocabajo 250 ml",216587,N/A,0.1193530261516571,False Positive
+,310722,"Refresco de manzana KAS, lata 33 cl",198022,N/A,0.12218213081359863,False Positive
+,25556283,"Tónica SCHWEPPES ZERO, botellín 20 cl",208483,N/A,0.12322364747524261,False Positive
+,23152903,"Confitura de melocotón HELIOS, pack 10x25 g",212821,N/A,0.12652906775474548,False Positive
+,25082165,"Margarina vegetal sin aceite de palma FLORA, tarrina 225 g",204704,N/A,0.1269722282886505,False Positive
+,25213588,"Cacao soluble original COLA CAO, maleta 2,5 kg",891215,N/A,0.12886589765548706,False Positive
+,22885206,"Queso de oveja añejo de leche cruda CERRATO, cuña 350 g",54948,N/A,0.1302947998046875,False Positive
+,23153356,"Confitura de ciruela HELIOS, pack 10x25 g",212822,N/A,0.13064897060394287,False Positive
+,22016737,"Cerveza 0,0 tostada MAHOU, pack 12x33 cl",166551,N/A,0.13486671447753906,False Positive
+,24879348,"Bebida de soja ALPRO, brik 1 litro",217339,N/A,0.13700968027114868,False Positive
+,17766478,"Mermelada de tomate LA VIEJA FABRICA C. SELECTA, frasco 285 g",93121,N/A,0.13848188519477844,False Positive
+,15991888,"Tónica NORDIC MIST, botella 1 litro",860678,N/A,0.1397383213043213,False Positive
+,24257297,"Cacao soluble 0% COLA CAO, caja 1,6 kg",199792,N/A,0.14006701111793518,False Positive
+,23513294,"Chocolatinas mini original HUESITOS, paquete 270 g",135846,N/A,0.1407250165939331,False Positive
+,16551004,"Cerveza 0,0 SAN MIGUEL, pack lata 12x33 cl",273715,N/A,0.14387744665145874,False Positive
+,15264633,"Tequila JOSÈ CUERVO SILVER, botella 70 cl",221771,N/A,0.14571614563465118,False Positive
+,314716,"Gelatina en hojas VAHINÉ, bolsa 17 g",124754,N/A,0.14640063047409058,False Positive
+,19501378,"Cerveza 0,0 tostada MAHOU, lata 33 cl",192443,N/A,0.1496598720550537,False Positive
+,17702424,"Grageas de chocolate LACASITOS, bolsa 65 g",78760,N/A,0.15248514711856842,False Positive
+,26603936,"Aceite de oliva virgen extra COOSUR, spray 40 cl",222336,N/A,0.155999094247818,False Positive
+,825505,"Cacao soluble COLA CAO, 6 unid., caja 108 g",125283,N/A,0.1616540551185608,False Positive
+,232710,"Queso mezcla semicurado G. BAQUERO, al corte, compra mínima 250 g",254917,N/A,0.16217878460884094,False Positive
+,10924439,"Barrita de chocolate White KINDER BUENO, paquete 43 g",95528,N/A,0.16374102234840393,False Positive
+,50757,"Mermelada de naranja LA VIEJA FABRICA, frasco 365 g",515424,N/A,0.1671844720840454,False Positive
+,822403,"Mejillón en escabeche 13/18 piezas ISABEL, lata 115 g",216810,N/A,0.16790908575057983,False Positive
+,24879363,"Bebida de soja sin azucares añadidos ALPRO, brik 1 litro",217344,N/A,0.16826185584068298,False Positive
+,20166856,"Chorizo extra picante de León PALCARSA, bandeja 100 g",128205,N/A,0.17233610153198242,False Positive
+,8420002,"Whisky DYC, botella 1,5 litros",19825,N/A,0.17317651212215424,False Positive
+,17001116,"Leche fermentada líquida sabor fresa DANONE, botella 550 g",139911,N/A,0.1732274293899536,False Positive
+,204230,"Yogur sabor a limón DANONE, pack 4x120 g",6238,N/A,0.17375685274600983,False Positive
+,26411371,"Bloc foie de pato MARTIKO, lata 130 g",76239,N/A,0.17559170722961426,False Positive
+,242180,"Chorizo tradición dulce REVILLA, al corte, compra mínima 100 g",220700,N/A,0.17733493447303772,False Positive
+,26591560,"Tarta Donostiarra CASA ECEIZA, caja 200 g",207928,N/A,0.17766617238521576,False Positive
+,9153966,"Ron 7 años FLOR de CAÑA, botella 70 cl",136479,N/A,0.17785674333572388,False Positive
+,16510695,"Yogur desnatado natural PASTORET, tarrina 500 g",136926,N/A,0.17895475029945374,False Positive
+,5107651,"Ron 7 años MATUSALEN , botella 70 cl",34561,N/A,0.18074733018875122,False Positive
+,23087570,"Cacao instantáneo original PALADIN, sobre 340 g",64582,N/A,0.1811186969280243,False Positive
+,13279468,"Ron Añejo BRUGAL, botella 1 litro",159757,N/A,0.18256784975528717,False Positive
+,308353,"Piparra ZUBIA, frasco 125 g",160834,N/A,0.18258091807365417,False Positive
+,791392,"Chorizo picante PALACIOS, sarta 250 g",108212,N/A,0.18431642651557922,False Positive
+,17766445,"Mermelada de arándanos LA VIEJA FABRICA C. Selecta, frasco 285 g ",119308,N/A,0.1859683096408844,False Positive
+,25062522,"Tónica de limón SCHWEPPES, lata 33 cl",212211,N/A,0.18613404035568237,False Positive
+,22214308,"Vino Tinto Merlot Tierra VIÑA ALBALI, botella 75 cl",686296,N/A,0.1865522563457489,False Positive
+,25013442,"Helado sabor naranja en su cáscara NORDWIK, 1 ud, 90 g",221514,N/A,0.18708844482898712,False Positive
+,24079667,"Tónica Ginger Beer SCHWEPPES, botellín 20 cl",206594,N/A,0.1873146891593933,False Positive
+,24284531,"Ginebra Sapphire BOMBAY, botella 1 litro",479661,N/A,0.19212257862091064,False Positive
+,24915365,"Tequila reposado ESPOLON, botella 70 cl",221834,N/A,0.19730158150196075,False Positive
+,15106552,"Activia 0% natural edulcorado DANONE, pack 8x120 g",217248,N/A,0.19756841659545898,False Positive
+,25519778,"Cerveza Oro 0,0 AMSTEL pack 6, botellas 25 cl",221576,N/A,0.20152127742767334,False Positive
+,21678495,"Whisky XV CHIVAS, botella 70 cl",75504,N/A,0.2020779848098755,False Positive
+,20952495,"Espárragos 1ª 4/6 piezas VIUDA DE CAYO, lata 220 g",146854,N/A,0.20312288403511047,False Positive
+,1509900,"Tequila Especial JOSE CUERVO, botella 70 cl",221772,N/A,0.20364528894424438,False Positive
+,8409344,"Bífidus natural ACTIVIA, pack 8x120 g",217246,N/A,0.20524191856384277,False Positive
+,649871,"Vino Tinto Joven D.O. Rioja ARABARTE, botella 75 cl",89499,N/A,0.20630383491516113,False Positive
+,24348633,"Whisky 15 años DEWAR`S, botella 70 cl",88406,N/A,0.20792824029922485,False Positive
+,50724,"Mermelada de frambuesa LA VIEJA FABRICA, frasco 350 g ",91312,N/A,0.20859181880950928,False Positive
+,26528430,"Champagne Brut VEUVE CLICQUOT, botella 75 cl",222110,N/A,0.2101491093635559,False Positive
+,24982530,"Leche condensada desnatada LA LECHERA, lata 387 g",214658,N/A,0.2120039463043213,False Positive
+,2955136,"Vino Tinto Gran Reserva Rioja VIÑA ALBINA, botella 75 cl",216905,N/A,0.21211498975753784,False Positive
+,24950164,"Mermelada de arándanos y fresas LVF, frasco 280 g",7762,N/A,0.21415656805038452,False Positive
+,26694752,"Limpiador superficies delicadas DON LIMPIO, garrafa 3 litros",220452,N/A,0.2142309993505478,False Positive
+,25013434,"Helado sabor limón en su cáscara NORDWIK, 1 ud, 90 g",221515,N/A,0.2147316038608551,False Positive
+,14218085,"Ron Extra Añejo MATUSALEM, botella 70 cl",98058,N/A,0.21543559432029724,False Positive
+,465757,"Cerveza sin alcohol MAHOU, pack botellín 6x25 cl",469222,N/A,0.21576140820980072,False Positive
+,3051737,"Mantequilla KAIKU, pastilla 125 g",186787,N/A,0.2168700098991394,False Positive
+,25527995,"Vino Tinto DCO Rioja Joven Campillo Cuvée, botella 75 cl",719706,N/A,0.21729981899261475,False Positive
+,186288,"Vino Tinto Reserva D.O. Rioja GLORIOSO, botella 75 cl",169507,N/A,0.22018134593963623,False Positive
+,19743426,"Vino Blanco D.O.C. Rioja ARABARTE, botella 75 cl",89501,N/A,0.22090879082679749,False Positive
+,976423,"Whisky 100 PIPERS, botella 70 cl",658060,N/A,0.22409096360206604,False Positive
+,20244760,"Yogur griego de caramelo OIKOS, pack 2x110 g",193179,N/A,0.2290920615196228,False Positive
+,23481666,"Panela de caña eco AZUCARERA, doypack 200 g",178405,N/A,0.23154956102371216,False Positive
+,24281768,"La piña en rodajas DEL MONTE, lata 360 g",131255,N/A,0.23308108747005463,False Positive
+,16129165,"Vaso con pajita LACASITOS, vaso 100 g",308711,N/A,0.2336542308330536,False Positive
+,25875824,"Whisky escocés Green Label 15 años JOHNNIE WALKER, botella 70 cl",12287,N/A,0.23380930721759796,False Positive
+,8462459,"Aceite de oliva virgen extra CARBONELL, garrafa 3 litros",8063,N/A,0.23559097945690155,False Positive
+,8368185,"Actimel para beber sabor fresa DANONE, pack 6x100 ml",31959,N/A,0.23573359847068787,False Positive
+,16035727,"Tónica SCHWEPPES ZERO, lata 33 cl",292110,N/A,0.23800042271614075,False Positive
+,26719203,"Tequila reposado POSADO 818, botella 70 cl",221597,N/A,0.2405795156955719,False Positive
+,16052631,"Ventresca de atún claro en aceite de oliva CAMPOS, lata 111 g",217504,N/A,0.24097013473510742,False Positive
+,19776509,"Vino Tinto Joven D.O.C. Rioja ZINTZO, botella 75 cl",200399,N/A,0.24210616946220398,False Positive
+,9268301,"Ron CACIQUE, botella 1 litro",122434,N/A,0.2430359274148941,False Positive
+,19681832,"Corazones de alcachofa baby 8/12 piezas CYNARA, frasco 115 g",72490,N/A,0.24472622573375702,False Positive
+,19530906,"Mayonesa HEINZ, frasco 480 ml",191369,N/A,0.24795770645141602,False Positive
+,24284630,"Ginebra Sunset BOMBAY, botella 70 cl",213133,N/A,0.24798011779785156,False Positive
+,846865,"Champagne Brut Reserva TAITTINGER, botella 75 cl",507793,N/A,0.24971053004264832,False Positive
+,24880593,"Bebida de almendras barista ALPRO, brik 1 litro",209631,N/A,0.25005459785461426,False Positive
+,16429425,"Aceite de oliva virgen CARBONELL, garrafa 3 litros",206501,N/A,0.2554963231086731,False Positive
+,14393979,"Whisky CUTTY SARK, botella 1 litro",218659,N/A,0.25627410411834717,False Positive
+,1772706,"Vino Tinto Reserva D.O. Rioja COTO DE IMAZ, botella 75 cl",195613,N/A,0.25773805379867554,False Positive
+,8927733,"Licor de hierbas EL AFILADOR, botella 70 cl",548626,N/A,0.26012152433395386,False Positive
+,14226435,"Cerveza 0,0 ESTRELLA GALICIA, pack botellín 6x25 cl",109537,N/A,0.2604728937149048,False Positive
+,245415,"Bebida isotónica sabor naranja AQUARIUS, lata 33 cl",217004,N/A,0.2655741274356842,False Positive
+,798447,"Activia 0% natural DANONE, pack 4x120 g",217247,N/A,0.2705214023590088,False Positive
+,1989193,"Ginger Ale SCHWEPPES, botella 1 litro",127991,N/A,0.27159833908081055,False Positive
+,25573478,"Mermelada de higo selecta LA VIEJA FABRICA, frasco 280 g",151192,N/A,0.2743898332118988,False Positive
+,17702705,"Cacahuete recubierto de chocolate CONGUITOS, bolsa 75 g",209222,N/A,0.2817951440811157,False Positive
+,21678503,"Whisky Mizunara CHIVAS, botella 70 cl",259844,N/A,0.2828129827976227,False Positive
+,315606,"Whisky JOHNNIE WALKER, botella 70 cl",276406,N/A,0.28377705812454224,False Positive
+,10867026,"Refresco de cola PEPSI, botella 1 litro",391807,N/A,0.2841283977031708,False Positive
+,346148,"Leche condensada LA LECHERA, tubo 170 g",127027,N/A,0.28630736470222473,False Positive
+,8437899,"Tarta biscuit de nata-yema CASA ECEIZA, caja 550 g",207926,N/A,0.28778859972953796,False Positive
+,375832,"Ron Añejo 3 años HAVANA CLUB, botella 70 cl",323999,N/A,0.29052209854125977,False Positive
+,10919579,"Sobrasada ibérica ELPOZO, tarrina 250 g",50514,N/A,0.29430797696113586,False Positive
+,23831316,"Chocolate negro con almendras NESTLÉ, tableta 270 g",72947,N/A,0.2947311997413635,False Positive
+,317867,"Whisky JIM BEAN, botella 70 cl",77779,N/A,0.29727715253829956,False Positive
+,25963844,"Vermut rojo ZARRO, botella 1 litro",200906,N/A,0.3008016347885132,False Positive
+,14596746,"Vino Tinto Reserva D.O.C. Rioja 200 MONGES, botella 75 cl",421863,N/A,0.3017064332962036,False Positive
+,26767392,"Bebida vegetal coco barista ALPRO, brik 1 litro",217304,N/A,0.3069359362125397,False Positive
+,398313,"Café molido mezcla 50/50 FORTALEZA, paquete 250 g",4938,N/A,0.30733275413513184,False Positive
+,24879405,"Bebida de avena barista ALPRO, brik 1 litro",217342,N/A,0.30802100896835327,False Positive
+,21740055,"Salmón ahumado VICI, bandeja 350 g",214293,N/A,0.3085809350013733,False Positive
+,194688,"Bonito en escabeche ARROYABE, frasco 227 g ",93120,N/A,0.30929479002952576,False Positive
+,941070,"Mermelada de naranja HELIOS, frasco 340 g ",203091,N/A,0.3108530044555664,False Positive
+,23496334,"Helices con vegetales GALLO, paquete 675 g",252486,N/A,0.3109171390533447,False Positive
+,25875832,"Whisky Escocés de Malta 8 años LAGAVULIN, botella 70 cl",36138,N/A,0.32228344678878784,False Positive
+,387910,"Vino Tinto Reserva Rioja LAN, botella 75 cl",163475,N/A,0.3240828216075897,False Positive
+,659656,"Bloc de Foie de pato ZUBIA, lata 130 g",160725,N/A,0.32875919342041016,False Positive
+,26475111,"Hamburguesa de vacuno Angus EROSKI, bandeja 180 g",146651,N/A,0.33114326000213623,False Positive
+,26170258,"Salsa ligera CHOVI, frasco 500 ml",217513,N/A,0.33604031801223755,False Positive
+,1522804,"Ginebra BOMBAY Sapphire, botella 70 cl",211197,N/A,0.3380855917930603,False Positive
+,26697300,"Salsa al ajo asado HELLMANNS, bocabajo 250 ml",176668,N/A,0.3414797782897949,False Positive
+,348235,"Cacao soluble NESQUIK, lata 390 g",3419,N/A,0.3426482081413269,False Positive
+,26336370,"Queso Emmental francés ENTREMONT, taco 220 g",255580,N/A,0.3435429334640503,False Positive
+,744649,"Salsa Ligera YBARRA, frasco 450 ml",216735,N/A,0.3474860191345215,False Positive
+,24121915,"Salami extra GOIKOA, bandeja 70 g",97341,N/A,0.34999990463256836,False Positive
+,20033924,"Fresas LA CUERVA, bolsa 300 g",953667,N/A,0.35064613819122314,False Positive
+,18749135,"Moras FINI, bolsa 165 g",190299,N/A,0.3539735674858093,False Positive
+,26687830,"Aceite aove cosecha temprana COOSUR SQUIZZ, botella 620 ml",219242,N/A,0.35636913776397705,False Positive
+,17820457,"Cerveza DAURA MARZEN, botellín 33 cl",115139,N/A,0.35679489374160767,False Positive
+,6308118,"Vino Tinto Reserva Rioja AÑARES, botella 75 cl",480922,N/A,0.3573834300041199,False Positive
+,16951840,"Magdalena PROCELI, 4 unid., paquete 160 g",9073,N/A,0.3582670986652374,False Positive
+,21002068,"Arándanos LA CUERVA, bolsa 300 g",953628,N/A,0.35975125432014465,False Positive
+,15744543,"Selection Mix FINI, bolsa 150 g",188211,N/A,0.3602004647254944,False Positive
+,317230,"Pacharán IGP Navarra ZOCO, botella 1 litro",222243,N/A,0.36429762840270996,False Positive
+,11136389,"Atún claro natural CUCA, pack 3x48 g",61497,N/A,0.3651057779788971,False Positive
+,13075551,"Tinto de verano limón sin alcohol DON SIMON, botella 1,5 litros",208254,N/A,0.3660795986652374,False Positive
+,25605023,"Salmón ahumado noruego tradicional MARTIKO, sobre 50 g",41060,N/A,0.3668539524078369,False Positive
+,20059127,"Liquorice Wonder Mix Doypack FINI, bolsa 165 g",217574,N/A,0.369512677192688,False Positive
+,24352973,"Vermouth Rojo ARTESANO, botella 1 litro",182522,N/A,0.3695683479309082,False Positive
+,16068579,"Salsa para ensaladillas YBARRA, frasco 450 ml",701441,N/A,0.37065988779067993,False Positive
+,26162305,"Cerveza tostada 0,0 SAN MIGUEL, pack botellín 6x25 cl",717262,N/A,0.3724866807460785,False Positive
+,16569212,"Chocolate negro 74% cacao EROSKI, tableta 100 g",78382,N/A,0.37390124797821045,False Positive
+,9739228,"Tarta de queso con arándanos CASA ECEIZA, caja 500 g",207927,N/A,0.3814259171485901,False Positive
+,26381665,"Bombones NESTLÉ CAJA ROJA, caja 43 g",350272,N/A,0.3849722146987915,False Positive
+,25656356,"Bonito del Norte al natural ARROYABE, frasco 150 g",93127,N/A,0.39441412687301636,False Positive
+,10869204,"Caldo de pollo AVECREM, 18 pastillas, caja 196 g",171380,N/A,0.395142138004303,False Positive
+,20965596,"Huevo Schokobons White KINDER, bolsa 200 g",670423,N/A,0.3954005837440491,False Positive
+,9175548,"Vino Tinto Joven D.O.C. Rioja LUIS CAÑAS, botella 75 cl",8518,N/A,0.39638426899909973,False Positive
+,18953646,"Caldo de pollo KNORR, 12 pastillas, caja 120 g",63049,N/A,0.3985063433647156,False Positive
+,22316988,"Bebible sabor fresa-frambuesa YOPRO, botella 300 g",181238,N/A,0.4020128548145294,False Positive
+,11754470,"Leche desnatada LACTURALE, brik 1 litro",110167,N/A,0.4041138291358948,False Positive
+,15726284,"Ginebra NORDÉS, botella 70 cl",219126,N/A,0.4059338867664337,False Positive
+,13927702,"Vermouth Blanco MARTINI, botella 1,5 litros",202448,N/A,0.4129202961921692,False Positive
+,18200402,"Leche semidesnatada sin lactosa LACTURALE, brik 1 litro",110168,N/A,0.4140796661376953,False Positive
+,24318495,"Whisky GLEN GRANT ARBOLARIS, botella 70 cl",200549,N/A,0.41544607281684875,False Positive
+,8406761,"Ginebra BEEFEATER, botella 1,5 litros",686309,N/A,0.41568300127983093,False Positive
+,845842,"Vino Blanco SANTIAGO RUIZ, botella 75 cl",49933,N/A,0.41687434911727905,False Positive
+,25613381,"Chorizo extra LA GLORIA RIOJANA, sarta 230 g",53047,N/A,0.4190656244754791,False Positive
+,19741354,"Barrita Milka&Oreo Lc MILKA, 1 ud, 37 g",161808,N/A,0.4197327494621277,False Positive
+,366674,"Atún claro en escabeche CALVO, pack 3x80 g",162366,N/A,0.4204004406929016,False Positive
+,16008674,"Polpa MUTTI, pack 2x210 g",114579,N/A,0.4204082190990448,False Positive
+,13927496,"Vermouth Rojo MARTINI, botella 1,5 litros",60307,N/A,0.4211686849594116,False Positive
+,20161626,"Bayeta colors VILEDA, pack 8 uds",170621,N/A,0.42117446660995483,False Positive
+,21257860,"Vino Tinto Joven D.O.C. Rioja Alavesa GAILUR, botella 75 cl",139926,N/A,0.4249040484428406,False Positive
+,23472269,"Vino Rosado Clarete D.O. Cigales PROTOS, botella 75 cl",183422,N/A,0.42581629753112793,False Positive
+,19582899,"Horchata original CHUFI, botella 1 litro",174524,N/A,0.4339628517627716,False Positive
+,26603910,"Aceite oliva virgen extra O. Centenatios COOSUR, botella 1 litro",189605,N/A,0.4340760111808777,False Positive
+,5967336,"Tomate triturado EROSKI BIO, frasco 660 g",193135,N/A,0.43410825729370117,False Positive
+,370502,"Cereza en almibar HELIOS, frasco 90 g ",490646,N/A,0.4351174831390381,False Positive
+,339747,"Caldo de carne KNORR Starlux, 12 pastillas, caja 120 g",280722,N/A,0.4360571801662445,False Positive
+,990205,"Ron 7 años HAVANA CLUB, botella 70 cl",386711,N/A,0.43968600034713745,False Positive
+,9235490,"Whisky de Malta 10 años GLENMORANGIE, botella 70 cl",47339,N/A,0.4421795904636383,False Positive
+,26229054,"Salmón ahumado corte sashimi DOMINGUEZ, bandeja 150 g",219575,N/A,0.4422829747200012,False Positive
+,953443,"Queso reserva de oveja BOFFARD, al corte, compra mínima 250 g",883662,N/A,0.4468024969100952,False Positive
+,8552226,"Natillas de vainilla DANONE Danet, pack 8x120 g",28819,N/A,0.4487670063972473,False Positive
+,169037,"Vino Blanco Barbadillo CASTILLO SAN DIEGO, botella 75 cl",409370,N/A,0.4554714858531952,False Positive
+,2707222,"Chorizo PALCARSA, 4 unid., sobre 200 g",9390,N/A,0.4586118757724762,False Positive
+,12305520,"Ron BACARDI, botella 70 cl",75907,N/A,0.4597790837287903,False Positive
+,16656423,"Queso anejo oveja FLOR DE ESGUEVA, al corte, compra mínima 250 g",21957,N/A,0.46040022373199463,False Positive
+,24896607,"Galleta OREO, paquete 66 g",195047,N/A,0.4614620506763458,False Positive
+,24879389,"Bebida de avena ALPRO, brik 1 litro",206943,N/A,0.4624751806259155,False Positive
+,19659580,"Crema Orochata LICOR 43, botella 70 cl",130271,N/A,0.46840763092041016,False Positive
+,17199860,"Mermelada de mora HELIOS, tarro 340 g",201698,N/A,0.468606561422348,False Positive
+,280297,"Bonito en escabeche EROSKI, lata 111 g",99964,N/A,0.4697793126106262,False Positive
+,20160867,"Vino Blanco Verdejo D.O. Rueda DIAMANTE, botella 75 cl",911976,N/A,0.4724489450454712,False Positive
+,16979056,"Entrecot de añojo skin, 2 uds, bandeja aprox. 970 g",163638,N/A,0.4726242423057556,False Positive
+,21027214,"Alcachofa mitades I.G.P.Tudela R16 LA TUDELANA, frasco 250 g",182565,N/A,0.475249707698822,False Positive
+,20364204,"Paté de pato DELICASS, lata 130 g",71154,N/A,0.47662782669067383,False Positive
+,227793,"Yogur desnatado sabor limón DANONE VITALINEA, pack 4x120 g",4218,N/A,0.4787462055683136,False Positive
+,1434091,"Vino Tinto Reserva D.O. Rioja VIÑA SALCEDA, botella 75 cl",69459,N/A,0.4822552800178528,False Positive
+,13866330,"Favoritos pica HARIBO, bolsa 150 g",211660,N/A,0.48307132720947266,False Positive
+,25815283,"Mermelada de frambuesa HELIOS, frasco 340 g",203089,N/A,0.48376578092575073,False Positive
+,26749275,"Yogur skyr natural DANONE, pack 4x100 g",145312,N/A,0.48928651213645935,False Positive
+,26776914,"Cuchillo chuletero Silk de acero inox JAY, 1 ud",4564,N/A,0.49048542976379395,False Positive
+,17994716,"Corazón de escarola EROSKI, bolsa 150 g",54893,N/A,0.4909437298774719,False Positive
+,26090837,"Limpiador desinfectante eucalipto SANYTOL, recambio 750 ml",7458,N/A,0.49777916073799133,False Positive
+,5873104,"Ron Elixir de Cuba LEGENDARIO, botella 70 cl",221948,N/A,0.5011489391326904,False Positive
+,7559792,"Guindilla, caja 40 g",50165,N/A,0.5056004524230957,False Positive
+,23899149,"Queso de oveja latxa urdina AGOUR, al corte, compra mínima 250 g",202370,N/A,0.5098223090171814,False Positive
+,12806840,"Queso de oveja viejo leche cruda FLOR DE ESGUEVA, cuña 400 g",259493,N/A,0.5107870697975159,False Positive
+,26896027,"Batido milkshake muccino PULEVA, botella 1 litro",393887,N/A,0.5113663673400879,False Positive
+,16854069,"Crema de plátano y fresa HABELAS HAILAS, botella 77 cl",172177,N/A,0.5115174651145935,False Positive
+,363754,"Caldo de pescado en pastillas KNORR, 12 pastillas. caja 120 g",144173,N/A,0.5124036073684692,False Positive
+,20364212,"Paté de higado de pato al Oporto DELICASS, lata 130 g",71114,N/A,0.5143576264381409,False Positive
+,4557906,"Pan de molde integral sin corteza BIMBO, paquete 450 g",30154,N/A,0.5156513452529907,False Positive
+,25458894,"Salsa ligera PRIMA, bote 390 ml",75995,N/A,0.5202211737632751,False Positive
+,10443604,"Vino Tinto Reserva D.O. Navarra INURRIETA, botella 75 cl",91145,N/A,0.5214797854423523,False Positive
+,133009,"Licor de café MARIE BRIZAR, botella 70 cl",62205,N/A,0.52177894115448,False Positive
+,25611765,"Bitter sin azúcar ROYAL BLISS MARE ROSSO, botellín 20 cl",217634,N/A,0.526093065738678,False Positive
+,307140,"Bitter CAMPARI, botella 70 cl",302172,N/A,0.5283603668212891,False Positive
+,7160526,"Bonito bajo en sal CALVO, lata 111 g",221334,N/A,0.5294479131698608,False Positive
+,19191956,"Cerveza barrica MAHOU, botellín 33 cl",156077,N/A,0.5311341285705566,False Positive
+,26186650,"Tequila Reposado DON JULIO, botella 70 cl",42014,N/A,0.5364915132522583,False Positive
+,12243382,"Passata Di Pomodoro MUTTI, frasco 400 g",75963,N/A,0.5379022359848022,False Positive
+,26233049,"Yogur natural DANONE ZERO, pack 4x120 g",54050,N/A,0.5418140888214111,False Positive
+,2009777,"Vino Tinto Crianza ENATE, botella 75 cl",728572,N/A,0.5442222952842712,False Positive
+,8369241,"Activia con mango-papaya-soja DANONE, pack 4x120 g",217250,N/A,0.5462756752967834,False Positive
+,25745035,"Queso de oveja reserva BOFFARD, cuña 250 g",31235,N/A,0.5465402603149414,False Positive
+,11752342,"Ginebra BEEFETER 24, botella 70 cl",214755,N/A,0.5475530624389648,False Positive
+,13544861,"Pulpa de tomate MUTTI, lata 400 g",10530,N/A,0.548292875289917,False Positive
+,8523615,"Calabaza cacahuete, pieza al peso aprox. 1 kg",207575,N/A,0.548778235912323,False Positive
+,26350702,"Atún claro natural +PRO CALVO, pack 3x65 g",221365,N/A,0.549113392829895,False Positive
+,10739951,"Batido de vainilla PULEVA, pack 6x200 ml",60589,N/A,0.5512863397598267,False Positive
+,19684737,"Patata Baby Micro EROSKI, bolsa 400 g",33077,N/A,0.5519624948501587,False Positive
+,23049703,"Caramelos Gummy Jellies DULCIORA, bolsa 100 g",216473,N/A,0.5541136264801025,False Positive
+,25621350,"Vino Tinto Crianza FAUSTINO RIVERO, botella 75 cl",383513,N/A,0.5544793605804443,False Positive
+,23059116,"Bayeta microfibra para cristales EROSKI, pack 1 ud.",215870,N/A,0.55730140209198,False Positive
+,3218500,"Café natural espresso FORTALEZA, caja 250 g",3636,N/A,0.5576704740524292,False Positive
+,26747758,"Salsa dulce pimiento asadoLA VIEJA FABRICA, frasco 280 g",515203,N/A,0.5597155094146729,False Positive
+,25950528,"Azúcar especial mermelada AZUCARERA, paquete 1 kg",222141,N/A,0.5608260631561279,False Positive
+,847921,"Champagne Brut MUMM CORDÓN ROUGE, botella 75 cl",820196,N/A,0.5610339045524597,False Positive
+,26727339,"Bebida vegetal de avena barista KAIKU, brik 1 litro",186799,N/A,0.5626442432403564,False Positive
+,19088970,"Lechuga batavia EUSKO LABEL EROSKI NATUR, bolsa 250 g",42364,N/A,0.5638027191162109,False Positive
+,15314461,"Ventresca de atún claro en aceite de oliva EROSKI, lata 111 g",184384,N/A,0.5650936365127563,False Positive
+,24289894,"Caldo de carne AVECREM, caja 20 pastillas",177472,N/A,0.5662035346031189,False Positive
+,26156901,"Cerveza 0,0 sin filtrar EL AGUILA, botellín 33 cl",221571,N/A,0.5665631294250488,False Positive
+,2571099,"Azafrán en rama POTE, caja 4 sobres",46052,N/A,0.5668199062347412,False Positive
+,26608893,"Cerveza 0,0 tostada sin gluten ESTRELLA GALICIA, lata 33 cl",196084,N/A,0.5701662302017212,False Positive
+,1362151,"Vino Tinto Ferm. en Barrica Rioja BERONIA, botella 75 cl",12766,N/A,0.571662962436676,False Positive
+,170316,"Harina de trigo extra GALLO, paquete 1 kg",649480,N/A,0.5731559991836548,False Positive
+,20012480,"Café molido descafeinado FORTALEZA, paquete 400 g",501761,N/A,0.57447350025177,False Positive
+,19869262,"Cerveza Pilsen ESTRELLA GALICIA, pack botellín 6x33 cl",204171,N/A,0.5750921964645386,False Positive
+,23486889,"Cerveza tostada FREE DAMM, lata 33 cl",538681,N/A,0.5788299441337585,False Positive
+,25816992,"Whisky JAMESON, botella 1 litro",184626,N/A,0.5798612833023071,False Positive
+,24949604,"Boletus edulis bocados LA CUERVA, bolsa 300 g",180457,N/A,0.58066725730896,False Positive
+,26747733,"Salsa dulce cebollaLA VIEJA FABRICA, frasco 290 g",123109,N/A,0.5869385004043579,False Positive
+,26202770,"Salsa boloñesa vegetal EROSKI, frasco 350 g",101836,N/A,0.5915314555168152,False Positive
+,22307466,"Yogur cremoso sabor fresa GOSHUA, tarro 145 g",36042,N/A,0.5928559303283691,False Positive
+,816884,"Vino Tinto Tempranillo Rioja CAMPO VIEJO, botella 75 cl",39130,N/A,0.5990786552429199,False Positive
+,26202788,"Salsa ricotta EROSKI, frasco 350 g",198356,N/A,0.6004390716552734,False Positive
+,24935520,"Lomo de merluza EROSKI, bandeja aprox. 350 g",221505,N/A,0.605745792388916,False Positive
+,4357968,"Mejillón en escabeche 12/16 piezas CUCA, lata 115 g",689182,N/A,0.6063375473022461,False Positive
+,373126,"Whisky 12 años CARDHU, botella 70 cl",125046,N/A,0.6082780361175537,False Positive
+,14690499,"Yogur sabor fresa-maced.-limón-tarta queso DANONE, pack 8x120 g",8908,N/A,0.6091526746749878,False Positive
+,26199182,"Finger de pollo EROSKI, bolsa 400 g",209262,N/A,0.6116830110549927,False Positive
+,21975537,"Gazpacho fresco Eroski SELEQTIA, botella 1 litro",751582,N/A,0.612289547920227,False Positive
+,26741025,"Refresco de pomelo SCHWEPPES, lata 33 cl",160608,N/A,0.6173899173736572,False Positive
+,25454620,"Bifi con coco KAIKU, pack 4x125 g",43454,N/A,0.6199823617935181,False Positive
+,19501402,"Cerveza Bourbon MAHOU, botellín 33 cl",217160,N/A,0.6215764284133911,False Positive
+,25864901,"Crema de calabacín EROSKI, tarrina 350 g",187283,N/A,0.6235424280166626,False Positive
+,23623804,"Multidesinfectante lejía SANICENTRO, pistola 750 ml",186574,N/A,0.6266152858734131,False Positive
+,17467903,"Salsa de queso de cabrales SALSAS ASTURIANAS, frasco 190 g",110892,N/A,0.6266568303108215,False Positive
+,359174,"Piña en rodajas en su jugo EROSKI, lata 340 g",133633,N/A,0.6273657083511353,False Positive
+,2452795,"Vino Tinto Reserva D.O. Rioja VIÑA REAL, botella 75 cl",64857,N/A,0.6319109797477722,False Positive
+,16052565,"Atún claro natural CAMPOS, pack 3x56 g",93346,N/A,0.6326193809509277,False Positive
+,317255,"Pacharán IGP Navarra BASARANA Etiqueta Negra, botella 1 litro",35250,N/A,0.633083701133728,False Positive
+,23051659,"Salchichas Frankfurt con queso EROSKI, pack 4x160 g",220655,N/A,0.6333023309707642,False Positive
+,22626113,"Espumoso Italian Rosé FREIXENET, botella 75 cl",167353,N/A,0.635388970375061,False Positive
+,225771,"Salmón entero y limpio de crianza, al peso, compra mínima 2.5 kg",156830,N/A,0.6374441385269165,False Positive
+,25522459,"Limpiador líquido madera DON LIMPIO garrafa 1,3+0,2 litros",220451,N/A,0.6375133991241455,False Positive
+,526541,"Vino Tinto Crianza De La Tierra YLLERA, botella 75 cl",293657,N/A,0.6406608819961548,False Positive
+,8521759,"Espárrago verde fino, manojo 250 g",186014,N/A,0.6441954970359802,False Positive
+,26719799,"Dúo de canónigos y rúcula EROSKI, bolsa 100 g",179404,N/A,0.6466230750083923,False Positive
+,23744196,"Licor Velvet DISARONNO, botella 70 cl",872404,N/A,0.6495521664619446,False Positive
+,18229062,"Patatas fritas a la sartén sin sal CASA VELLA, bolsa 150 g",187760,N/A,0.6539110541343689,False Positive
+,23804248,"Queso reserva de leche cruda EL PASTOR, cuña 375 g",215230,N/A,0.6564900875091553,False Positive
+,20546560,"Bifidus Activia líquido granada-frambuesa DANONE, botella 280 g",217249,N/A,0.6566433906555176,False Positive
+,3002524,"Vino Tinto Reserva D.O. Rioja CUNE, botella 75 cl",848666,N/A,0.6627199649810791,False Positive
+,16049629,"Bonito en escabeche CAMPOS, lata 160 g",81485,N/A,0.6665482521057129,False Positive
+,26333526,"Filete de salmón EROSKI, bandeja aprox. 300 g",104610,N/A,0.6685625314712524,False Positive
+,25629452,"Queso Raclette sin corteza LE RUSTIQUE, lonchas, bandeja 350 g",217731,N/A,0.6729863286018372,False Positive
+,26399394,"Refresco frutos rojos con gas SCHWEPPES BERRY, lata 25 cl",208479,N/A,0.6766522526741028,False Positive
+,26703579,"Limpiador multiusos olor manzana SANYTOL, botella 750 ml",7456,N/A,0.677142858505249,False Positive
+,26202762,"Salsa basilico EROSKI, frasco 350 g",212973,N/A,0.6838377714157104,False Positive
+,24281644,"Piña en rodajas DEL MONTE, lata 510 g",197296,N/A,0.6849782466888428,False Positive
+,13170089,"Arándanos rojos EROSKI, tarrina 150 g",182824,N/A,0.6881459951400757,False Positive
+,26175745,"Yogur artesanal de limón y yuzu PASTORET, tarrina 500 g",149538,N/A,0.6899901628494263,False Positive
+,23816804,"Gambón descongelado 10-20, al peso, compra mínima 500 g",67083,N/A,0.6902594566345215,False Positive
+,26805903,"Ginebra Blanca MACARONESIAN, botella 70 cl",129602,N/A,0.6905227899551392,False Positive
+,24946642,"Navajas al natural 8-14 piezas BAYMAR, lata 63 g",63438,N/A,0.6906516551971436,False Positive
+,226175,"Merluza entera (1-2 kg), pieza al peso aprox. 1.5 kg",219734,N/A,0.6922001838684082,False Positive
+,22888382,"Atún claro al natural ZALLO, frasco 155 g",222146,N/A,0.7007291316986084,False Positive
+,24046161,"Gazpacho suave EROSKI, brik 1 litro",222406,N/A,0.7044148445129395,False Positive
+,26811281,"Mermelada mora de zarza LA VIEJA FÁBRICA, frasco 280 g",89336,N/A,0.7108522057533264,False Positive
+,25015876,"Queso azul Peña Santa CENTRAL LECHERA ASTURIANA, cuña 125 g",194020,N/A,0.7112894654273987,False Positive
+,19146851,"Lenguado, pieza al peso aprox. 600 g",930358,N/A,0.7152779698371887,False Positive
+,11145810,"Sardina al limón CUCA, lata 120 g",335998,N/A,0.7153218984603882,False Positive
+,9223496,"Yogur natural azucarado sin lactosa KAIKU, pack 4x125 g",43486,N/A,0.7196784019470215,False Positive
+,267948,"Bacalao ahumado MSC MARTIKO, sobre 80 g",210972,N/A,0.7219160795211792,False Positive
+,20204384,"Copa de vino, vidrio transparente ARISTO, 53 cl.",112999,N/A,0.7267009615898132,False Positive
+,25322496,"Margarina vegetal 3/4 LUXMAR, tarrina 500 g",213266,N/A,0.7267026901245117,False Positive
+,24409856,"Chocolatina extrafino barritas NESTLÉ, paquete 108 g",170401,N/A,0.7270721793174744,False Positive
+,24895625,"Biscuit Lc NUTELLA, bolsa 41,4 g",143738,N/A,0.7283117771148682,False Positive
+,26527705,"Picada de pollo EROSKI, bandeja 500 g",212517,N/A,0.730448842048645,False Positive
+,8409302,"Paté de oca ZUBIA, lata 100 g",160717,N/A,0.7345520257949829,False Positive
+,19856517,"Masa pizza extrafina EROSKI, paquete 280 g",196359,N/A,0.7357043027877808,False Positive
+,24563256,"Tortellini de pollo y panceta EROSKI, bandeja 250 g",840866,N/A,0.7359806299209595,False Positive
+,26344523,"Pollo asado troceado EROSKI, bolsa aprox. 1 kg",211927,N/A,0.7636944055557251,False Positive
+,19841113,"Tortellini con tomate-mozzarella EROSKI, bandeja 250 g",73839,N/A,0.7638083696365356,False Positive
+,25965849,"Arándanos deshidratrados PRUNITA, bolsa 200 g",208489,N/A,0.766791820526123,False Positive
+,26712281,"Barrita original NOCILLA, caja 6 uds",174163,N/A,0.7702770233154297,False Positive
+,276352,"Licor de endrinas navarro BASARANA 20, botella 1 litro",141755,N/A,0.7751733064651489,False Positive
+,18362681,"Lomo de salmón EROSKI NATUR GGN, bandeja 300 g",156831,N/A,0.7803173065185547,False Positive
+,9513524,"Limpiador multiusos CRISTASOL, pistola 750 ml",155384,N/A,0.7859115600585938,False Positive
+,23114374,"Salsa de seta EROSKI, tarrina 130 g",79396,N/A,0.7859340906143188,False Positive
+,19660059,"Natillas con galleta ekilibrio REINA, pack 4x125 g",190526,N/A,0.7878751754760742,False Positive
+,25514548,"Sardinilla picante EROSKI, pack 2x90 g",130514,N/A,0.7886529564857483,False Positive
+,20097176,"Ron Añejo BARCELO, botella 1,75 cl",491959,N/A,0.7893487215042114,False Positive
+,24137515,"Fregona MF tiras super VILEDA, pack 1 ud",117989,N/A,0.7948399782180786,False Positive
+,25259474,"Salchicha big Frankfurt ELPOZO, pack 3x200 g",33499,N/A,0.8094413876533508,False Positive
+,26167767,"Ensaladilla de cangrejo EROSKI, tarrina 250 g",909363,N/A,0.8115933537483215,False Positive
+,26749432,"Protein pouch frambuesa KAIKU, doypack 110 g",5563,N/A,0.8162369728088379,False Positive
+,26139923,"Prelavado sin manchas KH-7, recambio 780 ml",206263,N/A,0.8173925280570984,False Positive
+,25008111,"Mermelada de higo negro HELIOS PURAFRUTA, frasco 250 g",171247,N/A,0.8188856840133667,False Positive
+,19841121,"Tagliatelle al huevo EROSKI, bolsa 250 g",3565,N/A,0.821111798286438,False Positive
+,12536066,"Jugoso al horno pollo con hierbas MAGGI, sobre 34 g",275678,N/A,0.8231899738311768,False Positive
+,10447050,"Cadera de añojo, al corte, compra mínima 500 g",191962,N/A,0.8238404989242554,False Positive
+,19856053,"Masa pizza XXL EROSKI, paquete 550 g",43278,N/A,0.8271384239196777,False Positive
+,25622853,"Vinagre de limpieza concentrado EROSKI, botella 1 litro",201711,N/A,0.8442915678024292,False Positive
+,26379370,"Yakisoba de pollo con verduras EROSKI, tarrina 250 g",4053,N/A,0.8448083400726318,False Positive
+,423103,"Leche semidesnatada calcio KAIKU, brik 1 litro",26436,N/A,0.8472108840942383,False Positive
+,18960674,"Picada mixta cerdo-vacuno burger meat XXL EROSKI, bandeja 1 kg",197057,N/A,0.8530079126358032,False Positive
+,26344259,"Preparado para puré de verduras EROSKI, bolsa 850 g",27337,N/A,0.8632798790931702,False Positive
+,19827112,"Batido de cacao sin lactosa PULEVA, pack 6x200 ml",327639,N/A,0.8660600781440735,False Positive
+,26129353,"Tortilla de patata con cebolla EROSKI, 1 ud., 600 g",73928,N/A,0.8665878772735596,False Positive
+,26614164,"Quitagrasas en espuma aroma Marsella EROSKI, pistola 750 ml",201712,N/A,0.8682066798210144,False Positive
+,10907723,"Filete de babilla extrafino de añojo, bandeja 350 g",191963,N/A,0.8697813749313354,False Positive
+,23114408,"Salsa Pesto Genovés EROSKI, tarrina 130 g",657722,N/A,0.8699185848236084,False Positive
+,25950494,"Azúcar moreno moka AZUCARERA, bolsa 300 g",147266,N/A,0.8702961802482605,False Positive
+,26811257,"Mermelada frutas del bosque LA VIEJA FABRICA, frasco 280 g",119708,N/A,0.8735012412071228,False Positive
+,12365243,"Bacalao al pil pil EROSKI SELEQTIA, bandeja 300 g",216933,N/A,0.8748201727867126,False Positive
+,23415490,"Tomate frito casero EROSKI BIO, frasco 340 g",192405,N/A,0.8813124895095825,False Positive
+,19356310,"Vino Blanco D.O.C. Rioja VIÑA POMAL, botella 75 cl",221356,N/A,0.8836795091629028,False Positive
+,19233170,"Hamburguesa de pollo, al peso, compra mínima 250 g",201562,N/A,0.8862786293029785,False Positive
+,12831236,"Leche entera sin lactosa KAIKU, brik 1 litro",29088,N/A,0.8871783018112183,False Positive
+,26690412,"Limpiador maderas KH-7, spray 500 ml",206262,N/A,0.8882642984390259,False Positive
+,19699321,"Desinfectante de ropa SANYTOL, botella 1200 ml",7455,N/A,0.8884661197662354,False Positive
+,9253592,"Filete de merluza EROSKI, bandeja aprox. 350 g",216301,N/A,0.8920333385467529,False Positive
+,26719807,"Ensalada Supremme Maxi EROSKI, bolsa 150 g",33080,N/A,0.8931303024291992,False Positive
+,21119425,"Solomillos de salmón EROSKI NATUR GGN, bandeja 300 g",220864,N/A,0.8946021795272827,False Positive
+,19838317,"Alcachofas cortadas EROSKI, bolsa 450 g",142189,N/A,0.8967979550361633,False Positive
+,14780910,"Ciruelas sin hueso BORGES, bolsa 150 g",219358,N/A,0.9027920365333557,False Positive
+,368100,"Atún claro al natural ISABEL, pack 3x56 g",135031,N/A,0.9050079584121704,False Positive
+,26253146,"Mayonesa en sobres COOSUR, caja 250 uds",121258,N/A,0.9057357311248779,False Positive
+,16199341,"Cola de merluza, al peso, compra mínima 500 g",125504,N/A,0.9099311232566833,False Positive
+,26467829,"Bonito entero E.NATUR MSC EUSKO LABEL, pieza al peso aprox. 7 kg",74817,N/A,0.9200321435928345,False Positive
+,23488760,"Queso tierno de cabra EL PASTOR,  cuña 250 g",215232,N/A,0.9200474619865417,False Positive
+,12451464,"Salsa Brava EROSKI, bote 330 g",216839,N/A,0.9215229153633118,False Positive
+,23504921,"Desinfectante textil SANICENTRO, botella 1 litro",188328,N/A,0.9315294027328491,False Positive
+,1509330,"Leche desnatada calcio plus KAIKU, brik 1 litro",26435,N/A,0.9405782222747803,False Positive
+,546382,"Sepia limpia, al peso, compra mínima 500 g",882596,N/A,0.9411429166793823,False Positive
+,23466618,"Inseciticida de manzana 2en1 ORION, spray 600 ml",30822,N/A,0.9412176609039307,False Positive
+,8555559,"Salteado de judía-berenjena-zanahoria EROSKI, bolsa 450 g",211933,N/A,0.9445868134498596,False Positive
+,13163159,"Hamburguesa de pavo EROSKI, 4 uds., bandeja 320 g",172264,N/A,0.9457190036773682,False Positive
+,16478596,"Langostino cocido calibre 80/100 EROSKI basic, bandeja 450 g",198849,N/A,0.9459396600723267,False Positive
+,15182033,"Mini hamburguesa de ternera EROSKI, 8 uds, bandeja 280 g",188525,N/A,0.9463405609130859,False Positive
+,21023254,"Sirope de ágave AZUCARERA, bocaabajo 360 g",113450,N/A,0.9494146108627319,False Positive
+,21833744,"Tomate rallado EROSKI, tarrina 180 g",50409,N/A,0.9571305513381958,False Positive
+,25329020,"Mermelada de frambuesa 0% HELIOS, frasco 280 g",197259,N/A,0.9597285985946655,False Positive
+,12193967,"Orejón de albaricoque EROSKI, tarrina 270 g",165364,N/A,0.9618775844573975,False Positive
+,25937525,"Salsa pesto genovese DE CECCO, frasco 190 g",216924,N/A,0.9619458317756653,False Positive
+,20981288,"Barritas de surimi KRISSIA, bandeja 400 g",174313,N/A,0.9664267301559448,False Positive
+,26133587,"Cepillo quitapelos pet pro VILEDA, 1 ud",211273,N/A,0.9668030738830566,False Positive
+,23087406,"Bebida de naranja sin azúcar EROSKI, brik 1,75 litros",211944,N/A,0.967174768447876,False Positive
+,323980,"Ron PAMPERO, botella 70 cl",221322,N/A,0.9711587429046631,False Positive
+,26258970,"Codillo asado EROSKI, pieza al peso aprox. 700 g",209478,N/A,0.9729229211807251,False Positive
+,26719302,"Salmorejo EROSKI, botella 330 ml",215492,N/A,0.9821114540100098,False Positive
+,26467936,"Ijada de bonito E.NATUR MSC EUSKO LABEL GRAN, al peso,compra mín 1 kg",220115,N/A,0.9954005479812622,False Positive
+,26895300,"Mini bocaditos tomate y orégano, bolsa 110 g",195716,N/A,1.001352071762085,False Positive
+,9243502,"Rodaja de bonito EROSKI NATUR EUSKO LABEL, bandeja aprox. 400 g",155282,N/A,1.005126953125,False Positive
+,14199392,"Cola de merluza del Cantábrico, bandeja aprox. 350 g",192034,N/A,1.012268304824829,False Positive
+,24073959,"Kit para takos de carne de pato con verduras MARTIKO, caja 630 g",185534,N/A,1.0156924724578857,False Positive
+,10589976,"Anchoa en aceite de oliva Eroski SELEQTIA, frasco 55 g",4326,N/A,1.0266910791397095,False Positive
+,49692,"Patatas fritas lisas EROSKI BASIC, bolsa 170 g",183044,N/A,1.031478762626648,False Positive
+,226084,"Gallo grande limpio (500-700 g) al peso, compra mínima 600 g",158147,N/A,1.0325478315353394,False Positive
+,17032806,"Apio EROSKI NATUR, unidad",50578,N/A,1.035407304763794,False Positive
+,22516421,"Cardo VIUDA DE CAYO, frasco 400 g",146920,N/A,1.050837755203247,False Positive
+,9232364,"Limpiador oxigeno activo ESTRELLA, botella 1,10 litros",187457,N/A,1.056624412536621,False Positive
+,25308214,"Bayeta para baño y cocina EROSKI, 1 ud",130775,N/A,1.0619969367980957,False Positive
+,493130,"Filete de bacalao al punto de sal, al peso, compra mínima 500 g",4475,N/A,1.06531822681427,False Positive
+,26069997,"Pan de centeno-multicereales EROSKI, paquete 250 g",218557,N/A,1.071504831314087,False Positive
+,25462169,"Barrita con pipas EROSKI, pack 2x83 g",175132,N/A,1.0728315114974976,False Positive
+,26139915,"Prelavado sin manchas KH-7, pistola 780 ml",221929,N/A,1.0809650421142578,False Positive
+,24129207,"Grissinis EROSKI, bolsa 120 g",161365,N/A,1.081296682357788,False Positive
+,25462193,"Palitos de frutos secos EROSKI, pack 2x60 g",177048,N/A,1.082574486732483,False Positive
+,23329881,"Cebolla en dados ARDO, bolsa 2.500 g",178458,N/A,1.1091208457946777,False Positive
+,1193093,"Borraja troceada, bandeja 400 g",383305,N/A,1.1097335815429688,False Positive
+,23087422,"Bebida de piña sin azúcar EROSKI, brik 1,75 litros",211936,N/A,1.1236413717269897,False Positive
+,25500562,"Queso Roncal D.O. LARRA, cuña 250 g",170845,N/A,1.1244243383407593,False Positive
+,24795270,"Dátil con hueso EROSKI, bandeja 250 g",216022,N/A,1.1344022750854492,False Positive
+,12365268,"Bacalao desalado menú EROSKI, bandeja 350 g",182495,N/A,1.136310338973999,False Positive
+,26171520,"Salsa dulce pimiento rojo y jalapeño LA V. FABRICA, frasco 280 g",123124,N/A,1.1408087015151978,False Positive
+,23078884,"Chistorra EROSKI, pieza aprox. 280 g",198716,N/A,1.1463972330093384,False Positive
+,25284746,"Muffins de chocolate EROSKI, pack 2x70 g",829439,N/A,1.1575281620025635,False Positive
+,166025,"Mendo limpio, al peso, compra mínima 250 g",919464,N/A,1.1716103553771973,False Positive
+,24784068,"Fornacina clásica EROSKI SELEQTIA, bolsa 175 g",214686,N/A,1.1753230094909668,False Positive
+,23059215,"Paño secavajillas EROSKI, paquete 2 uds.",218711,N/A,1.1837173700332642,False Positive
+,12006482,"Filete de bacalao al punto de sal E. NATUR MSC, bandeja aprox. 350 g",173844,N/A,1.189348816871643,False Positive
+,4480331,"Endibia EROSKI NATUR, bandeja 450 g",96603,N/A,1.1915919780731201,False Positive
+,315424,"Brandy TERRY 1900, botella 70 cl",182391,N/A,1.1946579217910767,False Positive
+,24597312,"Pargo de cultivo 600-800, 1 ud",135277,N/A,1.216924786567688,False Positive
+,23087448,"Bebida multifrutas sin azúcar EROSKI, brik 1,75 litros",215493,N/A,1.2189275026321411,False Positive
+,25522384,"Filetes de anchoa en aceite de girasol EROSKI BASIC, pack 3x23 g",192037,N/A,1.2190361022949219,False Positive
+,315333,"Pan tostado integral EROSKI, 30 rebanadas, paquete 270 g",172043,N/A,1.2209073305130005,False Positive
+,17921818,"Colines 100% integral de trigo EROSKI, bolsa 250 g",4520,N/A,1.2352397441864014,False Positive
+,17496522,"Salsa pesto GALLO, frasco 190 g",194743,N/A,1.2591246366500854,False Positive
+,364497,"Cortezas de cerdo EROSKI, paquete 75 g",206269,N/A,1.2608985900878906,False Positive
+,21788955,"Colorante natural POTE, caja 20 g",178010,N/A,1.268277883529663,False Positive
+,21124177,"Salsa pesto rosso GALLO, frasco 190 g",194739,N/A,1.2896690368652344,False Positive
+,7056534,"Vino Tinto Crianza Rioja ARNALTE, botella 75 cl",218826,N/A,1.293982744216919,False Positive
+,19718824,"Longaniza de cerdo con tripa natural EROSKI, bandeja 285 g",65680,N/A,1.3263076543807983,False Positive
+,212878,"Leche semidesnatada KAIKU, brik 1 litro",186798,N/A,1.3425931930541992,False Positive
+,12449054,"Divinas del mar al ajillo con gambas EROSKI, bandeja 175 g",78438,N/A,1.4666355848312378,False Positive
+,25468182,"Mini polo de naranja y limón EROSKI, pack 8x80 ml",323674,N/A,1.4793046712875366,False Positive
+,4534095,"Caldo de pollo en polvo KNORR, cubete 1 kg",141863,N/A,1.4883508682250977,False Positive
+,16851560,"Platas de Aguinaga EROSKI, pack 2x150 g",102503,N/A,1.5816054344177246,False Positive
+,10113413,N/A,212822,N/A,N/A,False Negative
+,10138329,N/A,176635,N/A,N/A,False Negative
+,10138360,N/A,525005,N/A,N/A,False Negative
+,10140457,N/A,525980,N/A,N/A,False Negative
+,10302727,N/A,215200,N/A,N/A,False Negative
+,10326148,N/A,214450,N/A,N/A,False Negative
+,10376671,N/A,206510,N/A,N/A,False Negative
+,10430692,N/A,80710,N/A,N/A,False Negative
+,10445161,N/A,719706,N/A,N/A,False Negative
+,10470318,N/A,50513,N/A,N/A,False Negative
+,10473825,N/A,183485,N/A,N/A,False Negative
+,10481059,N/A,481975,N/A,N/A,False Negative
+,10569911,N/A,144005,N/A,N/A,False Negative
+,10594240,N/A,200748,N/A,N/A,False Negative
+,10736213,N/A,89432,N/A,N/A,False Negative
+,10766905,N/A,72337,N/A,N/A,False Negative
+,10767689,N/A,277108,N/A,N/A,False Negative
+,10780880,N/A,496041,N/A,N/A,False Negative
+,10781144,N/A,112485,N/A,N/A,False Negative
+,10781276,N/A,549302,N/A,N/A,False Negative
+,10787018,N/A,176378,N/A,N/A,False Negative
+,1078948,N/A,64532,N/A,N/A,False Negative
+,10837490,N/A,151857,N/A,N/A,False Negative
+,10841351,N/A,71450,N/A,N/A,False Negative
+,10841377,N/A,71309,N/A,N/A,False Negative
+,10841435,N/A,179993,N/A,N/A,False Negative
+,10841575,N/A,308958,N/A,N/A,False Negative
+,10858751,N/A,65772,N/A,N/A,False Negative
+,10869204,N/A,151203,N/A,N/A,False Negative
+,10870491,N/A,37826,N/A,N/A,False Negative
+,10871432,N/A,43833,N/A,N/A,False Negative
+,10875094,N/A,43908,N/A,N/A,False Negative
+,10907723,N/A,217978,N/A,N/A,False Negative
+,10913952,N/A,275678,N/A,N/A,False Negative
+,10918225,N/A,116782,N/A,N/A,False Negative
+,10926327,N/A,24382,N/A,N/A,False Negative
+,10935534,N/A,220770,N/A,N/A,False Negative
+,10956696,N/A,209175,N/A,N/A,False Negative
+,10956704,N/A,173570,N/A,N/A,False Negative
+,10956803,N/A,119333,N/A,N/A,False Negative
+,10973238,N/A,178540,N/A,N/A,False Negative
+,10998623,N/A,75714,N/A,N/A,False Negative
+,11004579,N/A,215697,N/A,N/A,False Negative
+,11006301,N/A,612378,N/A,N/A,False Negative
+,11011277,N/A,67646,N/A,N/A,False Negative
+,11013125,N/A,216867,N/A,N/A,False Negative
+,11013653,N/A,27295,N/A,N/A,False Negative
+,11024908,N/A,686296,N/A,N/A,False Negative
+,11033529,N/A,166439,N/A,N/A,False Negative
+,11059714,N/A,50816,N/A,N/A,False Negative
+,11127032,N/A,144095,N/A,N/A,False Negative
+,11143757,N/A,211661,N/A,N/A,False Negative
+,11155,N/A,213336,N/A,N/A,False Negative
+,11178415,N/A,212965,N/A,N/A,False Negative
+,11184546,N/A,183541,N/A,N/A,False Negative
+,11184553,N/A,183544,N/A,N/A,False Negative
+,11184595,N/A,183539,N/A,N/A,False Negative
+,11184603,N/A,183545,N/A,N/A,False Negative
+,11184611,N/A,216119,N/A,N/A,False Negative
+,112854,N/A,903175,N/A,N/A,False Negative
+,11321775,N/A,661219,N/A,N/A,False Negative
+,11323110,N/A,1904,N/A,N/A,False Negative
+,11551,N/A,54489,N/A,N/A,False Negative
+,11631751,N/A,129786,N/A,N/A,False Negative
+,11637675,N/A,182992,N/A,N/A,False Negative
+,1167014,N/A,213046,N/A,N/A,False Negative
+,11703618,N/A,10376,N/A,N/A,False Negative
+,1171347,N/A,8022,N/A,N/A,False Negative
+,11736717,N/A,213813,N/A,N/A,False Negative
+,11750965,N/A,185407,N/A,N/A,False Negative
+,1175249,N/A,97137,N/A,N/A,False Negative
+,11752524,N/A,110167,N/A,N/A,False Negative
+,11754462,N/A,110168,N/A,N/A,False Negative
+,11754470,N/A,110169,N/A,N/A,False Negative
+,11771565,N/A,183533,N/A,N/A,False Negative
+,11771714,N/A,57207,N/A,N/A,False Negative
+,11798063,N/A,102338,N/A,N/A,False Negative
+,1191998,N/A,678678,N/A,N/A,False Negative
+,1192004,N/A,280683,N/A,N/A,False Negative
+,11974672,N/A,183324,N/A,N/A,False Negative
+,11978574,N/A,201970,N/A,N/A,False Negative
+,11980521,N/A,87687,N/A,N/A,False Negative
+,1202506,N/A,116506,N/A,N/A,False Negative
+,120279,N/A,619892,N/A,N/A,False Negative
+,12042131,N/A,183640,N/A,N/A,False Negative
+,12091633,N/A,205393,N/A,N/A,False Negative
+,12194312,N/A,108690,N/A,N/A,False Negative
+,12194650,N/A,78622,N/A,N/A,False Negative
+,12194866,N/A,157223,N/A,N/A,False Negative
+,12234266,N/A,509249,N/A,N/A,False Negative
+,12243382,N/A,75967,N/A,N/A,False Negative
+,12451464,N/A,186876,N/A,N/A,False Negative
+,12451480,N/A,178948,N/A,N/A,False Negative
+,12462255,N/A,216921,N/A,N/A,False Negative
+,12462420,N/A,216920,N/A,N/A,False Negative
+,1248806,N/A,56092,N/A,N/A,False Negative
+,12722906,N/A,33499,N/A,N/A,False Negative
+,12751038,N/A,90348,N/A,N/A,False Negative
+,12759114,N/A,3465,N/A,N/A,False Negative
+,12771838,N/A,218372,N/A,N/A,False Negative
+,12781654,N/A,35666,N/A,N/A,False Negative
+,12811568,N/A,182924,N/A,N/A,False Negative
+,12965653,N/A,154655,N/A,N/A,False Negative
+,13073903,N/A,71377,N/A,N/A,False Negative
+,13099056,N/A,93217,N/A,N/A,False Negative
+,13163480,N/A,66737,N/A,N/A,False Negative
+,13180716,N/A,93204,N/A,N/A,False Negative
+,13180955,N/A,178728,N/A,N/A,False Negative
+,13181029,N/A,805766,N/A,N/A,False Negative
+,13192703,N/A,82961,N/A,N/A,False Negative
+,13207899,N/A,208401,N/A,N/A,False Negative
+,13227376,N/A,214419,N/A,N/A,False Negative
+,13272927,N/A,170621,N/A,N/A,False Negative
+,13279468,N/A,120193,N/A,N/A,False Negative
+,13279591,N/A,75298,N/A,N/A,False Negative
+,13279625,N/A,300404,N/A,N/A,False Negative
+,13279823,N/A,168102,N/A,N/A,False Negative
+,13283098,N/A,737815,N/A,N/A,False Negative
+,13286943,N/A,156249,N/A,N/A,False Negative
+,13319454,N/A,78093,N/A,N/A,False Negative
+,13319488,N/A,78102,N/A,N/A,False Negative
+,13320619,N/A,106020,N/A,N/A,False Negative
+,13320684,N/A,113583,N/A,N/A,False Negative
+,13320692,N/A,106024,N/A,N/A,False Negative
+,13337456,N/A,220565,N/A,N/A,False Negative
+,13342308,N/A,37778,N/A,N/A,False Negative
+,13343736,N/A,188342,N/A,N/A,False Negative
+,13399761,N/A,131218,N/A,N/A,False Negative
+,13544861,N/A,114579,N/A,N/A,False Negative
+,13581509,N/A,383994,N/A,N/A,False Negative
+,13682141,N/A,211245,N/A,N/A,False Negative
+,13698394,N/A,97893,N/A,N/A,False Negative
+,137075,N/A,216856,N/A,N/A,False Negative
+,13797667,N/A,101836,N/A,N/A,False Negative
+,13870662,N/A,185534,N/A,N/A,False Negative
+,13923016,N/A,178903,N/A,N/A,False Negative
+,13927496,N/A,125987,N/A,N/A,False Negative
+,13927702,N/A,125992,N/A,N/A,False Negative
+,14007876,N/A,45652,N/A,N/A,False Negative
+,14009906,N/A,186200,N/A,N/A,False Negative
+,14027940,N/A,98592,N/A,N/A,False Negative
+,1404,N/A,723736,N/A,N/A,False Negative
+,14086177,N/A,7455,N/A,N/A,False Negative
+,140970,N/A,903201,N/A,N/A,False Negative
+,14200331,N/A,89922,N/A,N/A,False Negative
+,14243190,N/A,81028,N/A,N/A,False Negative
+,14266944,N/A,109682,N/A,N/A,False Negative
+,14294276,N/A,93906,N/A,N/A,False Negative
+,14298533,N/A,105199,N/A,N/A,False Negative
+,14333603,N/A,142486,N/A,N/A,False Negative
+,14333926,N/A,151207,N/A,N/A,False Negative
+,14339410,N/A,75784,N/A,N/A,False Negative
+,14393755,N/A,72099,N/A,N/A,False Negative
+,14393813,N/A,507065,N/A,N/A,False Negative
+,14393979,N/A,217763,N/A,N/A,False Negative
+,14404743,N/A,944086,N/A,N/A,False Negative
+,14446710,N/A,108682,N/A,N/A,False Negative
+,14468698,N/A,143738,N/A,N/A,False Negative
+,14510150,N/A,62419,N/A,N/A,False Negative
+,14544357,N/A,39361,N/A,N/A,False Negative
+,14573117,N/A,103368,N/A,N/A,False Negative
+,14626022,N/A,92954,N/A,N/A,False Negative
+,14632111,N/A,220115,N/A,N/A,False Negative
+,14683965,N/A,111395,N/A,N/A,False Negative
+,14708085,N/A,195225,N/A,N/A,False Negative
+,14708093,N/A,37025,N/A,N/A,False Negative
+,14708119,N/A,37028,N/A,N/A,False Negative
+,14780951,N/A,21645,N/A,N/A,False Negative
+,14803308,N/A,118654,N/A,N/A,False Negative
+,14844716,N/A,192057,N/A,N/A,False Negative
+,14856405,N/A,87890,N/A,N/A,False Negative
+,14863369,N/A,213816,N/A,N/A,False Negative
+,14866578,N/A,217991,N/A,N/A,False Negative
+,14879274,N/A,199294,N/A,N/A,False Negative
+,14880421,N/A,116442,N/A,N/A,False Negative
+,14882195,N/A,356850,N/A,N/A,False Negative
+,148825,N/A,540410,N/A,N/A,False Negative
+,14894604,N/A,143997,N/A,N/A,False Negative
+,14897060,N/A,153704,N/A,N/A,False Negative
+,14905871,N/A,129916,N/A,N/A,False Negative
+,14999247,N/A,95340,N/A,N/A,False Negative
+,15001662,N/A,78073,N/A,N/A,False Negative
+,15009442,N/A,107247,N/A,N/A,False Negative
+,15021298,N/A,217210,N/A,N/A,False Negative
+,15072630,N/A,5734,N/A,N/A,False Negative
+,15074271,N/A,181265,N/A,N/A,False Negative
+,1509207,N/A,184626,N/A,N/A,False Negative
+,1509256,N/A,327639,N/A,N/A,False Negative
+,1509280,N/A,480961,N/A,N/A,False Negative
+,1509900,N/A,190476,N/A,N/A,False Negative
+,15135668,N/A,215871,N/A,N/A,False Negative
+,151357,N/A,72501,N/A,N/A,False Negative
+,15137235,N/A,175870,N/A,N/A,False Negative
+,151399,N/A,650065,N/A,N/A,False Negative
+,15141427,N/A,160166,N/A,N/A,False Negative
+,15143787,N/A,192058,N/A,N/A,False Negative
+,151456,N/A,290615,N/A,N/A,False Negative
+,15168149,N/A,167891,N/A,N/A,False Negative
+,15182397,N/A,78131,N/A,N/A,False Negative
+,15211261,N/A,100808,N/A,N/A,False Negative
+,15212103,N/A,119317,N/A,N/A,False Negative
+,15212111,N/A,168990,N/A,N/A,False Negative
+,15216591,N/A,130330,N/A,N/A,False Negative
+,1522804,N/A,479661,N/A,N/A,False Negative
+,15244171,N/A,177155,N/A,N/A,False Negative
+,15256415,N/A,77046,N/A,N/A,False Negative
+,15264633,N/A,138248,N/A,N/A,False Negative
+,15266596,N/A,136602,N/A,N/A,False Negative
+,15292923,N/A,91145,N/A,N/A,False Negative
+,15317902,N/A,469118,N/A,N/A,False Negative
+,15319411,N/A,78336,N/A,N/A,False Negative
+,15319445,N/A,78337,N/A,N/A,False Negative
+,15380470,N/A,26455,N/A,N/A,False Negative
+,15443195,N/A,117709,N/A,N/A,False Negative
+,15495914,N/A,121882,N/A,N/A,False Negative
+,155424,N/A,90549,N/A,N/A,False Negative
+,15565617,N/A,150704,N/A,N/A,False Negative
+,15596513,N/A,498394,N/A,N/A,False Negative
+,15600570,N/A,123197,N/A,N/A,False Negative
+,15617756,N/A,136651,N/A,N/A,False Negative
+,15630288,N/A,212991,N/A,N/A,False Negative
+,15630338,N/A,110198,N/A,N/A,False Negative
+,15630395,N/A,93093,N/A,N/A,False Negative
+,15633126,N/A,178259,N/A,N/A,False Negative
+,156349,N/A,148347,N/A,N/A,False Negative
+,15673064,N/A,172473,N/A,N/A,False Negative
+,15700891,N/A,487006,N/A,N/A,False Negative
+,15700917,N/A,442325,N/A,N/A,False Negative
+,15705536,N/A,190264,N/A,N/A,False Negative
+,15710809,N/A,193103,N/A,N/A,False Negative
+,15725773,N/A,219432,N/A,N/A,False Negative
+,15726284,N/A,131004,N/A,N/A,False Negative
+,157271,N/A,464165,N/A,N/A,False Negative
+,15734635,N/A,194020,N/A,N/A,False Negative
+,15744543,N/A,217574,N/A,N/A,False Negative
+,15749138,N/A,124642,N/A,N/A,False Negative
+,15749484,N/A,124645,N/A,N/A,False Negative
+,15749534,N/A,124643,N/A,N/A,False Negative
+,15749856,N/A,206938,N/A,N/A,False Negative
+,15783947,N/A,208023,N/A,N/A,False Negative
+,15792559,N/A,179290,N/A,N/A,False Negative
+,158253,N/A,653796,N/A,N/A,False Negative
+,15872799,N/A,44492,N/A,N/A,False Negative
+,15933138,N/A,37021,N/A,N/A,False Negative
+,15936958,N/A,173045,N/A,N/A,False Negative
+,15942451,N/A,4123,N/A,N/A,False Negative
+,15945330,N/A,198021,N/A,N/A,False Negative
+,15964752,N/A,37027,N/A,N/A,False Negative
+,15973548,N/A,14905,N/A,N/A,False Negative
+,15992225,N/A,108686,N/A,N/A,False Negative
+,15993017,N/A,139233,N/A,N/A,False Negative
+,16008674,N/A,156597,N/A,N/A,False Negative
+,16012437,N/A,93118,N/A,N/A,False Negative
+,16013229,N/A,5331,N/A,N/A,False Negative
+,16018178,N/A,168652,N/A,N/A,False Negative
+,16027385,N/A,196406,N/A,N/A,False Negative
+,16035719,N/A,129398,N/A,N/A,False Negative
+,16035909,N/A,162366,N/A,N/A,False Negative
+,16036287,N/A,163200,N/A,N/A,False Negative
+,16046385,N/A,645541,N/A,N/A,False Negative
+,16046427,N/A,123729,N/A,N/A,False Negative
+,16107872,N/A,502294,N/A,N/A,False Negative
+,16107898,N/A,502320,N/A,N/A,False Negative
+,16107906,N/A,502645,N/A,N/A,False Negative
+,16107922,N/A,502671,N/A,N/A,False Negative
+,16107930,N/A,502749,N/A,N/A,False Negative
+,16107989,N/A,4567,N/A,N/A,False Negative
+,16121238,N/A,157289,N/A,N/A,False Negative
+,16148421,N/A,132832,N/A,N/A,False Negative
+,161802,N/A,569686,N/A,N/A,False Negative
+,16198061,N/A,126262,N/A,N/A,False Negative
+,16203168,N/A,80072,N/A,N/A,False Negative
+,16203242,N/A,131853,N/A,N/A,False Negative
+,16205940,N/A,698802,N/A,N/A,False Negative
+,16212318,N/A,9075,N/A,N/A,False Negative
+,16216335,N/A,165135,N/A,N/A,False Negative
+,16281834,N/A,165124,N/A,N/A,False Negative
+,16281867,N/A,165121,N/A,N/A,False Negative
+,162925,N/A,216709,N/A,N/A,False Negative
+,16292781,N/A,106677,N/A,N/A,False Negative
+,16359051,N/A,78692,N/A,N/A,False Negative
+,16423717,N/A,127007,N/A,N/A,False Negative
+,16423733,N/A,144544,N/A,N/A,False Negative
+,16438699,N/A,135968,N/A,N/A,False Negative
+,16439267,N/A,107943,N/A,N/A,False Negative
+,16452948,N/A,196402,N/A,N/A,False Negative
+,16463358,N/A,114030,N/A,N/A,False Negative
+,16478836,N/A,211307,N/A,N/A,False Negative
+,16489130,N/A,152558,N/A,N/A,False Negative
+,16489148,N/A,152562,N/A,N/A,False Negative
+,16491052,N/A,186123,N/A,N/A,False Negative
+,164996,N/A,195230,N/A,N/A,False Negative
+,16546491,N/A,135699,N/A,N/A,False Negative
+,16576,N/A,8069,N/A,N/A,False Negative
+,16623084,N/A,199295,N/A,N/A,False Negative
+,16640195,N/A,159877,N/A,N/A,False Negative
+,16659005,N/A,62451,N/A,N/A,False Negative
+,16666133,N/A,199297,N/A,N/A,False Negative
+,16702086,N/A,134458,N/A,N/A,False Negative
+,16710634,N/A,156614,N/A,N/A,False Negative
+,16739989,N/A,91312,N/A,N/A,False Negative
+,16740193,N/A,141586,N/A,N/A,False Negative
+,16748675,N/A,170402,N/A,N/A,False Negative
+,16810913,N/A,141282,N/A,N/A,False Negative
+,16818957,N/A,9987,N/A,N/A,False Negative
+,16819526,N/A,138356,N/A,N/A,False Negative
+,16829236,N/A,346554,N/A,N/A,False Negative
+,16843245,N/A,11288,N/A,N/A,False Negative
+,16854085,N/A,182734,N/A,N/A,False Negative
+,16886632,N/A,176668,N/A,N/A,False Negative
+,16899601,N/A,53224,N/A,N/A,False Negative
+,16902405,N/A,637598,N/A,N/A,False Negative
+,16904740,N/A,218823,N/A,N/A,False Negative
+,16906364,N/A,55328,N/A,N/A,False Negative
+,16909160,N/A,76591,N/A,N/A,False Negative
+,16909178,N/A,165203,N/A,N/A,False Negative
+,16936320,N/A,218034,N/A,N/A,False Negative
+,16940280,N/A,196403,N/A,N/A,False Negative
+,16971798,N/A,138909,N/A,N/A,False Negative
+,16979171,N/A,181580,N/A,N/A,False Negative
+,16998221,N/A,183515,N/A,N/A,False Negative
+,17003443,N/A,220705,N/A,N/A,False Negative
+,17025693,N/A,187455,N/A,N/A,False Negative
+,17030909,N/A,178520,N/A,N/A,False Negative
+,170316,N/A,825162,N/A,N/A,False Negative
+,17055039,N/A,210438,N/A,N/A,False Negative
+,17074147,N/A,214197,N/A,N/A,False Negative
+,17115304,N/A,214924,N/A,N/A,False Negative
+,17117649,N/A,200640,N/A,N/A,False Negative
+,17141755,N/A,46231,N/A,N/A,False Negative
+,17155078,N/A,138949,N/A,N/A,False Negative
+,17168055,N/A,165642,N/A,N/A,False Negative
+,17234691,N/A,132764,N/A,N/A,False Negative
+,17235862,N/A,159010,N/A,N/A,False Negative
+,17238841,N/A,179991,N/A,N/A,False Negative
+,17306374,N/A,176970,N/A,N/A,False Negative
+,17315409,N/A,138434,N/A,N/A,False Negative
+,17321951,N/A,159795,N/A,N/A,False Negative
+,17344862,N/A,156161,N/A,N/A,False Negative
+,17360918,N/A,183498,N/A,N/A,False Negative
+,17365370,N/A,141411,N/A,N/A,False Negative
+,17402421,N/A,158075,N/A,N/A,False Negative
+,174094,N/A,216970,N/A,N/A,False Negative
+,1743483,N/A,87483,N/A,N/A,False Negative
+,1743533,N/A,210500,N/A,N/A,False Negative
+,17467945,N/A,109677,N/A,N/A,False Negative
+,17512781,N/A,95605,N/A,N/A,False Negative
+,17533,N/A,58934,N/A,N/A,False Negative
+,175463,N/A,88192,N/A,N/A,False Negative
+,17569427,N/A,160690,N/A,N/A,False Negative
+,17582487,N/A,110883,N/A,N/A,False Negative
+,1759554,N/A,521443,N/A,N/A,False Negative
+,17623984,N/A,219835,N/A,N/A,False Negative
+,17625138,N/A,87294,N/A,N/A,False Negative
+,17714395,N/A,148115,N/A,N/A,False Negative
+,17716770,N/A,176631,N/A,N/A,False Negative
+,17718859,N/A,187760,N/A,N/A,False Negative
+,1772706,N/A,650052,N/A,N/A,False Negative
+,17727082,N/A,16550,N/A,N/A,False Negative
+,17736935,N/A,280722,N/A,N/A,False Negative
+,17744756,N/A,447408,N/A,N/A,False Negative
+,17744772,N/A,811239,N/A,N/A,False Negative
+,17771098,N/A,179968,N/A,N/A,False Negative
+,17771502,N/A,185567,N/A,N/A,False Negative
+,17778762,N/A,582062,N/A,N/A,False Negative
+,17778796,N/A,40847,N/A,N/A,False Negative
+,17797895,N/A,155384,N/A,N/A,False Negative
+,17820432,N/A,59267,N/A,N/A,False Negative
+,17820515,N/A,206587,N/A,N/A,False Negative
+,17820580,N/A,214073,N/A,N/A,False Negative
+,17875931,N/A,201972,N/A,N/A,False Negative
+,17908047,N/A,220110,N/A,N/A,False Negative
+,17916578,N/A,217509,N/A,N/A,False Negative
+,17921834,N/A,214860,N/A,N/A,False Negative
+,17946732,N/A,9750,N/A,N/A,False Negative
+,179481,N/A,377858,N/A,N/A,False Negative
+,17961509,N/A,160658,N/A,N/A,False Negative
+,18005538,N/A,214871,N/A,N/A,False Negative
+,18023820,N/A,150206,N/A,N/A,False Negative
+,18121848,N/A,219242,N/A,N/A,False Negative
+,18215533,N/A,148844,N/A,N/A,False Negative
+,18258673,N/A,89429,N/A,N/A,False Negative
+,18268771,N/A,936052,N/A,N/A,False Negative
+,18293068,N/A,216308,N/A,N/A,False Negative
+,18293563,N/A,62629,N/A,N/A,False Negative
+,18298018,N/A,489814,N/A,N/A,False Negative
+,18298042,N/A,63576,N/A,N/A,False Negative
+,18350751,N/A,152026,N/A,N/A,False Negative
+,18362681,N/A,177765,N/A,N/A,False Negative
+,18374611,N/A,922974,N/A,N/A,False Negative
+,18396721,N/A,124350,N/A,N/A,False Negative
+,18396937,N/A,195005,N/A,N/A,False Negative
+,18406439,N/A,195638,N/A,N/A,False Negative
+,18406819,N/A,165400,N/A,N/A,False Negative
+,18413849,N/A,129458,N/A,N/A,False Negative
+,18416602,N/A,393887,N/A,N/A,False Negative
+,18420711,N/A,"770575
+",N/A,N/A,False Negative
+,18420778,N/A,125307,N/A,N/A,False Negative
+,18463992,N/A,167895,N/A,N/A,False Negative
+,1848456,N/A,755209,N/A,N/A,False Negative
+,18491894,N/A,165047,N/A,N/A,False Negative
+,1850163,N/A,95248,N/A,N/A,False Negative
+,1850197,N/A,637182,N/A,N/A,False Negative
+,18503847,N/A,37022,N/A,N/A,False Negative
+,18520999,N/A,378079,N/A,N/A,False Negative
+,18601153,N/A,93346,N/A,N/A,False Negative
+,18602300,N/A,158711,N/A,N/A,False Negative
+,18625467,N/A,58890,N/A,N/A,False Negative
+,1867,N/A,207576,N/A,N/A,False Negative
+,18672311,N/A,192441,N/A,N/A,False Negative
+,18672949,N/A,292110,N/A,N/A,False Negative
+,18681338,N/A,158354,N/A,N/A,False Negative
+,18699249,N/A,183506,N/A,N/A,False Negative
+,18731455,N/A,201562,N/A,N/A,False Negative
+,18763102,N/A,211125,N/A,N/A,False Negative
+,18788166,N/A,432289,N/A,N/A,False Negative
+,18843334,N/A,199288,N/A,N/A,False Negative
+,18860205,N/A,189520,N/A,N/A,False Negative
+,18915926,N/A,190093,N/A,N/A,False Negative
+,18942748,N/A,87393,N/A,N/A,False Negative
+,18982488,N/A,124646,N/A,N/A,False Negative
+,19100650,N/A,157793,N/A,N/A,False Negative
+,19135979,N/A,181545,N/A,N/A,False Negative
+,19142124,N/A,112025,N/A,N/A,False Negative
+,19145853,N/A,44615,N/A,N/A,False Negative
+,19160480,N/A,145768,N/A,N/A,False Negative
+,19191980,N/A,162951,N/A,N/A,False Negative
+,19215961,N/A,925249,N/A,N/A,False Negative
+,19291814,N/A,160223,N/A,N/A,False Negative
+,19322916,N/A,214420,N/A,N/A,False Negative
+,19327055,N/A,772343,N/A,N/A,False Negative
+,1934785,N/A,47635,N/A,N/A,False Negative
+,1934868,N/A,212183,N/A,N/A,False Negative
+,19357318,N/A,89185,N/A,N/A,False Negative
+,19362136,N/A,218939,N/A,N/A,False Negative
+,19399542,N/A,157194,N/A,N/A,False Negative
+,19460922,N/A,209139,N/A,N/A,False Negative
+,19488204,N/A,203828,N/A,N/A,False Negative
+,19501378,N/A,166551,N/A,N/A,False Negative
+,19511088,N/A,196669,N/A,N/A,False Negative
+,19519081,N/A,93631,N/A,N/A,False Negative
+,19519347,N/A,93633,N/A,N/A,False Negative
+,19526268,N/A,47440,N/A,N/A,False Negative
+,19530906,N/A,121903,N/A,N/A,False Negative
+,19530922,N/A,119342,N/A,N/A,False Negative
+,19539196,N/A,53753,N/A,N/A,False Negative
+,19539220,N/A,53860,N/A,N/A,False Negative
+,19539246,N/A,155379,N/A,N/A,False Negative
+,19582899,N/A,131809,N/A,N/A,False Negative
+,19584796,N/A,182530,N/A,N/A,False Negative
+,19590298,N/A,379470,N/A,N/A,False Negative
+,19591148,N/A,771368,N/A,N/A,False Negative
+,19597137,N/A,150695,N/A,N/A,False Negative
+,19620319,N/A,163945,N/A,N/A,False Negative
+,19621325,N/A,192573,N/A,N/A,False Negative
+,1964485,N/A,505947,N/A,N/A,False Negative
+,19657428,N/A,219253,N/A,N/A,False Negative
+,19659572,N/A,157831,N/A,N/A,False Negative
+,19659887,N/A,167084,N/A,N/A,False Negative
+,19659903,N/A,167085,N/A,N/A,False Negative
+,19659911,N/A,167086,N/A,N/A,False Negative
+,19659945,N/A,166145,N/A,N/A,False Negative
+,19662576,N/A,95686,N/A,N/A,False Negative
+,19671304,N/A,547768,N/A,N/A,False Negative
+,19674225,N/A,98692,N/A,N/A,False Negative
+,19684737,N/A,73929,N/A,N/A,False Negative
+,19685882,N/A,166518,N/A,N/A,False Negative
+,19701028,N/A,197007,N/A,N/A,False Negative
+,19739788,N/A,114355,N/A,N/A,False Negative
+,19739796,N/A,114368,N/A,N/A,False Negative
+,19739812,N/A,114359,N/A,N/A,False Negative
+,19742329,N/A,103994,N/A,N/A,False Negative
+,19755388,N/A,160826,N/A,N/A,False Negative
+,19761584,N/A,148847,N/A,N/A,False Negative
+,19828425,N/A,186217,N/A,N/A,False Negative
+,19841097,N/A,214093,N/A,N/A,False Negative
+,19841121,N/A,183117,N/A,N/A,False Negative
+,19841287,N/A,190272,N/A,N/A,False Negative
+,19867357,N/A,168503,N/A,N/A,False Negative
+,19869262,N/A,204172,N/A,N/A,False Negative
+,19873124,N/A,214015,N/A,N/A,False Negative
+,19989094,N/A,127991,N/A,N/A,False Negative
+,19989714,N/A,166795,N/A,N/A,False Negative
+,19989789,N/A,219049,N/A,N/A,False Negative
+,20012274,N/A,4938,N/A,N/A,False Negative
+,20043873,N/A,58893,N/A,N/A,False Negative
+,20053963,N/A,20546,N/A,N/A,False Negative
+,20065421,N/A,210433,N/A,N/A,False Negative
+,20068540,N/A,215695,N/A,N/A,False Negative
+,20075099,N/A,211268,N/A,N/A,False Negative
+,20097176,N/A,168061,N/A,N/A,False Negative
+,20099982,N/A,167353,N/A,N/A,False Negative
+,20106001,N/A,7456,N/A,N/A,False Negative
+,20109740,N/A,168859,N/A,N/A,False Negative
+,20112504,N/A,75504,N/A,N/A,False Negative
+,201301,N/A,98466,N/A,N/A,False Negative
+,20133831,N/A,213541,N/A,N/A,False Negative
+,20143657,N/A,130729,N/A,N/A,False Negative
+,20144002,N/A,123013,N/A,N/A,False Negative
+,20144630,N/A,778661,N/A,N/A,False Negative
+,20150868,N/A,29073,N/A,N/A,False Negative
+,20153292,N/A,648999,N/A,N/A,False Negative
+,20160958,N/A,31883,N/A,N/A,False Negative
+,20161675,N/A,692328,N/A,N/A,False Negative
+,20161774,N/A,21923,N/A,N/A,False Negative
+,20162038,N/A,5502,N/A,N/A,False Negative
+,20163259,N/A,200739,N/A,N/A,False Negative
+,20166518,N/A,56094,N/A,N/A,False Negative
+,20166856,N/A,106328,N/A,N/A,False Negative
+,20167102,N/A,77685,N/A,N/A,False Negative
+,201681,N/A,145763,N/A,N/A,False Negative
+,20169553,N/A,125283,N/A,N/A,False Negative
+,20220927,N/A,198951,N/A,N/A,False Negative
+,20227682,N/A,80309,N/A,N/A,False Negative
+,20228755,N/A,686309,N/A,N/A,False Negative
+,20235792,N/A,206398,N/A,N/A,False Negative
+,2025641,N/A,735527,N/A,N/A,False Negative
+,2026003,N/A,216618,N/A,N/A,False Negative
+,202986,N/A,133489,N/A,N/A,False Negative
+,20328365,N/A,142816,N/A,N/A,False Negative
+,20348637,N/A,217297,N/A,N/A,False Negative
+,203562,N/A,110188,N/A,N/A,False Negative
+,20363487,N/A,452231,N/A,N/A,False Negative
+,20363511,N/A,190191,N/A,N/A,False Negative
+,20364212,N/A,65354,N/A,N/A,False Negative
+,20385886,N/A,173009,N/A,N/A,False Negative
+,203927,N/A,110292,N/A,N/A,False Negative
+,204214,N/A,145312,N/A,N/A,False Negative
+,204255,N/A,8908,N/A,N/A,False Negative
+,206003,N/A,14742,N/A,N/A,False Negative
+,20883666,N/A,162285,N/A,N/A,False Negative
+,20891776,N/A,190299,N/A,N/A,False Negative
+,20896270,N/A,137694,N/A,N/A,False Negative
+,20971024,N/A,89216,N/A,N/A,False Negative
+,20971099,N/A,171396,N/A,N/A,False Negative
+,20974176,N/A,78525,N/A,N/A,False Negative
+,21001771,N/A,147198,N/A,N/A,False Negative
+,21118179,N/A,204410,N/A,N/A,False Negative
+,21119425,N/A,214044,N/A,N/A,False Negative
+,21148119,N/A,175223,N/A,N/A,False Negative
+,21176482,N/A,215565,N/A,N/A,False Negative
+,21187141,N/A,43628,N/A,N/A,False Negative
+,21197256,N/A,770575,N/A,N/A,False Negative
+,212019,N/A,26435,N/A,N/A,False Negative
+,21216692,N/A,841061,N/A,N/A,False Negative
+,21216700,N/A,841126,N/A,N/A,False Negative
+,212878,N/A,26436,N/A,N/A,False Negative
+,212886,N/A,29088,N/A,N/A,False Negative
+,21320239,N/A,125875,N/A,N/A,False Negative
+,21416177,N/A,165119,N/A,N/A,False Negative
+,21416326,N/A,165120,N/A,N/A,False Negative
+,21505730,N/A,178296,N/A,N/A,False Negative
+,215681,N/A,521820,N/A,N/A,False Negative
+,21586904,N/A,435734,N/A,N/A,False Negative
+,21603626,N/A,164422,N/A,N/A,False Negative
+,216309,N/A,168933,N/A,N/A,False Negative
+,21770318,N/A,217335,N/A,N/A,False Negative
+,2179323,N/A,126915,N/A,N/A,False Negative
+,21815469,N/A,178172,N/A,N/A,False Negative
+,21816376,N/A,99964,N/A,N/A,False Negative
+,21833744,N/A,198494,N/A,N/A,False Negative
+,219253,N/A,135698,N/A,N/A,False Negative
+,21975388,N/A,158076,N/A,N/A,False Negative
+,21975537,N/A,208024,N/A,N/A,False Negative
+,22004576,N/A,218822,N/A,N/A,False Negative
+,220681,N/A,259493,N/A,N/A,False Negative
+,22241079,N/A,165117,N/A,N/A,False Negative
+,22296230,N/A,183440,N/A,N/A,False Negative
+,22297675,N/A,210435,N/A,N/A,False Negative
+,22307268,N/A,89430,N/A,N/A,False Negative
+,22307599,N/A,211298,N/A,N/A,False Negative
+,22307896,N/A,78627,N/A,N/A,False Negative
+,22309504,N/A,141655,N/A,N/A,False Negative
+,22311468,N/A,114799,N/A,N/A,False Negative
+,22311476,N/A,411879,N/A,N/A,False Negative
+,22311484,N/A,64765,N/A,N/A,False Negative
+,22316905,N/A,189867,N/A,N/A,False Negative
+,22338560,N/A,95535,N/A,N/A,False Negative
+,22338594,N/A,9073,N/A,N/A,False Negative
+,22344360,N/A,461890,N/A,N/A,False Negative
+,22379671,N/A,184593,N/A,N/A,False Negative
+,22384655,N/A,208193,N/A,N/A,False Negative
+,22396832,N/A,212956,N/A,N/A,False Negative
+,22405302,N/A,72947,N/A,N/A,False Negative
+,22409874,N/A,515424,N/A,N/A,False Negative
+,22409908,N/A,89336,N/A,N/A,False Negative
+,22410310,N/A,5132,N/A,N/A,False Negative
+,22457345,N/A,220796,N/A,N/A,False Negative
+,22458293,N/A,212772,N/A,N/A,False Negative
+,22465181,N/A,189924,N/A,N/A,False Negative
+,22483770,N/A,212974,N/A,N/A,False Negative
+,22493191,N/A,40882,N/A,N/A,False Negative
+,22495774,N/A,144713,N/A,N/A,False Negative
+,22515183,N/A,124647,N/A,N/A,False Negative
+,225227,N/A,220722,N/A,N/A,False Negative
+,225771,N/A,217330,N/A,N/A,False Negative
+,22610331,N/A,216868,N/A,N/A,False Negative
+,226175,N/A,66847,N/A,N/A,False Negative
+,226217,N/A,142379,N/A,N/A,False Negative
+,22688477,N/A,217374,N/A,N/A,False Negative
+,227645,N/A,162782,N/A,N/A,False Negative
+,228056,N/A,956449,N/A,N/A,False Negative
+,22864490,N/A,78302,N/A,N/A,False Negative
+,22884514,N/A,30154,N/A,N/A,False Negative
+,22901680,N/A,129920,N/A,N/A,False Negative
+,23053721,N/A,210461,N/A,N/A,False Negative
+,23053754,N/A,218902,N/A,N/A,False Negative
+,23059116,N/A,78666,N/A,N/A,False Negative
+,23059157,N/A,215870,N/A,N/A,False Negative
+,23067085,N/A,141224,N/A,N/A,False Negative
+,23078884,N/A,104675,N/A,N/A,False Negative
+,23114861,N/A,11164,N/A,N/A,False Negative
+,23148836,N/A,212741,N/A,N/A,False Negative
+,23156466,N/A,218782,N/A,N/A,False Negative
+,23158256,N/A,190685,N/A,N/A,False Negative
+,231761,N/A,799643,N/A,N/A,False Negative
+,23180011,N/A,193179,N/A,N/A,False Negative
+,23245806,N/A,156155,N/A,N/A,False Negative
+,23245814,N/A,151711,N/A,N/A,False Negative
+,23245863,N/A,158058,N/A,N/A,False Negative
+,23245939,N/A,214962,N/A,N/A,False Negative
+,232868,N/A,214600,N/A,N/A,False Negative
+,232876,N/A,219217,N/A,N/A,False Negative
+,233098,N/A,178766,N/A,N/A,False Negative
+,23332513,N/A,211460,N/A,N/A,False Negative
+,23332521,N/A,451555,N/A,N/A,False Negative
+,23335813,N/A,144541,N/A,N/A,False Negative
+,23351711,N/A,20392,N/A,N/A,False Negative
+,23352974,N/A,455078,N/A,N/A,False Negative
+,23352990,N/A,173412,N/A,N/A,False Negative
+,23399959,N/A,129397,N/A,N/A,False Negative
+,23406820,N/A,78521,N/A,N/A,False Negative
+,23407497,N/A,9660,N/A,N/A,False Negative
+,23429483,N/A,210436,N/A,N/A,False Negative
+,23429525,N/A,210437,N/A,N/A,False Negative
+,23444425,N/A,8042,N/A,N/A,False Negative
+,23447808,N/A,208691,N/A,N/A,False Negative
+,23462484,N/A,27807,N/A,N/A,False Negative
+,23486657,N/A,151731,N/A,N/A,False Negative
+,23488760,N/A,96762,N/A,N/A,False Negative
+,23496326,N/A,252486,N/A,N/A,False Negative
+,23499114,N/A,217006,N/A,N/A,False Negative
+,23500184,N/A,200625,N/A,N/A,False Negative
+,23509755,N/A,820196,N/A,N/A,False Negative
+,23511843,N/A,89366,N/A,N/A,False Negative
+,23513492,N/A,216050,N/A,N/A,False Negative
+,23514169,N/A,126698,N/A,N/A,False Negative
+,23518459,N/A,94958,N/A,N/A,False Negative
+,23522220,N/A,201389,N/A,N/A,False Negative
+,23523376,N/A,89126,N/A,N/A,False Negative
+,23531999,N/A,202448,N/A,N/A,False Negative
+,235366,N/A,742508,N/A,N/A,False Negative
+,23604143,N/A,194854,N/A,N/A,False Negative
+,23606841,N/A,104812,N/A,N/A,False Negative
+,23623804,N/A,188328,N/A,N/A,False Negative
+,23627185,N/A,191593,N/A,N/A,False Negative
+,23629934,N/A,8518,N/A,N/A,False Negative
+,23633100,N/A,181652,N/A,N/A,False Negative
+,23666878,N/A,891215,N/A,N/A,False Negative
+,23689144,N/A,216737,N/A,N/A,False Negative
+,23716046,N/A,215232,N/A,N/A,False Negative
+,23718042,N/A,168723,N/A,N/A,False Negative
+,23760622,N/A,211680,N/A,N/A,False Negative
+,23760770,N/A,194637,N/A,N/A,False Negative
+,23764087,N/A,194739,N/A,N/A,False Negative
+,23764137,N/A,194743,N/A,N/A,False Negative
+,237834,N/A,214733,N/A,N/A,False Negative
+,23791320,N/A,185568,N/A,N/A,False Negative
+,23796980,N/A,72787,N/A,N/A,False Negative
+,237974,N/A,214359,N/A,N/A,False Negative
+,238048,N/A,36349,N/A,N/A,False Negative
+,238071,N/A,212571,N/A,N/A,False Negative
+,23808009,N/A,208439,N/A,N/A,False Negative
+,23816929,N/A,193131,N/A,N/A,False Negative
+,23832090,N/A,200400,N/A,N/A,False Negative
+,23836802,N/A,190876,N/A,N/A,False Negative
+,23840614,N/A,160725,N/A,N/A,False Negative
+,23843048,N/A,194266,N/A,N/A,False Negative
+,23844632,N/A,197272,N/A,N/A,False Negative
+,23975345,N/A,93851,N/A,N/A,False Negative
+,23991318,N/A,98890,N/A,N/A,False Negative
+,24071250,N/A,207928,N/A,N/A,False Negative
+,24079626,N/A,217515,N/A,N/A,False Negative
+,24082869,N/A,840762,N/A,N/A,False Negative
+,24082927,N/A,221334,N/A,N/A,False Negative
+,24103871,N/A,155448,N/A,N/A,False Negative
+,24107559,N/A,200501,N/A,N/A,False Negative
+,24114498,N/A,211660,N/A,N/A,False Negative
+,24117806,N/A,197960,N/A,N/A,False Negative
+,24118705,N/A,200904,N/A,N/A,False Negative
+,24118713,N/A,199898,N/A,N/A,False Negative
+,24126070,N/A,197270,N/A,N/A,False Negative
+,24137267,N/A,204572,N/A,N/A,False Negative
+,24137564,N/A,211273,N/A,N/A,False Negative
+,24138976,N/A,350610,N/A,N/A,False Negative
+,24138984,N/A,182201,N/A,N/A,False Negative
+,24139016,N/A,121387,N/A,N/A,False Negative
+,24141129,N/A,174120,N/A,N/A,False Negative
+,24154957,N/A,201969,N/A,N/A,False Negative
+,24157844,N/A,139252,N/A,N/A,False Negative
+,24174526,N/A,142820,N/A,N/A,False Negative
+,242180,N/A,10647,N/A,N/A,False Negative
+,2423846,N/A,92594,N/A,N/A,False Negative
+,2424000,N/A,78814,N/A,N/A,False Negative
+,2424067,N/A,78512,N/A,N/A,False Negative
+,24246191,N/A,178107,N/A,N/A,False Negative
+,24257826,N/A,145729,N/A,N/A,False Negative
+,24265027,N/A,179702,N/A,N/A,False Negative
+,24265100,N/A,123238,N/A,N/A,False Negative
+,24275869,N/A,199832,N/A,N/A,False Negative
+,24275877,N/A,199831,N/A,N/A,False Negative
+,24275885,N/A,198954,N/A,N/A,False Negative
+,24278632,N/A,178732,N/A,N/A,False Negative
+,24281024,N/A,220655,N/A,N/A,False Negative
+,24281644,N/A,131255,N/A,N/A,False Negative
+,24284531,N/A,211197,N/A,N/A,False Negative
+,24285553,N/A,211161,N/A,N/A,False Negative
+,24287278,N/A,191511,N/A,N/A,False Negative
+,24287450,N/A,201185,N/A,N/A,False Negative
+,24287906,N/A,382070,N/A,N/A,False Negative
+,24305336,N/A,204171,N/A,N/A,False Negative
+,24450058,N/A,211067,N/A,N/A,False Negative
+,24548687,N/A,26905,N/A,N/A,False Negative
+,24552002,N/A,80877,N/A,N/A,False Negative
+,24552010,N/A,219759,N/A,N/A,False Negative
+,24563496,N/A,214418,N/A,N/A,False Negative
+,24583999,N/A,82973,N/A,N/A,False Negative
+,24598039,N/A,217879,N/A,N/A,False Negative
+,24598054,N/A,207981,N/A,N/A,False Negative
+,24615270,N/A,217845,N/A,N/A,False Negative
+,24615304,N/A,157714,N/A,N/A,False Negative
+,24637373,N/A,211610,N/A,N/A,False Negative
+,24781031,N/A,220067,N/A,N/A,False Negative
+,24782880,N/A,684814,N/A,N/A,False Negative
+,24801110,N/A,140508,N/A,N/A,False Negative
+,24824716,N/A,174172,N/A,N/A,False Negative
+,24856619,N/A,925106,N/A,N/A,False Negative
+,24878431,N/A,206263,N/A,N/A,False Negative
+,24879348,N/A,207256,N/A,N/A,False Negative
+,24879389,N/A,207251,N/A,N/A,False Negative
+,24879439,N/A,217304,N/A,N/A,False Negative
+,24880619,N/A,206425,N/A,N/A,False Negative
+,24887697,N/A,273715,N/A,N/A,False Negative
+,24904096,N/A,491621,N/A,N/A,False Negative
+,24908626,N/A,218659,N/A,N/A,False Negative
+,24909764,N/A,206110,N/A,N/A,False Negative
+,24914863,N/A,127293,N/A,N/A,False Negative
+,24918120,N/A,933933,N/A,N/A,False Negative
+,24918930,N/A,207104,N/A,N/A,False Negative
+,24919367,N/A,211020,N/A,N/A,False Negative
+,24928145,N/A,163829,N/A,N/A,False Negative
+,24928152,N/A,210393,N/A,N/A,False Negative
+,24928525,N/A,179661,N/A,N/A,False Negative
+,24931842,N/A,149004,N/A,N/A,False Negative
+,24935975,N/A,218084,N/A,N/A,False Negative
+,24938912,N/A,295633,N/A,N/A,False Negative
+,24945818,N/A,47112,N/A,N/A,False Negative
+,24947061,N/A,196268,N/A,N/A,False Negative
+,24955197,N/A,121333,N/A,N/A,False Negative
+,24958316,N/A,98039,N/A,N/A,False Negative
+,24959041,N/A,734474,N/A,N/A,False Negative
+,24990913,N/A,196957,N/A,N/A,False Negative
+,25003336,N/A,212300,N/A,N/A,False Negative
+,25010943,N/A,196407,N/A,N/A,False Negative
+,25013657,N/A,216318,N/A,N/A,False Negative
+,25026998,N/A,130593,N/A,N/A,False Negative
+,25035817,N/A,209526,N/A,N/A,False Negative
+,25035825,N/A,209527,N/A,N/A,False Negative
+,25035833,N/A,209528,N/A,N/A,False Negative
+,250571,N/A,23728,N/A,N/A,False Negative
+,25082140,N/A,204704,N/A,N/A,False Negative
+,25148289,N/A,207106,N/A,N/A,False Negative
+,25203407,N/A,101649,N/A,N/A,False Negative
+,25228032,N/A,66865,N/A,N/A,False Negative
+,25232745,N/A,54144,N/A,N/A,False Negative
+,25234915,N/A,653679,N/A,N/A,False Negative
+,25258989,N/A,184973,N/A,N/A,False Negative
+,25258997,N/A,163789,N/A,N/A,False Negative
+,25260795,N/A,112781,N/A,N/A,False Negative
+,25277666,N/A,586235,N/A,N/A,False Negative
+,25322496,N/A,207587,N/A,N/A,False Negative
+,25329053,N/A,515203,N/A,N/A,False Negative
+,25329061,N/A,515242,N/A,N/A,False Negative
+,25453093,N/A,670423,N/A,N/A,False Negative
+,25453747,N/A,215421,N/A,N/A,False Negative
+,25454349,N/A,165364,N/A,N/A,False Negative
+,25458746,N/A,146692,N/A,N/A,False Negative
+,25458829,N/A,344552,N/A,N/A,False Negative
+,25462151,N/A,208565,N/A,N/A,False Negative
+,25474149,N/A,6238,N/A,N/A,False Negative
+,25493735,N/A,401115,N/A,N/A,False Negative
+,25501271,N/A,218706,N/A,N/A,False Negative
+,25516220,N/A,78438,N/A,N/A,False Negative
+,25557208,N/A,186874,N/A,N/A,False Negative
+,25557570,N/A,212298,N/A,N/A,False Negative
+,25559303,N/A,212505,N/A,N/A,False Negative
+,25566001,N/A,215764,N/A,N/A,False Negative
+,25591157,N/A,199296,N/A,N/A,False Negative
+,25591629,N/A,192078,N/A,N/A,False Negative
+,25599044,N/A,165249,N/A,N/A,False Negative
+,25599051,N/A,165247,N/A,N/A,False Negative
+,25599069,N/A,165251,N/A,N/A,False Negative
+,25605015,N/A,41060,N/A,N/A,False Negative
+,25613381,N/A,167525,N/A,N/A,False Negative
+,25614033,N/A,92149,N/A,N/A,False Negative
+,25615006,N/A,217842,N/A,N/A,False Negative
+,25615584,N/A,220072,N/A,N/A,False Negative
+,25615592,N/A,212900,N/A,N/A,False Negative
+,25616921,N/A,60589,N/A,N/A,False Negative
+,25637828,N/A,213476,N/A,N/A,False Negative
+,25648916,N/A,216966,N/A,N/A,False Negative
+,25669789,N/A,97167,N/A,N/A,False Negative
+,25675661,N/A,141656,N/A,N/A,False Negative
+,2569879,N/A,397553,N/A,N/A,False Negative
+,25746827,N/A,78560,N/A,N/A,False Negative
+,25749391,N/A,43195,N/A,N/A,False Negative
+,25805672,N/A,220654,N/A,N/A,False Negative
+,25807108,N/A,371384,N/A,N/A,False Negative
+,25864547,N/A,146863,N/A,N/A,False Negative
+,25875824,N/A,161944,N/A,N/A,False Negative
+,25879040,N/A,216175,N/A,N/A,False Negative
+,25879248,N/A,156515,N/A,N/A,False Negative
+,25882390,N/A,5984,N/A,N/A,False Negative
+,25889874,N/A,201870,N/A,N/A,False Negative
+,25898693,N/A,177940,N/A,N/A,False Negative
+,25904830,N/A,103209,N/A,N/A,False Negative
+,25904855,N/A,632307,N/A,N/A,False Negative
+,25922865,N/A,214858,N/A,N/A,False Negative
+,25925876,N/A,204703,N/A,N/A,False Negative
+,25935792,N/A,214755,N/A,N/A,False Negative
+,25944018,N/A,159011,N/A,N/A,False Negative
+,25944034,N/A,238875,N/A,N/A,False Negative
+,25944109,N/A,108689,N/A,N/A,False Negative
+,25944299,N/A,116446,N/A,N/A,False Negative
+,25948324,N/A,200639,N/A,N/A,False Negative
+,25948332,N/A,200638,N/A,N/A,False Negative
+,25948340,N/A,200651,N/A,N/A,False Negative
+,25948357,N/A,200649,N/A,N/A,False Negative
+,25948365,N/A,200650,N/A,N/A,False Negative
+,25948381,N/A,200645,N/A,N/A,False Negative
+,25948407,N/A,210439,N/A,N/A,False Negative
+,25955857,N/A,191806,N/A,N/A,False Negative
+,25963844,N/A,171733,N/A,N/A,False Negative
+,25966037,N/A,211936,N/A,N/A,False Negative
+,25970070,N/A,215600,N/A,N/A,False Negative
+,25970203,N/A,102579,N/A,N/A,False Negative
+,25978511,N/A,136728,N/A,N/A,False Negative
+,26015651,N/A,215035,N/A,N/A,False Negative
+,26015693,N/A,215036,N/A,N/A,False Negative
+,26124818,N/A,434135,N/A,N/A,False Negative
+,26125906,N/A,217014,N/A,N/A,False Negative
+,26129346,N/A,207999,N/A,N/A,False Negative
+,26139923,N/A,215402,N/A,N/A,False Negative
+,26141986,N/A,86198,N/A,N/A,False Negative
+,26144121,N/A,88337,N/A,N/A,False Negative
+,26162222,N/A,36170,N/A,N/A,False Negative
+,26162347,N/A,185249,N/A,N/A,False Negative
+,26167775,N/A,198285,N/A,N/A,False Negative
+,26171769,N/A,215599,N/A,N/A,False Negative
+,26171892,N/A,219047,N/A,N/A,False Negative
+,26171926,N/A,219048,N/A,N/A,False Negative
+,26179374,N/A,210865,N/A,N/A,False Negative
+,26187344,N/A,170401,N/A,N/A,False Negative
+,26187534,N/A,179615,N/A,N/A,False Negative
+,26188458,N/A,216469,N/A,N/A,False Negative
+,26188565,N/A,196700,N/A,N/A,False Negative
+,26188573,N/A,196701,N/A,N/A,False Negative
+,26193391,N/A,214091,N/A,N/A,False Negative
+,26198424,N/A,268177,N/A,N/A,False Negative
+,26198705,N/A,10073,N/A,N/A,False Negative
+,26201855,N/A,122720,N/A,N/A,False Negative
+,26202887,N/A,104643,N/A,N/A,False Negative
+,26203935,N/A,52581,N/A,N/A,False Negative
+,26204792,N/A,137214,N/A,N/A,False Negative
+,26220798,N/A,55693,N/A,N/A,False Negative
+,26222604,N/A,118066,N/A,N/A,False Negative
+,26222620,N/A,217730,N/A,N/A,False Negative
+,26226944,N/A,217004,N/A,N/A,False Negative
+,26227793,N/A,458640,N/A,N/A,False Negative
+,26233866,N/A,201998,N/A,N/A,False Negative
+,26239558,N/A,344981,N/A,N/A,False Negative
+,26250605,N/A,97142,N/A,N/A,False Negative
+,26251835,N/A,205902,N/A,N/A,False Negative
+,26260877,N/A,216934,N/A,N/A,False Negative
+,26260901,N/A,108087,N/A,N/A,False Negative
+,26333500,N/A,218398,N/A,N/A,False Negative
+,26338210,N/A,935649,N/A,N/A,False Negative
+,26341255,N/A,213462,N/A,N/A,False Negative
+,26345892,N/A,66210,N/A,N/A,False Negative
+,26361881,N/A,216473,N/A,N/A,False Negative
+,26374199,N/A,78626,N/A,N/A,False Negative
+,26381475,N/A,206258,N/A,N/A,False Negative
+,26381525,N/A,350272,N/A,N/A,False Negative
+,26395681,N/A,216858,N/A,N/A,False Negative
+,26399204,N/A,215560,N/A,N/A,False Negative
+,26411371,N/A,73335,N/A,N/A,False Negative
+,26416198,N/A,630448,N/A,N/A,False Negative
+,26457390,N/A,43271,N/A,N/A,False Negative
+,26459040,N/A,220773,N/A,N/A,False Negative
+,26502153,N/A,199790,N/A,N/A,False Negative
+,26505891,N/A,182490,N/A,N/A,False Negative
+,26507632,N/A,216734,N/A,N/A,False Negative
+,26507657,N/A,216735,N/A,N/A,False Negative
+,26507673,N/A,216733,N/A,N/A,False Negative
+,26528430,N/A,72605,N/A,N/A,False Negative
+,26533661,N/A,209127,N/A,N/A,False Negative
+,2655967,N/A,259844,N/A,N/A,False Negative
+,26727339,N/A,186798,N/A,N/A,False Negative
+,26749119,N/A,149538,N/A,N/A,False Negative
+,2675379,N/A,752557,N/A,N/A,False Negative
+,2678571,N/A,84578,N/A,N/A,False Negative
+,26793976,N/A,21576,N/A,N/A,False Negative
+,2685840,N/A,212775,N/A,N/A,False Negative
+,2685899,N/A,212781,N/A,N/A,False Negative
+,269035,N/A,76239,N/A,N/A,False Negative
+,27102,N/A,97877,N/A,N/A,False Negative
+,2723252,N/A,121305,N/A,N/A,False Negative
+,2750214,N/A,214569,N/A,N/A,False Negative
+,2750222,N/A,214346,N/A,N/A,False Negative
+,2750396,N/A,215198,N/A,N/A,False Negative
+,2750404,N/A,215071,N/A,N/A,False Negative
+,2750503,N/A,668408,N/A,N/A,False Negative
+,280271,N/A,104009,N/A,N/A,False Negative
+,289462,N/A,192972,N/A,N/A,False Negative
+,2946119,N/A,183527,N/A,N/A,False Negative
+,300434,N/A,78276,N/A,N/A,False Negative
+,3020,N/A,207582,N/A,N/A,False Negative
+,302695,N/A,169507,N/A,N/A,False Negative
+,302984,N/A,83538,N/A,N/A,False Negative
+,303362,N/A,52286,N/A,N/A,False Negative
+,306027,N/A,174824,N/A,N/A,False Negative
+,306035,N/A,174668,N/A,N/A,False Negative
+,3063773,N/A,174276,N/A,N/A,False Negative
+,307108,N/A,482872,N/A,N/A,False Negative
+,307892,N/A,218527,N/A,N/A,False Negative
+,310839,N/A,176419,N/A,N/A,False Negative
+,311712,N/A,159098,N/A,N/A,False Negative
+,311720,N/A,180739,N/A,N/A,False Negative
+,3117256,N/A,211525,N/A,N/A,False Negative
+,312751,N/A,72956,N/A,N/A,False Negative
+,313403,N/A,62309,N/A,N/A,False Negative
+,313411,N/A,127514,N/A,N/A,False Negative
+,315077,N/A,81554,N/A,N/A,False Negative
+,315093,N/A,75725,N/A,N/A,False Negative
+,315473,N/A,214076,N/A,N/A,False Negative
+,315523,N/A,233636,N/A,N/A,False Negative
+,315606,N/A,830245,N/A,N/A,False Negative
+,315622,N/A,534378,N/A,N/A,False Negative
+,315655,N/A,247000,N/A,N/A,False Negative
+,315713,N/A,200905,N/A,N/A,False Negative
+,315754,N/A,76986,N/A,N/A,False Negative
+,316018,N/A,872794,N/A,N/A,False Negative
+,316026,N/A,78717,N/A,N/A,False Negative
+,3162989,N/A,192263,N/A,N/A,False Negative
+,316620,N/A,322452,N/A,N/A,False Negative
+,317206,N/A,132820,N/A,N/A,False Negative
+,317230,N/A,62335,N/A,N/A,False Negative
+,317255,N/A,35223,N/A,N/A,False Negative
+,317354,N/A,805103,N/A,N/A,False Negative
+,317388,N/A,62465,N/A,N/A,False Negative
+,317487,N/A,98748,N/A,N/A,False Negative
+,317578,N/A,191126,N/A,N/A,False Negative
+,317594,N/A,63479,N/A,N/A,False Negative
+,317610,N/A,60333,N/A,N/A,False Negative
+,317628,N/A,60307,N/A,N/A,False Negative
+,317701,N/A,261443,N/A,N/A,False Negative
+,317966,N/A,60398,N/A,N/A,False Negative
+,318204,N/A,65468,N/A,N/A,False Negative
+,318287,N/A,64857,N/A,N/A,False Negative
+,318303,N/A,70954,N/A,N/A,False Negative
+,318410,N/A,346632,N/A,N/A,False Negative
+,319335,N/A,61639,N/A,N/A,False Negative
+,319400,N/A,57759,N/A,N/A,False Negative
+,320267,N/A,122930,N/A,N/A,False Negative
+,320481,N/A,111501,N/A,N/A,False Negative
+,322057,N/A,217708,N/A,N/A,False Negative
+,322172,N/A,88285,N/A,N/A,False Negative
+,324368,N/A,289835,N/A,N/A,False Negative
+,324715,N/A,289757,N/A,N/A,False Negative
+,324863,N/A,67054,N/A,N/A,False Negative
+,326637,N/A,476385,N/A,N/A,False Negative
+,327858,N/A,55068,N/A,N/A,False Negative
+,329664,N/A,8724,N/A,N/A,False Negative
+,330308,N/A,133536,N/A,N/A,False Negative
+,330688,N/A,203089,N/A,N/A,False Negative
+,3317617,N/A,209883,N/A,N/A,False Negative
+,332155,N/A,16255,N/A,N/A,False Negative
+,332643,N/A,52204,N/A,N/A,False Negative
+,335315,N/A,143714,N/A,N/A,False Negative
+,3355344,N/A,221703,N/A,N/A,False Negative
+,336073,N/A,58578,N/A,N/A,False Negative
+,336255,N/A,431847,N/A,N/A,False Negative
+,336289,N/A,431964,N/A,N/A,False Negative
+,336305,N/A,432276,N/A,N/A,False Negative
+,3377512,N/A,380965,N/A,N/A,False Negative
+,3387479,N/A,147329,N/A,N/A,False Negative
+,339549,N/A,645528,N/A,N/A,False Negative
+,340158,N/A,69537,N/A,N/A,False Negative
+,3434826,N/A,127355,N/A,N/A,False Negative
+,344333,N/A,184568,N/A,N/A,False Negative
+,344358,N/A,184573,N/A,N/A,False Negative
+,345918,N/A,93127,N/A,N/A,False Negative
+,345975,N/A,93131,N/A,N/A,False Negative
+,346106,N/A,127027,N/A,N/A,False Negative
+,348359,N/A,344578,N/A,N/A,False Negative
+,349167,N/A,212774,N/A,N/A,False Negative
+,349209,N/A,828139,N/A,N/A,False Negative
+,350165,N/A,171404,N/A,N/A,False Negative
+,350223,N/A,171415,N/A,N/A,False Negative
+,356154,N/A,110287,N/A,N/A,False Negative
+,356162,N/A,523835,N/A,N/A,False Negative
+,357350,N/A,222859,N/A,N/A,False Negative
+,359901,N/A,480922,N/A,N/A,False Negative
+,360883,N/A,75595,N/A,N/A,False Negative
+,361915,N/A,100867,N/A,N/A,False Negative
+,366666,N/A,78206,N/A,N/A,False Negative
+,367391,N/A,212777,N/A,N/A,False Negative
+,367409,N/A,212779,N/A,N/A,False Negative
+,368670,N/A,815620,N/A,N/A,False Negative
+,368704,N/A,213337,N/A,N/A,False Negative
+,368720,N/A,722124,N/A,N/A,False Negative
+,3687878,N/A,216829,N/A,N/A,False Negative
+,3740826,N/A,183483,N/A,N/A,False Negative
+,375865,N/A,70980,N/A,N/A,False Negative
+,3761095,N/A,59100,N/A,N/A,False Negative
+,377754,N/A,61596,N/A,N/A,False Negative
+,378323,N/A,911976,N/A,N/A,False Negative
+,379271,N/A,190028,N/A,N/A,False Negative
+,379461,N/A,560417,N/A,N/A,False Negative
+,382226,N/A,213180,N/A,N/A,False Negative
+,3824505,N/A,70567,N/A,N/A,False Negative
+,382903,N/A,163475,N/A,N/A,False Negative
+,3830189,N/A,829426,N/A,N/A,False Negative
+,383414,N/A,68016,N/A,N/A,False Negative
+,383810,N/A,825214,N/A,N/A,False Negative
+,384073,N/A,33050,N/A,N/A,False Negative
+,3897220,N/A,364676,N/A,N/A,False Negative
+,394106,N/A,561379,N/A,N/A,False Negative
+,403220,N/A,131391,N/A,N/A,False Negative
+,4047338,N/A,181453,N/A,N/A,False Negative
+,406108,N/A,221698,N/A,N/A,False Negative
+,4093837,N/A,205245,N/A,N/A,False Negative
+,409839,N/A,212649,N/A,N/A,False Negative
+,41111,N/A,436787,N/A,N/A,False Negative
+,413864,N/A,99961,N/A,N/A,False Negative
+,4196671,N/A,78094,N/A,N/A,False Negative
+,4208989,N/A,322790,N/A,N/A,False Negative
+,4212585,N/A,101593,N/A,N/A,False Negative
+,4269932,N/A,77426,N/A,N/A,False Negative
+,4270583,N/A,154936,N/A,N/A,False Negative
+,4270591,N/A,648778,N/A,N/A,False Negative
+,4292355,N/A,132096,N/A,N/A,False Negative
+,429449,N/A,159757,N/A,N/A,False Negative
+,4313904,N/A,89428,N/A,N/A,False Negative
+,4374153,N/A,78335,N/A,N/A,False Negative
+,4374161,N/A,78194,N/A,N/A,False Negative
+,4383626,N/A,211544,N/A,N/A,False Negative
+,4400917,N/A,99031,N/A,N/A,False Negative
+,441618,N/A,47407,N/A,N/A,False Negative
+,446807,N/A,213179,N/A,N/A,False Negative
+,4480331,N/A,20406,N/A,N/A,False Negative
+,4482949,N/A,430131,N/A,N/A,False Negative
+,4501375,N/A,617929,N/A,N/A,False Negative
+,4501508,N/A,815,N/A,N/A,False Negative
+,45278,N/A,72079,N/A,N/A,False Negative
+,4529186,N/A,873262,N/A,N/A,False Negative
+,4534095,N/A,63049,N/A,N/A,False Negative
+,4534251,N/A,800774,N/A,N/A,False Negative
+,4557427,N/A,4492,N/A,N/A,False Negative
+,4577995,N/A,73724,N/A,N/A,False Negative
+,462317,N/A,98290,N/A,N/A,False Negative
+,465708,N/A,158536,N/A,N/A,False Negative
+,465716,N/A,358852,N/A,N/A,False Negative
+,465740,N/A,79898,N/A,N/A,False Negative
+,468413,N/A,119501,N/A,N/A,False Negative
+,4705,N/A,66378,N/A,N/A,False Negative
+,47985,N/A,195228,N/A,N/A,False Negative
+,479964,N/A,92113,N/A,N/A,False Negative
+,4804720,N/A,22415,N/A,N/A,False Negative
+,4834537,N/A,175162,N/A,N/A,False Negative
+,4840666,N/A,137412,N/A,N/A,False Negative
+,4852976,N/A,6821,N/A,N/A,False Negative
+,485300,N/A,561951,N/A,N/A,False Negative
+,485565,N/A,50814,N/A,N/A,False Negative
+,487363,N/A,135031,N/A,N/A,False Negative
+,489070,N/A,335985,N/A,N/A,False Negative
+,4935664,N/A,308607,N/A,N/A,False Negative
+,4961314,N/A,144248,N/A,N/A,False Negative
+,49692,N/A,208566,N/A,N/A,False Negative
+,49700,N/A,211634,N/A,N/A,False Negative
+,49882,N/A,12766,N/A,N/A,False Negative
+,5018171,N/A,143172,N/A,N/A,False Negative
+,5018213,N/A,206969,N/A,N/A,False Negative
+,5023361,N/A,174538,N/A,N/A,False Negative
+,505545,N/A,75907,N/A,N/A,False Negative
+,506279,N/A,232167,N/A,N/A,False Negative
+,50765,N/A,515190,N/A,N/A,False Negative
+,511790,N/A,201378,N/A,N/A,False Negative
+,5130901,N/A,75908,N/A,N/A,False Negative
+,5130968,N/A,111323,N/A,N/A,False Negative
+,5154539,N/A,94956,N/A,N/A,False Negative
+,5158357,N/A,933712,N/A,N/A,False Negative
+,52019,N/A,5931,N/A,N/A,False Negative
+,5223,N/A,37026,N/A,N/A,False Negative
+,524967,N/A,216905,N/A,N/A,False Negative
+,530311,N/A,116391,N/A,N/A,False Negative
+,53520,N/A,178594,N/A,N/A,False Negative
+,538967,N/A,38202,N/A,N/A,False Negative
+,540864,N/A,501761,N/A,N/A,False Negative
+,54379,N/A,54396,N/A,N/A,False Negative
+,5481809,N/A,78590,N/A,N/A,False Negative
+,5517917,N/A,88976,N/A,N/A,False Negative
+,553768,N/A,489242,N/A,N/A,False Negative
+,5607577,N/A,261911,N/A,N/A,False Negative
+,56515,N/A,715,N/A,N/A,False Negative
+,5848726,N/A,91,N/A,N/A,False Negative
+,5848916,N/A,218839,N/A,N/A,False Negative
+,5848924,N/A,218841,N/A,N/A,False Negative
+,5848932,N/A,218821,N/A,N/A,False Negative
+,5859210,N/A,220349,N/A,N/A,False Negative
+,5867841,N/A,283855,N/A,N/A,False Negative
+,5873104,N/A,390676,N/A,N/A,False Negative
+,5881313,N/A,509457,N/A,N/A,False Negative
+,588525,N/A,80028,N/A,N/A,False Negative
+,5900154,N/A,602264,N/A,N/A,False Negative
+,5965850,N/A,4735,N/A,N/A,False Negative
+,5974340,N/A,87808,N/A,N/A,False Negative
+,597773,N/A,133390,N/A,N/A,False Negative
+,5981733,N/A,154653,N/A,N/A,False Negative
+,6002067,N/A,115870,N/A,N/A,False Negative
+,601609,N/A,89431,N/A,N/A,False Negative
+,6062053,N/A,90588,N/A,N/A,False Negative
+,6076566,N/A,94363,N/A,N/A,False Negative
+,6144455,N/A,127601,N/A,N/A,False Negative
+,6144711,N/A,164496,N/A,N/A,False Negative
+,62216,N/A,56006,N/A,N/A,False Negative
+,6304,N/A,664274,N/A,N/A,False Negative
+,633404,N/A,108522,N/A,N/A,False Negative
+,656348,N/A,283751,N/A,N/A,False Negative
+,6606255,N/A,1089,N/A,N/A,False Negative
+,66175,N/A,207578,N/A,N/A,False Negative
+,6646459,N/A,523575,N/A,N/A,False Negative
+,6739288,N/A,47034,N/A,N/A,False Negative
+,6784581,N/A,37676,N/A,N/A,False Negative
+,6817696,N/A,98024,N/A,N/A,False Negative
+,6818090,N/A,104565,N/A,N/A,False Negative
+,6819882,N/A,78245,N/A,N/A,False Negative
+,6833388,N/A,53142,N/A,N/A,False Negative
+,6833438,N/A,53150,N/A,N/A,False Negative
+,6984447,N/A,8063,N/A,N/A,False Negative
+,702639,N/A,158477,N/A,N/A,False Negative
+,70532,N/A,212773,N/A,N/A,False Negative
+,7054117,N/A,12291,N/A,N/A,False Negative
+,7105117,N/A,466739,N/A,N/A,False Negative
+,71126,N/A,553592,N/A,N/A,False Negative
+,7132467,N/A,188466,N/A,N/A,False Negative
+,7132483,N/A,503659,N/A,N/A,False Negative
+,7132590,N/A,4569,N/A,N/A,False Negative
+,7390586,N/A,217833,N/A,N/A,False Negative
+,7559776,N/A,214574,N/A,N/A,False Negative
+,7559818,N/A,15256,N/A,N/A,False Negative
+,759738,N/A,212048,N/A,N/A,False Negative
+,759985,N/A,123916,N/A,N/A,False Negative
+,7642168,N/A,136486,N/A,N/A,False Negative
+,7643570,N/A,20043,N/A,N/A,False Negative
+,766899,N/A,202436,N/A,N/A,False Negative
+,768689,N/A,34337,N/A,N/A,False Negative
+,788042,N/A,411645,N/A,N/A,False Negative
+,788398,N/A,411736,N/A,N/A,False Negative
+,808774,N/A,126541,N/A,N/A,False Negative
+,817064,N/A,491959,N/A,N/A,False Negative
+,818146,N/A,31524,N/A,N/A,False Negative
+,82016,N/A,185108,N/A,N/A,False Negative
+,8329831,N/A,44387,N/A,N/A,False Negative
+,8351827,N/A,78056,N/A,N/A,False Negative
+,8351884,N/A,78296,N/A,N/A,False Negative
+,835744,N/A,209372,N/A,N/A,False Negative
+,8369241,N/A,24325,N/A,N/A,False Negative
+,8382343,N/A,156349,N/A,N/A,False Negative
+,8389207,N/A,43588,N/A,N/A,False Negative
+,8420002,N/A,65171,N/A,N/A,False Negative
+,8426736,N/A,49753,N/A,N/A,False Negative
+,844498,N/A,595205,N/A,N/A,False Negative
+,8445231,N/A,78529,N/A,N/A,False Negative
+,8451338,N/A,652756,N/A,N/A,False Negative
+,8456345,N/A,28819,N/A,N/A,False Negative
+,8479180,N/A,148587,N/A,N/A,False Negative
+,8484214,N/A,196362,N/A,N/A,False Negative
+,8484230,N/A,196363,N/A,N/A,False Negative
+,8484289,N/A,69660,N/A,N/A,False Negative
+,8492761,N/A,220556,N/A,N/A,False Negative
+,8529596,N/A,208373,N/A,N/A,False Negative
+,857011,N/A,211510,N/A,N/A,False Negative
+,8570418,N/A,185489,N/A,N/A,False Negative
+,8570517,N/A,151604,N/A,N/A,False Negative
+,8581928,N/A,97169,N/A,N/A,False Negative
+,860502,N/A,509132,N/A,N/A,False Negative
+,861583,N/A,128632,N/A,N/A,False Negative
+,870683,N/A,158157,N/A,N/A,False Negative
+,87510,N/A,70542,N/A,N/A,False Negative
+,8797631,N/A,171101,N/A,N/A,False Negative
+,881375,N/A,65688,N/A,N/A,False Negative
+,886051,N/A,65682,N/A,N/A,False Negative
+,8861668,N/A,81447,N/A,N/A,False Negative
+,886291,N/A,65683,N/A,N/A,False Negative
+,886374,N/A,65684,N/A,N/A,False Negative
+,8927774,N/A,548613,N/A,N/A,False Negative
+,8927980,N/A,8859,N/A,N/A,False Negative
+,8928806,N/A,102509,N/A,N/A,False Negative
+,8932253,N/A,31959,N/A,N/A,False Negative
+,8976227,N/A,196081,N/A,N/A,False Negative
+,9007972,N/A,141164,N/A,N/A,False Negative
+,901330,N/A,170287,N/A,N/A,False Negative
+,9082314,N/A,144620,N/A,N/A,False Negative
+,9101726,N/A,336050,N/A,N/A,False Negative
+,91033,N/A,213045,N/A,N/A,False Negative
+,9143769,N/A,142570,N/A,N/A,False Negative
+,9160615,N/A,197577,N/A,N/A,False Negative
+,916460,N/A,42265,N/A,N/A,False Negative
+,917323,N/A,101536,N/A,N/A,False Negative
+,917372,N/A,98818,N/A,N/A,False Negative
+,9191412,N/A,35187,N/A,N/A,False Negative
+,9193095,N/A,218711,N/A,N/A,False Negative
+,9195637,N/A,355407,N/A,N/A,False Negative
+,9205220,N/A,211021,N/A,N/A,False Negative
+,9205238,N/A,211022,N/A,N/A,False Negative
+,920913,N/A,185339,N/A,N/A,False Negative
+,9225574,N/A,163638,N/A,N/A,False Negative
+,9237470,N/A,44808,N/A,N/A,False Negative
+,9242793,N/A,288444,N/A,N/A,False Negative
+,92569,N/A,694031,N/A,N/A,False Negative
+,9268301,N/A,10346,N/A,N/A,False Negative
+,940833,N/A,150098,N/A,N/A,False Negative
+,941153,N/A,203090,N/A,N/A,False Negative
+,945527,N/A,172780,N/A,N/A,False Negative
+,945535,N/A,172789,N/A,N/A,False Negative
+,9504788,N/A,195736,N/A,N/A,False Negative
+,9504929,N/A,197700,N/A,N/A,False Negative
+,951371,N/A,179595,N/A,N/A,False Negative
+,951389,N/A,5956,N/A,N/A,False Negative
+,9527730,N/A,33278,N/A,N/A,False Negative
+,954615,N/A,383513,N/A,N/A,False Negative
+,955240,N/A,195236,N/A,N/A,False Negative
+,9558529,N/A,212782,N/A,N/A,False Negative
+,959361,N/A,44320,N/A,N/A,False Negative
+,961318,N/A,11303,N/A,N/A,False Negative
+,961334,N/A,943995,N/A,N/A,False Negative
+,9634643,N/A,94954,N/A,N/A,False Negative
+,963934,N/A,872404,N/A,N/A,False Negative
+,9658550,N/A,216587,N/A,N/A,False Negative
+,9658618,N/A,208693,N/A,N/A,False Negative
+,9658683,N/A,215087,N/A,N/A,False Negative
+,9702234,N/A,183487,N/A,N/A,False Negative
+,9717398,N/A,844493,N/A,N/A,False Negative
+,9717463,N/A,186378,N/A,N/A,False Negative
+,9764101,N/A,206668,N/A,N/A,False Negative
+,976449,N/A,122434,N/A,N/A,False Negative
+,976456,N/A,277459,N/A,N/A,False Negative
+,9805706,N/A,181582,N/A,N/A,False Negative
+,983536,N/A,106325,N/A,N/A,False Negative
+,9847237,N/A,208254,N/A,N/A,False Negative
+,989483,N/A,198629,N/A,N/A,False Negative
+,990205,N/A,323999,N/A,N/A,False Negative

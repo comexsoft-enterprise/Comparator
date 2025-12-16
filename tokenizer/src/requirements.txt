@@ -1,0 +1,21 @@
+spacy == 2.3.5
+numpy >=1.22.4,<1.25.0
+thinc >=7.4.1,<7.5.0
+lxml
+beautifulsoup4
+requests
+torch
+transformers == 4.28.0
+sentence-transformers
+nltk
+python-dotenv
+huggingface_hub == 0.12.0
+pip
+rich
+pandas
+openpyxl
+jupyterlab==4.4.3
+prefect==3.4.0
+prefect-aws==0.5.10
+prefect-docker==0.6.4
+deep-translator==1.11.4

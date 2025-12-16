@@ -1,0 +1,10 @@
+uv
+rich
+debugpy
+pyright
+pytest
+loguru
+prefect==3.4.0
+prefect-aws==0.5.10
+prefect-docker==0.6.4
+pandas==2.3.0

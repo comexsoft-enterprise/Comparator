@@ -1,0 +1,1306 @@
+{
+  "source_supermarket": "eroski",
+  "target_supermarket": "makro",
+  "mapping_results": [
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/sunflower-oil/",
+      "matched_target_category": "alimentación-general/despensa/aceite/aceite-de-girasol"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/strong-olive-oil/",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-oliva"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/mild-olive-oil/",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-oliva-virgen"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/virgin-olive-oil/",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-oliva-virgen-extra"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/other-oils/",
+      "matched_target_category": "alimentacion-general/despensa/aceite/otros-aceites"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/flour/",
+      "matched_target_category": "alimentacion-general/panaderia/pan-rallado"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/breadcrumbs/",
+      "matched_target_category": "alimentacion-general/panaderia/pan-rallado"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/stock-cubes/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/salt/",
+      "matched_target_category": "alimentacion-general/despensa/sal/"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/special-vinegars/",
+      "matched_target_category": "alimentacion-general/despensa/vinagre/vinagre-balsamico"
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/vinegar/",
+      "matched_target_category": "alimentacion-general/despensa/vinagre/vinagre-de-vino"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/special-olives/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/black-olives/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/stuffed-olives/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/green-olives/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/skewers-and-cocktail-pickles/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/chillies-capers-and-others/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/gherkins-and-cocktail-onions/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/other-traditional-pickles/",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/clams-razor-clams-and-others/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/almejas"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/tuna-in-oil/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/tuna-and-bonito-in-pickled-sauce/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/tuna-and-bonito-in-spring-water/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/bonito-in-oil/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/bonito-an-tuna-belly/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/cockles/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/almejas"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/mackerel/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/otras-conservas-de-pescado-y-marisco"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/squid-octopus-and-cuttlefish/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/calamar-pulpo-y-chipiron"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/mussels/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/mejillones"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/sardines-and-small-sardines/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/sardinas"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/other-preserves/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/otras-conservas-de-pescado-y-marisco"
+    },
+    {
+      "source_category": "nutrition/fish-preserves/other-preserves/",
+      "matched_target_category": "https://tienda.makro.es/shop/category/alimentaci%C3%B3n-general/conservas/conservas-de-pescado-y-marisco/conservas-de-marisco"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/artichokes-and-mixed-vegetables/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/macedonia-de-verduras"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/mushrooms-and-wild-mushrooms/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/setas-y-champinones"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/fruit-preserves/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-frutas"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/asparagus/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/esparrago"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/spinach-chard-and-others/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/otras-conservas-vegetales"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/peas-and-sweetcorn/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/guisantes"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/peas-and-sweetcorn/",
+      "matched_target_category": "https://tienda.makro.es/shop/category/alimentaci%C3%B3n-general/conservas/conservas-de-verduras/ma%C3%ADz"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/red-peppers-others/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/pimiento"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/red-piquillo-peppers/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/pimiento"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/fried-tomato-sauce/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/tomate"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/whole-tomatoes/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/tomate"
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/salad-vegetables/",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/otras-conservas-vegetales"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/almonds-and-hazlenuts/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/peanuts-crunchy-corn-and-cocktail-snacks/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/dried-fruit/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/walnuts-and-other-mixed-nuts/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/crisps-in-tube/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/low-fat-crisps/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/flavoured-plain-crisps/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/traditional-plain-crisps/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/flavoured-crinkle-crisps/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/sunflower-seeds/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/pistachoes-and-cashews/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/snack-and-other-appetisers/",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/milk-with-added-calcium/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/batidos-y-bebidas-con-base-de-leche"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/condensed-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-condensada"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/skimmed-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-desnatada"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/powdered-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/otras-leches"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/whole-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-entera"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/fresh-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-fresca"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/semi-skimmed-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-semidesnatada"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/lactose-free-and-special-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-sin-lactosa"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/cacao-shakes-and-chocolate-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/batidos-y-bebidas-con-base-de-leche"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/soya-and-other-cereal-drinks/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/almond-milk/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/juice-and-milk-drinks-/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/batidos-y-bebidas-con-base-de-leche"
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/other-milkshakes/",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/batidos-y-bebidas-con-base-de-leche"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/rice/",
+      "matched_target_category": "alimentación-general/despensa/arroz"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/spaghetti-noodles-and-long-pasta/",
+      "matched_target_category": "alimentación-general/despensa/pasta/fideos"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/soup-noodles-and-pasta/",
+      "matched_target_category": "alimentación-general/despensa/pasta/fideos"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/lasagne-and-cannelloni/",
+      "matched_target_category": "alimentación-general/despensa/pasta/pasta-para-lasaña-y-canelones"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/pulses/",
+      "matched_target_category": "alimentación-general/despensa/legumbres"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/cooked-pulses/",
+      "matched_target_category": "alimentación-general/conservas/conservas-de-legumbres"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/macaroni-and-short-pasta/",
+      "matched_target_category": "alimentación-general/despensa/pasta/"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/egg-pasta-and-pasta-nests/",
+      "matched_target_category": "alimentación-general/despensa/pasta/pasta-de-huevo"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/pasta-gourmet/",
+      "matched_target_category": "alimentación-general/despensa/pasta/"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/gluten-free-and-integral-pasta/",
+      "matched_target_category": "alimentación-general/despensa/pasta/"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/plant-based-pasta-and-salads/",
+      "matched_target_category": "alimentación-general/despensa/pasta/pastas-de-colores-y-vegetales"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/sauces-/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/sauces-/",
+      "matched_target_category": "alimentación-general/conservas/conservas-de-verduras/tomate"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/semolina-tapioca-and-others/",
+      "matched_target_category": "alimentación-general/despensa/pasta/cous-cous"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/semolina-tapioca-and-others/",
+      "matched_target_category": "alimentación-general/despensa/pasta/otras-pastas"
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/tortellini-ravioli-and-others/",
+      "matched_target_category": "alimentación-general/despensa/pasta/pastas-rellenas"
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/bechamel-sauce/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/butter/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/mantequilla"
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/margarine/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/margarina"
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/confectionery-cream/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/nata"
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/fresh-cream/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/nata/nata-agria"
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/cooking-cream/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/nata/nata-para-cocinar"
+    },
+    {
+      "source_category": "nutrition/ready-meals/meat-poultry-and-game/",
+      "matched_target_category": "alimentación-general/comidas-preparadas/platos-preparados-de-carne"
+    },
+    {
+      "source_category": "nutrition/ready-meals/mexican-food/",
+      "matched_target_category": "alimentación-general/despensa/snacks/otros-snacks"
+    },
+    {
+      "source_category": "nutrition/ready-meals/mexican-food/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/ready-meals/mexican-food/",
+      "matched_target_category": "alimentación-general/despensa/snacks/encurtidos"
+    },
+    {
+      "source_category": "nutrition/ready-meals/mexican-food/",
+      "matched_target_category": "alimentación-general/panadería/pan-fresco/otros-panes"
+    },
+    {
+      "source_category": "nutrition/ready-meals/asian-food/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/ready-meals/asian-food/",
+      "matched_target_category": "alimentación-general/despensa/pasta/fideos"
+    },
+    {
+      "source_category": "nutrition/ready-meals/food-from-other-origins/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/ready-meals/food-from-other-origins/",
+      "matched_target_category": "alimentación-general/charcutería/otras-cremas-para-untar"
+    },
+    {
+      "source_category": "nutrition/ready-meals/prepared-salads/",
+      "matched_target_category": "alimentación-general/comidas-preparadas/ensaladas"
+    },
+    {
+      "source_category": "nutrition/ready-meals/pulses-rice-and-pasta/",
+      "matched_target_category": "alimentación-general/comidas-preparadas/otros-platos-preparados"
+    },
+    {
+      "source_category": "nutrition/ready-meals/fish/",
+      "matched_target_category": "alimentación-general/comidas-preparadas/platos-preparados-de-pescado"
+    },
+    {
+      "source_category": "nutrition/ready-meals/instant-mashed-potato/",
+      "matched_target_category": "alimentación-general/despensa/sopas-caldos-y-purés/puré-y-cremas"
+    },
+    {
+      "source_category": "nutrition/ready-meals/sausages-and-lean-meat/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "nutrition/ready-meals/soup-broth-and-creamy-soups/",
+      "matched_target_category": "alimentación-general/despensa/sopas-caldos-y-purés/sopas-y-caldos"
+    },
+    {
+      "source_category": "nutrition/ready-meals/soup-broth-and-creamy-soups/",
+      "matched_target_category": "alimentación-general/despensa/sopas-caldos-y-purés/puré-y-cremas"
+    },
+    {
+      "source_category": "nutrition/ready-meals/stuffed-vegetables-and-peppers/",
+      "matched_target_category": "alimentación-general/comidas-preparadas/platos-preparados-de-verduras"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts-/rice-dessert-/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/postres/arroz-con-leche"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/coffee-and-cold-drinks/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/dairy-desserts-/cream-sundaes-and-mousses/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/preparados-para-postres/mousse"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/junket/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/creme-caramel/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/postres/flan"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts-/jelly/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/postres/gelatina"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/custard-desserts/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/postres/natillas"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/chocolate-and-other-desserts/",
+      "matched_target_category": "alimentación-general/pastelería-y-confiteríaa/tartas"
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/non-chilled/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/dietary-products/sports-nutrition/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/dietary-products/plant-based-drinks/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/dietary-products/herbal-medicine/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/dietary-products/nutrition-and-diet/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/dietary-products/gluten-free-products/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/dietary-products/pancakes/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/dietary-products/superfoods/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-oils-and-seasonings/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-appetisers-olives-and-pickles/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-rice-seeds-and-pulses/",
+      "matched_target_category": "alimentación-general/alimentos-bio"
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-drinks/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-preserves/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-breakfast-and-snacks/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-confectionery-and-sweeteners/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-milk-and-plant-based-drinks/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-pasta-soup-and-creamy-soup/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/organic-products/chilled-products/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/saffron-and-colourants/",
+      "matched_target_category": "alimentación-general/despensa/especias-y-condimientos/azafrán-y-colorantes"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/parsley-and-oregano/",
+      "matched_target_category": "alimentación-general/despensa/especias-y-condimientos/perejil"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/parsley-and-oregano/",
+      "matched_target_category": "alimentación-general/despensa/especias-y-condimientos/hierbas-aromáticas"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/other-spices/",
+      "matched_target_category": "alimentación-general/despensa/especias-y-condimientos"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/ketchup-and-mustard/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/mayonnaise/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/soy-sauce-spicy-sauces-and-others/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/sauces-for-meat/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/pasta-sauces/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/pasta-sauces/",
+      "matched_target_category": "alimentación-general/conservas/conservas-de-verduras/tomate"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/thousand-islands-dressing-salsa-brava-and-barbecue-sauce/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/other-cold-sauces/",
+      "matched_target_category": "alimentación-general/salsas-y-aliños"
+    },
+    {
+      "source_category": "nutrition/yogurts/lcasei-and-probiotics/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/fresh-cheese-desserts-and-other-childrens-desserts/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/yogurts/health-and-fitness/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/bifidus-yogurt/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bifidus"
+    },
+    {
+      "source_category": "nutrition/yogurts/0-bifidus-yogurt/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bifidus"
+    },
+    {
+      "source_category": "nutrition/yogurts/creamy-yogurts/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/fruit-and-flavoured-yogurts/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/low-fat-yogurts/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/organic-and-special-yogurts/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/yogurt-drinks-and-others/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/natural-yogurt/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/yogurts/soya-and-100-plant-based-yogurt/",
+      "matched_target_category": "alimentación-general/lácteos-y-huevos/yogures/yogur-bebible"
+    },
+    {
+      "source_category": "nutrition/comida-internacional/comida-mexicana/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/comida-internacional/comida-oriental/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "nutrition/comida-internacional/otros-origenes/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/marinated-products/",
+      "matched_target_category": "frescos/carne/elaborados"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/yearling-beef-/",
+      "matched_target_category": "frescos/carne/vacuno"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/mince-and-burgers/",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/pork-and-iberian-pork-products/",
+      "matched_target_category": "frescos/carne"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/rabbit/",
+      "matched_target_category": "frescos/carne/otras-carnes"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/lamb-and-suckling-pig/",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/prepared-and-breaded-products/",
+      "matched_target_category": "frescos/carne/elaborados"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/turkey-duck-and-other-poultry/",
+      "matched_target_category": "frescos/carne/pollos-y-aves/pato"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/chicken/",
+      "matched_target_category": "frescos/carne/pollos-y-aves"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/sausages-black-pudding-and-chorizo/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-fresco"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/beef/",
+      "matched_target_category": "frescos/carne/vacuno"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/cow-ox-and-bull-meat/",
+      "matched_target_category": "frescos/carne/vacuno/vaca"
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/other-meat-and-offal/",
+      "matched_target_category": "frescos/carne/casqueríaa"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/spicy-pork-sausage-and-long-pork-sausage/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-fresco"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/chorizo/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-curado/chorizo"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/prepared-cured-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-curado/lomo"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/cured-ham/",
+      "matched_target_category": "alimentación-general/charcutería/jamón"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/whole-cured-ham/",
+      "matched_target_category": "alimentación-general/charcutería/jamón"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/pork-loin/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-curado/lomo"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/bacon-and-black-pudding/",
+      "matched_target_category": "alimentación-general/charcutería/bacon-y-panceta"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/bacon-and-black-pudding/",
+      "matched_target_category": "alimentación-general/charcuteríaa/embutido-fresco"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/turkey-and-other-cured-poultry/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-cocido"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/salami-and-majorcan-sausage/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-curado/salami"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/salami-and-majorcan-sausage/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/garlic-sausage-and-fuet/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-curado/salchichón"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/diced-cured-meat/",
+      "matched_target_category": "alimentación-general/charcutería/jamón"
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/other-cured-meats-and-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/jamón"
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/bacon/",
+      "matched_target_category": "alimentación-general/charcutería/bacon-y-panceta"
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/brawn/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-cocido"
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/pork-cold-cuts/",
+      "matched_target_category": "alimentación-general/charcutería/mortadela-y-chopped"
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/cooked-ham/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-cocido"
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/turkey-and-other-poultry-cold-cuts/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-cocido"
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/diced-cooked-meats/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-cocido"
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/other-cold-cuts-and-cooked-meats/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-cocido"
+    },
+    {
+      "source_category": "fresh/fruit/plums-and-grapes/",
+      "matched_target_category": "frescos/frutas/otras-frutas"
+    },
+    {
+      "source_category": "fresh/fruit/plums-and-grapes/",
+      "matched_target_category": "frescos/frutas/frutas-deshidratadas"
+    },
+    {
+      "source_category": "fresh/fruit/strawberries-cherries-and-red-fruit/",
+      "matched_target_category": "frescos/frutas/frutos-rojos-y-fresas"
+    },
+    {
+      "source_category": "fresh/fruit/organic-fruit/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/fruit/cut-fruit-and-juices/",
+      "matched_target_category": "frescos/frutas/zumos-naturales"
+    },
+    {
+      "source_category": "fresh/fruit/mixed-nuts-/",
+      "matched_target_category": "alimentación-general/despensa/snacks/frutos-secos"
+    },
+    {
+      "source_category": "fresh/fruit/apples-and-pears/",
+      "matched_target_category": "frescos/frutas/manzanas"
+    },
+    {
+      "source_category": "fresh/fruit/apples-and-pears/",
+      "matched_target_category": "frescos/frutas/peras"
+    },
+    {
+      "source_category": "fresh/fruit/melons-and-watermelons/",
+      "matched_target_category": "frescos/frutas/melones-y-sandías"
+    },
+    {
+      "source_category": "fresh/fruit/oranges-and-other-citrus-fruit/",
+      "matched_target_category": "frescos/frutas/cítricos"
+    },
+    {
+      "source_category": "fresh/fruit/pineapples-avocadoes-mango-and-papaya/",
+      "matched_target_category": "frescos/frutas/frutas-tropicales"
+    },
+    {
+      "source_category": "fresh/fruit/bananas-and-kiwi-fruit/",
+      "matched_target_category": "frescos/frutas/frutas-tropicales"
+    },
+    {
+      "source_category": "fresh/fruit/yucca-coconut-and-others/",
+      "matched_target_category": "frescos/frutas/frutas-tropicales"
+    },
+    {
+      "source_category": "fresh/eggs/free-range-and-organic-eggs/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/eggs/quail-eggs/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/eggs/eggs-size-m/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/eggs/eggs-size-l/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/eggs/eggs-size-xl/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/eggs/egg-products/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-chorizo/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-curado/chorizo"
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-ham/",
+      "matched_target_category": "alimentación-general/charcutería/jamón"
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/whole-iberian-ham/",
+      "matched_target_category": "alimentación-general/charcutería/jamón"
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-loin/",
+      "matched_target_category": "alimentación-general/charcutería/jamón"
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-sausage/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-curado/salchichón"
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/other-iberian-cold-cuts/",
+      "matched_target_category": "alimentación-general/charcutería/embutido-cocido"
+    },
+    {
+      "source_category": "fresh/seafood/clams-mussels-scallops-and-razor-clams/",
+      "matched_target_category": "/frescos/pescados-y-mariscos/mariscos-de-concha"
+    },
+    {
+      "source_category": "fresh/seafood/winkles-crabs-and-others/",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos"
+    },
+    {
+      "source_category": "fresh/seafood/king-crab-spider-crab-and-small-crab/",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos"
+    },
+    {
+      "source_category": "fresh/seafood/shrimps-and-prawns/",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos"
+    },
+    {
+      "source_category": "fresh/seafood/cooked-king-prawns/",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos"
+    },
+    {
+      "source_category": "fresh/seafood/raw-king-prawns/",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/white-bread/",
+      "matched_target_category": "alimentación-general/congelados/panadería-congelada/pan-congelado"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/traditional-bread/",
+      "matched_target_category": "alimentación-general/congelados/panadería-congelada/pan-congelado"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/wholemeal-grain-and-other-bread/",
+      "matched_target_category": "alimentación-general/panadería/pan-fresco/otros-panes"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/burger-buns-sliced-bread-and-others/",
+      "matched_target_category": "alimentación-general/panadería/pan-fresco/pan-para-hamburguesas-y-perritos"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/gluten-free/",
+      "matched_target_category": "alimentación-general/congelados/panadería-congelada/pan-congelado"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/croissants-filled-pastry-rolls-and-others/",
+      "matched_target_category": "alimentación-general/congelados/panadería-congelada/bollería-congelada"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/pastries/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/pies-and-savoury-rolls/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/tartas"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/buns-and-others/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/sponge-cakes-and-others/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/magdalenas-y-rosquillas/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/assorted-biscuits-and-vol-au-vents/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/cakes/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/tartas"
+    },
+    {
+      "source_category": "fresh/fish/smoked-fish-roe-and-salt-fish/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescados-y-mariscos-elaborados/ahumados"
+    },
+    {
+      "source_category": "fresh/fish/anchovies-sardines-horse-mackerel-and-mackerel/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje"
+    },
+    {
+      "source_category": "fresh/fish/preserved-fresh-anchovies/",
+      "matched_target_category": "alimentación-general/despensa/snacks/encurtidos"
+    },
+    {
+      "source_category": "fresh/fish/preserved-fresh-anchovies/",
+      "matched_target_category": "alimentación-general/conservas/conservas-de-pescado-y-marisco/anchoas"
+    },
+    {
+      "source_category": "fresh/fish/bonito-tuna-and-swordfish/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje"
+    },
+    {
+      "source_category": "fresh/fish/squid-cuttlefish-and-octopus/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pulpo-calamar-y-sepia"
+    },
+    {
+      "source_category": "fresh/fish/conger-eel-and-monkfish/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje"
+    },
+    {
+      "source_category": "fresh/fish/megrim-sole-and-cod/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje"
+    },
+    {
+      "source_category": "fresh/fish/sucedaneo-of-elvers-and-surimi/",
+      "matched_target_category": "alimentación-general/conservas/conservas-de-pescado-y-marisco/otras-conservas-de-pescado-y-marisco"
+    },
+    {
+      "source_category": "fresh/fish/hake-blue-whiting-and-whiting/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje"
+    },
+    {
+      "source_category": "fresh/fish/seabass-seabream-turbot-and-red-seabream/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-de-crianza"
+    },
+    {
+      "source_category": "fresh/fish/ready-prepared-fish-and-others/",
+      "matched_target_category": "alimentación-general/charcutería/otras-cremas-para-untar"
+    },
+    {
+      "source_category": "fresh/fish/salmon-and-trout/",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-de-crianza"
+    },
+    {
+      "source_category": "fresh/ready-meals/just-heat-up/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/ready-meals/enjoy-cooking/",
+      "matched_target_category": "alimentación-general/despensa/pasta/masas"
+    },
+    {
+      "source_category": "fresh/ready-meals/ready-to-eat/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/ready-meals/pizza/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/ready-meals/sushi/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/kids-and-portions/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/blue-cheese/",
+      "matched_target_category": "alimentación-general/quesos/quesos-azules-y-roquefort"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/cured-and-mature-cheese/",
+      "matched_target_category": "alimentación-general/quesos/quesos-curados-viejos-y-reserva"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/fresh-cheese/",
+      "matched_target_category": "alimentación-general/quesos/quesos-frescos"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/sliced-and-processed-cheese/",
+      "matched_target_category": "alimentación-general/quesos"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/semi-cured-cheese-/",
+      "matched_target_category": "alimentación-general/quesos/quesos-curados-viejos-y-reserva"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/soft-cheese/",
+      "matched_target_category": "alimentación-general/quesos"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/international-cheeses/",
+      "matched_target_category": "alimentación-general/quesos/quesos-internacionales"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/cheese-spread/",
+      "matched_target_category": "alimentación-general/quesos/untar-y-queso-crema"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/grated-cheese/",
+      "matched_target_category": "alimentación-general/quesos/rallados"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/cheese-boards-and-trays/",
+      "matched_target_category": "alimentación-general/quesos/tablas-de-quesos"
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/quince/",
+      "matched_target_category": "alimentación-general/despensa/snacks/encurtidos"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/paste-majorcan-sausage-and-lard/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/foie-gras-and-pate/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/pork-pate/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/duck-and-goose-pate/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/organic-pate/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/fish-pate-and-others/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/gourmet-pate/",
+      "matched_target_category": "alimentación-general/charcutería/patés-foies-y-sobrasadas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/white-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/special-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/frankfurter-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/thick-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/chicken-and-turkey-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/sausages-with-cheese/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/vienna-sausages/",
+      "matched_target_category": "alimentación-general/charcutería/salchichas"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/chard-spinach-and-others/",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/garlic-and-onions/",
+      "matched_target_category": "frescos/verduras/ajos-cebollas-y-ajetes"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/aubergines-pumpkins-and-courgettes/",
+      "matched_target_category": "frescos/verduras/calabaza-y-calabacin"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/ready-to-eat-salads/",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/fungi-wild-mushrooms-and-mushrooms/",
+      "matched_target_category": "frescos/verduras/setas-y-hongos"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/organic-vegetables/",
+      "matched_target_category": "frescos/verduras"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/lettuce-cucumber-and-others/",
+      "matched_target_category": "frescos/verduras/lechuga-y-escarola"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/potatoes-and-carrots/",
+      "matched_target_category": "frescos/verduras/patatas"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/potatoes-and-carrots/",
+      "matched_target_category": "frescos/verduras/zanahorias"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/ready-prepared-and-pre-cooked/",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/leeks-beans-pulses-and-cabbages/",
+      "matched_target_category": "frescos/verduras/coliflor-brócoli-y-lombarda"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/sauces-herbs-and-spices/",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/sauces-herbs-and-spices/",
+      "matched_target_category": "frescos/verduras/hierbas-aromáticas-y-condimentos"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/tomatoes-and-peppers/",
+      "matched_target_category": "frescos/verduras/tomates"
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/tomatoes-and-peppers/",
+      "matched_target_category": "frescos/verduras/pimientos"
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/chicory-and-soluble-cereals/",
+      "matched_target_category": "alimentación-general/despensa/cacao-en-polvo"
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/coffee-capsules/",
+      "matched_target_category": "alimentación-general/despensa/café/café-en-monodosis"
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/coffee-beans/",
+      "matched_target_category": "alimentación-general/despensa/café/café-en-grano"
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/ground-coffee/",
+      "matched_target_category": "alimentación-general/despensa/café/café-molido"
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/instant-coffee/",
+      "matched_target_category": "alimentación-general/despensa/café/café-soluble"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/dessert-decorations/",
+      "matched_target_category": "frescos/frutas/frutas-deshidratadas"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/organic-sugar/",
+      "matched_target_category": "alimentación-general/despensa/azucar-y-edulcorantes"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/special-sugar/",
+      "matched_target_category": "alimentación-general/despensa/azucar-y-edulcorantes"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/sugar-cubes/",
+      "matched_target_category": "alimentación-general/despensa/azucar-y-edulcorantes"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/brown-sugar/",
+      "matched_target_category": "alimentación-general/despensa/azucar-y-edulcorantes"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/sugar-sachets/",
+      "matched_target_category": "alimentación-general/despensa/azucar-y-edulcorantes"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/catalan-cream-and-other-creams/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/sweeteners-and-fructose/",
+      "matched_target_category": "alimentación-general/despensa/azucar-y-edulcorantes"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/creme-caramel-custard-desserts-and-junket/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/preparados-para-postres/otros-preparados-para-postres"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/dessert-gelatin/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/preparados-para-postres/gelatinas"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/raising-agents-and-others/",
+      "matched_target_category": "alimentación-general/despensa/levadura"
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/cakes-tarts-and-sponge-cakes/",
+      "matched_target_category": null
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/syrups-and-liquid-caramel/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/preparados-para-postres/siropes-salsas-y-jarabes"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/sponge-cakes-muffins-and-ensaimadas/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/tartas"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/gluten-free-bakery-products/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/canas-palmeras-and-napolitanas/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/bakery-croissants/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/cupcakes/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/milk-bread-rolls/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/small-sponge-cakes/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/tarts-and-cakes/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/other-bakery-products/",
+      "matched_target_category": "alimentación-general/pastelería-y-confitería/bollería"
+    }
+  ]
+}

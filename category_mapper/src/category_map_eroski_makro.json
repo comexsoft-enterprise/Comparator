@@ -1,0 +1,2826 @@
+{
+  "source_supermarket": "eroski",
+  "target_supermarket": "makro",
+  "mapping_results": [
+    {
+      "source_category": "breakfast-and-sweets/bakery/bakery-croissants",
+      "matched_target_category": "alimentacion-general/panaderia/pan-tostado/tostadas",
+      "similarity_score": 0.8804
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/canas-palmeras-and-napolitanas",
+      "matched_target_category": "alimentacion-general/panaderia/pan-tostado/reganas-y-picos",
+      "similarity_score": 0.8655
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/cupcakes",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/bolleria",
+      "similarity_score": 0.8816
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/gluten-free-bakery-products",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/pan-de-molde",
+      "similarity_score": 0.87
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/milk-bread-rolls",
+      "matched_target_category": "alimentacion-general/panaderia/pan-rallado",
+      "similarity_score": 0.8621
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/other-bakery-products",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8887
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/small-sponge-cakes",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8608
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/sponge-cakes-muffins-and-ensaimadas",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/empanadas-y-tartas-saladas",
+      "similarity_score": 0.8551
+    },
+    {
+      "source_category": "breakfast-and-sweets/bakery/tarts-and-cakes",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/tartas",
+      "similarity_score": 0.8992
+    },
+    {
+      "source_category": "breakfast-and-sweets/biscuits/childrens-breakfast-biscuits",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8614
+    },
+    {
+      "source_category": "breakfast-and-sweets/biscuits/fibre-wholemeal-and-organic-biscuits",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8641
+    },
+    {
+      "source_category": "breakfast-and-sweets/biscuits/filled-and-coated-biscuits",
+      "matched_target_category": "alimentacion-general/despensa/pasta/pastas-rellenas",
+      "similarity_score": 0.8596
+    },
+    {
+      "source_category": "breakfast-and-sweets/biscuits/gluten-free-biscuits",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/nata/nata-sin-lactosa",
+      "similarity_score": 0.8703
+    },
+    {
+      "source_category": "breakfast-and-sweets/biscuits/savoury-biscuits",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8708
+    },
+    {
+      "source_category": "breakfast-and-sweets/biscuits/snack-variety-and-tea-biscuits",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8502
+    },
+    {
+      "source_category": "breakfast-and-sweets/biscuits/traditional-biscuits",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/tartas",
+      "similarity_score": 0.8679
+    },
+    {
+      "source_category": "breakfast-and-sweets/boiled-sweets-chewing-gum-and-sweets/boiled-sweets",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/edulcorante",
+      "similarity_score": 0.8535
+    },
+    {
+      "source_category": "breakfast-and-sweets/boiled-sweets-chewing-gum-and-sweets/chewing-gum",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/edulcorante",
+      "similarity_score": 0.8566
+    },
+    {
+      "source_category": "breakfast-and-sweets/boiled-sweets-chewing-gum-and-sweets/chocolate-drops-and-bonbons",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/golosinas-y-caramelos",
+      "similarity_score": 0.8451
+    },
+    {
+      "source_category": "breakfast-and-sweets/boiled-sweets-chewing-gum-and-sweets/chupa-chups",
+      "matched_target_category": "frescos/frutas/frutos-rojos-y-fresas",
+      "similarity_score": 0.8436
+    },
+    {
+      "source_category": "breakfast-and-sweets/boiled-sweets-chewing-gum-and-sweets/liquiorice-jelly-sweets-and-others",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8444
+    },
+    {
+      "source_category": "breakfast-and-sweets/boiled-sweets-chewing-gum-and-sweets/sweets",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/edulcorante",
+      "similarity_score": 0.8569
+    },
+    {
+      "source_category": "breakfast-and-sweets/cereals-and-snack-bars/bars",
+      "matched_target_category": "alimentacion-general/despensa/cereales-y-semillas",
+      "similarity_score": 0.8739
+    },
+    {
+      "source_category": "breakfast-and-sweets/cereals-and-snack-bars/childrens-cereal",
+      "matched_target_category": "alimentacion-general/despensa/cereales-y-semillas",
+      "similarity_score": 0.8776
+    },
+    {
+      "source_category": "breakfast-and-sweets/cereals-and-snack-bars/cornflakes",
+      "matched_target_category": "alimentacion-general/despensa/cereales-y-semillas",
+      "similarity_score": 0.8729
+    },
+    {
+      "source_category": "breakfast-and-sweets/cereals-and-snack-bars/fibre-fitness-and-muesli-cereal",
+      "matched_target_category": "alimentacion-general/despensa/cereales-y-semillas",
+      "similarity_score": 0.8621
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/childrens-chocolate",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8685
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/chocolate-snacks",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8662
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/chocolates",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8706
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/dark-chocolate",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8621
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/dark-chocolate-with-mixed-nuts",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8423
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/dessert-chocolate",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8735
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/drinking-chocolate",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8643
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/filled-chocolates-and-others",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8656
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/milk-chocolate",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8669
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/milk-chocolate-with-mixed-nuts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8472
+    },
+    {
+      "source_category": "breakfast-and-sweets/chocolate-and-individual-chocolates/sugar-free-chocolate",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/chocolates-y-bombones",
+      "similarity_score": 0.8616
+    },
+    {
+      "source_category": "breakfast-and-sweets/cocoa-powder-and-chocolate-spread/1-flavour-chocloate-spread",
+      "matched_target_category": "alimentacion-general/despensa/cacao-en-polvo",
+      "similarity_score": 0.8618
+    },
+    {
+      "source_category": "breakfast-and-sweets/cocoa-powder-and-chocolate-spread/chocolate-drink-mix",
+      "matched_target_category": "alimentacion-general/despensa/cacao-en-polvo",
+      "similarity_score": 0.8612
+    },
+    {
+      "source_category": "breakfast-and-sweets/cocoa-powder-and-chocolate-spread/kakao",
+      "matched_target_category": "alimentacion-general/despensa/cacao-en-polvo",
+      "similarity_score": 0.8751
+    },
+    {
+      "source_category": "breakfast-and-sweets/cocoa-powder-and-chocolate-spread/powdered-drinking-chocolate",
+      "matched_target_category": "alimentacion-general/despensa/cacao-en-polvo",
+      "similarity_score": 0.8658
+    },
+    {
+      "source_category": "breakfast-and-sweets/cocoa-powder-and-chocolate-spread/snack-and-others",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8627
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/jam-and-marmalade-portions",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.8749
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/low-sugar-jam",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.865
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/monofloral-honey",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.8658
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/other-honey",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.8787
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/other-jam-and-marmalade",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.8735
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/peach-and-apricot",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.8544
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/polyfloral-honey",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.867
+    },
+    {
+      "source_category": "breakfast-and-sweets/honey-jam-and-marmalade/strawberry-and-plum",
+      "matched_target_category": "alimentacion-general/despensa/mermeladas-confituras-y-miel/miel",
+      "similarity_score": 0.8607
+    },
+    {
+      "source_category": "breakfast-and-sweets/infusions/camomile-tea",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/bebidas-de-te",
+      "similarity_score": 0.8592
+    },
+    {
+      "source_category": "breakfast-and-sweets/infusions/healthy-infusions",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/edulcorante",
+      "similarity_score": 0.8767
+    },
+    {
+      "source_category": "breakfast-and-sweets/infusions/linden-flower-and-peppermint-tea",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/vermouth-y-aperitivos",
+      "similarity_score": 0.8457
+    },
+    {
+      "source_category": "breakfast-and-sweets/infusions/tea",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/bebidas-de-te",
+      "similarity_score": 0.8789
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/burger-hot-dog-and-other-rolls",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas",
+      "similarity_score": 0.8492
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/crispbread-and-crackers",
+      "matched_target_category": "alimentacion-general/panaderia/pan-tostado/reganas-y-picos",
+      "similarity_score": 0.8482
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/crust-free-sliced-bread",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/pan-de-molde",
+      "similarity_score": 0.8492
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/crust-on-sliced-bread",
+      "matched_target_category": "alimentacion-general/panaderia/pan-tostado/reganas-y-picos",
+      "similarity_score": 0.8484
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/mini-rusks-and-rolls",
+      "matched_target_category": "frescos/frutas/frutos-rojos-y-fresas",
+      "similarity_score": 0.85
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/rusk-croutons-and-others",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8455
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/rusks-bread",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8563
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/sliced-bread-with-country-style-crust",
+      "matched_target_category": "alimentacion-general/panaderia/pan-tostado/reganas-y-picos",
+      "similarity_score": 0.8374
+    },
+    {
+      "source_category": "breakfast-and-sweets/sliced-bread-and-rusk-bread/wholemeal-sliced-bread",
+      "matched_target_category": "alimentacion-general/panaderia/pan-tostado/reganas-y-picos",
+      "similarity_score": 0.8535
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/brown-sugar",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/azucar",
+      "similarity_score": 0.867
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/cakes-tarts-and-sponge-cakes",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/tartas",
+      "similarity_score": 0.8633
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/catalan-cream-and-other-creams",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/cremas",
+      "similarity_score": 0.8576
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/creme-caramel-custard-desserts-and-junket",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/azucar",
+      "similarity_score": 0.8549
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/dessert-decorations",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/preparados-para-postres/aromas-y-decoracion",
+      "similarity_score": 0.8726
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/dessert-gelatin",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/preparados-para-postres/gelatinas",
+      "similarity_score": 0.8747
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/raising-agents-and-others",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/azucar",
+      "similarity_score": 0.8533
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/special-sugar",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/azucar",
+      "similarity_score": 0.8749
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/sugar-cubes",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/azucar",
+      "similarity_score": 0.873
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/sugar-sachets",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/azucar",
+      "similarity_score": 0.869
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/sweeteners-and-fructose",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/edulcorante",
+      "similarity_score": 0.8842
+    },
+    {
+      "source_category": "breakfast-and-sweets/sugar-sweeteners-and-baking-aids/syrups-and-liquid-caramel",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/azucar",
+      "similarity_score": 0.8592
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/chicory-and-soluble-cereals",
+      "matched_target_category": "alimentacion-general/despensa/cafe/cafe-soluble",
+      "similarity_score": 0.8658
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/coffee-beans",
+      "matched_target_category": "alimentacion-general/despensa/cafe/cafe-en-grano",
+      "similarity_score": 0.8778
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/coffee-capsules",
+      "matched_target_category": "alimentacion-general/despensa/cafe/cafe-en-grano",
+      "similarity_score": 0.8681
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/ground-coffee",
+      "matched_target_category": "alimentacion-general/despensa/cafe/cafe-molido",
+      "similarity_score": 0.8767
+    },
+    {
+      "source_category": "breakfast-and-sweets/the-shop-of-the-coffee/instant-coffee",
+      "matched_target_category": "alimentacion-general/despensa/cafe/cafe-en-grano",
+      "similarity_score": 0.8684
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/aerosol-air-freshener",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-girasol",
+      "similarity_score": 0.8463
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/car-air-freshener",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8484
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/crawling-insecticide",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/mantenimiento/control-de-plagas/trampas-electricas-e-insecticidas",
+      "similarity_score": 0.8457
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/dehumidifier-air-freshener",
+      "matched_target_category": "frescos/verduras/verduras-deshidratadas",
+      "similarity_score": 0.8528
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/electric-air-freshener",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/mantenimiento/control-de-plagas/trampas-electricas-e-insecticidas",
+      "similarity_score": 0.8579
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/flying-insecticides",
+      "matched_target_category": "frescos/carne/pollos-y-aves/otras-aves",
+      "similarity_score": 0.8544
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/mini-spray-air-freshener",
+      "matched_target_category": "frescos/verduras/verduras-mini",
+      "similarity_score": 0.8532
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/moth-and-woodworm-treatments",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/mantenimiento/control-de-plagas/trampas-electricas-e-insecticidas",
+      "similarity_score": 0.8547
+    },
+    {
+      "source_category": "cleaning/air-freshener-and-insecticides/other-fresheners",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/otros-refrescos",
+      "similarity_score": 0.8589
+    },
+    {
+      "source_category": "cleaning/bleach-and-ammonia/bleach-with-detergent",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.839
+    },
+    {
+      "source_category": "cleaning/bleach-and-ammonia/laundry-bleach",
+      "matched_target_category": "no-alimentacion/cocina/equipamiento-de-cocina/mobiliario-de-cocina/lavamanos",
+      "similarity_score": 0.8485
+    },
+    {
+      "source_category": "cleaning/bleach-and-ammonia/multipurpose-bleach",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8466
+    },
+    {
+      "source_category": "cleaning/bleach-and-ammonia/strong-liquids",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8378
+    },
+    {
+      "source_category": "cleaning/cleansing-implements/brooms-and-handles",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8623
+    },
+    {
+      "source_category": "cleaning/cleansing-implements/cloths",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8728
+    },
+    {
+      "source_category": "cleaning/cleansing-implements/dusters",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.867
+    },
+    {
+      "source_category": "cleaning/cleansing-implements/dustpans-and-other",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8678
+    },
+    {
+      "source_category": "cleaning/cleansing-implements/gloves",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8704
+    },
+    {
+      "source_category": "cleaning/cleansing-implements/mop",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8661
+    },
+    {
+      "source_category": "cleaning/cleansing-implements/scourers",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-preparacion/utensilios-de-mano-y-mezcla/escurrideras",
+      "similarity_score": 0.8631
+    },
+    {
+      "source_category": "cleaning/detergent-soap-and-softener/delicate-clothing",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8678
+    },
+    {
+      "source_category": "cleaning/detergent-soap-and-softener/hand-wash",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8804
+    },
+    {
+      "source_category": "cleaning/detergent-soap-and-softener/organic-products",
+      "matched_target_category": "no-alimentacion/hoteleria/limpieza/productos-de-limpieza",
+      "similarity_score": 0.8716
+    },
+    {
+      "source_category": "cleaning/detergent-soap-and-softener/softeners",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/sazonadores",
+      "similarity_score": 0.8715
+    },
+    {
+      "source_category": "cleaning/detergent-soap-and-softener/washing-machine-detergent-liquid",
+      "matched_target_category": "no-alimentacion/hoteleria/lavado-planchado-y-cuidado-de-ropa/lavado-y-secado-de-ropa/productos-para-el-lavado-de-la-ropa",
+      "similarity_score": 0.8535
+    },
+    {
+      "source_category": "cleaning/detergent-soap-and-softener/washing-machine-detergent-powder",
+      "matched_target_category": "no-alimentacion/cocina/equipamiento-de-cocina/mobiliario-de-cocina/lavamanos",
+      "similarity_score": 0.8582
+    },
+    {
+      "source_category": "cleaning/detergent-soap-and-softener/washing-machine-detergent-tablets",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8515
+    },
+    {
+      "source_category": "cleaning/dishwasher/dishwasher-freshener",
+      "matched_target_category": "no-alimentacion/cocina/equipamiento-de-cocina/mobiliario-de-cocina/lavamanos",
+      "similarity_score": 0.8668
+    },
+    {
+      "source_category": "cleaning/dishwasher/dishwasher-salt",
+      "matched_target_category": "alimentacion-general/despensa/sal/sal-para-cocinar",
+      "similarity_score": 0.8826
+    },
+    {
+      "source_category": "cleaning/dishwasher/hand-dishwashing",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8801
+    },
+    {
+      "source_category": "cleaning/dishwasher/machine-dishwashing-liquid",
+      "matched_target_category": "no-alimentacion/cocina/equipamiento-de-cocina/mobiliario-de-cocina/lavamanos",
+      "similarity_score": 0.8725
+    },
+    {
+      "source_category": "cleaning/dishwasher/machine-dishwashing-powder",
+      "matched_target_category": "no-alimentacion/cocina/equipamiento-de-cocina/mobiliario-de-cocina/lavamanos",
+      "similarity_score": 0.872
+    },
+    {
+      "source_category": "cleaning/dishwasher/machine-dishwashing-tablets",
+      "matched_target_category": "no-alimentacion/cocina/equipamiento-de-cocina/mobiliario-de-cocina/lavamanos",
+      "similarity_score": 0.8699
+    },
+    {
+      "source_category": "cleaning/dishwasher/organic-products",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8799
+    },
+    {
+      "source_category": "cleaning/dishwasher/rinse-aid",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8707
+    },
+    {
+      "source_category": "cleaning/food-preservation/aluminium",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8793
+    },
+    {
+      "source_category": "cleaning/food-preservation/cling-film",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-conservacion/elementos-desechables-de-conservacion/film-para-preservacion-de-alimentos",
+      "similarity_score": 0.8795
+    },
+    {
+      "source_category": "cleaning/food-preservation/complementos-cocina",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.9025
+    },
+    {
+      "source_category": "cleaning/food-preservation/fresh-bags",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-fresco",
+      "similarity_score": 0.8841
+    },
+    {
+      "source_category": "cleaning/food-preservation/oven-and-other-paper",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-coccion/fuentes-y-moldes-para-horno/papel-de-horno",
+      "similarity_score": 0.8817
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/bathroom-cleaner",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8683
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/floor-cleaner",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.875
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/furniture-cleaner",
+      "matched_target_category": "no-alimentacion/cocina/equipamiento-de-cocina/mobiliario-de-cocina/lavamanos",
+      "similarity_score": 0.8575
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/glass-cleaner",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/servicio-de-bebida/copas-y-vasos",
+      "similarity_score": 0.8529
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/kitchen-cleaner",
+      "matched_target_category": "no-alimentacion/hoteleria/limpieza/productos-de-limpieza",
+      "similarity_score": 0.8688
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/multipurpose-and-multi-cleaner",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8558
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/organic-products",
+      "matched_target_category": "no-alimentacion/hoteleria/limpieza/productos-de-limpieza",
+      "similarity_score": 0.8697
+    },
+    {
+      "source_category": "cleaning/household-and-bathroom-cleaner/upholstery-cleaner-and-other",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8561
+    },
+    {
+      "source_category": "cleaning/kitchen-towel-and-paper-napkins/kitchen-towel",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/panos-y-celulosa-de-cocina/panos-de-cocina",
+      "similarity_score": 0.8621
+    },
+    {
+      "source_category": "cleaning/kitchen-towel-and-paper-napkins/paper-napkins-and-table-covers",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/cuberteria/cubiertos/tenedores-de-mesa",
+      "similarity_score": 0.8572
+    },
+    {
+      "source_category": "cleaning/rubbish-bags/100l-bags",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/gestion-de-residuos/bolsas-de-basura",
+      "similarity_score": 0.8565
+    },
+    {
+      "source_category": "cleaning/rubbish-bags/30l-bags",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/gestion-de-residuos/bolsas-de-basura",
+      "similarity_score": 0.856
+    },
+    {
+      "source_category": "cleaning/rubbish-bags/50l-bags",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/gestion-de-residuos/bolsas-de-basura",
+      "similarity_score": 0.8548
+    },
+    {
+      "source_category": "cleaning/rubbish-bags/small-bags",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/gestion-de-residuos/bolsas-de-basura",
+      "similarity_score": 0.8722
+    },
+    {
+      "source_category": "cleaning/shoe-cleaning/brushes-and-accessories",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8657
+    },
+    {
+      "source_category": "cleaning/shoe-cleaning/cleaner-applicator",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8557
+    },
+    {
+      "source_category": "cleaning/shoe-cleaning/cleaner-wipes",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8692
+    },
+    {
+      "source_category": "cleaning/shoe-cleaning/fats-waxes-and-other",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8452
+    },
+    {
+      "source_category": "cleaning/shoe-cleaning/jar-can-and-tube-cleaner",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8425
+    },
+    {
+      "source_category": "cleaning/shoe-cleaning/shoe-dyes",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8675
+    },
+    {
+      "source_category": "cleaning/shoe-cleaning/sponge-cleaner",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8603
+    },
+    {
+      "source_category": "cleaning/toilet-paper-and-tissues/facial-tissues",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8729
+    },
+    {
+      "source_category": "cleaning/toilet-paper-and-tissues/pocket-handkerchiefs",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8679
+    },
+    {
+      "source_category": "cleaning/toilet-paper-and-tissues/toilet-paper",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8788
+    },
+    {
+      "source_category": "cleaning/toilet-paper-and-tissues/wet-toilet-paper",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8698
+    },
+    {
+      "source_category": "cleaning/washing-accessories/dyes",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8718
+    },
+    {
+      "source_category": "cleaning/washing-accessories/ironing-accessories",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8759
+    },
+    {
+      "source_category": "cleaning/washing-accessories/softeners",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8694
+    },
+    {
+      "source_category": "cleaning/washing-accessories/stain-remover",
+      "matched_target_category": "no-alimentacion/gestion-limpieza-y-mantenimiento/limpieza-y-gestion-de-residuos/limpieza/utensilios-de-limpieza/accesorios-de-limpieza",
+      "similarity_score": 0.8705
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/coffee-pots-teapots-flasks-and-accessories",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/servicio-de-barra-y-mesa/accesorios-de-cafe-y-te/cafeteras",
+      "similarity_score": 0.8716
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/cooking-and-baking-utensils",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-preparacion/utensilios-de-formado-y-emplatado",
+      "similarity_score": 0.8952
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/cutlery-and-tableware",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/cuberteria/cubiertos/cuchillos-de-mesa",
+      "similarity_score": 0.8846
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/disposable-cutlery-plates-cups-etc",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/menaje-desechable/menaje-desechable-para-presentacion-de-comida/platos-desechables",
+      "similarity_score": 0.8801
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/drawer-and-cupboard-organisers",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-coccion/cazos-y-ollas/arroceras",
+      "similarity_score": 0.8586
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/dustpans-and-rubbish-bins",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-preparacion/utensilios-de-reposteria/tamizadores-y-espolvoreadores",
+      "similarity_score": 0.8548
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/food-containers-and-organisers",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-preparacion/utensilios-de-formado-y-emplatado",
+      "similarity_score": 0.8677
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/glasses-tumblers-bottles-and-jars",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/servicio-de-bebida/jarras-y-botellas/jarras",
+      "similarity_score": 0.8682
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/knives-and-cutting-tools",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-preparacion/utensilios-de-corte/cuchillos-de-cocina",
+      "similarity_score": 0.893
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/plates-and-dishes",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-preparacion/utensilios-de-formado-y-emplatado",
+      "similarity_score": 0.8873
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/pots-pans-and-casseroles",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-coccion/cazos-y-ollas/cacerolas-cazuelas-y-cazos",
+      "similarity_score": 0.8823
+    },
+    {
+      "source_category": "diy-and-garden/kitchenware/water-purifiers",
+      "matched_target_category": "no-alimentacion/cocina/suministros-de-cocina/utensilios-de-preparacion/utensilios-de-reposteria/tamizadores-y-espolvoreadores",
+      "similarity_score": 0.8664
+    },
+    {
+      "source_category": "drinks/beer/alcohol-free",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cerveza-sin-alcohol",
+      "similarity_score": 0.909
+    },
+    {
+      "source_category": "drinks/beer/extra",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.8988
+    },
+    {
+      "source_category": "drinks/beer/flavoured",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.8905
+    },
+    {
+      "source_category": "drinks/beer/lager",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.8883
+    },
+    {
+      "source_category": "drinks/beer/premium",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.8962
+    },
+    {
+      "source_category": "drinks/fino-sherries-sweet-sherries-and-aperitifs/fino-sherries",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/sangria-y-tinto-de-verano",
+      "similarity_score": 0.8597
+    },
+    {
+      "source_category": "drinks/fino-sherries-sweet-sherries-and-aperitifs/manzanilla-wine",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/sangria-y-tinto-de-verano",
+      "similarity_score": 0.8558
+    },
+    {
+      "source_category": "drinks/fino-sherries-sweet-sherries-and-aperitifs/mosto-sherries",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.853
+    },
+    {
+      "source_category": "drinks/fino-sherries-sweet-sherries-and-aperitifs/muscatel-wines",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/sangria-y-tinto-de-verano",
+      "similarity_score": 0.8368
+    },
+    {
+      "source_category": "drinks/fino-sherries-sweet-sherries-and-aperitifs/other-sweet-wines",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/sangria-y-tinto-de-verano",
+      "similarity_score": 0.8606
+    },
+    {
+      "source_category": "drinks/fino-sherries-sweet-sherries-and-aperitifs/vermouth",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/vermouth-y-aperitivos",
+      "similarity_score": 0.8783
+    },
+    {
+      "source_category": "drinks/juices-and-nectar/functional",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.8711
+    },
+    {
+      "source_category": "drinks/juices-and-nectar/juices-and-nectares",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.883
+    },
+    {
+      "source_category": "drinks/juices-and-nectar/to-go",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cervezas-especiales",
+      "similarity_score": 0.8701
+    },
+    {
+      "source_category": "drinks/juices-and-nectar/zumos-refrigerados",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8946
+    },
+    {
+      "source_category": "drinks/liqueurs/alcohol-free-fruit-liqueurs",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cerveza-sin-alcohol",
+      "similarity_score": 0.8966
+    },
+    {
+      "source_category": "drinks/liqueurs/anisette",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/licores-y-aguardientes",
+      "similarity_score": 0.8813
+    },
+    {
+      "source_category": "drinks/liqueurs/cocktails-and-mixers",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/licores-y-aguardientes",
+      "similarity_score": 0.8853
+    },
+    {
+      "source_category": "drinks/liqueurs/cognac-and-brandy",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/brandy-and-conac",
+      "similarity_score": 0.8997
+    },
+    {
+      "source_category": "drinks/liqueurs/fruit-liqueurs-with-alcohol",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/licores-y-aguardientes",
+      "similarity_score": 0.883
+    },
+    {
+      "source_category": "drinks/liqueurs/gin",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/ginebra",
+      "similarity_score": 0.8928
+    },
+    {
+      "source_category": "drinks/liqueurs/grape-liquor-and-spirits",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/licores-y-aguardientes",
+      "similarity_score": 0.8874
+    },
+    {
+      "source_category": "drinks/liqueurs/rum",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/ron",
+      "similarity_score": 0.8902
+    },
+    {
+      "source_category": "drinks/liqueurs/sloe-brandy-and-punch",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/brandy-and-conac",
+      "similarity_score": 0.8569
+    },
+    {
+      "source_category": "drinks/liqueurs/vodka-and-tequila",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/tequila-y-mezcal",
+      "similarity_score": 0.887
+    },
+    {
+      "source_category": "drinks/liqueurs/whisky",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/whisky",
+      "similarity_score": 0.9004
+    },
+    {
+      "source_category": "drinks/red-wines/jumilla-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8767
+    },
+    {
+      "source_category": "drinks/red-wines/la-mancha-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8785
+    },
+    {
+      "source_category": "drinks/red-wines/navarra-red-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8727
+    },
+    {
+      "source_category": "drinks/red-wines/other-red-wines",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.898
+    },
+    {
+      "source_category": "drinks/red-wines/regional-red-wines",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8924
+    },
+    {
+      "source_category": "drinks/red-wines/ribera-de-duero-red-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cerveza-rubia",
+      "similarity_score": 0.8755
+    },
+    {
+      "source_category": "drinks/red-wines/rioja-crianza-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8763
+    },
+    {
+      "source_category": "drinks/red-wines/rioja-joven-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8833
+    },
+    {
+      "source_category": "drinks/red-wines/rioja-reserve-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cerveza-rubia",
+      "similarity_score": 0.8753
+    },
+    {
+      "source_category": "drinks/red-wines/somontano-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8754
+    },
+    {
+      "source_category": "drinks/red-wines/toro-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8828
+    },
+    {
+      "source_category": "drinks/red-wines/valdepenas-red-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-tintos",
+      "similarity_score": 0.8778
+    },
+    {
+      "source_category": "drinks/rose-wines/navarra-rose-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-rosados",
+      "similarity_score": 0.8803
+    },
+    {
+      "source_category": "drinks/rose-wines/other-rose-wines",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-rosados",
+      "similarity_score": 0.906
+    },
+    {
+      "source_category": "drinks/rose-wines/penedes-rose-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-rosados",
+      "similarity_score": 0.8857
+    },
+    {
+      "source_category": "drinks/rose-wines/rioja-rose-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-rosados",
+      "similarity_score": 0.8829
+    },
+    {
+      "source_category": "drinks/rose-wines/valdepenas-rose-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-rosados",
+      "similarity_score": 0.8848
+    },
+    {
+      "source_category": "drinks/soft-drinks/cola",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/refrescos-de-cola",
+      "similarity_score": 0.9081
+    },
+    {
+      "source_category": "drinks/soft-drinks/energy-drinks",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/tonicas",
+      "similarity_score": 0.8986
+    },
+    {
+      "source_category": "drinks/soft-drinks/fizzy-lemon",
+      "matched_target_category": "alimentacion-general/bebidas/cervezas/cerveza-con-limon/sabores",
+      "similarity_score": 0.8799
+    },
+    {
+      "source_category": "drinks/soft-drinks/fizzy-orange",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8758
+    },
+    {
+      "source_category": "drinks/soft-drinks/iced-tea",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/bebidas-de-te",
+      "similarity_score": 0.8987
+    },
+    {
+      "source_category": "drinks/soft-drinks/isotonic-drinks",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/bebidas-isotonicas",
+      "similarity_score": 0.92
+    },
+    {
+      "source_category": "drinks/soft-drinks/other-fizzy-drinks",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/otros-refrescos",
+      "similarity_score": 0.8954
+    },
+    {
+      "source_category": "drinks/soft-drinks/other-still-drinks",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/otros-refrescos",
+      "similarity_score": 0.8906
+    },
+    {
+      "source_category": "drinks/soft-drinks/still-orange",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/tonicas",
+      "similarity_score": 0.8809
+    },
+    {
+      "source_category": "drinks/soft-drinks/tonic-water-bitters-and-soda-water",
+      "matched_target_category": "alimentacion-general/bebidas/refrescos/tonicas",
+      "similarity_score": 0.8736
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/apple-ciderl",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-espumosos",
+      "similarity_score": 0.8633
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/brut-nature-sparkling-wine",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8614
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/champagne",
+      "matched_target_category": "alimentacion-general/bebidas/champagne-y-cava",
+      "similarity_score": 0.8804
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/champagne-cider",
+      "matched_target_category": "alimentacion-general/bebidas/champagne-y-cava",
+      "similarity_score": 0.8742
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/dry-sparkling-wine",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-espumosos",
+      "similarity_score": 0.873
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/medium-and-mini-sparkling-wine",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-espumosos",
+      "similarity_score": 0.8566
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/other-sparkling-wines",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-espumosos",
+      "similarity_score": 0.8723
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/rose-sparkling-wine",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-espumosos",
+      "similarity_score": 0.8727
+    },
+    {
+      "source_category": "drinks/sparkling-wine-champagne-and-cider/semi-dry-sparkling-wine",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-espumosos",
+      "similarity_score": 0.8682
+    },
+    {
+      "source_category": "drinks/table-wines-and-sangria/sangria-and-fizzy-red-wine",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/sangria-y-tinto-de-verano",
+      "similarity_score": 0.8785
+    },
+    {
+      "source_category": "drinks/table-wines-and-sangria/wine-in-bottles",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/servicio-de-bebida/copas-y-vasos/copas-de-vino",
+      "similarity_score": 0.8723
+    },
+    {
+      "source_category": "drinks/table-wines-and-sangria/wine-in-cartons",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/servicio-de-bebida/copas-y-vasos/copas-de-vino",
+      "similarity_score": 0.8618
+    },
+    {
+      "source_category": "drinks/table-wines-and-sangria/wine-in-containers",
+      "matched_target_category": "no-alimentacion/sala-y-terraza/suministros-de-sala-y-terraza/servicio-de-bebida/copas-y-vasos/copas-de-vino",
+      "similarity_score": 0.8724
+    },
+    {
+      "source_category": "drinks/water/flavoured-water",
+      "matched_target_category": "alimentacion-general/bebidas/agua/otras-aguas",
+      "similarity_score": 0.8834
+    },
+    {
+      "source_category": "drinks/water/sparkling-water-less-than-1-litre",
+      "matched_target_category": "alimentacion-general/bebidas/agua/agua-con-gas",
+      "similarity_score": 0.8768
+    },
+    {
+      "source_category": "drinks/water/sparkling-water-more-than-1-litre",
+      "matched_target_category": "alimentacion-general/bebidas/agua/agua-con-gas",
+      "similarity_score": 0.8761
+    },
+    {
+      "source_category": "drinks/water/water-1-litre-to-2-litres",
+      "matched_target_category": "alimentacion-general/bebidas/agua/otras-aguas",
+      "similarity_score": 0.8918
+    },
+    {
+      "source_category": "drinks/water/water-more-than-2-litres",
+      "matched_target_category": "alimentacion-general/bebidas/agua/otras-aguas",
+      "similarity_score": 0.8887
+    },
+    {
+      "source_category": "drinks/water/water-up-to-1-litre",
+      "matched_target_category": "alimentacion-general/bebidas/agua/otras-aguas",
+      "similarity_score": 0.8863
+    },
+    {
+      "source_category": "drinks/white-wines/navarra-white-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8795
+    },
+    {
+      "source_category": "drinks/white-wines/other-white-wines",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.9008
+    },
+    {
+      "source_category": "drinks/white-wines/penedes-white-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8879
+    },
+    {
+      "source_category": "drinks/white-wines/ribeiro-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8862
+    },
+    {
+      "source_category": "drinks/white-wines/rioja-white-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8799
+    },
+    {
+      "source_category": "drinks/white-wines/rueda-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8805
+    },
+    {
+      "source_category": "drinks/white-wines/rias-baixas-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8912
+    },
+    {
+      "source_category": "drinks/white-wines/txakoli-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8764
+    },
+    {
+      "source_category": "drinks/white-wines/valdepenas-white-pdo",
+      "matched_target_category": "alimentacion-general/bebidas/vinos/vinos-blancos",
+      "similarity_score": 0.8871
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/assorted-biscuits-and-vol-au-vents",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/otros-panes",
+      "similarity_score": 0.863
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/buns-and-others",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/otros-panes",
+      "similarity_score": 0.888
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/burger-buns-sliced-bread-and-others",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/otros-panes",
+      "similarity_score": 0.8715
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/cakes",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/pan-de-molde",
+      "similarity_score": 0.8815
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/croissants-filled-pastry-rolls-and-others",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/otros-panes",
+      "similarity_score": 0.8627
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/gluten-free",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/pan-de-molde",
+      "similarity_score": 0.8968
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/magdalenas-y-rosquillas",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8837
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/pastries",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/pasteles",
+      "similarity_score": 0.8927
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/pies-and-savoury-rolls",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/pan-de-molde",
+      "similarity_score": 0.8726
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/sponge-cakes-and-others",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/otros-panes",
+      "similarity_score": 0.8788
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/traditional-bread",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/pan-de-molde",
+      "similarity_score": 0.8934
+    },
+    {
+      "source_category": "fresh/bread-and-cakes/white-bread",
+      "matched_target_category": "alimentacion-general/panaderia/pan-fresco/pan-de-molde",
+      "similarity_score": 0.8803
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/blue-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8747
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/cheese-boards-and-trays",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8625
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/cheese-spread",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8791
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/cured-and-mature-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-curados-viejos-y-reserva",
+      "similarity_score": 0.8778
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/fresh-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8906
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/grated-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8823
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/international-cheeses",
+      "matched_target_category": "alimentacion-general/quesos/quesos-internacionales",
+      "similarity_score": 0.8861
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/kids-and-portions",
+      "matched_target_category": "alimentacion-general/quesos/quesos-en-porciones",
+      "similarity_score": 0.8756
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/quince",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8784
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/semi-cured-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-semicurados",
+      "similarity_score": 0.882
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/sliced-and-processed-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-en-porciones",
+      "similarity_score": 0.8702
+    },
+    {
+      "source_category": "fresh/cheese-and-quince/soft-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8784
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/bacon",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.886
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/brawn",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8815
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/cooked-ham",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8833
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/diced-cooked-meats",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8889
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/other-cold-cuts-and-cooked-meats",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8897
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/pork-cold-cuts",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8915
+    },
+    {
+      "source_category": "fresh/cold-cuts-and-cooked-meats/turkey-and-other-poultry-cold-cuts",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8737
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/bacon-and-black-pudding",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas",
+      "similarity_score": 0.8598
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/chorizo",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-curado/chorizo",
+      "similarity_score": 0.8968
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/cured-ham",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-curado/salami",
+      "similarity_score": 0.8838
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/diced-cured-meat",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8788
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/garlic-sausage-and-fuet",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas",
+      "similarity_score": 0.8726
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/other-cured-meats-and-sausages",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescados-y-mariscos-elaborados/pescados-y-mariscos-cocidos",
+      "similarity_score": 0.8849
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/pork-loin",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-curado/lomo",
+      "similarity_score": 0.8821
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/prepared-cured-sausages",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescados-y-mariscos-elaborados/ahumados",
+      "similarity_score": 0.8853
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/salami-and-majorcan-sausage",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-curado/salami",
+      "similarity_score": 0.8753
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/spicy-pork-sausage-and-long-pork-sausage",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas",
+      "similarity_score": 0.8742
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/turkey-and-other-cured-poultry",
+      "matched_target_category": "frescos/carne/pollos-y-aves/otras-aves",
+      "similarity_score": 0.8713
+    },
+    {
+      "source_category": "fresh/cured-meats-and-cured-sausages/whole-cured-ham",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-curado/salami",
+      "similarity_score": 0.8864
+    },
+    {
+      "source_category": "fresh/eggs/egg-products",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8895
+    },
+    {
+      "source_category": "fresh/eggs/eggs-size-l",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/huevos/huevo-liquido",
+      "similarity_score": 0.8746
+    },
+    {
+      "source_category": "fresh/eggs/eggs-size-m",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.877
+    },
+    {
+      "source_category": "fresh/eggs/eggs-size-xl",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8803
+    },
+    {
+      "source_category": "fresh/eggs/free-range-and-organic-eggs",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/huevos/huevos-ecologicos",
+      "similarity_score": 0.8849
+    },
+    {
+      "source_category": "fresh/eggs/quail-eggs",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.884
+    },
+    {
+      "source_category": "fresh/fish/anchovies-sardines-horse-mackerel-and-mackerel",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje",
+      "similarity_score": 0.8842
+    },
+    {
+      "source_category": "fresh/fish/bonito-tuna-and-swordfish",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje",
+      "similarity_score": 0.8807
+    },
+    {
+      "source_category": "fresh/fish/conger-eel-and-monkfish",
+      "matched_target_category": "frescos/pescados-y-mariscos/mariscos-de-concha",
+      "similarity_score": 0.8793
+    },
+    {
+      "source_category": "fresh/fish/hake-blue-whiting-and-whiting",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje",
+      "similarity_score": 0.8762
+    },
+    {
+      "source_category": "fresh/fish/megrim-sole-and-cod",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8702
+    },
+    {
+      "source_category": "fresh/fish/preserved-fresh-anchovies",
+      "matched_target_category": "frescos/pescados-y-mariscos/mariscos-de-concha",
+      "similarity_score": 0.8933
+    },
+    {
+      "source_category": "fresh/fish/ready-prepared-fish-and-others",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescados-y-mariscos-elaborados/ahumados",
+      "similarity_score": 0.9037
+    },
+    {
+      "source_category": "fresh/fish/salmon-and-trout",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje",
+      "similarity_score": 0.8987
+    },
+    {
+      "source_category": "fresh/fish/seabass-seabream-turbot-and-red-seabream",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.878
+    },
+    {
+      "source_category": "fresh/fish/smoked-fish-roe-and-salt-fish",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescados-y-mariscos-elaborados/ahumados",
+      "similarity_score": 0.8886
+    },
+    {
+      "source_category": "fresh/fish/squid-cuttlefish-and-octopus",
+      "matched_target_category": "frescos/pescados-y-mariscos/pulpo-calamar-y-sepia",
+      "similarity_score": 0.8959
+    },
+    {
+      "source_category": "fresh/fish/sucedaneo-of-elvers-and-surimi",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje",
+      "similarity_score": 0.8821
+    },
+    {
+      "source_category": "fresh/fruit/apples-and-pears",
+      "matched_target_category": "frescos/frutas/peras",
+      "similarity_score": 0.9032
+    },
+    {
+      "source_category": "fresh/fruit/bananas-and-kiwi-fruit",
+      "matched_target_category": "frescos/frutas/melones-y-sandias",
+      "similarity_score": 0.8815
+    },
+    {
+      "source_category": "fresh/fruit/cut-fruit-and-juices",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8952
+    },
+    {
+      "source_category": "fresh/fruit/melons-and-watermelons",
+      "matched_target_category": "frescos/frutas/melones-y-sandias",
+      "similarity_score": 0.9172
+    },
+    {
+      "source_category": "fresh/fruit/mixed-nuts",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.9013
+    },
+    {
+      "source_category": "fresh/fruit/oranges-and-other-citrus-fruit",
+      "matched_target_category": "frescos/frutas/frutos-rojos-y-fresas",
+      "similarity_score": 0.893
+    },
+    {
+      "source_category": "fresh/fruit/peaches-and-other-stone-fruit",
+      "matched_target_category": "frescos/frutas/frutos-rojos-y-fresas",
+      "similarity_score": 0.8796
+    },
+    {
+      "source_category": "fresh/fruit/pineapples-avocadoes-mango-and-papaya",
+      "matched_target_category": "frescos/frutas/melones-y-sandias",
+      "similarity_score": 0.8809
+    },
+    {
+      "source_category": "fresh/fruit/plums-and-grapes",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8924
+    },
+    {
+      "source_category": "fresh/fruit/strawberries-cherries-and-red-fruit",
+      "matched_target_category": "frescos/frutas/frutos-rojos-y-fresas",
+      "similarity_score": 0.9106
+    },
+    {
+      "source_category": "fresh/fruit/yucca-coconut-and-others",
+      "matched_target_category": "frescos/frutas/frutos-rojos-y-fresas",
+      "similarity_score": 0.8854
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-chorizo",
+      "matched_target_category": "frescos/carne/cerdo/cerdo-iberico",
+      "similarity_score": 0.9045
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-ham",
+      "matched_target_category": "frescos/carne/cerdo/cerdo-iberico",
+      "similarity_score": 0.8966
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-loin",
+      "matched_target_category": "frescos/carne/cerdo/cerdo-iberico",
+      "similarity_score": 0.8984
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/iberian-sausage",
+      "matched_target_category": "frescos/carne/cerdo/cerdo-iberico",
+      "similarity_score": 0.896
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/other-iberian-cold-cuts",
+      "matched_target_category": "frescos/carne/cerdo/cerdo-iberico",
+      "similarity_score": 0.8838
+    },
+    {
+      "source_category": "fresh/iberian-cold-cuts/whole-iberian-ham",
+      "matched_target_category": "frescos/carne/cerdo/cerdo-iberico",
+      "similarity_score": 0.8888
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/beef",
+      "matched_target_category": "frescos/carne/otras-carnes",
+      "similarity_score": 0.8976
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/chicken",
+      "matched_target_category": "frescos/carne/pollos-y-aves/pollo",
+      "similarity_score": 0.9003
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/cow-ox-and-bull-meat",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8774
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/lamb-and-suckling-pig",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8803
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/marinated-products",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescados-y-mariscos-elaborados/ahumados",
+      "similarity_score": 0.8843
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/mince-and-burgers",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas",
+      "similarity_score": 0.9021
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/other-meat-and-offal",
+      "matched_target_category": "frescos/carne/pollos-y-aves/otras-aves",
+      "similarity_score": 0.8834
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/pork-and-iberian-pork-products",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-fresco",
+      "similarity_score": 0.8752
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/prepared-and-breaded-products",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescados-y-mariscos-elaborados/ahumados",
+      "similarity_score": 0.8835
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/rabbit",
+      "matched_target_category": "frescos/carne/cordero-y-cabrito/cordero-recental",
+      "similarity_score": 0.8877
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/sausages-black-pudding-and-chorizo",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas",
+      "similarity_score": 0.8631
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/turkey-duck-and-other-poultry",
+      "matched_target_category": "frescos/carne/pollos-y-aves/otras-aves",
+      "similarity_score": 0.8902
+    },
+    {
+      "source_category": "fresh/meat-and-poultry/yearling-beef",
+      "matched_target_category": "frescos/carne/vacuno/anojo-nacional",
+      "similarity_score": 0.8801
+    },
+    {
+      "source_category": "fresh/ready-meals/enjoy-cooking",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-fresco",
+      "similarity_score": 0.8967
+    },
+    {
+      "source_category": "fresh/ready-meals/just-heat-up",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-fresco",
+      "similarity_score": 0.8826
+    },
+    {
+      "source_category": "fresh/ready-meals/pizza",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.8952
+    },
+    {
+      "source_category": "fresh/ready-meals/ready-to-eat",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/ensaladas",
+      "similarity_score": 0.9015
+    },
+    {
+      "source_category": "fresh/ready-meals/sushi",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-fresco",
+      "similarity_score": 0.8943
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/chicken-and-turkey-sausages",
+      "matched_target_category": "frescos/carne/pollos-y-aves/pato",
+      "similarity_score": 0.8783
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/duck-and-goose-pate",
+      "matched_target_category": "frescos/carne/pollos-y-aves/pato",
+      "similarity_score": 0.8827
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/fish-pate-and-others",
+      "matched_target_category": "frescos/pescados-y-mariscos/pescado-salvaje",
+      "similarity_score": 0.8837
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/foie-gras-and-pate",
+      "matched_target_category": "alimentacion-general/charcuteria/pates-foies-y-sobrasadas",
+      "similarity_score": 0.8948
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/frankfurter-sausages",
+      "matched_target_category": "frescos/carne/carne-picada-y-hamburguesas",
+      "similarity_score": 0.8793
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/gourmet-pate",
+      "matched_target_category": "alimentacion-general/charcuteria/pates-foies-y-sobrasadas",
+      "similarity_score": 0.8901
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/paste-majorcan-sausage-and-lard",
+      "matched_target_category": "alimentacion-general/charcuteria/pates-foies-y-sobrasadas",
+      "similarity_score": 0.8672
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/pork-pate",
+      "matched_target_category": "frescos/carne/pollos-y-aves/pato",
+      "similarity_score": 0.8942
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/sausages-with-cheese",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.881
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/thick-sausages",
+      "matched_target_category": "alimentacion-general/charcuteria/pates-foies-y-sobrasadas",
+      "similarity_score": 0.881
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/vienna-sausages",
+      "matched_target_category": "alimentacion-general/charcuteria/pates-foies-y-sobrasadas",
+      "similarity_score": 0.8786
+    },
+    {
+      "source_category": "fresh/sausagespate-and-foie-gras/white-sausages",
+      "matched_target_category": "alimentacion-general/quesos/quesos-frescos",
+      "similarity_score": 0.878
+    },
+    {
+      "source_category": "fresh/seafood/clams-mussels-scallops-and-razor-clams",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.875
+    },
+    {
+      "source_category": "fresh/seafood/cooked-king-prawns",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8884
+    },
+    {
+      "source_category": "fresh/seafood/king-crab-spider-crab-and-small-crab",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8735
+    },
+    {
+      "source_category": "fresh/seafood/raw-king-prawns",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8875
+    },
+    {
+      "source_category": "fresh/seafood/shrimps-and-prawns",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.9004
+    },
+    {
+      "source_category": "fresh/seafood/winkles-crabs-and-others",
+      "matched_target_category": "frescos/pescados-y-mariscos/crustaceos",
+      "similarity_score": 0.8885
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/aubergines-pumpkins-and-courgettes",
+      "matched_target_category": "frescos/verduras/calabaza-y-calabacin",
+      "similarity_score": 0.8832
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/chard-spinach-and-others",
+      "matched_target_category": "frescos/verduras/acelgas-espinacas-y-apio",
+      "similarity_score": 0.8935
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/fungi-wild-mushrooms-and-mushrooms",
+      "matched_target_category": "frescos/verduras/setas-y-hongos",
+      "similarity_score": 0.8919
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/garlic-and-onions",
+      "matched_target_category": "frescos/verduras/ajos-cebollas-y-ajetes",
+      "similarity_score": 0.8927
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/leeks-beans-pulses-and-cabbages",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas",
+      "similarity_score": 0.8718
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/lettuce-cucumber-and-others",
+      "matched_target_category": "frescos/verduras/setas-y-hongos",
+      "similarity_score": 0.879
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/potatoes-and-carrots",
+      "matched_target_category": "frescos/verduras/zanahorias-rabanos-y-puerros",
+      "similarity_score": 0.8879
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/ready-prepared-and-pre-cooked",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas",
+      "similarity_score": 0.9083
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/ready-to-eat-salads",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas",
+      "similarity_score": 0.9103
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/sauces-herbs-and-spices",
+      "matched_target_category": "frescos/verduras/hierbas-aromaticas-y-condimentos",
+      "similarity_score": 0.9043
+    },
+    {
+      "source_category": "fresh/vegetables-and-leafy-vegetables/tomatoes-and-peppers",
+      "matched_target_category": "frescos/verduras/pimientos",
+      "similarity_score": 0.9005
+    },
+    {
+      "source_category": "frozen-products/bread-and-cakes/churros-and-batons",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/postres-congelados",
+      "similarity_score": 0.8717
+    },
+    {
+      "source_category": "frozen-products/bread-and-cakes/other-doughs",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/postres-congelados",
+      "similarity_score": 0.8846
+    },
+    {
+      "source_category": "frozen-products/fish/cod",
+      "matched_target_category": "alimentacion-general/congelados/marisco-congelado/marisco-congelado",
+      "similarity_score": 0.878
+    },
+    {
+      "source_category": "frozen-products/fish/hake",
+      "matched_target_category": "alimentacion-general/congelados/marisco-congelado/marisco-congelado",
+      "similarity_score": 0.8774
+    },
+    {
+      "source_category": "frozen-products/fish/other-fish",
+      "matched_target_category": "alimentacion-general/congelados/marisco-congelado/otros-mariscos-congelados",
+      "similarity_score": 0.895
+    },
+    {
+      "source_category": "frozen-products/fish/prepared-fish",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/platos-preparados-de-pescado",
+      "similarity_score": 0.9063
+    },
+    {
+      "source_category": "frozen-products/fish/squid",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/platos-preparados-de-pescado",
+      "similarity_score": 0.881
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/chocolate-ice-creams",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8815
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/cream-ices-and-truffles",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8781
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/frozen-fruit",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8882
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/ice-cream-blocks",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8776
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/ice-cream-cakes",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/postres-congelados",
+      "similarity_score": 0.8825
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/ice-cream-cones",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8824
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/ice-cream-tubs",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8788
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/ice-cubes",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8822
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/ice-lollies-and-childrens-ice-creams",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.872
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/other-ice-creams",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8951
+    },
+    {
+      "source_category": "frozen-products/ice-creams-and-desserts/sandwiches-and-snacks",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8938
+    },
+    {
+      "source_category": "frozen-products/pizzas/french-bread-pizzas",
+      "matched_target_category": "alimentacion-general/congelados/panaderia-congelada/pan-congelado",
+      "similarity_score": 0.8732
+    },
+    {
+      "source_category": "frozen-products/pizzas/pizza-bases",
+      "matched_target_category": "alimentacion-general/congelados/panaderia-congelada/masa-congelada",
+      "similarity_score": 0.8728
+    },
+    {
+      "source_category": "frozen-products/pizzas/pizzas",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/pizzas-y-focaccias",
+      "similarity_score": 0.8826
+    },
+    {
+      "source_category": "frozen-products/pizzas/snack-pizzas",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/postres-congelados",
+      "similarity_score": 0.8748
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/artichokes",
+      "matched_target_category": "alimentacion-general/congelados/frutas-y-verduras-congeladas/verduras-congeladas",
+      "similarity_score": 0.8737
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/green-beans",
+      "matched_target_category": "alimentacion-general/congelados/frutas-y-verduras-congeladas/verduras-congeladas",
+      "similarity_score": 0.8759
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/mixed-vegetables",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/platos-preparados-de-verduras",
+      "similarity_score": 0.8823
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/other-vegetables",
+      "matched_target_category": "alimentacion-general/congelados/frutas-y-verduras-congeladas/verduras-congeladas",
+      "similarity_score": 0.8893
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/peas",
+      "matched_target_category": "alimentacion-general/congelados/frutas-y-verduras-congeladas/verduras-congeladas",
+      "similarity_score": 0.8735
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/potatoes",
+      "matched_target_category": "alimentacion-general/congelados/frutas-y-verduras-congeladas/verduras-congeladas",
+      "similarity_score": 0.8801
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/russian-salad",
+      "matched_target_category": "alimentacion-general/congelados/frutas-y-verduras-congeladas/verduras-congeladas",
+      "similarity_score": 0.8633
+    },
+    {
+      "source_category": "frozen-products/potatoes-vegetables-and-mushrooms/spinach-and-broad-beans",
+      "matched_target_category": "alimentacion-general/congelados/frutas-y-verduras-congeladas/verduras-congeladas",
+      "similarity_score": 0.8624
+    },
+    {
+      "source_category": "frozen-products/ready-meals/cannelloni",
+      "matched_target_category": "alimentacion-general/congelados/panaderia-congelada/bolleria-congelada",
+      "similarity_score": 0.8832
+    },
+    {
+      "source_category": "frozen-products/ready-meals/chicken-wings-meatballs-and-others",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/otros-platos-preparados-congelados",
+      "similarity_score": 0.8753
+    },
+    {
+      "source_category": "frozen-products/ready-meals/croquettes",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/platos-preparados-de-carne",
+      "similarity_score": 0.8836
+    },
+    {
+      "source_category": "frozen-products/ready-meals/international-foods",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/especias-y-condimentos-internacionales",
+      "similarity_score": 0.8844
+    },
+    {
+      "source_category": "frozen-products/ready-meals/lasagne",
+      "matched_target_category": "alimentacion-general/congelados/panaderia-congelada/masa-congelada",
+      "similarity_score": 0.8829
+    },
+    {
+      "source_category": "frozen-products/ready-meals/mini-pasties",
+      "matched_target_category": "alimentacion-general/congelados/panaderia-congelada/masa-congelada",
+      "similarity_score": 0.8801
+    },
+    {
+      "source_category": "frozen-products/ready-meals/nuggets-and-chicken",
+      "matched_target_category": "alimentacion-general/congelados/carne-congelada/pollos-y-aves",
+      "similarity_score": 0.8778
+    },
+    {
+      "source_category": "frozen-products/ready-meals/other-fried-foods",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/otros-platos-preparados-congelados",
+      "similarity_score": 0.89
+    },
+    {
+      "source_category": "frozen-products/ready-meals/segundos-platos",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/otros-platos-preparados-congelados",
+      "similarity_score": 0.9081
+    },
+    {
+      "source_category": "frozen-products/sautees-and-stir-fries/rice-and-pasta-stir-fries",
+      "matched_target_category": "alimentacion-general/congelados/platos-preparados-congelados/platos-preparados-de-arroz-y-pasta",
+      "similarity_score": 0.8769
+    },
+    {
+      "source_category": "frozen-products/sautees-and-stir-fries/vegetable-and-pulse-stir-fries",
+      "matched_target_category": "frescos/verduras/ensaladas-y-verduras-preparadas",
+      "similarity_score": 0.8631
+    },
+    {
+      "source_category": "frozen-products/seafood/frozen-cooked-lobster-tails",
+      "matched_target_category": "alimentacion-general/congelados/marisco-congelado/gambas-langostinos-y-otros-crustaceos-congelados",
+      "similarity_score": 0.871
+    },
+    {
+      "source_category": "frozen-products/seafood/frozen-raw-lobster-tails",
+      "matched_target_category": "alimentacion-general/congelados/marisco-congelado/gambas-langostinos-y-otros-crustaceos-congelados",
+      "similarity_score": 0.8709
+    },
+    {
+      "source_category": "frozen-products/seafood/other-seafoods",
+      "matched_target_category": "alimentacion-general/congelados/marisco-congelado/otros-mariscos-congelados",
+      "similarity_score": 0.9033
+    },
+    {
+      "source_category": "frozen-products/seafood/paella-ingredients",
+      "matched_target_category": "alimentacion-general/congelados/marisco-congelado/marisco-congelado",
+      "similarity_score": 0.8703
+    },
+    {
+      "source_category": "frozen-products/seafood/sucedaneo-of-elvers",
+      "matched_target_category": "alimentacion-general/congelados/pescado-congelado/sucedaneos-de-angulas-y-surimis-congelados",
+      "similarity_score": 0.8842
+    },
+    {
+      "source_category": "frozen-products/seafood/surimi-and-crab-sticks",
+      "matched_target_category": "alimentacion-general/congelados/pescado-congelado/sucedaneos-de-angulas-y-surimis-congelados",
+      "similarity_score": 0.877
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/bechamel-sauce",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/mantequilla",
+      "similarity_score": 0.8758
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/butter",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/mantequilla",
+      "similarity_score": 0.8851
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/confectionery-cream",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/cremas",
+      "similarity_score": 0.8859
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/cooking-cream",
+      "matched_target_category": "alimentacion-general/charcuteria/otras-cremas-para-untar",
+      "similarity_score": 0.8875
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/fresh-cream",
+      "matched_target_category": "alimentacion-general/charcuteria/embutido-fresco",
+      "similarity_score": 0.8809
+    },
+    {
+      "source_category": "nutrition/butter-cream-and-spreads/margarine",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/margarina",
+      "similarity_score": 0.8887
+    },
+    {
+      "source_category": "nutrition/comida-internacional/comida-mexicana",
+      "matched_target_category": "alimentacion-general/quesos/quesos-internacionales",
+      "similarity_score": 0.9057
+    },
+    {
+      "source_category": "nutrition/comida-internacional/comida-oriental",
+      "matched_target_category": "alimentacion-general/quesos/quesos-internacionales",
+      "similarity_score": 0.9015
+    },
+    {
+      "source_category": "nutrition/comida-internacional/otros-origenes",
+      "matched_target_category": "alimentacion-general/quesos/quesos-internacionales",
+      "similarity_score": 0.9088
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/chocolate-and-other-desserts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.9024
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/coffee-and-cold-drinks",
+      "matched_target_category": "alimentacion-general/congelados/helados-y-postres/helados",
+      "similarity_score": 0.8873
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/cream-sundaes-and-mousses",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/mousse",
+      "similarity_score": 0.8862
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/creme-caramel",
+      "matched_target_category": "alimentacion-general/pasteleria-y-confiteria/dulces-y-chocolates/cremas",
+      "similarity_score": 0.8964
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/custard-desserts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/natillas",
+      "similarity_score": 0.8862
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/jelly",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/gelatina",
+      "similarity_score": 0.8931
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/junket",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8762
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/non-chilled",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/nata/nata-sin-lactosa",
+      "similarity_score": 0.8835
+    },
+    {
+      "source_category": "nutrition/dairy-desserts/rice-dessert",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8801
+    },
+    {
+      "source_category": "nutrition/dietary-products/gluten-free-products",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/nata/nata-sin-lactosa",
+      "similarity_score": 0.8914
+    },
+    {
+      "source_category": "nutrition/dietary-products/herbal-medicine",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8921
+    },
+    {
+      "source_category": "nutrition/dietary-products/nutrition-and-diet",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.8981
+    },
+    {
+      "source_category": "nutrition/dietary-products/pancakes",
+      "matched_target_category": "alimentacion-general/panaderia/pan-rallado",
+      "similarity_score": 0.8909
+    },
+    {
+      "source_category": "nutrition/dietary-products/plant-based-drinks",
+      "matched_target_category": "alimentacion-general/alimentos-bio",
+      "similarity_score": 0.8803
+    },
+    {
+      "source_category": "nutrition/dietary-products/sports-nutrition",
+      "matched_target_category": "alimentacion-general/higiene/cuidado-personal",
+      "similarity_score": 0.881
+    },
+    {
+      "source_category": "nutrition/dietary-products/superfoods",
+      "matched_target_category": "alimentacion-general/alimentos-bio",
+      "similarity_score": 0.8898
+    },
+    {
+      "source_category": "nutrition/fish-preserves/bonito-an-tuna-belly",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito",
+      "similarity_score": 0.8911
+    },
+    {
+      "source_category": "nutrition/fish-preserves/bonito-in-oil",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito",
+      "similarity_score": 0.8865
+    },
+    {
+      "source_category": "nutrition/fish-preserves/clams-razor-clams-and-others",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/almejas",
+      "similarity_score": 0.8826
+    },
+    {
+      "source_category": "nutrition/fish-preserves/cockles",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/conservas-de-marisco",
+      "similarity_score": 0.8874
+    },
+    {
+      "source_category": "nutrition/fish-preserves/mackerel",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/conservas-de-marisco",
+      "similarity_score": 0.8926
+    },
+    {
+      "source_category": "nutrition/fish-preserves/mussels",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/mejillones",
+      "similarity_score": 0.9044
+    },
+    {
+      "source_category": "nutrition/fish-preserves/other-preserves",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/otras-conservas-de-pescado-y-marisco",
+      "similarity_score": 0.9007
+    },
+    {
+      "source_category": "nutrition/fish-preserves/sardines-and-small-sardines",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/sardinas",
+      "similarity_score": 0.9058
+    },
+    {
+      "source_category": "nutrition/fish-preserves/squid-octopus-and-cuttlefish",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/calamar-pulpo-y-chipiron",
+      "similarity_score": 0.8825
+    },
+    {
+      "source_category": "nutrition/fish-preserves/tuna-and-bonito-in-pickled-sauce",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito",
+      "similarity_score": 0.8744
+    },
+    {
+      "source_category": "nutrition/fish-preserves/tuna-and-bonito-in-spring-water",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito",
+      "similarity_score": 0.8729
+    },
+    {
+      "source_category": "nutrition/fish-preserves/tuna-in-oil",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-pescado-y-marisco/atun-y-bonito",
+      "similarity_score": 0.8732
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/almond-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8848
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/cacao-shakes-and-chocolate-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8782
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/condensed-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-condensada",
+      "similarity_score": 0.9036
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/fresh-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8961
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/juice-and-milk-drinks",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.9048
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/lactose-free-and-special-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-sin-lactosa",
+      "similarity_score": 0.8977
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/milk-with-added-calcium",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/otras-leches",
+      "similarity_score": 0.8797
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/other-milkshakes",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/batidos-y-bebidas-con-base-de-leche",
+      "similarity_score": 0.8978
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/powdered-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8904
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/semi-skimmed-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8825
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/skimmed-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8853
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/soya-and-other-cereal-drinks",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8904
+    },
+    {
+      "source_category": "nutrition/milk-milkshakes-and-juice-and-vegetal-drinks/whole-milk",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/leche-entera",
+      "similarity_score": 0.9022
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/almonds-and-hazlenuts",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/nuez-moscada",
+      "similarity_score": 0.8492
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/crisps-in-tube",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas",
+      "similarity_score": 0.8568
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/dried-fruit",
+      "matched_target_category": "alimentacion-general/despensa/snacks/frutos-secos",
+      "similarity_score": 0.8759
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/flavoured-crinkle-crisps",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/otras-especias-y-condimientos",
+      "similarity_score": 0.8593
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/flavoured-plain-crisps",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas",
+      "similarity_score": 0.8656
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/low-fat-crisps",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas",
+      "similarity_score": 0.8579
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/peanuts-crunchy-corn-and-cocktail-snacks",
+      "matched_target_category": "alimentacion-general/bebidas/espirituosos/licores-y-aguardientes",
+      "similarity_score": 0.8457
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/pistachoes-and-cashews",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8565
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/snack-and-other-appetisers",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/nuez-moscada",
+      "similarity_score": 0.8711
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/sunflower-seeds",
+      "matched_target_category": "alimentacion-general/despensa/cereales-y-semillas",
+      "similarity_score": 0.868
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/traditional-crinkle-crisps",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas",
+      "similarity_score": 0.855
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/traditional-plain-crisps",
+      "matched_target_category": "alimentacion-general/despensa/snacks/patatas-fritas",
+      "similarity_score": 0.8649
+    },
+    {
+      "source_category": "nutrition/mixed-nuts-crisps-and-snacks/walnuts-and-other-mixed-nuts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/nata/otras-natas",
+      "similarity_score": 0.8683
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/breadcrumbs",
+      "matched_target_category": "alimentacion-general/panaderia/pan-rallado",
+      "similarity_score": 0.8786
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/flour",
+      "matched_target_category": "alimentacion-general/panaderia/pan-rallado",
+      "similarity_score": 0.8741
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/mild-olive-oil",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-oliva-virgen",
+      "similarity_score": 0.8736
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/other-oils",
+      "matched_target_category": "alimentacion-general/despensa/aceite/otros-aceites",
+      "similarity_score": 0.8793
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/salt",
+      "matched_target_category": "alimentacion-general/despensa/sal/sal-para-cocinar",
+      "similarity_score": 0.8791
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/special-vinegars",
+      "matched_target_category": "alimentacion-general/despensa/vinagre/otros-vinagres",
+      "similarity_score": 0.8688
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/stock-cubes",
+      "matched_target_category": "alimentacion-general/despensa/sal/sal-para-cocinar",
+      "similarity_score": 0.8585
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/strong-olive-oil",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-oliva-virgen-extra",
+      "similarity_score": 0.8694
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/sunflower-oil",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-girasol",
+      "similarity_score": 0.8723
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/vinegar",
+      "matched_target_category": "alimentacion-general/despensa/vinagre/otros-vinagres",
+      "similarity_score": 0.8774
+    },
+    {
+      "source_category": "nutrition/oil-vinegar-salt-flour-and-breadcrumbs/virgin-olive-oil",
+      "matched_target_category": "alimentacion-general/despensa/aceite/aceite-de-oliva-virgen",
+      "similarity_score": 0.8848
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/black-olives",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8751
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/chillies-capers-and-others",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/otras-especias-y-condimientos",
+      "similarity_score": 0.8669
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/gherkins-and-cocktail-onions",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8545
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/green-olives",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8743
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/other-traditional-pickles",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8755
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/skewers-and-cocktail-pickles",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8651
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/special-olives",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8753
+    },
+    {
+      "source_category": "nutrition/olives-and-pickles/stuffed-olives",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8792
+    },
+    {
+      "source_category": "nutrition/organic-products/chilled-products",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8852
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-appetisers-olives-and-pickles",
+      "matched_target_category": "alimentacion-general/conservas/aceitunas-y-encurtidos",
+      "similarity_score": 0.8703
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-breakfast-and-snacks",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/huevos/huevos-ecologicos",
+      "similarity_score": 0.8785
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-confectionery-and-sweeteners",
+      "matched_target_category": "alimentacion-general/despensa/azucar-y-edulcorante/edulcorante",
+      "similarity_score": 0.8897
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-drinks",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8907
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-milk-and-plant-based-drinks",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/leche-y-bebidas-vegetales/bebidas-vegetales",
+      "similarity_score": 0.8931
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-oils-and-seasonings",
+      "matched_target_category": "alimentacion-general/despensa/aceite/otros-aceites",
+      "similarity_score": 0.8823
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-pasta-soup-and-creamy-soup",
+      "matched_target_category": "alimentacion-general/despensa/sopas-caldos-y-pures/pure-y-cremas",
+      "similarity_score": 0.8738
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-preserves",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-carne",
+      "similarity_score": 0.8967
+    },
+    {
+      "source_category": "nutrition/organic-products/organic-rice-seeds-and-pulses",
+      "matched_target_category": "alimentacion-general/despensa/cereales-y-semillas",
+      "similarity_score": 0.8718
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/cooked-pulses",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8809
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/egg-pasta-and-pasta-nests",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8647
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/gluten-free-and-integral-pasta",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8753
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/lasagne-and-cannelloni",
+      "matched_target_category": "alimentacion-general/despensa/pasta/pasta-para-lasana-y-canelones",
+      "similarity_score": 0.8862
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/macaroni-and-short-pasta",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8667
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/pasta-gourmet",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8864
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/plant-based-pasta-and-salads",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8734
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/pulses",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8803
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/rice",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.885
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/sauces",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8836
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/semolina-tapioca-and-others",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8586
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/soup-noodles-and-pasta",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8797
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/spaghetti-noodles-and-long-pasta",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8718
+    },
+    {
+      "source_category": "nutrition/pulses-rice-and-pasta/tortellini-ravioli-and-others",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8627
+    },
+    {
+      "source_category": "nutrition/ready-meals/asian-food",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/ensaladas",
+      "similarity_score": 0.8868
+    },
+    {
+      "source_category": "nutrition/ready-meals/fish",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pescado",
+      "similarity_score": 0.904
+    },
+    {
+      "source_category": "nutrition/ready-meals/food-from-other-origins",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/otros-platos-preparados",
+      "similarity_score": 0.8824
+    },
+    {
+      "source_category": "nutrition/ready-meals/instant-mashed-potato",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/tortilla-de-patata",
+      "similarity_score": 0.8793
+    },
+    {
+      "source_category": "nutrition/ready-meals/meat-poultry-and-game",
+      "matched_target_category": "alimentacion-general/congelados/carne-congelada/pollos-y-aves",
+      "similarity_score": 0.879
+    },
+    {
+      "source_category": "nutrition/ready-meals/mexican-food",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/ensaladas",
+      "similarity_score": 0.891
+    },
+    {
+      "source_category": "nutrition/ready-meals/prepared-salads",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/ensaladas",
+      "similarity_score": 0.913
+    },
+    {
+      "source_category": "nutrition/ready-meals/pulses-rice-and-pasta",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-pasta-y-arroz",
+      "similarity_score": 0.8953
+    },
+    {
+      "source_category": "nutrition/ready-meals/sausages-and-lean-meat",
+      "matched_target_category": "alimentacion-general/comidas-preparadas/platos-preparados-de-carne",
+      "similarity_score": 0.8718
+    },
+    {
+      "source_category": "nutrition/ready-meals/soup-broth-and-creamy-soups",
+      "matched_target_category": "alimentacion-general/despensa/sopas-caldos-y-pures/pure-y-cremas",
+      "similarity_score": 0.8983
+    },
+    {
+      "source_category": "nutrition/ready-meals/stuffed-vegetables-and-peppers",
+      "matched_target_category": "frescos/verduras/pimientos",
+      "similarity_score": 0.8753
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/ketchup-and-mustard",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/otras-especias-y-condimientos",
+      "similarity_score": 0.877
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/mayonnaise",
+      "matched_target_category": "alimentacion-general/salsas-y-alinos",
+      "similarity_score": 0.8956
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/other-cold-sauces",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/otras-especias-y-condimientos",
+      "similarity_score": 0.8927
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/other-spices",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/otras-especias-y-condimientos",
+      "similarity_score": 0.9088
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/parsley-and-oregano",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/perejil",
+      "similarity_score": 0.8837
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/pasta-sauces",
+      "matched_target_category": "alimentacion-general/despensa/pasta/otras-pastas",
+      "similarity_score": 0.8954
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/saffron-and-colourants",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/azafran-y-colorantes",
+      "similarity_score": 0.9034
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/sauces-for-meat",
+      "matched_target_category": "alimentacion-general/salsas-y-alinos",
+      "similarity_score": 0.8889
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/soy-sauce-spicy-sauces-and-others",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/otras-especias-y-condimientos",
+      "similarity_score": 0.8843
+    },
+    {
+      "source_category": "nutrition/sauces-and-spices/thousand-islands-dressing-salsa-brava-and-barbecue-sauce",
+      "matched_target_category": "alimentacion-general/despensa/especias-y-condimientos/otras-especias-y-condimientos",
+      "similarity_score": 0.8573
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/artichokes-and-mixed-vegetables",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/alcachofa",
+      "similarity_score": 0.889
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/asparagus",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/esparrago",
+      "similarity_score": 0.901
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/fried-tomato-sauce",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/tomate",
+      "similarity_score": 0.8867
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/fruit-preserves",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-frutas",
+      "similarity_score": 0.9129
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/mushrooms-and-wild-mushrooms",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/setas-y-champinones",
+      "similarity_score": 0.8826
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/peas-and-sweetcorn",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/maiz",
+      "similarity_score": 0.8692
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/red-peppers-others",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/pimiento",
+      "similarity_score": 0.8888
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/red-piquillo-peppers",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/pimiento",
+      "similarity_score": 0.8875
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/salad-vegetables",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/esparrago",
+      "similarity_score": 0.8907
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/spinach-chard-and-others",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/esparrago",
+      "similarity_score": 0.8772
+    },
+    {
+      "source_category": "nutrition/vegetable-an-fruit-preserves/whole-tomatoes",
+      "matched_target_category": "alimentacion-general/conservas/conservas-de-verduras/tomate",
+      "similarity_score": 0.9005
+    },
+    {
+      "source_category": "nutrition/yogurts/0-bifidus-yogurt",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8789
+    },
+    {
+      "source_category": "nutrition/yogurts/bifidus-yogurt",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.888
+    },
+    {
+      "source_category": "nutrition/yogurts/creamy-yogurts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8848
+    },
+    {
+      "source_category": "nutrition/yogurts/fresh-cheese-desserts-and-other-childrens-desserts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/postres/otros-postres",
+      "similarity_score": 0.8775
+    },
+    {
+      "source_category": "nutrition/yogurts/fruit-and-flavoured-yogurts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8813
+    },
+    {
+      "source_category": "nutrition/yogurts/health-and-fitness",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8908
+    },
+    {
+      "source_category": "nutrition/yogurts/lcasei-and-probiotics",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8755
+    },
+    {
+      "source_category": "nutrition/yogurts/low-fat-yogurts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8874
+    },
+    {
+      "source_category": "nutrition/yogurts/natural-yogurt",
+      "matched_target_category": "frescos/frutas/zumos-naturales",
+      "similarity_score": 0.8958
+    },
+    {
+      "source_category": "nutrition/yogurts/organic-and-special-yogurts",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8832
+    },
+    {
+      "source_category": "nutrition/yogurts/soya-and-100-plant-based-yogurt",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-de-soja-y-vegetal",
+      "similarity_score": 0.8733
+    },
+    {
+      "source_category": "nutrition/yogurts/yogurt-drinks-and-others",
+      "matched_target_category": "alimentacion-general/lacteos-y-huevos/yogures/yogur-bebible",
+      "similarity_score": 0.8949
+    }
+  ]
+}

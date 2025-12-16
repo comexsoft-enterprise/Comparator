@@ -1,0 +1,9 @@
+prefect==3.4.0
+prefect-aws==0.5.10
+prefect-docker==0.6.4
+numpy>=1.22.4,<1.25.0
+spacy==2.3.5
+torch
+pip
+rich
+faiss-cpu
