@@ -180,7 +180,11 @@ def export_cross_store_results_to_csv(
             for rank, prod_b in enumerate(similar_b_list, 1):
                 # Get shared attributes
                 shared_attrs = prod_b.get('shared_nodes_details', [])
-                shared_attrs_str = ', '.join(shared_attrs) if shared_attrs else ''
+                # Handle both old format (list of strings) and new format (list of dicts)
+                if shared_attrs and isinstance(shared_attrs[0], dict):
+                    shared_attrs_str = ', '.join([str(attr.get('value', '')) for attr in shared_attrs])
+                else:
+                    shared_attrs_str = ', '.join([str(a) for a in shared_attrs]) if shared_attrs else ''
                 
                 rows.append({
                     'Product_A_ID': product_a_id,
@@ -278,6 +282,7 @@ def export_cross_store_results_to_excel(
                 'Product_A_Name': product_a.get('product_name', 'N/A'),
                 'Product_A_Description': product_a.get('description', ''),
                 'Product_A_URL': product_a.get('url', ''),
+                'Brand_A': product_a.get('brand', ''),
                 'Store_A': store_a,
                 'Rank': status,
                 'Product_B_ID': '',
@@ -285,6 +290,7 @@ def export_cross_store_results_to_excel(
                 'Product_B_Name': '',
                 'Product_B_Description': '',
                 'Product_B_URL': '',
+                'Brand_B': '',
                 'Store_B': store_b,
                 'Combined_Score': '',
                 'Graph_Score': '',
@@ -305,7 +311,11 @@ def export_cross_store_results_to_excel(
             for rank, prod_b in enumerate(similar_b_list, 1):
                 # Get shared attributes
                 shared_attrs = prod_b.get('shared_nodes_details', [])
-                shared_attrs_str = ', '.join(shared_attrs) if shared_attrs else ''
+                # Handle both old format (list of strings) and new format (list of dicts)
+                if shared_attrs and isinstance(shared_attrs[0], dict):
+                    shared_attrs_str = ', '.join([str(attr.get('value', '')) for attr in shared_attrs])
+                else:
+                    shared_attrs_str = ', '.join([str(a) for a in shared_attrs]) if shared_attrs else ''
                 
                 rows.append({
                     'Product_A_ID': product_a_id,
@@ -314,12 +324,14 @@ def export_cross_store_results_to_excel(
                     'Product_A_Name': product_a.get('product_name', 'N/A'),
                     'Product_A_Description': product_a.get('description', ''),
                     'Product_A_URL': product_a.get('url', ''),
+                    'Brand_A': product_a.get('brand', ''),
                     'Rank': rank,
                     'Product_B_ID': prod_b.get('id', ''),
                     'Product_B_SIID': prod_b.get('siid', ''),
                     'Product_B_Name': prod_b.get('product_name', 'N/A'),
                     'Product_B_Description': prod_b.get('description', ''),
                     'Product_B_URL': prod_b.get('url', ''),
+                    'Brand_B': prod_b.get('brand', ''),
                     'Store_B': store_b,
                     'Combined_Score': round(prod_b.get('combined_score', 0.0), 3) if prod_b.get('combined_score') else '',
                     'Graph_Score': round(prod_b.get('weighted_score', 0.0), 3),
@@ -389,14 +401,14 @@ def export_cross_store_results_to_excel(
             })
             
             # Set column widths
-            worksheet.set_column('A:A', 15)  # Product_A_ID
-            worksheet.set_column('B:B', 30)  # Product_A_SIID
+            worksheet.set_column('A:A', 5)  # Product_A_ID
+            worksheet.set_column('B:B', 5)  # Product_A_SIID
             worksheet.set_column('C:C', 15)  # Store_A
-            worksheet.set_column('D:D', 40)  # Product_A_Name
-            worksheet.set_column('E:E', 60)  # Product_A_Description
-            worksheet.set_column('F:F', 50)  # Product_A_URL
-            worksheet.set_column('G:G', 8)   # Rank
-            worksheet.set_column('H:H', 15)  # Product_B_ID
+            worksheet.set_column('D:D', 20)  # Product_A_Name
+            worksheet.set_column('E:E', 15)  # Product_A_Description
+            worksheet.set_column('F:F', 15)  # Product_A_URL
+            worksheet.set_column('G:G', 5)   # Rank
+            worksheet.set_column('H:H', 10)  # Product_B_ID
             worksheet.set_column('I:I', 30)  # Product_B_SIID
             worksheet.set_column('J:J', 40)  # Product_B_Name
             worksheet.set_column('K:K', 60)  # Product_B_Description

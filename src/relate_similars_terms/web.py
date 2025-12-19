@@ -92,6 +92,9 @@ PACKAGING_LABEL = os.getenv("PACKAGING_LABEL", "Ingredient")
 # NAME_PROP cambia según el label: "value" para Quantity, "name" para los demás
 NAME_PROP = "value" if PACKAGING_LABEL == "Quantity" else "name"
 
+# Labels permitidos para cambio dinámico
+ALLOWED_LABELS = ["Ingredient", "Brand", "Format", "Quantity", "Component"]
+
 def get_rules_path() -> Path:
     """Devuelve la ruta del archivo de reglas basado en el PACKAGING_LABEL actual."""
     label_lower = PACKAGING_LABEL.lower()
@@ -350,10 +353,11 @@ def fetch_suggestions(
     }
 
     if sort not in allowed_sorts or sort is None:
+        # Orden por defecto: cantidad de mayor a menor, luego por status y original
         def default_key(r):
             return (
                 r.get("status", ""),
-                -(r.get("similarity") or 0),
+                -(r.get("amount") or 0),  # Negativo para orden descendente
                 r.get("original") or "",
             )
         all_rows.sort(key=default_key)
@@ -674,6 +678,8 @@ BASE_HTML = """
     .btn.danger:hover { background:#bb2d3b; }
     .btn.success { background:#198754; border-color:#198754; color:#fff; }
     .btn.success:hover { background:#157347; }
+    .btn.warning { background:#fd7e14; border-color:#fd7e14; color:#fff; }
+    .btn.warning:hover { background:#e8590c; }
     .btn.small { padding:4px 8px; font-size:12px; }
     .btn.outline { background:transparent; }
     .btn.outline.success { color:#198754; border-color:#198754; }
@@ -681,7 +687,7 @@ BASE_HTML = """
     .btn.outline.danger { color:#dc3545; border-color:#dc3545; }
     .btn.outline.danger:hover { background:#dc3545; color:#fff; }
     .status { font-size: 12px; padding:2px 6px; border-radius:6px; border:1px solid #ddd; display:inline-block; }
-    .status.PENDING{ background:#fff3cd; border-color:#ffe69c; }
+    .status.PENDING_SUGGESTED{ background:#fff3cd; border-color:#ffe69c; }
     .status.PENDING_NO_TARGET{ background:#fde2e1; border-color:#f5b5b3; }
     .status.APPROVED{ background:#d1e7dd; border-color:#a3cfbb; }
     .status.REJECTED{ background:#f8d7da; border-color:#f1aeb5; }
@@ -692,8 +698,6 @@ BASE_HTML = """
     .pager { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
     input[type="text"], select { padding:8px; border:1px solid #ddd; border-radius:8px; }
     .nowrap { white-space: nowrap; }
-    .actions { text-align:center; width:120px; }
-    .row-actions { display:flex; gap:4px; justify-content:center; }
     tr:hover { background:#f8f9fa; }
     .similarity-high { color:#198754; font-weight:bold; }
     .similarity-medium { color:#fd7e14; }
@@ -847,22 +851,57 @@ BASE_HTML = """
 </head>
 <body>
 <header>
-  <h2>Normalización de Packaging – Aprobaciones</h2>
+  <h2>Normalización de términos – Aprobaciones</h2>
   <p style="margin: 5px 0;">
     <strong>Label actual:</strong> <code style="background: #e3f2fd; padding: 2px 6px; border-radius: 3px;">{{ current_packaging_label }}</code>
     <span style="margin-left: 15px;">|</span>
     <span style="margin-left: 15px;"><strong>Total:</strong> {{ total }} sugerencias</span>
   </p>
-  <p style="margin: 5px 0; font-size: 12px; color: #666;">
-    📋 <strong>Rules:</strong> <code>{{ current_rules_file }}</code> 
-    <span style="margin-left: 10px;">|</span>
-    <span style="margin-left: 10px;">📊 <strong>Suggestions:</strong> <code>{{ current_suggestions_file }}</code></span>
-  </p>
-  <span class="muted">
-    Paso 1: elige destino válido (verde).<br/>
-    Paso 2: selecciona modo "Alias" o "Fusionar y borrar".<br/>
-    Paso 3: Approve seleccionados. Luego Apply Approved.
-  </span>
+  
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-top: 10px;">
+    <div style="flex: 1;">
+      <p style="margin: 5px 0; font-size: 12px; color: #666;">
+        📋 <strong>Rules:</strong> <code>{{ current_rules_file }}</code> 
+        <span style="margin-left: 10px;">|</span>
+        <span style="margin-left: 10px;">📊 <strong>Suggestions:</strong> <code>{{ current_suggestions_file }}</code></span>
+      </p>
+      <span class="muted">
+        Paso 1: elige destino válido (verde).<br/>
+        Paso 2: selecciona modo "Alias" o "Fusionar y borrar".<br/>
+        Paso 3: Approve seleccionados. Luego Apply Approved.
+      </span>
+    </div>
+    
+    <!-- Selector de Label de Packaging -->
+    <div style="padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px solid #ddd;">
+      <form method="post" action="{{ url_for('change_label') }}" style="display: inline-block; margin-right: 10px;">
+        <label style="font-weight: 500; margin-right: 10px;">🏷️ Cambiar Label:</label>
+        <select name="packaging_label" 
+                style="padding: 6px 8px; border: 2px solid #ccc; border-radius: 4px; min-width: 150px; font-size: 14px;">
+          <option value="Ingredient" {% if current_packaging_label == 'Ingredient' %}selected{% endif %}>Ingredient</option>
+          <option value="Brand" {% if current_packaging_label == 'Brand' %}selected{% endif %}>Brand</option>
+          <option value="Format" {% if current_packaging_label == 'Format' %}selected{% endif %}>Format</option>
+          <option value="Quantity" {% if current_packaging_label == 'Quantity' %}selected{% endif %}>Quantity</option>
+          <option value="Component" {% if current_packaging_label == 'Component' %}selected{% endif %}>Component</option>
+        </select>
+        <button type="submit" class="btn primary" style="margin-left: 10px;"
+                onclick="return confirm('⚠️ CAMBIAR LABEL\\n\\nEsto actualizará:\\n1. Las queries en esta interfaz\\n2. El label usado al regenerar sugerencias\\n\\nLabel actual: {{ current_packaging_label }}\\nNuevo label: ' + document.querySelector('select[name=packaging_label]').value + '\\n\\n¿Continuar?')">
+          Aplicar Label
+        </button>
+      </form>
+      
+      <button type="button" class="btn warning"
+        onclick="if(confirm('🔄 REGENERAR SUGERENCIAS\\n\\nEsto ejecutará main.py para:\\n1. Verificar y crear aliases faltantes en Neo4j\\n2. Generar nuevas sugerencias\\n\\nEl proceso puede tardar varios minutos.\\n\\n¿Continuar?')) { 
+          var form = document.createElement('form'); 
+          form.method = 'POST'; 
+          form.action = '{{ url_for('regenerate_suggestions') }}'; 
+          document.body.appendChild(form); 
+          form.submit(); 
+        }">
+        🔄 Regenerate
+      </button>
+    </div>
+  </div>
 </header>
 
 {% with messages = get_flashed_messages() %}
@@ -873,11 +912,11 @@ BASE_HTML = """
   {% endif %}
 {% endwith %}
 
-<form method="get" action="{{ url_for('index') }}" class="toolbar">
+<form id="filterForm" method="get" action="{{ url_for('index') }}" class="toolbar">
   <input type="text" name="q" value="{{ q or '' }}" placeholder="Buscar original / destino…">
 
   <select name="status">
-    {% for s in ['PENDING','PENDING_NO_TARGET','APPROVED','REJECTED','APPLIED','ALL'] %}
+    {% for s in ['PENDING_SUGGESTED','PENDING_NO_TARGET','APPROVED','REJECTED','APPLIED','ALL'] %}
       <option value="{{ s }}" {% if status==s %}selected{% endif %}>{{ s }}</option>
     {% endfor %}
   </select>
@@ -899,24 +938,7 @@ BASE_HTML = """
   <input type="hidden" name="sort" value="{{ sort or '' }}">
   <input type="hidden" name="direction" value="{{ direction or 'asc' }}">
 
-  <button type="button" class="btn" onclick="clearFilters()">🔄 Limpiar</button>
-</form>
-
-<!-- Selector de Label de Packaging -->
-<form method="post" action="{{ url_for('change_label') }}" style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 6px; display: inline-block;">
-  <label style="font-weight: 500; margin-right: 10px;">🏷️ Cambiar Label:</label>
-  <select name="packaging_label" 
-          style="padding: 6px 8px; border: 2px solid #ccc; border-radius: 4px; min-width: 150px; font-size: 14px;">
-    <option value="Ingredient" {% if current_packaging_label == 'Ingredient' %}selected{% endif %}>Ingredient</option>
-    <option value="Brand" {% if current_packaging_label == 'Brand' %}selected{% endif %}>Brand</option>
-    <option value="Format" {% if current_packaging_label == 'Format' %}selected{% endif %}>Format</option>
-    <option value="Quantity" {% if current_packaging_label == 'Quantity' %}selected{% endif %}>Quantity</option>
-    <option value="Component" {% if current_packaging_label == 'Component' %}selected{% endif %}>Component</option>
-  </select>
-  <button type="submit" class="btn primary" style="margin-left: 10px;"
-          onclick="return confirm('⚠️ CAMBIAR LABEL\\n\\nEsto actualizará:\\n1. Las queries en esta interfaz\\n2. El label usado al regenerar sugerencias\\n\\nLabel actual: {{ current_packaging_label }}\\nNuevo label: ' + document.querySelector('select[name=packaging_label]').value + '\\n\\n¿Continuar?')">
-    Aplicar Label
-  </button>
+  <button type="button" class="btn" onclick="clearFilters()">🔄 Refrescar </button>
 </form>
 
 <form method="post" action="{{ url_for('bulk_action') }}">
@@ -933,19 +955,10 @@ BASE_HTML = """
       }">
       Apply Approved → Neo4j
     </button>
-    <button type="button" class="btn primary" style="margin-left:10px;"
-      onclick="if(confirm('🔄 REGENERAR SUGERENCIAS\\n\\nEsto ejecutará main.py para:\\n1. Verificar y crear aliases faltantes en Neo4j\\n2. Generar nuevas sugerencias\\n\\nEl proceso puede tardar varios minutos.\\n\\n¿Continuar?')) { 
-        var form = document.createElement('form'); 
-        form.method = 'POST'; 
-        form.action = '{{ url_for('regenerate_suggestions') }}'; 
-        document.body.appendChild(form); 
-        form.submit(); 
-      }">
-      🔄 Regenerate Suggestions
-    </button>
     <span class="muted">
       Approve: si destino válido ⇒ APPROVED, si NO ⇒ PENDING_NO_TARGET<br>
-      Reject ⇒ REJECTED
+      Reject ⇒ REJECTED<br>
+      Estados: PENDING_SUGGESTED (con sugerencia) | PENDING_NO_TARGET (requiere target)
     </span>
   </div>
 
@@ -980,14 +993,13 @@ BASE_HTML = """
             Estado{% if sort=='status' %} {{ '▲' if direction=='asc' else '▼' }}{% endif %}
           </a>
         </th>
-        <th class="actions">Acciones</th>
       </tr>
     </thead>
 
     <tbody>
       {% if rows|length == 0 %}
       <tr>
-        <td colspan="9" style="text-align: center; padding: 40px; color: #666;">
+        <td colspan="8" style="text-align: center; padding: 40px; color: #666;">
           <div style="font-size: 48px; margin-bottom: 20px;">📭</div>
           <h3 style="margin: 10px 0;">No hay sugerencias disponibles</h3>
           <p style="margin: 10px 0;">
@@ -1046,24 +1058,10 @@ BASE_HTML = """
         <td class="right nowrap">{{ ('%.3f' % r.similarity) if r.similarity is not none else '-' }}</td>
         <td class="right nowrap">{{ r.amount if r.amount is not none else '-' }}</td>
         <td class="nowrap"><span class="status {{ r.status }}">{{ r.status }}</span></td>
-        <td class="actions">
-          {% if r.status == 'PENDING' %}
-          <div class="row-actions">
-            <form method="post" action="{{ url_for('single_action', sid=r.sid, action='approve') }}" style="display:inline;">
-              <button type="submit" class="btn small outline success" title="Aprobar">✓</button>
-            </form>
-            <form method="post" action="{{ url_for('single_action', sid=r.sid, action='reject') }}" style="display:inline;">
-              <button type="submit" class="btn small outline danger" title="Rechazar">✗</button>
-            </form>
-          </div>
-          {% else %}
-          <span class="muted">-</span>
-          {% endif %}
-        </td>
       </tr>
       <!-- Fila expandible para productos relacionados -->
       <tr id="products-row-{{ r.sid }}" class="products-section">
-        <td colspan="9" class="products-content">
+        <td colspan="8" class="products-content">
           <div id="products-content-{{ r.sid }}">
             <div class="no-products">Cargando productos relacionados...</div>
           </div>
@@ -1172,8 +1170,13 @@ BASE_HTML = """
   const pageSizeSelect = document.querySelector('select[name="page_size"]');
   
   function applyFiltersImmediately() {
-    // Agregar los campos hidden de ordenamiento
-    const form = document.querySelector('form');
+    // Usar el form de filtros específicamente
+    const form = document.getElementById('filterForm');
+    if (!form) {
+      console.error('No se encontró el form de filtros');
+      return;
+    }
+    
     const sortInput = document.querySelector('input[name="sort"]');
     const directionInput = document.querySelector('input[name="direction"]');
     
@@ -1206,7 +1209,7 @@ BASE_HTML = """
   // Limpiar filtros
   function clearFilters() {
     if (searchInput) searchInput.value = '';
-    if (statusSelect) statusSelect.value = 'PENDING';
+    if (statusSelect) statusSelect.value = 'PENDING_SUGGESTED';
     if (ruleTypeSelect) ruleTypeSelect.value = 'ALL';
     if (pageSizeSelect) pageSizeSelect.value = '50';
     applyFiltersImmediately();
@@ -1295,8 +1298,12 @@ BASE_HTML = """
       const sort = url.searchParams.get('sort');
       const direction = url.searchParams.get('direction');
       
-      // Crear inputs hidden para ordenamiento
-      const form = document.querySelector('form');
+      // Usar el form de filtros específicamente
+      const form = document.getElementById('filterForm');
+      if (!form) {
+        console.error('No se encontró el form de filtros');
+        return;
+      }
       
       // Remover inputs de ordenamiento existentes
       form.querySelectorAll('input[name="sort"], input[name="direction"]').forEach(inp => inp.remove());
@@ -1340,10 +1347,11 @@ def index():
     rule_type = request.args.get("rule_type") or "ALL"
     page_size = int(request.args.get("page_size", PAGE_SIZE_DEFAULT))
     page = max(1, int(request.args.get("page", "1")))
-    sort = request.args.get("sort") or None
-    direction = request.args.get("direction", "asc")
+    # Por defecto ordenar por cantidad descendente
+    sort = request.args.get("sort") or "amount"
+    direction = request.args.get("direction", "desc")
     if direction not in ("asc", "desc"):
-        direction = "asc"
+        direction = "desc"
 
     all_rows_now = load_suggestions()
     
@@ -1448,26 +1456,6 @@ def apply_approved():
     return redirect(url_for("index", status="APPLIED"))
 
 
-@app.route("/single/<int:sid>/<action>", methods=["POST"])
-def single_action(sid, action):
-    """
-    Aprobar o rechazar una sola sugerencia mediante botones individuales.
-    """
-    if action not in ("approve", "reject"):
-        flash("Acción no válida.")
-        return redirect(request.referrer or url_for("index"))
-    
-    new_status = "APPROVED" if action == "approve" else "REJECTED"
-    count = update_status([sid], new_status)
-    
-    if count > 0:
-        flash(f"Elemento {sid} {'aprobado' if action == 'approve' else 'rechazado'}.")
-    else:
-        flash(f"No se pudo actualizar el elemento {sid}.")
-    
-    return redirect(request.referrer or url_for("index"))
-
-
 @app.route("/regenerate", methods=["POST"])
 def regenerate_suggestions():
     """
@@ -1519,7 +1507,13 @@ def regenerate_suggestions():
         "Recarga la página en unos momentos para ver los resultados.",
         "info"
     )
-    return redirect(url_for("index"))
+    
+    # Después de regenerar, mostrar directamente PENDING_SUGGESTED
+    # Preservar búsqueda y page_size, pero resetear a PENDING_SUGGESTED
+    q = request.args.get("q", "")
+    page_size = request.args.get("page_size", PAGE_SIZE_DEFAULT)
+    
+    return redirect(url_for("index", status="PENDING_SUGGESTED", rule_type="ALL", q=q, page_size=page_size))
 
 
 @app.route("/change_label", methods=["POST"])
@@ -1596,7 +1590,13 @@ def change_label():
     print(f"  - Rules: {new_rules_path}")
     print(f"  - Suggestions: {new_suggestions_path}")
     
-    return redirect(url_for("index"))
+    # Preservar parámetros de filtro actuales si existen
+    status = request.args.get("status", "PENDING")
+    rule_type = request.args.get("rule_type", "ALL")
+    q = request.args.get("q", "")
+    page_size = request.args.get("page_size", PAGE_SIZE_DEFAULT)
+    
+    return redirect(url_for("index", status=status, rule_type=rule_type, q=q, page_size=page_size))
 
 
 @app.route("/api/products/<packaging_name>")

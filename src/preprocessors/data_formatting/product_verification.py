@@ -85,7 +85,8 @@ class ProductVerifier:
 
     def _collection_name_from_filename(self, filepath: str) -> str:
         """
-        Derive a safe collection name from an input filename.
+        Derive a collection name from an input filename with format: supermarket_postcode_XX
+        where XX is 01, 02, 03, etc. based on existing collections.
         """
         try:
             p = Path(filepath)
@@ -103,15 +104,73 @@ class ProductVerifier:
             # Remove any leftover processing tags anywhere in the name
             name = re.sub(r'_(validated|verified|translated|enriched|fixed)', '', name)
 
-            # Lowercase, replace spaces and non-alphanumeric with underscore
-            name = re.sub(r"[^0-9a-zA-Z]+", "_", name)
-            # Collapse multiple underscores and strip
-            name = re.sub(r"_+", "_", name).strip('_')
+            # Lowercase, replace spaces and non-alphanumeric with hyphen
+            name = re.sub(r"[^0-9a-zA-Z-]+", "-", name)
+            # Collapse multiple hyphens and strip
+            name = re.sub(r"-+", "-", name).strip('-')
 
-            # Avoid empty name
-            return name or 'products'
+            # Expected format: supermarket_postcode (e.g., eroski-01013)
+            base_name = name or 'products'
+            
+            # Find the next available version number
+            return self._get_versioned_collection_name(base_name)
+            
         except Exception:
-            return 'products'
+            return 'products-01'
+    
+    def _get_versioned_collection_name(self, base_name: str) -> str:
+        """
+        Get versioned collection name in format: supermarket_postcode_XX
+        Checks existing collections and returns next available version.
+        
+        Args:
+            base_name: Base collection name (e.g., 'eroski-01013')
+            
+        Returns:
+            Versioned collection name (e.g., 'eroski-01013-01', 'eroski-01013-02')
+        """
+        try:
+            if self.mongo_db is None:
+                # If DB not connected, return default -01
+                return f"{base_name}-01"
+            
+            # Get all existing collection names
+            try:
+                existing_collections = self.mongo_db.list_collection_names()
+            except Exception:
+                try:
+                    db = getattr(self.mongo_db, 'get_database')()
+                    existing_collections = db.list_collection_names()
+                except Exception:
+                    # If we can't get collections, default to -01
+                    return f"{base_name}-01"
+            
+            # Find all collections matching the base name pattern
+            pattern = re.compile(rf'^{re.escape(base_name)}-(\d{{2}})$')
+            existing_versions = []
+            
+            for coll_name in existing_collections:
+                match = pattern.match(coll_name)
+                if match:
+                    version_num = int(match.group(1))
+                    existing_versions.append(version_num)
+            
+            # If no existing versions, start with -01
+            if not existing_versions:
+                versioned_name = f"{base_name}-01"
+                logging.info(f"Creating new collection: {versioned_name}")
+                return versioned_name
+            
+            # Find the next available version number
+            next_version = max(existing_versions) + 1
+            # Use hyphen separator for consistency with initial '-01' format
+            versioned_name = f"{base_name}-{next_version:02d}"
+            logging.info(f"Found {len(existing_versions)} existing version(s). Creating new collection: {versioned_name}")
+            return versioned_name
+            
+        except Exception as e:
+            logging.warning(f"Error getting versioned collection name: {e}. Using default -01")
+            return f"{base_name}-01"
     
     def connect_to_mongodb(self) -> bool:
         """
@@ -158,7 +217,6 @@ class ProductVerifier:
             self.neo4j_connector = Neo4jConnector()
             if self.neo4j_connector.connect_to_neo4j():
                 self.neo4j_driver = self.neo4j_connector.driver
-                logging.info("✅ Successfully connected to Neo4j database")
                 return True
             else:
                 logging.warning("⚠️  Failed to connect to Neo4j database (will skip deletion)")
@@ -384,14 +442,13 @@ class ProductVerifier:
                 logging.error('MongoDB database not initialized')
                 return False
 
-            # Prefer collection derived from input filename (if set); else fall back to store/brand or 'products'
+            # Use the collection name determined at the start of verification
+            # This ensures all products from the same file go to the same versioned collection
             collection_name = getattr(self, 'current_input_collection', None)
             if not collection_name:
-                store_name = csv_product.get('store') or csv_product.get('brand')
-                if store_name and isinstance(store_name, str) and store_name.strip():
-                    collection_name = store_name.strip().lower().replace(' ', '_')
-                else:
-                    collection_name = 'products'
+                # Fallback: should not happen if verify_products() sets it correctly
+                logging.warning("current_input_collection not set, using default 'products-01'")
+                collection_name = 'products-01'
 
             try:
                 collection = self.mongo_db.get_collection(collection_name)
@@ -434,14 +491,13 @@ class ProductVerifier:
                 logging.error('MongoDB database not initialized')
                 return False
 
-            # Prefer collection derived from input filename (if set); else fall back to store/brand or 'products'
+            # Use the collection name determined at the start of verification
+            # This ensures all products from the same file go to the same versioned collection
             collection_name = getattr(self, 'current_input_collection', None)
             if not collection_name:
-                store_name = csv_product.get('store') or csv_product.get('brand')
-                if store_name and isinstance(store_name, str) and store_name.strip():
-                    collection_name = store_name.strip().lower().replace(' ', '_')
-                else:
-                    collection_name = 'products'
+                # Fallback: should not happen if verify_products() sets it correctly
+                logging.warning("current_input_collection not set, using default 'products-01'")
+                collection_name = 'products-01'
 
             try:
                 collection = self.mongo_db.get_collection(collection_name)

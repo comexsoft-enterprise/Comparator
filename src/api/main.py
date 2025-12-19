@@ -12,8 +12,8 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from pydantic import BaseModel, Field
-from bson import ObjectId
 from neo4j.graph import Node, Relationship
+from bson import ObjectId
 
 from config.settings import NEO4J_CONFIG, AZURE_OPENAI_CONFIG, PROJECT_ROOT
 
@@ -23,8 +23,9 @@ from src.connectors.postgresql_connector import get_postgresql_connection
 
 from src.api.api_utils.upload_file import PreprocessingResponse, process_uploaded_file
 from src.api.api_utils.neo4j_queries import FilterTriplets, get_nodes_by_label, generate_query_for_filter_triplets, verify_node_exists_query
+from src.api.api_utils.product_files import get_product_file_by_siid
 
-from src.models.model_variations.get_similar_products import (
+from src.models.model_variations.get_similar_neo4j_refactored import (
     model,
     ModelParameters,
     FoodWeights,
@@ -54,22 +55,6 @@ AZURE_OPENAI_API_VERSION = AZURE_OPENAI_CONFIG["api_version"]
 # PYDANTIC MODELS
 # ============================================================================
 
-class ProductUpdateRequest(BaseModel):
-    """Request model for updating a product"""
-    updates: Dict[str, Any]
-    
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "updates": {
-                    "name": "New Product Name",
-                    "price": 12.99,
-                    "internal_category": "Beverages"
-                }
-            }
-        }
-
-
 class CompareStoresRequest(BaseModel):
     """Request model for comparing products between stores"""
     store_a: str = Field(description="Name of the source store (e.g., 'eroski-01013-01')")
@@ -86,17 +71,12 @@ class CompareStoresRequest(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "store_a": "eroski-01013-01",
-                "store_b": "makro-01013-01",
-                "list_ids": ["23421704", "22405302"],
-                "top_n_results": 5
+                "store_a": "eroski-01013",
+                "store_b": "makro-01013",
+                "list_ids": [],
+                "top_n_results": 1
             }
         }
-
-
-# ============================================================================
-# HELPER FUNCTIONS
-# ============================================================================
 
 
 # ============================================================================
@@ -245,6 +225,36 @@ def _serialize_entity(e):
         return e
 
 
+# Serialize MongoDB documents to JSON-compatible format
+def _serialize_doc(doc):
+    """Convert MongoDB document to JSON-serializable dict.
+    
+    Handles ObjectId and datetime conversion.
+    
+    Args:
+        doc: MongoDB document (dict)
+        
+    Returns:
+        JSON-serializable dict
+    """
+    if doc is None:
+        return None
+    
+    serialized = {}
+    for key, value in doc.items():
+        if isinstance(value, ObjectId):
+            serialized[key] = str(value)
+        elif isinstance(value, datetime):
+            serialized[key] = value.isoformat()
+        elif isinstance(value, dict):
+            serialized[key] = _serialize_doc(value)
+        elif isinstance(value, list):
+            serialized[key] = [_serialize_doc(item) if isinstance(item, dict) else item for item in value]
+        else:
+            serialized[key] = value
+    return serialized
+
+
 def _extract_first_value_from_record(record):
     # record may be a mapping-like (dict/neo4j.Record). Try common keys n,r then fallback.
     try:
@@ -276,7 +286,7 @@ async def root():
         "endpoints": {
             "POST /compare": "Compare products between two stores",
             "POST /upload": "Upload and preprocess a new supermarket file",
-            "GET /mongodb/product/{siid}": "Get product by siid from MongoDB"
+            "GET /mongodb/product-file/{siid}": "Get product file with merged matched products and price history by siid"
         }
     }
 
@@ -546,151 +556,51 @@ async def compare_stores(request: CompareStoresRequest) -> Dict[str, List]:
             connector.close_connection()
 
 
-# 6. Get product by siid from MongoDB (FICHAS DE PRODUCTOS)
-@app.get("/mongodb/product/{siid}")
-async def get_product_by_siid(siid: str)-> Dict[str, Any]:
+# 6. Get product file by siid (with matched products merged and price history)
+@app.get("/mongodb/product-file/{siid}")
+async def get_product_file(siid: str, format: bool = True, lang: str = "es") -> Dict[str, Any]:
     """
-    Get product information from MongoDB by siid.
-    Searches across all collections until the product is found.
+    Get a complete product file by siid.
+    This endpoint retrieves the product and merges common fields from all matched products.
+    Also includes price_history from PostgreSQL if available.
+    
+    Common fields (merged using most common value):
+    - Brand, Format, Measure value, Unit measure, Model, EAN
+    - Any field containing 'nutri'
+    
+    Non-common fields: All other taxonomy fields from the specific product
     
     Args:
         siid: Product's siid identifier
+        format: If True, format the response using LLM for better readability (default: True)
+        lang: Language for formatting (default: "es")
         
     Returns:
-        Product information from MongoDB including the collection where it was found
+        Complete product file with merged common fields, specific non-common fields, and price_history.
+        If format=True, returns both a formatted_summary and raw_data.
     """
     try:
-        db = get_mongo_client()
-        if db is None:
+        logger.info(f"Building product file for siid: {siid} (format={format})")
+        product_file = get_product_file_by_siid(siid, format_with_llm=format, lang=lang)
+        
+        if "error" in product_file:
             raise HTTPException(
-                status_code=503,
-                detail="Failed to connect to MongoDB"
+                status_code=404 if "not found" in product_file["error"].lower() else 500,
+                detail=product_file["error"]
             )
         
-        # Search in all collections
-        collections = db.list_collection_names()
-        
-        for coll_name in collections:
-            coll = db[coll_name]
-            doc = coll.find_one({"siid": siid})
-            if doc:
-                logger.info(f"Found product with siid {siid} in collection {coll_name}")
-                product_doc = _serialize_doc(doc)
-
-                # Inline lightweight cleaning: remove keys with None, empty string, or 'null' (case-insensitive)
-                def inline_clean(o):
-                    if isinstance(o, dict):
-                        out = {}
-                        for kk, vv in o.items():
-                            # remove None
-                            if vv is None:
-                                continue
-                            # remove empty string or explicit 'null' text
-                            if isinstance(vv, str) and (vv.strip() == "" or vv.strip().lower() == "null"):
-                                continue
-                            # recurse for nested structures
-                            if isinstance(vv, (dict, list)):
-                                cleaned = inline_clean(vv)
-                                out[kk] = cleaned
-                            else:
-                                out[kk] = vv
-                        return out
-                    elif isinstance(o, list):
-                        lst = []
-                        for item in o:
-                            if item is None:
-                                continue
-                            if isinstance(item, str) and (item.strip() == "" or item.strip().lower() == "null"):
-                                continue
-                            if isinstance(item, (dict, list)):
-                                lst.append(inline_clean(item))
-                            else:
-                                lst.append(item)
-                        return lst
-                    else:
-                        return o
-
-                product_doc = inline_clean(product_doc)
-
-                # Remove any embedding keys before returning the product
-                product_doc = _remove_embedding_keys(product_doc)
-
-                result = {
-                    "collection": coll_name,
-                    "product": product_doc
-                }
-
-                # If product has a product_hash, try to fetch price_history from PostgreSQL
-                product_hash = None
-                try:
-                    product_hash = doc.get('product_hash') or doc.get('Product_Hash')
-                except Exception:
-                    product_hash = None
-
-                if product_hash:
-                    try:
-                        pg_conn = get_postgresql_connection()
-                        cur = pg_conn.cursor()
-                        # Query price_history from product_vector_data table by product_hash
-                        cur.execute("SELECT price_history FROM product_vector_data WHERE product_hash = %s LIMIT 1;", (product_hash,))
-                        row = cur.fetchone()
-                        if row and row[0] is not None:
-                            ph = row[0]
-                            # Lightweight inline clean for price_history
-                            def _clean_ph(x):
-                                if isinstance(x, dict):
-                                    outp = {}
-                                    for k2, v2 in x.items():
-                                        if v2 is None:
-                                            continue
-                                        if isinstance(v2, str) and (v2.strip() == "" or v2.strip().lower() == "null"):
-                                            continue
-                                        if isinstance(v2, (dict, list)):
-                                            outp[k2] = _clean_ph(v2)
-                                        else:
-                                            outp[k2] = v2
-                                    return outp
-                                if isinstance(x, list):
-                                    lst2 = []
-                                    for it in x:
-                                        if it is None:
-                                            continue
-                                        if isinstance(it, str) and (it.strip() == "" or it.strip().lower() == "null"):
-                                            continue
-                                        if isinstance(it, (dict, list)):
-                                            lst2.append(_clean_ph(it))
-                                        else:
-                                            lst2.append(it)
-                                    return lst2
-                                return x
-
-                            if isinstance(ph, (dict, list)):
-                                ph = _clean_ph(ph)
-                            result['price_history'] = ph
-                        cur.close()
-                        pg_conn.close()
-                    except Exception as e:
-                        logger.warning(f"Could not fetch price_history from PostgreSQL for product_hash {product_hash}: {e}")
-                        result['price_history'] = None
-
-                return result
-        
-        # If not found in any collection
-        raise HTTPException(
-            status_code=404,
-            detail=f"Product with siid '{siid}' not found in any collection"
-        )
+        return product_file
         
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error fetching product by siid {siid}: {e}", exc_info=True)
+        logger.error(f"Error building product file for siid {siid}: {e}", exc_info=True)
         raise HTTPException(
             status_code=500,
-            detail=f"Error fetching product: {str(e)}"
+            detail=f"Error building product file: {str(e)}"
         )
 
-# 8. Get product_hash by MongoDB id field
+# 7. Get product_hash by MongoDB id field
 @app.get("/mongodb/product-hash/{id}")
 async def get_product_hash_by_id(id: str) -> Dict[str, Any]:
     """
@@ -760,7 +670,7 @@ async def get_product_hash_by_id(id: str) -> Dict[str, Any]:
             detail=f"Error fetching product_hash: {str(e)}"
         )
 
-# 9. Delete product by product_hash from all databases
+# 8. Delete product by product_hash from all databases
 @app.delete("/product/{product_hash}")
 async def delete_product_by_hash(product_hash: str) -> Dict[str, Any]:
     """

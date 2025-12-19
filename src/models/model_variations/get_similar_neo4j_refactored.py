@@ -7,7 +7,7 @@ It combines:
 - Semantic similarity (OpenAI embeddings for product names and descriptions)
 
 Usage:
-    python 3_get_similar_products.py
+    python 3_get_similar_neo4j_refactored.py
 
 Requirements:
     - Neo4j database running locally (neo4j://localhost:7687)
@@ -125,7 +125,7 @@ class FoodWeights(BaseModel):
     graph: FoodGraphWeights = Field(default_factory=FoodGraphWeights)
     combined: CombinedWeights = Field(
         default_factory=lambda: CombinedWeights(
-            graph=0.44, name=0.28, description=0.17, euclidean=0.11
+            graph=0.10, name=0.40, description=0.40, euclidean=0.10
         )
     )
 
@@ -152,10 +152,10 @@ class NonFoodElecWeights(BaseModel):
 
 class QualityThresholds(BaseModel):
     """Minimum quality thresholds for filtering results."""
-    min_graph_score: float = Field(default=0.8, ge=0, le=1, description="Minimum graph-based similarity score")
+    min_graph_score: float = Field(default=0.5, ge=0, description="Minimum graph-based similarity score")
     min_name_similarity: float = Field(default=0.5, ge=0, le=1, description="Minimum name embedding similarity")
     min_description_similarity: float = Field(default=0.5, ge=0, le=1, description="Minimum description embedding similarity")
-    min_euclidean_similarity: float = Field(default=0.7, ge=0, le=1, description="Minimum euclidean distance similarity")
+    min_euclidean_similarity: float = Field(default=0.0, ge=0, le=1, description="Minimum euclidean distance similarity")
 
 
 class ModelParameters(BaseModel):
@@ -385,8 +385,15 @@ def model(params: ModelParameters):
     #       id_lists=['123456789', '9876543210', '1111111111']
     # ============================================================
     
-    # CURRENT CONFIGURATION: Using external file
-    id_obtention_method = 'external_file'  # Options: 'neo4j', 'external_file', 'id_list'
+    # AUTOMATIC CONFIGURATION: Determine method based on list_ids
+    # If list_ids is empty, load all products from Neo4j
+    # If list_ids has elements, use the provided list
+    if params.list_ids and len(params.list_ids) > 0:
+        id_obtention_method = 'id_list'
+        print(f"📝 Using id_list method with {len(params.list_ids)} product IDs")
+    else:
+        id_obtention_method = 'neo4j'
+        print(f"📝 Using neo4j method (loading all products from {params.store_a})")
     
     try:
         results = model.find_cross_store_similarities(
@@ -539,4 +546,10 @@ def model(params: ModelParameters):
 
 
 if __name__ == "__main__":
-    model(store_a="eroski-01013-01", store_b="makro-01013-01", top_n_results=3)
+    params = ModelParameters(
+        store_a="eroski-01013",
+        store_b="makro-01013",
+        list_ids=[],
+        top_n_results=1
+    )
+    model(params)

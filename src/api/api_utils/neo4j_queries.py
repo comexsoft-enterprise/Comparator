@@ -1014,8 +1014,13 @@ def generate_query_for_filter_triplets(
                         logging.info(f"  ✓ Using direct connection")
                     logging.info(f"  ✓ Property expression: {prop_expr}")
                 else:
-                    prop_expr = "m.name"
-                    logging.info(f"  Same node type, using m.name")
+                    # Same node type - find nodes connected to the filtered node
+                    # E.g., find Brands connected to "marca_blanca" Brand
+                    logging.info(f"  Same node type ({canonical_ref}), looking for connected nodes")
+                    match_clauses.append(f"MATCH ({filter_node_var}:{canonical_ref})-[]-(m:{canonical_ref})")
+                    prop_expr = f"{filter_node_var}.name"
+                    logging.info(f"  ✓ Finding {canonical_ref} nodes connected to filtered {canonical_ref} node")
+                    logging.info(f"  ✓ Property expression: {prop_expr}")
                     
             elif f_rep == "relationship":
                 logging.info(f"  Case: REF=NODE, FILTER=RELATIONSHIP")

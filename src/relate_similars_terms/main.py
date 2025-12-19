@@ -6,7 +6,7 @@ Genera sugerencias de normalización SIN aplicar cambios en la BD:
 - Lee Packaging y su nº de conexiones con Product
 - Propone un "sugerido" por reglas (capacidad/unidades), alias y similitud
 - Comprueba si el sugerido ya existe en Packaging
-  - Si existe  -> status = PENDING (aprobable)
+  - Si existe  -> status = PENDING_SUGGESTED (aprobable)
   - Si NO      -> status = PENDING_NO_TARGET (revisión manual)
 - Exporta TODO a un JSON local (no toca Neo4j más allá de leer)
 
@@ -514,7 +514,7 @@ def sugerir(
                 "rule_type": "ALIAS_SIMILARITY",
                 "similarity": round(alias_score, 3),
                 "rationale": f"Similar a alias '{alias_key}' que mapea a '{final_canonical}'.",
-                "status": "PENDING" if exists else "PENDING_NO_TARGET"
+                "status": "PENDING_SUGGESTED" if exists else "PENDING_NO_TARGET"
             }
             suggestions.append(sugg_item)
             continue
@@ -561,7 +561,7 @@ def sugerir(
                     "rule_type": rule_type,
                     "similarity": round(sim, 3),
                     "rationale": "Componentes mapeados por similitud (incluyendo aliases)" if has_alias_match else "Componentes mapeados por similitud (comparado tras normalización).",
-                    "status": "PENDING" if exists else "PENDING_NO_TARGET"
+                    "status": "PENDING_SUGGESTED" if exists else "PENDING_NO_TARGET"
                 }
                 suggestions.append(sugg_item)
             else:
@@ -582,7 +582,7 @@ def sugerir(
                     "rule_type": rule_type,
                     "similarity": round(sim, 3),
                     "rationale": "Mejor coincidencia por similitud via alias" if is_alias_match else "Mejor coincidencia por similitud (comparado tras normalización).",
-                    "status": "PENDING" if exists else "PENDING_NO_TARGET"
+                    "status": "PENDING_SUGGESTED" if exists else "PENDING_NO_TARGET"
                 }
                 suggestions.append(sugg_item)
         else:

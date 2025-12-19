@@ -13,6 +13,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 from tqdm import tqdm
 
+project_root = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(project_root))
+
 from config.settings import NEO4J_CONFIG, AZURE_OPENAI_CONFIG, LOGGING_CONFIG
 from langchain_community.vectorstores.neo4j_vector import Neo4jVector
 from neo4j import GraphDatabase
@@ -231,22 +234,22 @@ def main():
         logger.info("Generating product_name embeddings")
         logger.info("=" * 70)
         
-        # generate_embeddings_multithreaded(
-        #     driver=driver,
-        #     embedder=embedder,
-        #     node_label="Product",
-        #     text_property="product_name",
-        #     embedding_property=f"product_name_embedding_{suffix}",
-        #     batch_size=batch_size,
-        #     max_workers=max_workers
-        # )
+        generate_embeddings_multithreaded(
+            driver=driver,
+            embedder=embedder,
+            node_label="Product",
+            text_property="product_name",
+            embedding_property=f"product_name_embedding_{suffix}",
+            batch_size=batch_size,
+            max_workers=max_workers
+        )
         
-        # create_vector_index(
-        #     driver=driver,
-        #     index_name=f"product_name_embedding_{suffix}",
-        #     node_label="Product",
-        #     embedding_property=f"product_name_embedding_{suffix}"
-        # )
+        create_vector_index(
+            driver=driver,
+            index_name=f"product_name_embedding_{suffix}",
+            node_label="Product",
+            embedding_property=f"product_name_embedding_{suffix}"
+        )
         
         # Process description embeddings
         logger.info("=" * 70)

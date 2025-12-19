@@ -1,13 +1,15 @@
 from pathlib import Path
 import sys
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 import logging
-from src.connectors.neo4j_connector import Neo4jConnector
+
 
 # Add the project root to Python path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
+from src.connectors.neo4j_connector import Neo4jConnector
+from data.schemas.product_type_patterns import PRODUCT_TYPE_PATTERNS
 
 
 ### STEPS TO DETERMINE CATEGORIES VALUES ###
@@ -31,6 +33,36 @@ class CategoryAnalysis:
             List of result dictionaries
         """
         return self.neo4j_connector.execute_query(query, parameters or {})
+    
+    def _detect_product_type(self, product_name: str, product_description: str) -> Optional[str]:
+        """
+        Detect product type by checking name and description against configured patterns.
+        This is done ONCE per product A instead of in every comparison.
+        
+        Args:
+            product_name: Product name
+            product_description: Product description
+            
+        Returns:
+            Product type string (e.g., 'olive_oil') or None if no match
+        """
+        if not product_name:
+            return None
+        
+        product_name_lower = product_name.lower()
+        product_desc_lower = (product_description or "").lower()
+        
+        # Check each product type's patterns
+        for product_type, patterns_config in PRODUCT_TYPE_PATTERNS.items():
+            all_patterns = patterns_config.get("patterns_en", []) + patterns_config.get("patterns_es", [])
+            
+            for pattern in all_patterns:
+                pattern_lower = pattern.lower()
+                # Check in name or description
+                if pattern_lower in product_name_lower or pattern_lower in product_desc_lower:
+                    return product_type
+        
+        return None
     
     def get_type_category_subcategory(self, product_a_id: str, store_a_name: str) -> None:
         # First, get the category that product A belongs to
@@ -88,162 +120,200 @@ class CategoryAnalysis:
         product_a_id = product_a.get('id')
         logging.info(f"[{idx}/{total}] Finding similar products for ID: {product_a_id}")
 
+        # PRE-QUERY: Detect product type ONCE for product A (much faster than in-query detection)
+        detected_product_type = self._detect_product_type(
+            product_a.get('product_name', ''),
+            product_a.get('description', '')
+        )
+        
+        if detected_product_type:
+            logging.info(f"  Detected product_type for {product_a_id}: {detected_product_type}")
 
         # OPTIMIZED: Single query that includes categorization + similarity search
         query_similar = """
         // 1) Get product A with its categorization
-        MATCH (s:Store {name: $store_a})-[r:SELLS {id: $product_id}]->(a:Product)
-        OPTIONAL MATCH (a)-[:COVERS]->(subcat_a:Internal_Subcategory)
-        OPTIONAL MATCH (subcat_a)-[:HAS_INTERNAL_SUBCATEGORY]->(cat_a:Internal_Category)
-        OPTIONAL MATCH (cat_a)-[:HAS_INTERNAL_CATEGORY]->(type_a:Internal_Type)
-        WITH a, r, subcat_a, cat_a, type_a
+    MATCH (s:Store {name: $store_a})-[r:SELLS]->(a:Product)
+    WHERE r.id = $product_id
+    OPTIONAL MATCH (a)-[:COVERS]->(subcat_a:Internal_Subcategory)
+    OPTIONAL MATCH (subcat_a)-[:HAS_INTERNAL_SUBCATEGORY]->(cat_a:Internal_Category)
+    OPTIONAL MATCH (cat_a)-[:HAS_INTERNAL_CATEGORY]->(type_a:Internal_Type)
 
-        // 2) Get neighbors of A (including aliases) and brand info
-        OPTIONAL MATCH (a)-[:FROM_BRAND]-(brand_a:Brand)
-        // Check if brand_a has ALIAS_OF to marca_blanca (computed once)
-        OPTIONAL MATCH (brand_a)-[:ALIAS_OF]->(marca_blanca_check:Brand {name: 'marca_blanca'})
-        WITH a, subcat_a, cat_a, type_a, brand_a,
-             marca_blanca_check IS NOT NULL AS a_is_marca_blanca,
-             a.measure_value AS a_measure_value,
-             a.unit_measure AS a_unit_measure
-        
-        MATCH (a)-[rel_a]-(x)
-        // Follow ALIAS_OF chain to get canonical nodes
-        OPTIONAL MATCH (x)-[:ALIAS_OF*0..]->(canonical_x)
-        WHERE canonical_x:Ingredient OR canonical_x IS NULL
-        WITH a, subcat_a, cat_a, type_a, brand_a, a_is_marca_blanca, a_measure_value, a_unit_measure,
-             collect(DISTINCT {
-                 node: COALESCE(canonical_x, x), 
-                 relType: type(rel_a),
-                 original: x
-             }) AS neighborsA
+    // 2) Get neighbors of A (including aliases) and brand info
+    OPTIONAL MATCH (a)-[:FROM_BRAND]-(brand_a:Brand)
+    OPTIONAL MATCH (brand_a)-[:ALIAS_OF]->(marca_blanca_check:Brand {name: 'marca_blanca'})
+    WITH a, subcat_a, cat_a, type_a, brand_a,
+         marca_blanca_check IS NOT NULL AS a_is_marca_blanca,
+         a.measure_value AS a_measure_value,
+         a.unit_measure AS a_unit_measure
+    
+    MATCH (a)-[rel_a]-(x)
+    OPTIONAL MATCH (x)-[:ALIAS_OF*0..]->(canonical_x)
+    WHERE canonical_x:Ingredient OR canonical_x IS NULL
+    WITH a, subcat_a, cat_a, type_a, brand_a, a_is_marca_blanca, a_measure_value, a_unit_measure,
+         collect(DISTINCT {
+             node: COALESCE(canonical_x, x), 
+             relType: type(rel_a),
+             original: x
+         }) AS neighborsA
 
-        // 3) Get products in store B, filtering by type if exists
-        MATCH (sb:Store {name: $store_b})-[rb:SELLS]->(b:Product)
-        OPTIONAL MATCH (b)-[:COVERS]->(subcat_b:Internal_Subcategory)
-        OPTIONAL MATCH (subcat_b)-[:HAS_INTERNAL_SUBCATEGORY]->(cat_b:Internal_Category)
-        OPTIONAL MATCH (cat_b)-[:HAS_INTERNAL_CATEGORY]->(type_b:Internal_Type)
+    // 3) Get products in store B
+    MATCH (sb:Store {name: $store_b})-[rb:SELLS]->(b:Product)
+    OPTIONAL MATCH (b)-[:COVERS]->(subcat_b:Internal_Subcategory)
+    OPTIONAL MATCH (subcat_b)-[:HAS_INTERNAL_SUBCATEGORY]->(cat_b:Internal_Category)
+    OPTIONAL MATCH (cat_b)-[:HAS_INTERNAL_CATEGORY]->(type_b:Internal_Type)
 
-        WHERE type_a IS NULL OR type_b.name = type_a.name 
-        
+    // EXCLUSION RULE: Internal category types must match if defined
+    WHERE type_a IS NULL OR type_b.name = type_a.name"""
+
+        # Add product type filtering if detected (OPTIMIZATION: done once per product A)
+        if detected_product_type and detected_product_type in PRODUCT_TYPE_PATTERNS:
+            patterns = PRODUCT_TYPE_PATTERNS[detected_product_type]
+            all_patterns = patterns.get('patterns_en', []) + patterns.get('patterns_es', [])
+            
+            # Build simple pattern matching condition for product B
+            # Much faster than running CASE statements for every product B
+            pattern_conditions = [
+                f"(toLower(b.product_name) CONTAINS '{pattern.lower()}' OR toLower(b.description) CONTAINS '{pattern.lower()}')"
+                for pattern in all_patterns
+            ]
+            
+            if pattern_conditions:
+                query_similar += f"\n      AND ({' OR '.join(pattern_conditions)})"
+                logging.info(f"  ✨ Detected '{detected_product_type}' - Added {len(all_patterns)} pattern filters: {all_patterns}")
+
+        query_similar += """
 
         OPTIONAL MATCH (b)-[:FROM_BRAND]-(brand:Brand)
         OPTIONAL MATCH (b)-[:IS_PACKED_AS]-(fmt:Format)
         // Check brand B for marca_blanca connection
         OPTIONAL MATCH (brand)-[:ALIAS_OF]->(mb_check_b:Brand {name: 'marca_blanca'})
         
-        // Filter: both are marca_blanca OR both are NOT marca_blanca
-        // AND if unit_measure is 'L', measure_value must be the same
-        WITH a, neighborsA, b, sb, rb, brand, fmt, cat_b, cat_a, subcat_a, a_is_marca_blanca, a_measure_value, a_unit_measure,
+        // Filter: 
+        // 1) both are marca_blanca OR both are NOT marca_blanca
+        // 2) if both are NOT marca_blanca AND both have defined brands (not "no brand" or "unknown"), they must have the same brand
+        // 3) if unit_measure is 'L', measure_value must be the same
+        WITH a, neighborsA, b, sb, rb, brand, fmt, cat_b, cat_a, subcat_a, brand_a, a_is_marca_blanca, a_measure_value, a_unit_measure,
              mb_check_b IS NOT NULL AS b_is_marca_blanca
-        WHERE a_is_marca_blanca = b_is_marca_blanca
+        WHERE (
+              // If product A has unknown/no brand -> allow match with any product
+              (brand_a IS NULL OR toLower(coalesce(brand_a.name, '')) IN ['no brand', 'unknown'])
+          )
+          OR (
+              // A is marca_blanca -> B must be marca_blanca OR B unknown/no brand
+              a_is_marca_blanca = true
+              AND (
+                  b_is_marca_blanca = true
+                  OR brand IS NULL
+                  OR toLower(coalesce(brand.name, '')) IN ['no brand', 'unknown']
+              )
+          )
+          OR (
+              // A is a normal brand -> B must NOT be marca_blanca. Brand equality is not required anymore.
+              a_is_marca_blanca = false
+              AND NOT b_is_marca_blanca
+          )
           AND (
-              // If unit_measure is L (case insensitive), check measure_value
-              CASE WHEN toLower(a_unit_measure) = 'l' OR toLower(b.unit_measure) = 'l'
-                   THEN (a_measure_value = b.measure_value OR (a_measure_value IS NULL AND b.measure_value IS NULL))
-                   ELSE true
-              END
+              // If any unit is liters, require measure_value equality (or both null). Otherwise allow.
+              NOT (toLower(coalesce(a_unit_measure, '')) = 'l' OR toLower(coalesce(b.unit_measure, '')) = 'l')
+              OR (a_measure_value = b.measure_value OR (a_measure_value IS NULL AND b.measure_value IS NULL))
           )
         
-        WITH a, neighborsA, b, sb, rb, brand, fmt, cat_b,
+        WITH a, neighborsA, b, sb, rb, brand, fmt, cat_b, 
              cat_a, subcat_a
 
-        // 4) Calculate overlap
+    // 4) Calculate overlap (considering aliases)
+    UNWIND neighborsA AS n
+    MATCH (b)-[rel_b]-(y)
+    OPTIONAL MATCH (y)-[:ALIAS_OF*0..]->(canonical_y)
+    WHERE canonical_y:Ingredient OR canonical_y IS NULL
+    WITH b, sb, rb, brand, fmt, cat_b, cat_a, subcat_a, n,
+         COALESCE(canonical_y, y) AS matched_node,
+         type(rel_b) AS rel_type
+    WHERE b <> a
+      AND matched_node = n.node
+      AND rel_type = n.relType
 
-        // 4) Calculate overlap (considering aliases)
-        UNWIND neighborsA AS n
-        MATCH (b)-[rel_b]-(y)
-        // Also follow ALIAS_OF chain for store B products
-        OPTIONAL MATCH (y)-[:ALIAS_OF*0..]->(canonical_y)
-        WHERE canonical_y:Ingredient OR canonical_y IS NULL
-        WITH b, sb, rb, brand, fmt, cat_b, cat_a, subcat_a, n,
-             COALESCE(canonical_y, y) AS matched_node,
-             type(rel_b) AS rel_type
-        WHERE b <> a
-          AND matched_node = n.node
-          AND rel_type = n.relType
+    WITH b, sb, rb, brand, fmt,
+         cat_b,
+         cat_a,
+         subcat_a,
+         count(DISTINCT n.node) AS overlap,
+         collect(DISTINCT n) AS shared_nodes
+    WHERE overlap >= $min_matches
 
-        WITH b, sb, rb, brand, fmt,
-             cat_b,
-             cat_a,
-             subcat_a,
-             count(DISTINCT n.node) AS overlap,
-             collect(DISTINCT n) AS shared_nodes
-        WHERE overlap >= $min_matches
+    // 5) Calculate weighted score with category bonus
+    WITH b, sb, rb, brand, fmt,
+         cat_b,
+         cat_a,
+         subcat_a,
+         overlap,
+         shared_nodes,
+         CASE WHEN cat_a.name = cat_b.name THEN $weight_category ELSE 0.0 END AS category_bonus
 
-        // 5) Calculate weighted score with category bonus
-        WITH b, sb, rb, brand, fmt,
-             cat_b,
-             cat_a,
-             subcat_a,
-             overlap,
-             shared_nodes,
-             CASE WHEN cat_a.name = cat_b.name THEN $weight_category ELSE 0.0 END AS category_bonus
+    WITH b, sb, rb, brand, fmt, overlap, shared_nodes, category_bonus,
+         cat_b.name AS category_b_name,
+         reduce(score = 0.0, item IN shared_nodes |
+             score +
+             CASE
+                 WHEN item.node:Brand        THEN $weight_brand
+                 WHEN item.node:Format       THEN $weight_format
+                 WHEN item.node:Quantity     THEN $weight_quantity
+                 WHEN item.node:Ingredient AND item.relType = 'FIRST_LEVEL_INGREDIENT'
+                      THEN $weight_component_first
+                 WHEN item.node:Ingredient AND item.relType = 'SECOND_LEVEL_INGREDIENT'
+                      THEN $weight_component_second
+                 WHEN item.node:Ingredient AND item.relType = 'OTHER_INGREDIENT'
+                      THEN $weight_component_other
+                 WHEN item.node:Ingredient AND item.relType = 'ALLERGENS'
+                      THEN $weight_allergen
+                 WHEN item.node:Country AND item.relType = 'COUNTRY_OF_ORIGIN'
+                      THEN $weight_country_of_origin
+                 WHEN item.node:Internal_Subcategory
+                      THEN $weight_subcategory
+                 ELSE 0.01
+             END
+         ) + category_bonus AS weighted_score
 
-        WITH b, sb, rb, brand, fmt, overlap, shared_nodes, category_bonus,
-             cat_b.name AS category_b_name,
-             reduce(score = 0.0, item IN shared_nodes |
-                 score +
-                 CASE
-                     WHEN item.node:Brand        THEN $weight_brand
-                     WHEN item.node:Format       THEN $weight_format
-                     WHEN item.node:Quantity     THEN $weight_quantity
-                     WHEN item.node:Ingredient AND item.relType = 'FIRST_LEVEL_INGREDIENT'
-                          THEN $weight_component_first
-                     WHEN item.node:Ingredient AND item.relType = 'SECOND_LEVEL_INGREDIENT'
-                          THEN $weight_component_second
-                     WHEN item.node:Ingredient AND item.relType = 'OTHER_INGREDIENT'
-                          THEN $weight_component_other
-                     WHEN item.node:Ingredient AND item.relType = 'ALLERGENS'
-                          THEN $weight_allergen
-                     WHEN item.node:Country AND item.relType = 'COUNTRY_OF_ORIGIN'
-                          THEN $weight_country_of_origin
-                     WHEN item.node:Internal_Subcategory
-                          THEN $weight_subcategory
-                     ELSE 0.01
-                 END
-             ) + category_bonus AS weighted_score
+    // 6) Order and limit
+    ORDER BY weighted_score DESC, overlap DESC, b.siid ASC
+    LIMIT 300
 
-        // 6) Order and limit (single ORDER BY with stable tie-breaker)
-        ORDER BY weighted_score DESC, overlap DESC, b.siid ASC
-        LIMIT 300
-
-        // 7) Return all data
-        RETURN rb.id          AS id,
-               b.siid         AS siid,
-               rb.uuid        AS uuid,
-               b.product_name AS product_name,
-               b.description  AS description,
-               rb.url         AS url,
-               rb.price       AS price,
-               sb.name        AS store,
-               brand.name     AS brand,
-               fmt.name       AS format,
-               category_b_name AS category_name,
-               overlap,
-               weighted_score,
-               [item IN shared_nodes |
-                    CASE
-                        WHEN item.node:Brand
-                            THEN 'Brand: ' + item.node.name
-                        WHEN item.node:Format
-                            THEN 'Format: ' + item.node.name
-                        WHEN item.node:Ingredient AND item.relType = 'FIRST_LEVEL_INGREDIENT'
-                            THEN 'First_level_ingredient: ' + item.node.name
-                        WHEN item.node:Ingredient AND item.relType = 'SECOND_LEVEL_INGREDIENT'
-                            THEN 'Second_level_ingredient: ' + item.node.name
-                        WHEN item.node:Ingredient AND item.relType = 'OTHER_INGREDIENT'
-                            THEN 'Other_ingredient: ' + item.node.name
-                        WHEN item.node:Ingredient AND item.relType = 'ALLERGENS'
-                            THEN 'Allergen: ' + item.node.name
-                        WHEN item.node:Country AND item.relType = 'COUNTRY_OF_ORIGIN'
-                            THEN 'Origin_Country: ' + item.node.name
-                        WHEN item.node:Internal_Subcategory
-                            THEN 'Internal_Subcategory: ' + item.node.name
-                        ELSE 'Other: ' + coalesce(item.node.name, 'N/A')
-                    END
-               ] AS shared_nodes_details
-        """
+    // 7) Return all data
+    RETURN rb.id          AS id,
+           b.siid         AS siid,
+           rb.uuid        AS uuid,
+           b.product_name AS product_name,
+           b.description  AS description,
+           rb.url         AS url,
+           rb.price       AS price,
+           sb.name        AS store,
+           brand.name     AS brand,
+           fmt.name       AS format,
+           category_b_name AS category_name,
+           overlap,
+           weighted_score,
+           [item IN shared_nodes |
+                CASE
+                    WHEN item.node:Brand
+                        THEN 'Brand: ' + item.node.name
+                    WHEN item.node:Format
+                        THEN 'Format: ' + item.node.name
+                    WHEN item.node:Ingredient AND item.relType = 'FIRST_LEVEL_INGREDIENT'
+                        THEN 'First_level_ingredient: ' + item.node.name
+                    WHEN item.node:Ingredient AND item.relType = 'SECOND_LEVEL_INGREDIENT'
+                        THEN 'Second_level_ingredient: ' + item.node.name
+                    WHEN item.node:Ingredient AND item.relType = 'OTHER_INGREDIENT'
+                        THEN 'Other_ingredient: ' + item.node.name
+                    WHEN item.node:Ingredient AND item.relType = 'ALLERGENS'
+                        THEN 'Allergen: ' + item.node.name
+                    WHEN item.node:Country AND item.relType = 'COUNTRY_OF_ORIGIN'
+                        THEN 'Origin_Country: ' + item.node.name
+                    WHEN item.node:Internal_Subcategory
+                        THEN 'Internal_Subcategory: ' + item.node.name
+                    ELSE 'Other: ' + coalesce(item.node.name, 'N/A')
+                END
+           ] AS shared_nodes_details
+    """
 
         parameters = {
             "product_id": product_a_id,
@@ -392,8 +462,8 @@ class CategoryAnalysis:
         products = []
         not_found_ids = []
         
-        # Convert to integers
-        product_ids_int = [int(pid) for pid in product_ids]
+        # Keep as strings (SELLS.id is string in Neo4j for all stores)
+        product_ids_str = [str(pid).strip() for pid in product_ids]
         
         # Single batch query with IN operator
         query = """
@@ -406,7 +476,13 @@ class CategoryAnalysis:
                r.url AS url
         """
         
-        results = self.execute_query(query, {"store_a": store_a, "product_ids": product_ids_int})
+        # 🔍 PRINT ACTUAL QUERY WITH REAL VALUES
+        sample_ids = product_ids_str[:5] if len(product_ids_str) > 5 else product_ids_str
+        sample_ids_quoted = [f'"{id}"' for id in sample_ids]
+        logging.info(f"🔍 Query to Neo4j: MATCH (s:Store {{name: '{store_a}'}})-[r:SELLS]->(p:Product) WHERE r.id IN [{', '.join(sample_ids_quoted)}{'...' if len(product_ids_str) > 5 else ''}] RETURN ...")
+        logging.info(f"📊 Total IDs: {len(product_ids_str)}, ID type: {type(product_ids_str[0]).__name__ if product_ids_str else 'N/A'}")
+        
+        results = self.execute_query(query, {"store_a": store_a, "product_ids": product_ids_str})
         
         # Create a set of found IDs for quick lookup
         found_ids = set()
@@ -416,9 +492,9 @@ class CategoryAnalysis:
             found_ids.add(result['id'])
         
         # Identify not found IDs
-        for product_id in product_ids_int:
+        for product_id in product_ids_str:
             if product_id not in found_ids:
-                not_found_ids.append(str(product_id))
+                not_found_ids.append(product_id)
         
         logging.info(f"✅ Found {len(products)} products in Neo4j")
         if not_found_ids:
@@ -457,12 +533,8 @@ class CategoryAnalysis:
         products = []
         not_found_ids = []
         
-        # Convert to integers
-        try:
-            product_ids_int = [int(pid) for pid in id_list]
-        except ValueError as e:
-            logging.error(f"❌ Invalid ID in list: {e}")
-            return [], []
+        # Keep as strings (SELLS.id is string in Neo4j for all stores)
+        product_ids_str = [str(pid).strip() for pid in id_list]
         
         # Single batch query with IN operator
         query = """
@@ -475,7 +547,13 @@ class CategoryAnalysis:
                r.url AS url
         """
         
-        results = self.execute_query(query, {"store_a": store_a, "product_ids": product_ids_int})
+        # 🔍 PRINT ACTUAL QUERY WITH REAL VALUES
+        sample_ids = product_ids_str[:5] if len(product_ids_str) > 5 else product_ids_str
+        sample_ids_quoted = [f'"{id}"' for id in sample_ids]
+        logging.info(f"🔍 Query to Neo4j: MATCH (s:Store {{name: '{store_a}'}})-[r:SELLS]->(p:Product) WHERE r.id IN [{', '.join(sample_ids_quoted)}{'...' if len(product_ids_str) > 5 else ''}] RETURN ...")
+        logging.info(f"📊 Total IDs: {len(product_ids_str)}, ID type: {type(product_ids_str[0]).__name__ if product_ids_str else 'N/A'}")
+        
+        results = self.execute_query(query, {"store_a": store_a, "product_ids": product_ids_str})
         
         # Create a set of found IDs for quick lookup
         found_ids = set()
@@ -485,12 +563,16 @@ class CategoryAnalysis:
             found_ids.add(result['id'])
         
         # Identify not found IDs
-        for product_id in product_ids_int:
+        for product_id in product_ids_str:
             if product_id not in found_ids:
-                not_found_ids.append(str(product_id))
+                not_found_ids.append(product_id)
         
         logging.info(f"✅ Found {len(products)} products in Neo4j")
         if not_found_ids:
             logging.warning(f"⚠️ {len(not_found_ids)} product IDs not found in Neo4j")
         
         return products, not_found_ids
+
+
+
+

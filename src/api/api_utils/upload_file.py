@@ -11,21 +11,16 @@ from typing import List, Optional, Dict, Any
 from fastapi import UploadFile
 import pandas as pd
 from pydantic import BaseModel
-from neo4j import GraphDatabase
 
 from src.numeric_variables_postgres.postgresql_data_extraction import VectorDataExtractor, ingest_verified_csv
 from src.preprocessors.data_autocompletion.llm_completion import CSVCompleter
 from src.preprocessors.data_autocompletion.csv_fixing import CSVFixer
 from src.preprocessors.data_formatting.product_verification import verify_products
 from src.preprocessors.text_translation.translator import TranslatorOpenAI
-from config.settings import AZURE_OPENAI_CONFIG, NEO4J_CONFIG
-from src.ingestion.neo4j_embeddings import (
-    get_embedder,
-    generate_embeddings_multithreaded,
-    create_vector_index
-)
+from config.settings import NEO4J_CONFIG, AZURE_OPENAI_CONFIG, LOGGING_CONFIG
 import config.settings as settings
 AWS_TRANSLATE_CONFIG = getattr(settings, 'AWS_TRANSLATE_CONFIG', None)
+from neo4j import GraphDatabase
 
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent.parent.parent
@@ -42,6 +37,11 @@ from src.preprocessors.data_formatting.path_handling import (
 )
 
 from src.ingestion.neo4j_ingest import Neo4jCSVIngestor
+from src.ingestion.neo4j_embeddings import (
+    get_embedder,
+    generate_embeddings_multithreaded,
+    create_vector_index,
+)
 
 class PreprocessingResponse(BaseModel):
     """Response model for preprocessing pipeline"""
@@ -238,40 +238,13 @@ def process_uploaded_file(
             except Exception as e:
                 print(f"❌ Failed to create fallback translated file: {e}")
                 raise
-        
-        # ============================================================
-        # STEP 4: DATA EXTRACTION (postgresql_data_extraction)
-        # ============================================================
-        print(f"\n{'='*60}")
-        print("STEP 4: POSTGRESQL DATA EXTRACTION")
-        print(f"{'='*60}")
-        print(f"Processing translated file: {translated_path}")
-        
-        try:
-            # Initialize VectorDataExtractor with PostgreSQL mode
-            extractor = VectorDataExtractor(use_csv=False)
-            
-            # Process the translated CSV file
-            records_processed = extractor.process_input(
-                input_path=str(translated_path), 
-                drop_table=False
-            )
-            
-            print("✓ Data extraction completed!")
-            print(f"  - Records processed: {records_processed}")
-            print(f"  - Data saved to PostgreSQL database: product_vector_data table")
-            
-        except Exception as e:
-            print(f"❌ Data extraction step failed: {e}")
-            print(f"  Translated CSV is still available at: {translated_path}")
-            # Continue with pipeline even if extraction fails
-            traceback.print_exc()
+
 
         # ============================================================
-        # STEP 5: CSV COMPLETION WITH AZURE OPENAI
+        # STEP 4: CSV COMPLETION WITH AZURE OPENAI
         # ============================================================
         print(f"\n{'='*60}")
-        print("STEP 5: CSV COMPLETION WITH AZURE OPENAI")
+        print("STEP 4: CSV COMPLETION WITH AZURE OPENAI")
         print(f"{'='*60}")
 
         enriched_ts = datetime.now().strftime("%Y%m%d_%H%M")
@@ -308,10 +281,10 @@ def process_uploaded_file(
             raise
 
         # ============================================================
-        # STEP 6: CSV FIXING POST LLM COMPLETION
+        # STEP 5: CSV FIXING POST LLM COMPLETION
         # ============================================================
         print(f"\n{'='*60}")
-        print("STEP 6: CSV FIXING POST LLM COMPLETION")
+        print("STEP 5: CSV FIXING POST LLM COMPLETION")
         print(f"{'='*60}")
 
         fixed_dir = Path(PROJECT_ROOT) / 'data' / 'processed' / 'fixed'
@@ -354,6 +327,34 @@ def process_uploaded_file(
         # Column name lowercasing moved to CSVFixer.fix_csv implementation
 
         # ============================================================
+        # STEP 6: DATA EXTRACTION (postgresql_data_extraction)
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("STEP 6: POSTGRESQL DATA EXTRACTION")
+        print(f"{'='*60}")
+        print(f"Processing translated file: {fixed_path}")
+        
+        try:
+            # Initialize VectorDataExtractor with PostgreSQL mode
+            extractor = VectorDataExtractor(use_csv=False)
+            
+            # Process the translated CSV file
+            records_processed = extractor.process_input(
+                input_path=str(fixed_path), 
+                drop_table=False
+            )
+            
+            print("✓ Data extraction completed!")
+            print(f"  - Records processed: {records_processed}")
+            print(f"  - Data saved to PostgreSQL database: product_vector_data table")
+            
+        except Exception as e:
+            print(f"❌ Data extraction step failed: {e}")
+            print(f"  Fixed CSV is still available at: {fixed_path}")
+            # Continue with pipeline even if extraction fails
+            traceback.print_exc()
+
+        # ============================================================
         # PIPELINE COMPLETED
         # ============================================================
         print(f"\n{'='*60}")
@@ -382,19 +383,15 @@ def process_uploaded_file(
     
     # Create ingestor instance
     ingestor = Neo4jCSVIngestor()
-
-    folder_name = "fixed"
     
-    # Check if CSV files exist
-    csv_files = ingestor.get_csv_files(folder=folder_name)
-    if not csv_files:
-        logging.warning("❌ No CSV files found in the fixed data directory.")
-        logging.info(f"📁 Directory: {ingestor.processed_data_dir}/{folder_name}")
+    # Only process the specific file that was just created
+    csv_file = str(fixed_path)
+    
+    if not Path(csv_file).exists():
+        logging.warning(f"❌ Fixed CSV file not found: {csv_file}")
         return
     
-    logging.info(f"📄 Found {len(csv_files)} CSV files to process:")
-    for csv_file in csv_files:
-        logging.info(f"   • {Path(csv_file).name}")
+    logging.info(f"📄 Processing newly created file: {Path(csv_file).name}")
     
     logging.info("🔗 Attempting to connect to Neo4j database...")
     
@@ -404,46 +401,41 @@ def process_uploaded_file(
             logging.error("❌ Could not connect to Neo4j. Aborting checks.")
             return
 
-        # For each CSV file, check existence by product_hash and decide whether to skip ingestion for that file
-        for csv_file in csv_files:
-            try:
-                df = pd.read_csv(csv_file, sep=";")
-            except Exception as e:
-                logging.error(f"Error reading {csv_file}: {e}")
-                continue
+        # Check existence by product_hash for the specific file
+        try:
+            df = pd.read_csv(csv_file, sep=";", dtype=str, low_memory=False)
+            
+            if 'product_hash' in df.columns:
+                total = len(df)
+                existing = 0
 
-            if 'product_hash' not in df.columns:
-                logging.warning(f"No 'product_hash' column in {Path(csv_file).name}; skipping existence checks for this file.")
-                continue
+                for val in df['product_hash'].dropna().astype(str):
+                    if ingestor.check_value_exists('Product', 'product_hash', val):
+                        existing += 1
 
-            total = len(df)
-            existing = 0
+                logging.info(f"{Path(csv_file).name}: {existing}/{total} products already in DB")
 
-            for val in df['product_hash'].dropna().astype(str):
-                if ingestor.check_value_exists('Product', 'product_hash', val):
-                    existing += 1
+                if existing == total:
+                    logging.info(f"Skipping ingestion for {Path(csv_file).name} because all products already exist")
+                    return
+            else:
+                logging.warning(f"No 'product_hash' column in {Path(csv_file).name}; proceeding with ingestion.")
+                
+        except Exception as e:
+            logging.error(f"Error reading {csv_file}: {e}")
+            return
 
-            logging.info(f"{Path(csv_file).name}: {existing}/{total} products already in DB")
+        # Proceed with the ingestion process for this specific file
+        success = ingestor.ingest_csv_file(csv_file, batch_size=500)
 
-            if existing == total:
-                logging.info(f"Skipping ingestion for {Path(csv_file).name} because all products already exist")
-                # Optionally remove the file from the list to avoid re-processing
-                # csv_files.remove(csv_file)
-
-        # Proceed with the ingestion process (files with all-existing products will be re-checked/skipped inside ingest logic)
-        success = ingestor.ingest_all_csv_files(folder=folder_name, batch_size=500)
-        
-        if success:
-            logging.info("✅ CSV ingestion completed successfully!")
-        else:
-            logging.error("❌ CSV ingestion failed. Check the logs for details.")
+        generate_embeddings(embedder="openai")
+    
             
     except KeyboardInterrupt:
         logging.warning("⚠️  Ingestion interrupted by user")
     except Exception as e:
         logging.error(f"❌ Unexpected error: {e}")
         logging.error("   Check your Neo4j connection settings and ensure the database is running.")
-
 
 
 def generate_embeddings(embedder: str = None):
@@ -474,22 +466,22 @@ def generate_embeddings(embedder: str = None):
         logging.info("Generating product_name embeddings")
         logging.info("=" * 70)
         
-        # generate_embeddings_multithreaded(
-        #     driver=driver,
-        #     embedder=embedder,
-        #     node_label="Product",
-        #     text_property="product_name",
-        #     embedding_property=f"product_name_embedding_{suffix}",
-        #     batch_size=batch_size,
-        #     max_workers=max_workers
-        # )
+        generate_embeddings_multithreaded(
+            driver=driver,
+            embedder=embedder,
+            node_label="Product",
+            text_property="product_name",
+            embedding_property=f"product_name_embedding_{suffix}",
+            batch_size=batch_size,
+            max_workers=max_workers
+        )
         
-        # create_vector_index(
-        #     driver=driver,
-        #     index_name=f"product_name_embedding_{suffix}",
-        #     node_label="Product",
-        #     embedding_property=f"product_name_embedding_{suffix}"
-        # )
+        create_vector_index(
+            driver=driver,
+            index_name=f"product_name_embedding_{suffix}",
+            node_label="Product",
+            embedding_property=f"product_name_embedding_{suffix}"
+        )
         
         # Process description embeddings
         logging.info("=" * 70)

@@ -1,9 +1,17 @@
 import logging
+import json
+from datetime import datetime
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Dict, List
+from collections import defaultdict
+import psycopg2
+from psycopg2.extras import RealDictCursor
 from src.models.category_analysis.category_analysis import CategoryAnalysis
 from src.models.embedding_analysis.embedding_analysis import SimilarityAnalysis
 from src.models.postgresql_analysis.euclidean_distance_calculator import process_product_euclidean
+from src.models.model_variations.insert_match_posgres import insert_to_validate
+from config.settings import POSTGRES_DB_CONFIG
 
 
 class ModelCategoricalAnalysis(CategoryAnalysis):
@@ -209,6 +217,118 @@ class ModelCombinedSimilarity:
         self.category_analysis = CategoryAnalysis()
         self.similarity_analysis = SimilarityAnalysis()
         # falta la clase de los valores numéricos
+    
+    def _get_existing_perfect_matches(self, store_a: str, store_b: str, product_siids: List[str] = None) -> Dict[str, Dict[str, Any]]:
+        """
+        Query PostgreSQL for existing perfect matches for the given store pair.
+        
+        Args:
+            store_a: Name of the origin store
+            store_b: Name of the destination store
+            product_siids: Optional list of product SIIDs to check. If None, checks all products.
+            
+        Returns:
+            Dictionary mapping product_a_siid to complete match data in the same format
+            as similarity results, with structure:
+            {
+                'product_a_siid': {
+                    'product_a': {...},
+                    'similar_products_b': [{...}],
+                    'store_a': store_a
+                }
+            }
+        """
+        perfect_matches = {}
+        
+        try:
+            conn = psycopg2.connect(
+                host=POSTGRES_DB_CONFIG['host'],
+                port=POSTGRES_DB_CONFIG['port'],
+                database=POSTGRES_DB_CONFIG['database'],
+                user=POSTGRES_DB_CONFIG['user'],
+                password=POSTGRES_DB_CONFIG['password']
+            )
+            cursor = conn.cursor(cursor_factory=RealDictCursor)
+            
+            # Build query with optional SIID filtering
+            if product_siids and len(product_siids) > 0:
+                query = """
+                    SELECT 
+                        product_a_id, product_a_siid, product_a_name, product_a_description, product_a_url, store_a,
+                        product_b_id, product_b_siid, product_b_name, product_b_description, product_b_url, store_b,
+                        graph_score, name_similarity, description_similarity, 
+                        euclidean_similarity, combined_score, overlap_count, shared_nodes
+                    FROM product_match_validation
+                    WHERE store_a = %s 
+                      AND store_b = %s 
+                      AND validation_result = 'perfect'
+                      AND product_a_siid = ANY(%s)
+                """
+                cursor.execute(query, (store_a, store_b, product_siids))
+            else:
+                query = """
+                    SELECT 
+                        product_a_id, product_a_siid, product_a_name, product_a_description, product_a_url, store_a,
+                        product_b_id, product_b_siid, product_b_name, product_b_description, product_b_url, store_b,
+                        graph_score, name_similarity, description_similarity, 
+                        euclidean_similarity, combined_score, overlap_count, shared_nodes
+                    FROM product_match_validation
+                    WHERE store_a = %s 
+                      AND store_b = %s 
+                      AND validation_result = 'perfect'
+                """
+                cursor.execute(query, (store_a, store_b))
+            rows = cursor.fetchall()
+            
+            if rows:
+                logging.info(f"✅ Found {len(rows)} existing perfect matches in PostgreSQL for {store_a} → {store_b}")
+                
+                for row in rows:
+                    product_a_siid = row['product_a_siid']
+                    
+                    # Build product_a data
+                    product_a = {
+                        'id': row['product_a_id'],
+                        'siid': row['product_a_siid'],
+                        'product_name': row['product_a_name'],
+                        'description': row['product_a_description'],
+                        'url': row['product_a_url'],
+                        'store': row['store_a']
+                    }
+                    
+                    # Build similar_products_b data (single perfect match)
+                    similar_product_b = {
+                        'id': row['product_b_id'],
+                        'siid': row['product_b_siid'],
+                        'product_name': row['product_b_name'],
+                        'description': row['product_b_description'],
+                        'url': row['product_b_url'],
+                        'store': row['store_b'],
+                        'weighted_score': row['graph_score'],
+                        'name_similarity': row['name_similarity'],
+                        'description_similarity': row['description_similarity'],
+                        'euclidean_similarity': row['euclidean_similarity'],
+                        'combined_score': row['combined_score'],
+                        'overlap': row['overlap_count'],
+                        'shared_nodes_details': row['shared_nodes'] if row['shared_nodes'] else []
+                    }
+                    
+                    # Store in the same format as model results
+                    perfect_matches[product_a_siid] = {
+                        'product_a': product_a,
+                        'similar_products_b': [similar_product_b],
+                        'store_a': row['store_a']
+                    }
+            else:
+                logging.info(f"ℹ️  No existing perfect matches found in PostgreSQL for {store_a} → {store_b}")
+            
+            cursor.close()
+            conn.close()
+            
+        except Exception as e:
+            logging.error(f"❌ Error querying PostgreSQL for perfect matches: {e}")
+        
+        return perfect_matches
         
 
     def find_cross_store_similarities(
@@ -228,10 +348,10 @@ class ModelCombinedSimilarity:
             id_lists: list = None,
             score_threshold: float = 0.4,
             top_n: int = 3,
-            min_graph_score: float = 0.6,
-            min_name_similarity: float = 0.5,
-            min_description_similarity: float = 0.5,
-            min_euclidean_similarity: float = 0.5
+            min_graph_score: float = 0.3,
+            min_name_similarity: float = 0.4,
+            min_description_similarity: float = 0.4,
+            min_euclidean_similarity: float = 0.0
         ) -> Dict[str, Dict[str, Any]]:
             """
             Complete cross-store similarity analysis combining graph structure and embeddings.
@@ -304,7 +424,9 @@ class ModelCombinedSimilarity:
             logging.info(f"Distance metric: {distance_metric}")
             logging.info("="*70)
             
-            
+            # ============================================================
+            # STEP 1: LOAD PRODUCTS FROM SPECIFIED SOURCE
+            # ============================================================
             if id_obtention_method == 'external_file':
                 if not external_ids_path:
                     logging.error("❌ id_obtention_method='external_file' but no external_ids_path provided")
@@ -337,13 +459,56 @@ class ModelCombinedSimilarity:
                 return {}
             
             # ============================================================
-            # STEP 2: GRAPH-BASED SIMILARITY (CATEGORY ANALYSIS)
+            # STEP 2: CHECK FOR EXISTING PERFECT MATCHES (ONLY FOR LOADED PRODUCTS)
             # ============================================================
-            logging.info("\n🔍 STEP 1: Graph-based similarity analysis")
+            logging.info("\n🔍 STEP 2: Checking PostgreSQL for existing perfect matches")
+            
+            # Get SIIDs of loaded products to check for perfect matches
+            loaded_siids = [p.get('siid') for p in products_a if p.get('siid')]
+            
+            existing_perfect_matches = self._get_existing_perfect_matches(
+                store_a=store_a, 
+                store_b=store_b,
+                product_siids=loaded_siids  # Only check for products we actually loaded
+            )
+            
+            if existing_perfect_matches:
+                logging.info(f"✅ Found {len(existing_perfect_matches)} existing perfect matches for loaded products")
+                logging.info(f"   These products will be returned directly without model execution")
+            else:
+                logging.info(f"ℹ️  No existing perfect matches found for the {len(loaded_siids)} loaded products")
+            
+            
+            # ============================================================
+            # STEP 3: FILTER OUT PRODUCTS WITH PERFECT MATCHES
+            # ============================================================
+            products_to_process = []
+            skipped_count = 0
+            
+            for product in products_a:
+                product_siid = product.get('siid')
+                if product_siid and product_siid in existing_perfect_matches:
+                    skipped_count += 1
+                else:
+                    products_to_process.append(product)
+            
+            if skipped_count > 0:
+                logging.info(f"⏭️  Skipping {skipped_count} products with existing perfect matches")
+                logging.info(f"🔄 Processing {len(products_to_process)} remaining products through model")
+            
+            # If all products already have perfect matches, return them directly
+            if not products_to_process:
+                logging.info(f"✅ All {len(products_a)} products already have perfect matches! Skipping model execution.")
+                return existing_perfect_matches
+            
+            # ============================================================
+            # STEP 4: GRAPH-BASED SIMILARITY (CATEGORY ANALYSIS)
+            # ============================================================
+            logging.info(f"\n🔍 STEP 4: Graph-based similarity analysis for {len(products_to_process)} products")
             logging.info(f"   Finding similar products using graph structure...")
             
             results = self._run_category_analysis(
-                products_a=products_a,
+                products_a=products_to_process,  # Use filtered list
                 store_a=store_a,
                 store_b=store_b,
                 min_matches=min_matches,
@@ -355,7 +520,6 @@ class ModelCombinedSimilarity:
                 score_threshold=score_threshold,
                 min_graph_score=min_graph_score
             )
-            
             # ============================================================
             # STEP 3: EMBEDDING-BASED SIMILARITY
             # ============================================================
@@ -373,7 +537,6 @@ class ModelCombinedSimilarity:
                 min_name_similarity=min_name_similarity,
                 min_description_similarity=min_description_similarity
             )
-            
             # ============================================================
             # STEP 4: EUCLIDEAN DISTANCE CALCULATION
             # ============================================================
@@ -385,7 +548,6 @@ class ModelCombinedSimilarity:
                 max_workers=max_workers,
                 min_euclidean_similarity=min_euclidean_similarity
             )
-            
             # ============================================================
             # STEP 5: COMBINE ALL SCORES
             # ============================================================
@@ -402,7 +564,25 @@ class ModelCombinedSimilarity:
             )
             
             # ============================================================
-            # STEP 6: ADD METADATA
+            # STEP 5.5: MERGE WITH EXISTING PERFECT MATCHES
+            # ============================================================
+            if existing_perfect_matches:
+                logging.info(f"\n🔗 STEP 5.5: Merging results with existing perfect matches")
+                logging.info(f"   Adding {len(existing_perfect_matches)} perfect matches to results...")
+                
+                # Merge perfect matches into results
+                for product_siid, match_data in existing_perfect_matches.items():
+                    results[product_siid] = match_data
+                
+                logging.info(f"✅ Total results after merge: {len(results) - 1} products (excluding metadata)")
+            
+            # ============================================================
+            # STEP 6: CLEAN DUPLICATE PRODUCT_B MATCHES
+            # ============================================================
+            results = self._clean_duplicate_product_b(results)
+            
+            # ============================================================
+            # STEP 7: ADD METADATA
             # ============================================================
             results['_metadata'] = {
                 'store_a': store_a,
@@ -418,14 +598,24 @@ class ModelCombinedSimilarity:
                 'id_obtention_method': id_obtention_method,
                 'external_ids_path': external_ids_path if id_obtention_method == 'external_file' else None,
                 'id_lists_count': len(id_lists) if id_lists else 0,
-                'top_n': top_n
+                'top_n': top_n,
+                'existing_perfect_matches_count': len(existing_perfect_matches),
+                'new_matches_from_model': len(results) - len(existing_perfect_matches) - 1  # -1 for metadata
             }
-            
             logging.info("\n" + "="*70)
             logging.info("✅ ANALYSIS COMPLETE!")
-            logging.info(f"   Total products from {store_a}: {len(results) - 1 if '_metadata' in results else len(results)}")
+            logging.info(f"   Perfect matches from PostgreSQL: {len(existing_perfect_matches)}")
+            logging.info(f"   New matches from model: {len(results) - len(existing_perfect_matches) - 1}")
+            logging.info(f"   Total products: {len(results) - 1}")
             logging.info(f"   Products with matches: {sum(1 for k, r in results.items() if k != '_metadata' and r.get('similar_products_b'))}")
             logging.info("="*70 + "\n")
+            
+            # ============================================================
+            # STEP 8: EXPORT AND PERSIST RESULTS (WITH CLEANED DATA)
+            # ============================================================
+            
+            # Insert to PostgreSQL for validation (with cleaned data)
+            insert_to_validate(results)
             
             return results
     
@@ -494,7 +684,8 @@ class ModelCombinedSimilarity:
                     product_a_id, product_a, similar_products_b = future.result()
                     results[product_a_id] = {
                         'product_a': product_a,
-                        'similar_products_b': similar_products_b
+                        'similar_products_b': similar_products_b,
+                        'store_a': store_a
                     }
                     completed_count += 1
                     
@@ -515,10 +706,12 @@ class ModelCombinedSimilarity:
                         'id': not_found_id,
                         'product_name': 'NOT FOUND IN NEO4J',
                         'description': f'Product ID {not_found_id} does not exist in the database',
-                        'url': ''
+                        'url': '',
+                        'store_a': store_a
                     },
                     'similar_products_b': [],
-                    'not_found': True
+                    'not_found': True,
+                    'store_a': store_a
                 }
         
         logging.info(f"✅ Found graph-based matches for {sum(1 for r in results.values() if r.get('similar_products_b') and not r.get('not_found', False))} products")
@@ -606,8 +799,8 @@ class ModelCombinedSimilarity:
         max_workers: int,
         max_embedding_workers: int,
         store_a: str,
-        min_name_similarity: float = 0.8,
-        min_description_similarity: float = 0.8
+        min_name_similarity: float = 0.4,
+        min_description_similarity: float = 0.4
     ) -> Dict[str, Dict[str, Any]]:
         """
         Run embedding-based similarity analysis and combine with graph scores.
@@ -688,7 +881,7 @@ class ModelCombinedSimilarity:
         self,
         results: Dict[str, Any],
         max_workers: int = 10,
-        min_euclidean_similarity: float = 0.7
+        min_euclidean_similarity: float = 0.0
     ) -> Dict[str, Any]:
         """
         Step 4: Calculate euclidean distances for numerical features.
@@ -871,5 +1064,115 @@ class ModelCombinedSimilarity:
         
         elapsed = time.time() - start_time
         logging.info(f"✅ All scores combined and sorted in {elapsed:.1f}s")
+
+        return results
+    
+    def _clean_duplicate_product_b(self, results: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Clean duplicate Product_B matches across all Product_A results.
+        For each Product_B that appears multiple times, keep only the match with highest Combined_Score.
+        Recalculate ranks after removing duplicates.
+        
+        Args:
+            results: Dictionary with product_a_id as keys and similarity data as values
+            
+        Returns:
+            Cleaned results dictionary with unique Product_B matches and recalculated ranks
+        """
+        logging.info("\n🧹 STEP 6: Cleaning duplicate Product_B matches")
+        
+        # Build mapping of Product_B_ID -> list of (product_a_id, match_data, index)
+        product_b_to_matches = defaultdict(list)
+        
+        for product_a_id, data in results.items():
+            if product_a_id == '_metadata':
+                continue
+            
+            similar_products_b = data.get('similar_products_b', [])
+            
+            for idx, match in enumerate(similar_products_b):
+                product_b_id = match.get('id')
+                if product_b_id:
+                    combined_score = match.get('combined_score', 0.0)
+                    product_b_to_matches[product_b_id].append({
+                        'product_a_id': product_a_id,
+                        'match_data': match,
+                        'index': idx,
+                        'combined_score': combined_score
+                    })
+        
+        # Find duplicates (Product_B appearing in multiple Product_A)
+        duplicates_found = {
+            b_id: matches 
+            for b_id, matches in product_b_to_matches.items() 
+            if len(matches) > 1
+        }
+        
+        if not duplicates_found:
+            logging.info("✅ No duplicate Product_B matches found")
+            return results
+        
+        logging.info(f"🔍 Found {len(duplicates_found)} Product_B with duplicates")
+        
+        # Track which matches to remove
+        matches_to_remove = []
+        
+        # For each duplicate Product_B, keep only the one with highest combined_score
+        for product_b_id, matches in duplicates_found.items():
+            # Sort by combined_score descending
+            matches.sort(key=lambda x: x['combined_score'], reverse=True)
+            
+            # Keep the first (highest score), remove the rest
+            best_match = matches[0]
+            removed_matches = matches[1:]
+            
+            logging.info(f"   Product_B {product_b_id}:")
+            logging.info(f"      ✅ Keeping: Product_A {best_match['product_a_id']} (score: {best_match['combined_score']:.3f})")
+            
+            for removed in removed_matches:
+                logging.info(f"      ❌ Removing: Product_A {removed['product_a_id']} (score: {removed['combined_score']:.3f})")
+                matches_to_remove.append({
+                    'product_a_id': removed['product_a_id'],
+                    'product_b_id': product_b_id
+                })
+        
+        # Remove duplicate matches from results
+        removed_count = 0
+        for removal in matches_to_remove:
+            product_a_id = removal['product_a_id']
+            product_b_id = removal['product_b_id']
+            
+            if product_a_id in results:
+                similar_products_b = results[product_a_id].get('similar_products_b', [])
+                # Remove the match with this product_b_id
+                original_len = len(similar_products_b)
+                similar_products_b = [m for m in similar_products_b if m.get('id') != product_b_id]
+                results[product_a_id]['similar_products_b'] = similar_products_b
+                
+                if len(similar_products_b) < original_len:
+                    removed_count += 1
+        
+        logging.info(f"✅ Removed {removed_count} duplicate matches")
+        
+        # Recalculate ranks for each Product_A
+        logging.info("🔢 Recalculating ranks for each Product_A...")
+        
+        recalculated_count = 0
+        for product_a_id, data in results.items():
+            if product_a_id == '_metadata':
+                continue
+            
+            similar_products_b = data.get('similar_products_b', [])
+            
+            if similar_products_b:
+                # Ranks are already sorted by combined_score (from previous step)
+                # Just need to renumber them sequentially
+                for rank, match in enumerate(similar_products_b, start=1):
+                    match['rank'] = rank
+                
+                recalculated_count += 1
+        
+        logging.info(f"✅ Recalculated ranks for {recalculated_count} products")
+        logging.info("   All Product_B are now unique across all matches\n")
         
         return results
