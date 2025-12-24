@@ -234,3 +234,8 @@ data/processed/embeddings_cache.tmp
 data/processed/embeddings_cache.bak
 
 nohup.out
+
+# Data files
+*.json
+*.csv
+*.xlsx

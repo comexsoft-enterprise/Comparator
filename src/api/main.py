@@ -74,51 +74,13 @@ class CompareStoresRequest(BaseModel):
                 "store_a": "store_a",
                 "store_b": "store_b",
                 "list_ids": [],
-                "top_n_results": 1,
-                "food_weights": {
-                    "graph": {
-                        "name": 0.4,
-                        "description": 0.3,
-                        "euclidean": 0.3
-                    },
-                    "combined": {
-                        "name": 0.3,
-                        "description": 0.4,
-                        "euclidean": 0.3
-                    }
-                },
-                "non_food_super_weights": {
-                    "graph": {
-                        "name": 0.5,
-                        "description": 0.2,
-                        "euclidean": 0.3
-                    },
-                    "combined": {
-                        "name": 0.4,
-                        "description": 0.3,
-                        "euclidean": 0.3
-                    }
-                },
-                "non_food_elec_weights": {
-                    "graph": {
-                        "name": 0.6,
-                        "description": 0.1,
-                        "euclidean": 0.3
-                    },
-                    "combined": {
-                        "name": 0.5,
-                        "description": 0.2,
-                        "euclidean": 0.3
-                    }
-                },
-                "quality_thresholds": {
-                    "min_graph_score": 0.3,
-                    "min_name_similarity": 0.5,
-                    "min_description_similarity": 0.5,
-                    "min_euclidean_similarity": 0.0,
-                    "cat_score_threshold": 0.5,
-                    "combined_score_threshold": 0.5
-                }
+                "top_n_results": 1,                
+                "min_graph_score": 0.3,
+                "min_name_similarity": 0.5,
+                "min_description_similarity": 0.5,
+                "min_euclidean_similarity": 0.0,
+                "cat_score_threshold": 0.5,
+                "combined_score_threshold": 0.5   
             }
         }
 
