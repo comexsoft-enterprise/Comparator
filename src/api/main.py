@@ -21,7 +21,7 @@ from src.connectors.neo4j_connector import Neo4jConnector
 from src.connectors.mongodb_connector import get_mongo_client
 from src.connectors.postgresql_connector import get_postgresql_connection
 
-from src.api.api_utils.upload_file import PreprocessingResponse, process_uploaded_file
+from src.api.api_utils.upload_file import PreprocessingResponse, process_uploaded_file, process_product_array
 from src.api.api_utils.neo4j_queries import FilterTriplets, get_nodes_by_label, generate_query_for_filter_triplets, verify_node_exists_query
 from src.api.api_utils.product_files import get_product_file_by_siid
 
@@ -71,12 +71,88 @@ class CompareStoresRequest(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "store_a": "eroski-01013",
-                "store_b": "makro-01013",
+                "store_a": "store_a",
+                "store_b": "store_b",
                 "list_ids": [],
-                "top_n_results": 1
+                "top_n_results": 1,
+                "food_weights": {
+                    "graph": {
+                        "name": 0.4,
+                        "description": 0.3,
+                        "euclidean": 0.3
+                    },
+                    "combined": {
+                        "name": 0.3,
+                        "description": 0.4,
+                        "euclidean": 0.3
+                    }
+                },
+                "non_food_super_weights": {
+                    "graph": {
+                        "name": 0.5,
+                        "description": 0.2,
+                        "euclidean": 0.3
+                    },
+                    "combined": {
+                        "name": 0.4,
+                        "description": 0.3,
+                        "euclidean": 0.3
+                    }
+                },
+                "non_food_elec_weights": {
+                    "graph": {
+                        "name": 0.6,
+                        "description": 0.1,
+                        "euclidean": 0.3
+                    },
+                    "combined": {
+                        "name": 0.5,
+                        "description": 0.2,
+                        "euclidean": 0.3
+                    }
+                },
+                "quality_thresholds": {
+                    "min_graph_score": 0.3,
+                    "min_name_similarity": 0.5,
+                    "min_description_similarity": 0.5,
+                    "min_euclidean_similarity": 0.0,
+                    "cat_score_threshold": 0.5,
+                    "combined_score_threshold": 0.5
+                }
             }
         }
+
+
+class ProcessProductsRequest(BaseModel):
+    """Request model for processing an array of products"""
+    products: List[Dict[str, Any]] = Field(description="Array of product dictionaries to process")
+    store_name: Optional[str] = Field(default=None, description="Store name for context")
+    postcode: Optional[str] = Field(default=None, description="Postcode for location-based processing")
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "products": [
+                    {
+                        "id": "12345",
+                        "product_name": "Example Product",
+                        "price": "9.99",
+                        "store": "example-store"
+                    }
+                ],
+                "store_name": "example-store",
+                "postcode": "01013"
+            }
+        }
+
+
+class ProcessProductsResponse(BaseModel):
+    """Response model for processed products"""
+    status: str
+    products_processed: int
+    products: List[Dict[str, Any]]
+    message: str
+    errors: Optional[List[str]] = None
 
 
 # ============================================================================
@@ -476,6 +552,132 @@ async def upload_and_preprocess(
     except Exception as e:
         logger.error(f"Error handling upload: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+
+
+@app.post("/products/process", response_model=ProcessProductsResponse)
+async def process_products(
+    request: ProcessProductsRequest
+) -> Dict[str, Any]:
+    """
+    Process an array of products through the preprocessing pipeline:
+    1. Validation and standardization
+    2. Product verification
+    3. Translation
+    4. LLM completion (enrichment)
+    5. Fixing and post-processing
+    
+    Args:
+        request: ProcessProductsRequest containing:
+            - products: Array of product dictionaries
+            - store_name: Optional store name
+            - postcode: Optional postcode
+    
+    Returns:
+        ProcessProductsResponse with processed products array
+    """
+    try:
+        logger.info(f"Processing {len(request.products)} products")
+        
+        if not request.products:
+            raise HTTPException(
+                status_code=400,
+                detail="Products array cannot be empty"
+            )
+        
+        # Process the product array through the pipeline
+        result = process_product_array(
+            products=request.products,
+            store_name=request.store_name,
+            postcode=request.postcode
+        )
+        
+        if "error" in result:
+            raise HTTPException(
+                status_code=500,
+                detail=result["error"]
+            )
+        
+        logger.info(f"Successfully processed {len(result['products'])} products")
+        
+        return ProcessProductsResponse(
+            status="success",
+            products_processed=len(result["products"]),
+            products=result["products"],
+            message=f"Successfully processed {len(result['products'])} products through pipeline",
+            errors=result.get("errors")
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error processing product array: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
+
+
+@app.post("/products/process", response_model=ProcessProductsResponse)
+async def process_products(
+    request: ProcessProductsRequest
+) -> Dict[str, Any]:
+    """
+    Process an array of products through the preprocessing pipeline:
+    1. Validation and standardization
+    2. Product verification
+    3. Translation
+    4. LLM completion (enrichment)
+    5. Fixing and post-processing
+    
+    Args:
+        request: ProcessProductsRequest containing:
+            - products: Array of product dictionaries
+            - store_name: Optional store name
+            - postcode: Optional postcode
+    
+    Returns:
+        ProcessProductsResponse with processed products array
+    """
+    try:
+        logger.info(f"Processing {len(request.products)} products")
+        
+        if not request.products:
+            raise HTTPException(
+                status_code=400,
+                detail="Products array cannot be empty"
+            )
+        
+        # Process the product array through the pipeline
+        result = process_product_array(
+            products=request.products,
+            store_name=request.store_name,
+            postcode=request.postcode
+        )
+        
+        if "error" in result:
+            raise HTTPException(
+                status_code=500,
+                detail=result["error"]
+            )
+        
+        logger.info(f"Successfully processed {len(result['products'])} products")
+        
+        return ProcessProductsResponse(
+            status="success",
+            products_processed=len(result["products"]),
+            products=result["products"],
+            message=f"Successfully processed {len(result['products'])} products through pipeline",
+            errors=result.get("errors")
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error processing product array: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
 
 
 # 5. Get similar products between two stores.

@@ -41,7 +41,8 @@ class ModelCategoricalAnalysis(CategoryAnalysis):
             max_workers: int = 10,
             use_external_ids: bool = False,
             not_found_ids: List[str] = None,
-            score_threshold: float = 0.15
+            cat_score_threshold: float = 0.15,
+            batch_size: int = 10
         ) -> Dict[str, List[Dict[str, Any]]]:
             """
             Perform cross-store similarity analysis using category-based filtering.
@@ -56,50 +57,68 @@ class ModelCategoricalAnalysis(CategoryAnalysis):
                 max_workers: Maximum number of parallel workers for processing products A
                 use_external_ids: If True, read product IDs from external file instead of Neo4j
                 not_found_ids: List of product IDs not found in Neo4j (if use_external_ids=True)
-                score_threshold: Maximum graph score difference from best match to include
+                cat_score_threshold: Maximum graph score difference from best match to include
+                batch_size: Number of products to process in each batch (default: 10)
             """
 
             total = len(products_a)
-            logging.info(f"\n🚀 Starting parallel processing of {total} products with {max_workers} workers...")
+            # OPTIMIZATION: Reduce max_workers aggressively to prevent memory overload
+            effective_max_workers = min(max_workers, 5)  # Cap at 5 concurrent queries
+            logging.info(f"\n🚀 Starting BATCHED processing of {total} products")
+            logging.info(f"   Batch size: {batch_size} | Max workers: {effective_max_workers}")
             
             results = {}
             completed_count = 0
             
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                # Submit all tasks
-                future_to_product = {
-                    executor.submit(
-                        self.category_analysis.find_matches_by_category,
-                        product_a,
-                        store_a,
-                        store_b,
-                        min_matches,
-                        weights,
-                        idx,
-                        total,
-                        score_threshold
-                    ): product_a
-                    for idx, product_a in enumerate(products_a, 1)
-                }
+            # OPTIMIZATION: Process in batches to reduce memory pressure
+            for batch_start in range(0, total, batch_size):
+                batch_end = min(batch_start + batch_size, total)
+                batch = products_a[batch_start:batch_end]
+                batch_num = (batch_start // batch_size) + 1
+                total_batches = (total + batch_size - 1) // batch_size
                 
-                # Collect results as they complete
-                for future in as_completed(future_to_product):
-                    try:
-                        product_a_id, product_a, similar_products_b = future.result()
-                        results[product_a_id] = {
-                            'product_a': product_a,
-                            'similar_products_b': similar_products_b
-                        }
-                        completed_count += 1
-                        
-                        # Progress update every 5 products or at completion
-                        if completed_count % 5 == 0 or completed_count == total:
-                            pct = (completed_count / total) * 100
-                            logging.info(f"📊 Progress: {completed_count}/{total} ({pct:.1f}%) products processed")
+                logging.info(f"\n📦 Processing batch {batch_num}/{total_batches} ({len(batch)} products)")
+                
+                with ThreadPoolExecutor(max_workers=effective_max_workers) as executor:
+                    # Submit tasks for current batch
+                    future_to_product = {
+                        executor.submit(
+                            self.category_analysis.find_matches_by_category,
+                            product_a,
+                            store_a,
+                            store_b,
+                            min_matches,
+                            weights,
+                            batch_start + idx,
+                            total,
+                            cat_score_threshold
+                        ): product_a
+                        for idx, product_a in enumerate(batch, 1)
+                    }
+                    
+                    # Collect results as they complete
+                    for future in as_completed(future_to_product):
+                        try:
+                            product_a_id, product_a, similar_products_b = future.result()
+                            results[product_a_id] = {
+                                'product_a': product_a,
+                                'similar_products_b': similar_products_b
+                            }
+                            completed_count += 1
                             
-                    except Exception as e:
-                        product_a = future_to_product[future]
-                        logging.error(f"❌ Error processing product {product_a.get('id', 'N/A')}: {e}")
+                            # Progress update every 5 products or at completion
+                            if completed_count % 5 == 0 or completed_count == total:
+                                pct = (completed_count / total) * 100
+                                logging.info(f"📊 Progress: {completed_count}/{total} ({pct:.1f}%) products processed")
+                                
+                        except Exception as e:
+                            product_a = future_to_product[future]
+                            logging.error(f"❌ Error processing product {product_a.get('id', 'N/A')}: {e}")
+                
+                # Wait between batches to allow Neo4j to release memory
+                if batch_end < total:
+                    import time
+                    time.sleep(2)  # 2 second delay between batches
 
             # Add not-found products to results
             if use_external_ids and not_found_ids:
@@ -346,7 +365,8 @@ class ModelCombinedSimilarity:
             id_obtention_method: str = 'neo4j',
             external_ids_path: str = None,
             id_lists: list = None,
-            score_threshold: float = 0.4,
+            cat_score_threshold: float = 0.3,
+            combined_score_threshold: float = 0.5,
             top_n: int = 3,
             min_graph_score: float = 0.3,
             min_name_similarity: float = 0.4,
@@ -388,7 +408,8 @@ class ModelCombinedSimilarity:
                     - 'id_list': Use provided list of IDs
                 external_ids_path: Path to file containing product IDs (required if id_obtention_method='external_file')
                 id_lists: List of product IDs to process (required if id_obtention_method='id_list')
-                score_threshold: Maximum graph score difference from best match to include
+                cat_score_threshold: Maximum category graph score difference from best match to include
+                combined_score_threshold: Maximum graph score difference from best match to include
                 top_n: Number of top similar products to return for each product (default: 3)
                 min_graph_score: Minimum graph-based similarity score (default: 0.8)
                 min_name_similarity: Minimum name embedding similarity score (default: 0.8)
@@ -517,7 +538,7 @@ class ModelCombinedSimilarity:
                 graph_weights_non_food_elec=graph_weights_non_food_elec,
                 max_workers=max_workers,
                 not_found_ids=not_found_ids,
-                score_threshold=score_threshold,
+                cat_score_threshold=cat_score_threshold,
                 min_graph_score=min_graph_score
             )
             # ============================================================
@@ -560,6 +581,7 @@ class ModelCombinedSimilarity:
                 combined_weights_non_food_super=combined_weights_non_food_super,
                 combined_weights_non_food_elec=combined_weights_non_food_elec,
                 store_a=store_a,
+                combined_score_threshold=combined_score_threshold,
                 top_n=top_n
             )
             
@@ -592,7 +614,8 @@ class ModelCombinedSimilarity:
                 'weights_non_food_super': weights_non_food_super,
                 'weights_non_food_elec': weights_non_food_elec,
                 'distance_metric': distance_metric,
-                'score_threshold': score_threshold,
+                'cat_score_threshold': cat_score_threshold, 
+                'combined_score_threshold': combined_score_threshold,
                 'max_workers': max_workers,
                 'max_embedding_workers': max_embedding_workers,
                 'id_obtention_method': id_obtention_method,
@@ -630,7 +653,7 @@ class ModelCombinedSimilarity:
         graph_weights_non_food_elec: Dict[str, float],
         max_workers: int,
         not_found_ids: List[str],
-        score_threshold: float,
+        cat_score_threshold: float,
         min_graph_score: float = 0.8
     ) -> Dict[str, Dict[str, Any]]:
         """
@@ -673,7 +696,7 @@ class ModelCombinedSimilarity:
                     selected_weights,
                     idx,
                     total,
-                    score_threshold,
+                    cat_score_threshold,
                     min_graph_score
                 )
                 future_to_product[future] = product_a
@@ -800,73 +823,113 @@ class ModelCombinedSimilarity:
         max_embedding_workers: int,
         store_a: str,
         min_name_similarity: float = 0.4,
-        min_description_similarity: float = 0.4
+        min_description_similarity: float = 0.4,
+        embedding_batch_size: int = 8000
     ) -> Dict[str, Dict[str, Any]]:
         """
         Run embedding-based similarity analysis and combine with graph scores.
+        Processes embeddings in batches to avoid memory issues.
         
         Uses SimilarityAnalysis to:
-        1. Preload ALL embeddings in one query (ultra-fast)
-        2. Calculate semantic similarity in parallel
-        3. Combine with graph scores using configured weights
-        4. Sort results by combined score
+        1. Divide products into batches
+        2. For each batch: Load embeddings -> Process -> Clear memory
+        3. Calculate semantic similarity in parallel
+        4. Combine with graph scores using configured weights
+        5. Sort results by combined score
         
         Args:
             min_name_similarity: Minimum name embedding similarity score (0-1)
             min_description_similarity: Minimum description embedding similarity score (0-1)
+            embedding_batch_size: Number of products to process per batch (default: 8000)
         """
-        # Process embeddings in parallel for all products A
-        total_products_with_matches = sum(1 for data in results.values() if data.get('similar_products_b'))
+        import gc
+        
+        # Filter products with matches
+        products_with_matches = {
+            product_a_id: data 
+            for product_a_id, data in results.items() 
+            if data.get('similar_products_b') and product_a_id != '_metadata'
+        }
+        
+        total_products_with_matches = len(products_with_matches)
         
         if total_products_with_matches == 0:
             logging.info("⚠️ No products with matches found, skipping embedding analysis")
             return results
         
-        # OPTIMIZATION: Preload ALL embeddings in a single query
-        embedding_cache = self.similarity_analysis.preload_embeddings_for_results(results)
+        logging.info(f"🚀 Processing {total_products_with_matches} products in batches of {embedding_batch_size}")
+        logging.info(f"   Using {max_embedding_workers} parallel workers per batch")
         
-        logging.info(f"🚀 Processing {total_products_with_matches} products with {max_embedding_workers} workers...")
+        # Divide products into batches
+        product_ids = list(products_with_matches.keys())
+        num_batches = (len(product_ids) + embedding_batch_size - 1) // embedding_batch_size
         
         embedding_completed = 0
         
-        with ThreadPoolExecutor(max_workers=max_embedding_workers) as executor:
-            # Submit all embedding tasks with pre-loaded cache
-            future_to_product_id = {
-                executor.submit(
-                    self.similarity_analysis.process_embeddings_for_product,
-                    product_a_id,
-                    data['product_a'],
-                    data['similar_products_b'],
-                    distance_metric,
-                    embedding_cache,  # Pass pre-loaded cache
-                    min_name_similarity,
-                    min_description_similarity
-                ): product_a_id
-                for product_a_id, data in results.items()
-                if data.get('similar_products_b')  # Only process products with matches
+        for batch_idx in range(num_batches):
+            start_idx = batch_idx * embedding_batch_size
+            end_idx = min((batch_idx + 1) * embedding_batch_size, len(product_ids))
+            batch_product_ids = product_ids[start_idx:end_idx]
+            
+            batch_size = len(batch_product_ids)
+            logging.info(f"\n📦 Processing batch {batch_idx + 1}/{num_batches} ({batch_size} products)")
+            
+            # Create subset of results for this batch
+            batch_results = {
+                product_id: products_with_matches[product_id] 
+                for product_id in batch_product_ids
             }
             
-            # Collect results as they complete
-            for future in as_completed(future_to_product_id):
-                try:
-                    sorted_similar_b = future.result()
-                    product_a_id = future_to_product_id[future]
-                    
-                    if sorted_similar_b is not None:
-                        results[product_a_id]['similar_products_b'] = sorted_similar_b
-                    
-                    embedding_completed += 1
-                    
-                    # Progress update
-                    if embedding_completed % 5 == 0 or embedding_completed == total_products_with_matches:
-                        pct = (embedding_completed / total_products_with_matches) * 100
-                        logging.info(f"📊 Progress: {embedding_completed}/{total_products_with_matches} ({pct:.1f}%) embeddings processed")
+            # Load embeddings only for this batch
+            logging.info(f"   ⬇️  Loading embeddings for batch {batch_idx + 1}...")
+            embedding_cache = self.similarity_analysis.preload_embeddings_for_results(batch_results)
+            logging.info(f"   ✅ Loaded {len(embedding_cache)} embeddings for batch {batch_idx + 1}")
+            
+            # Process this batch in parallel
+            with ThreadPoolExecutor(max_workers=max_embedding_workers) as executor:
+                future_to_product_id = {
+                    executor.submit(
+                        self.similarity_analysis.process_embeddings_for_product,
+                        product_a_id,
+                        batch_results[product_a_id]['product_a'],
+                        batch_results[product_a_id]['similar_products_b'],
+                        distance_metric,
+                        embedding_cache,
+                        min_name_similarity,
+                        min_description_similarity
+                    ): product_a_id
+                    for product_a_id in batch_product_ids
+                }
+                
+                # Collect results for this batch
+                for future in as_completed(future_to_product_id):
+                    try:
+                        sorted_similar_b = future.result()
+                        product_a_id = future_to_product_id[future]
                         
-                except Exception as e:
-                    product_a_id = future_to_product_id[future]
-                    logging.error(f"❌ Error calculating embeddings for product {product_a_id}: {e}")
+                        if sorted_similar_b is not None:
+                            results[product_a_id]['similar_products_b'] = sorted_similar_b
+                        
+                        embedding_completed += 1
+                        
+                        # Progress update
+                        if embedding_completed % 5 == 0 or embedding_completed == total_products_with_matches:
+                            pct = (embedding_completed / total_products_with_matches) * 100
+                            logging.info(f"   📊 Progress: {embedding_completed}/{total_products_with_matches} ({pct:.1f}%) embeddings processed")
+                            
+                    except Exception as e:
+                        product_a_id = future_to_product_id[future]
+                        logging.error(f"   ❌ Error calculating embeddings for product {product_a_id}: {e}")
+            
+            # Clear embedding cache to free memory
+            logging.info(f"   🧹 Clearing embedding cache for batch {batch_idx + 1}...")
+            del embedding_cache
+            del batch_results
+            gc.collect()  # Force garbage collection
+            logging.info(f"   ✅ Memory cleared for batch {batch_idx + 1}")
         
-        logging.info(f"✅ Embedding similarity calculated using {distance_metric}")
+        logging.info(f"\n✅ All batches processed! Total embeddings calculated: {embedding_completed}")
+        logging.info(f"   Distance metric: {distance_metric}")
         logging.info(f"   FOOD weights: Graph={combined_weights_food['graph']}, Name={combined_weights_food['name']}, Description={combined_weights_food['description']}, Euclidean={combined_weights_food.get('euclidean', 0.0)}")
         logging.info(f"   NON-FOOD SUPER weights: Graph={combined_weights_non_food_super['graph']}, Name={combined_weights_non_food_super['name']}, Description={combined_weights_non_food_super['description']}, Euclidean={combined_weights_non_food_super.get('euclidean', 0.0)}")
         logging.info(f"   NON-FOOD ELEC weights: Graph={combined_weights_non_food_elec['graph']}, Name={combined_weights_non_food_elec['name']}, Description={combined_weights_non_food_elec['description']}, Euclidean={combined_weights_non_food_elec.get('euclidean', 0.0)}")
@@ -961,6 +1024,7 @@ class ModelCombinedSimilarity:
         combined_weights_non_food_super: Dict[str, float],
         combined_weights_non_food_elec: Dict[str, float],
         store_a: str,
+        combined_score_threshold: float = 0.5,
         top_n: int = 3
     ) -> Dict[str, Any]:
         """
@@ -1057,8 +1121,12 @@ class ModelCombinedSimilarity:
             # Sort by combined score (descending)
             similar_products_b.sort(key=lambda x: x.get('combined_score', 0.0), reverse=True)
             
-            # Keep only top N products
-            results[product_a_id]['similar_products_b'] = similar_products_b[:top_n]
+            # Filter by minimum combined_score threshold (0.5) and keep only top N products
+            filtered_products = [
+                prod for prod in similar_products_b 
+                if prod.get('combined_score', 0.0) > combined_score_threshold
+            ]
+            results[product_a_id]['similar_products_b'] = filtered_products[:top_n]
             
             processed += 1
         

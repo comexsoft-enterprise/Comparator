@@ -274,10 +274,10 @@ class Neo4jNodesRelationshipsManager:
                         }
                         nodes_by_type[node_type].append(node_data)
 
-                # Country nodes (can come from multiple sources, comma-separated)
+                # Country nodes (can come from multiple sources, comma-separated, dot-separated)
                 country = self.get_value_case_insensitive(product_data, 'country')
                 if not self.is_empty_value(country):
-                    countries = [c.strip() for c in str(country).replace(';', ',').split(',') if c.strip()]
+                    countries = [c.strip() for c in str(country).replace(';', ',').replace('.', ',').split(',') if c.strip()]
                     for country_value in countries:
                         if not self.is_empty_value(country_value) and country_value.lower() != 'nan':
                             if country_value not in seen_identifiers[NodeTypes.COUNTRY]:
@@ -288,7 +288,7 @@ class Neo4jNodesRelationshipsManager:
 
                 country_origin = self.get_value_case_insensitive(product_data, 'country_origin')
                 if not self.is_empty_value(country_origin):
-                    country_origins = [c.strip() for c in str(country_origin).replace(';', ',').split(',') if c.strip()]
+                    country_origins = [c.strip() for c in str(country_origin).replace(';', ',').replace('.', ',').split(',') if c.strip()]
                     for origin_value in country_origins:
                         if not self.is_empty_value(origin_value) and origin_value.lower() != 'nan':
                             if origin_value not in seen_identifiers[NodeTypes.COUNTRY]:

@@ -104,6 +104,10 @@ def insert_to_validate(results, initial_validation_status=None):
     
     logger.info(f"✅ Prepared {len(data_to_insert)} records for insertion")
     
+    # Initialize connection and cursor variables
+    conn = None
+    cursor = None
+    
     # Database connection
     try:
         conn = psycopg2.connect(

@@ -156,6 +156,8 @@ class QualityThresholds(BaseModel):
     min_name_similarity: float = Field(default=0.5, ge=0, le=1, description="Minimum name embedding similarity")
     min_description_similarity: float = Field(default=0.5, ge=0, le=1, description="Minimum description embedding similarity")
     min_euclidean_similarity: float = Field(default=0.0, ge=0, le=1, description="Minimum euclidean distance similarity")
+    cat_score_threshold: float = Field(default=0.5, ge=0, description="Maximum category graph score difference from best match to include")
+    combined_score_threshold: float = Field(default=0.5, ge=0, description="Maximum combined graph score difference from best match to include")
 
 
 class ModelParameters(BaseModel):
@@ -279,8 +281,9 @@ def model(params: ModelParameters):
     print("  Min Graph Matches: 2")
     print("  Score Threshold: 0.5")
     print(f"  Top N Results per Product: {params.top_n_results}")
-    print("  Max Workers (threading): 200")
-    print("  Max Embedding Workers: 300")
+    print("  Max Workers (Neo4j): 10 [OPTIMIZED for memory]")
+    print("  Max Embedding Workers: 50 [OPTIMIZED for memory]")
+    print("  Batch Size: 10 products per batch")
     
     # Build weight dictionaries from Pydantic models
     weights_food = {
@@ -335,6 +338,9 @@ def model(params: ModelParameters):
         "description": params.non_food_elec_weights.combined.description,
         "euclidean": params.non_food_elec_weights.combined.euclidean
     }
+
+    cat_score_threshold = params.quality_thresholds.cat_score_threshold
+    combined_score_threshold = params.quality_thresholds.combined_score_threshold
     
     print(f"\n  FOOD Weights (Graph + Combined):")
     for key, value in weights_food.items():
@@ -404,12 +410,13 @@ def model(params: ModelParameters):
             weights_non_food_super=weights_non_food_super,
             weights_non_food_elec=weights_non_food_elec,
             distance_metric=distance_metric,
-            max_workers=200,
-            max_embedding_workers=300,
+            max_workers=10,  # OPTIMIZED: Reduced to 10 to prevent Neo4j memory issues
+            max_embedding_workers=50,  # OPTIMIZED: Reduced to 50
             id_obtention_method=id_obtention_method,
             id_lists=params.list_ids,
             external_ids_path=str(PROJECT_ROOT / "src" / "models" / "2_eroski_id.txt"),
-            score_threshold=0.5,
+            cat_score_threshold=cat_score_threshold,
+            combined_score_threshold=combined_score_threshold,
             top_n=params.top_n_results,
             min_graph_score=params.quality_thresholds.min_graph_score,
             min_name_similarity=params.quality_thresholds.min_name_similarity,
