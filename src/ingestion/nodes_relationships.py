@@ -247,10 +247,10 @@ class Neo4jNodesRelationshipsManager:
 
                 # Check if this node type should split by comma
                 should_split = node_type in [NodeTypes.BRAND, NodeTypes.STORE, NodeTypes.FORMAT]
-                
+
                 if should_split:
                     # Split by comma and create separate nodes
-                    values = [v.strip() for v in str(identifier_value).replace(';', ',').split(',') if v.strip()]
+                    values = [v.strip() for v in str(identifier_value).replace(';', ',').replace('.', ',').split(',') if v.strip()]
                     for value in values:
                         if not self.is_empty_value(value) and value.lower() != 'nan':
                             if value not in seen_identifiers[node_type]:
@@ -264,7 +264,7 @@ class Neo4jNodesRelationshipsManager:
                 else:
                     # Single value node
                     properties = self._collect_node_properties(node_type, product_data)
-                    
+
                     # Avoid duplicates using set (O(1) lookup)
                     if identifier_value not in seen_identifiers[node_type]:
                         seen_identifiers[node_type].add(identifier_value)
@@ -273,44 +273,44 @@ class Neo4jNodesRelationshipsManager:
                             'properties': properties
                         }
                         nodes_by_type[node_type].append(node_data)
-            
-            # Country nodes (can come from multiple sources, comma-separated)
-            country = self.get_value_case_insensitive(product_data, 'country')
-            if not self.is_empty_value(country):
-                countries = [c.strip() for c in str(country).replace(';', ',').split(',') if c.strip()]
-                for country_value in countries:
-                    if not self.is_empty_value(country_value) and country_value.lower() != 'nan':
-                        if country_value not in seen_identifiers[NodeTypes.COUNTRY]:
-                            seen_identifiers[NodeTypes.COUNTRY].add(country_value)
-                            properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
-                            node_data = {'identifier': country_value, 'properties': properties}
-                            nodes_by_type[NodeTypes.COUNTRY].append(node_data)
-            
-            country_origin = self.get_value_case_insensitive(product_data, 'country_origin')
-            if not self.is_empty_value(country_origin):
-                country_origins = [c.strip() for c in str(country_origin).replace(';', ',').split(',') if c.strip()]
-                for origin_value in country_origins:
-                    if not self.is_empty_value(origin_value) and origin_value.lower() != 'nan':
-                        if origin_value not in seen_identifiers[NodeTypes.COUNTRY]:
-                            seen_identifiers[NodeTypes.COUNTRY].add(origin_value)
-                            properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
-                            node_data = {'identifier': origin_value, 'properties': properties}
-                            nodes_by_type[NodeTypes.COUNTRY].append(node_data)
-            
+
+                # Country nodes (can come from multiple sources, comma-separated, dot-separated)
+                country = self.get_value_case_insensitive(product_data, 'country')
+                if not self.is_empty_value(country):
+                    countries = [c.strip() for c in str(country).replace(';', ',').replace('.', ',').split(',') if c.strip()]
+                    for country_value in countries:
+                        if not self.is_empty_value(country_value) and country_value.lower() != 'nan':
+                            if country_value not in seen_identifiers[NodeTypes.COUNTRY]:
+                                seen_identifiers[NodeTypes.COUNTRY].add(country_value)
+                                properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
+                                node_data = {'identifier': country_value, 'properties': properties}
+                                nodes_by_type[NodeTypes.COUNTRY].append(node_data)
+
+                country_origin = self.get_value_case_insensitive(product_data, 'country_origin')
+                if not self.is_empty_value(country_origin):
+                    country_origins = [c.strip() for c in str(country_origin).replace(';', ',').replace('.', ',').split(',') if c.strip()]
+                    for origin_value in country_origins:
+                        if not self.is_empty_value(origin_value) and origin_value.lower() != 'nan':
+                            if origin_value not in seen_identifiers[NodeTypes.COUNTRY]:
+                                seen_identifiers[NodeTypes.COUNTRY].add(origin_value)
+                                properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
+                                node_data = {'identifier': origin_value, 'properties': properties}
+                                nodes_by_type[NodeTypes.COUNTRY].append(node_data)
+                
             # Ingredients/Components
             is_food = self._is_food_product(product_data)
-            
+
             # Allergens
             allergens_str = self.get_value_case_insensitive(product_data, 'allergens')
             if not self.is_empty_value(allergens_str):
-                allergens = [a.strip() for a in str(allergens_str).replace(';', ',').split(',') if a.strip()]
+                allergens = [a.strip() for a in str(allergens_str).replace(';', ',').replace('.', ',').split(',') if a.strip()]
                 for allergen in allergens:
                     if not self.is_empty_value(allergen) and allergen.lower() != 'nan':
                         if allergen not in seen_identifiers[NodeTypes.INGREDIENT]:
                             seen_identifiers[NodeTypes.INGREDIENT].add(allergen)
                             node_data = {'identifier': allergen, 'properties': {}}
                             nodes_by_type[NodeTypes.INGREDIENT].append(node_data)
-            
+
             if is_food:
                 ingredients_str = self.get_value_case_insensitive(product_data, 'ingredients')
                 if not self.is_empty_value(ingredients_str):
@@ -331,7 +331,7 @@ class Neo4jNodesRelationshipsManager:
                                 seen_identifiers[NodeTypes.COMPONENT].add(component)
                                 node_data = {'identifier': component, 'properties': {}}
                                 nodes_by_type[NodeTypes.COMPONENT].append(node_data)
-        
+
         return nodes_by_type
 
     def _create_nodes_batch(self, session, nodes_by_type: Dict[NodeTypes, List[Dict[str, Any]]]):
@@ -658,6 +658,19 @@ class Neo4jNodesRelationshipsManager:
                     logging.info(f"✓ Created index: {index_name}")
                 except Exception as e:
                     logging.warning(f"✗ Could not create index {index_name}: {e}")
+            
+            # Create default "marca_blanca" Brand node if it doesn't exist
+            try:
+                create_marca_blanca_query = """
+                MERGE (b:Brand {name: 'marca_blanca'})
+                ON CREATE SET b.created_at = datetime()
+                RETURN b
+                """
+                result = session.run(create_marca_blanca_query)
+                if result.single():
+                    logging.info("✓ Created or verified 'marca_blanca' Brand node")
+            except Exception as e:
+                logging.warning(f"✗ Could not create 'marca_blanca' Brand node: {e}")
 
     def close(self):
         """Close the Neo4j driver connection."""

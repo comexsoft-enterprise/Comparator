@@ -306,30 +306,29 @@ class CSVCompleter:
         context = f"""You are a highly skilled product data completion assistant. You will be provided with data containing multiple products, and your task is to adapt and 
                         complete this data to match the structure of a given template. Use the provided information to complete missing details. 
                         If the information is not explicitly given, infer the most probable and reasonable value 
-                        based on the product name, description, category and other fields.
+                        based on the product name, description, category, and any other fields that exist in the same row.
                         Only leave a field empty if it is truly impossible to infer anything coherent. Ensure all fields are filled with concise, accurate, and relevant values based strictly on the given data.
 
         Template columns: {json.dumps(output_columns)}
 
         Instructions:
-        The output must be translate in English no matter the original language.
-
-        1. For EACH product, just fill the fields with the existing data in the same row, if a information does not exist do not fill it.
+        1. The output must be translate in English no matter the original language.
+        2. The unit_measure column only can be g(grams), l(liters), ud(units).
         2. Categorize the product in the following way:
 
-            You must provide the categorization in the following JSON format:
+            You must provide the categorization in the JSON final result 
             {{
-                "type": "<type>",
-                "internal_category": "<internal_category>",
-                "internal_subcategory": "<internal_subcategory>"
+                "internaltype": "",
+                "internalcategory": "",
+                "internalsubcategory": ""
             }}
 
             VALID OPTIONS:
 
-            2.1. TYPE (choose one):
+            2.1. INTERNALTYPE (choose one):
             {chr(10).join(f"   - {t}" for t in self.internal_types)}
 
-            2.2. INTERNAL_CATEGORY (choose based on type):
+            2.2. INTERNALCATEGORY (choose based on type):
             
             If type is "Food", choose from:
             {chr(10).join(f"   - {c}" for c in self.internal_categories_food)}
@@ -337,14 +336,14 @@ class CSVCompleter:
             If type is "Non-Food", choose from:
             {chr(10).join(f"   - {c}" for c in self.internal_categories_non_food)}
 
-            2.3. internal_subcategory (choose based on internal_category, BUT MUST BE ONE OF THE FOLLOWING):
+            2.3. INTERNALSUBCATEGORY (choose based on internalcategory, BUT MUST BE ONE OF THE FOLLOWING):
             {subcategory_prompt_section}
             
 
         3. Return ONLY a valid JSON object with no markdown formatting, explanations, or code blocks.
         4. JSON structure:
         - Keys: Row indices as string (0, 1, 2, etc.)
-        - Values: Objects containing ALL template column fields with their values
+        - Values: Objects containing ALL template column fields with their values and no additional fields
         5. Here is the context for each column in the template to be used as reference:
 
         {json.dumps(self.column_registry.get_description_from_columns(output_columns), indent=2)}
@@ -352,10 +351,8 @@ class CSVCompleter:
         Example response format (ALL fields must be present for each product):
         {{
         "0": {{
-            "category": "Food/Dairy/Cheese/Semi-cured cheese",
             "brand": "President",
             "product_name": "Semi-cured cheese wedge",
-            "product_type": "Fresh",
             "description": "Semi-cured cheese wedge made with pasteurized cow's milk. Smooth and creamy texture with mild flavor. Perfect for sandwiches and tapas.",
             "format": "Wedge",
             "unit_measure": "g",
@@ -373,13 +370,14 @@ class CSVCompleter:
             "country_origin": "ES",
             "colour": null,
             "model": null,
-            "allergens": "milk"
+            "allergens": "milk",
+            "internalcategory": "Eggs, Milk, and Butter",
+            "internaltype": "Food",
+            "internalsubcategory": "Milk and Vegetable Drinks"
         }},
         "1": {{
-            "category": "Non-Food/Electronics/Smartphones/Premium smartphones",
             "brand": "Samsung",
             "product_name": "Galaxy S24 Ultra",
-            "product_type": "Electronics",
             "description": "Samsung Galaxy S24 Ultra 5G smartphone with 6.8-inch Dynamic AMOLED display, Snapdragon 8 Gen 3 processor, 12GB RAM, 256GB storage, quad camera system with 200MP main sensor, S Pen included, 5000mAh battery with fast charging.",
             "format": "Box",
             "unit_measure": "ud",
@@ -397,22 +395,24 @@ class CSVCompleter:
             "country_origin": "KR",
             "colour": "Titanium Gray",
             "model": "S24 Ultra",
-            "allergens": null
+            "allergens": null,            
+            "internalcategory": "Electronics",
+            "subcategorytype": "non-food",
+            "internalsubcategory": "Smart Home Devices"
         }}
         }}
 
         CRITICAL: 
-        - Description, product_name, product_type columns MUST be completed.
+        - Description, product_name, internaltype, internalcategory, internalsubcategory columns MUST be completed.
         - For every product, you MUST return ALL template columns.
         - Prefer inferring a reasonable value over leaving the field empty.
         - Only leave a field empty when there is absolutely no signal in the row.
         - Your response must be ONLY valid JSON. Do not include ```json``` markers, explanations, or any other text.
-        - EVERY product must have ALL template columns with values (existing or completed)
+        - EVERY product must have ALL template columns (completed or null if truly unknown.)
         - Numeric keys like 0,1,2 MUST be returned as "0", "1", "2".
         
         """
         prompt = f"Complete the following product information:\n{df_chunk[input_columns].to_dict(orient='records')}"
-
         return context, prompt
 
     def complete_chunk(self, df_chunk: pd.DataFrame) -> pd.DataFrame:
@@ -434,7 +434,6 @@ class CSVCompleter:
         output_columns = neo4j_columns.intersection(output_columns)
 
         not_in_output_and_neo4j_columns = neo4j_columns.intersection(not_in_output_columns)
-        print(f"Not in output but in Neo4j columns: {not_in_output_and_neo4j_columns}")
 
         input_columns = list(input_columns)
         output_columns = list(output_columns)
@@ -445,6 +444,15 @@ class CSVCompleter:
         filling_df_chunk['row_index'] = filling_df_chunk.index
 
         logging.debug(f"Filling chunk has columns: {filling_df_chunk.columns.tolist()}")
+        
+        # Filter columns to only include those that exist in the DataFrame
+        input_columns = [col for col in input_columns if col in filling_df_chunk.columns]
+        output_columns = [col for col in output_columns if col in filling_df_chunk.columns]
+        not_in_output_and_neo4j_columns = [col for col in not_in_output_and_neo4j_columns if col in filling_df_chunk.columns]
+
+        # print(f"Filtered input columns: {input_columns}")
+        # print(f"Filtered output columns: {output_columns}")
+        # print(f"Filtered not in output and neo4j columns: {not_in_output_and_neo4j_columns}")
         
         # Crear el prompt para el chunk
         context, prompt = self.create_completion_prompt_chunk(filling_df_chunk, input_columns, output_columns)
@@ -464,7 +472,7 @@ class CSVCompleter:
                 }
             )
 
-            logger.info("LLM API call completed successfully. Processing response...")
+            # logger.info("LLM API call completed successfully. Processing response...")
 
             # ==================================Obtener los tokens cachados en el servidor===================================================================================
             usage = getattr(response, "usage", None)
@@ -526,9 +534,9 @@ class CSVCompleter:
                 self.total_cost += call_cost
             
             # Log detallado (no file output)
-            logger.info(f"[TOKENS] input={input_tokens} output={output_tokens} total={total_tokens} | cached={cached_tokens} reasoning={reasoning_tokens}")
-            logger.info(f"[COST] this_call=${call_cost:.6f} | non_cached_input=${input_cost:.6f} cached_input=${cached_cost:.6f} output=${output_cost:.6f}")
-            logger.info(f"[ACCUMULATED] calls={self.call_count} total_cost=${self.total_cost:.4f}")
+            # logger.info(f"[TOKENS] input={input_tokens} output={output_tokens} total={total_tokens} | cached={cached_tokens} reasoning={reasoning_tokens}")
+            # logger.info(f"[COST] this_call=${call_cost:.6f} | non_cached_input=${input_cost:.6f} cached_input=${cached_cost:.6f} output=${output_cost:.6f}")
+            # logger.info(f"[ACCUMULATED] calls={self.call_count} total_cost=${self.total_cost:.4f}")
             # ==========================================================================================================================================
 
             # Parsear la respuesta del LLM
@@ -553,6 +561,30 @@ class CSVCompleter:
                     logger.error(f"LLM response is not a dictionary. Type: {type(llm_output)}")
 
                     return df_chunk[output_columns + not_in_output_and_neo4j_columns].copy()
+            
+            except json.JSONDecodeError as json_err:
+                # Try to fix common JSON issues - e.g., numeric keys without quotes
+                logger.warning(f"JSON parsing failed, attempting to fix: {json_err}")
+                try:
+                    # Use ast.literal_eval as fallback for Python dict syntax
+                    import ast
+                    # Replace JSON null with Python None for ast.literal_eval
+                    content_fixed = content.replace('null', 'None').replace('true', 'True').replace('false', 'False')
+                    llm_output = ast.literal_eval(content_fixed)
+                    logger.info("Successfully parsed using ast.literal_eval")
+                    
+                    if not isinstance(llm_output, dict):
+                        logger.error(f"LLM response is not a dictionary. Type: {type(llm_output)}")
+                        print(f"\033[94m{content}\033[0m")
+                        raise ValueError("Response is not a dictionary")
+                        
+                except Exception as ast_err:
+                    logger.error(f"Failed to parse with ast.literal_eval: {ast_err}")
+                    print(f"\033[94m{content}\033[0m")
+                    raise json_err
+            
+            # Process the parsed output
+            try:
 
                 # Create a new DataFrame from llm_output
                 rows_list = []
@@ -561,9 +593,12 @@ class CSVCompleter:
                     rows_list.append(row_data)
 
                 result_chunk = pd.DataFrame(rows_list, columns=output_columns)
-                # Add back the preserved keys
+                # Add back the preserved keys - only columns that actually exist in df_chunk
                 if not_in_output_and_neo4j_columns:
-                    result_chunk = pd.concat([df_chunk[not_in_output_and_neo4j_columns].reset_index(drop=True), result_chunk], axis=1)
+                    # Filter to only include columns that exist in the DataFrame
+                    existing_preserved_columns = [col for col in not_in_output_and_neo4j_columns if col in df_chunk.columns]
+                    if existing_preserved_columns:
+                        result_chunk = pd.concat([df_chunk[existing_preserved_columns].reset_index(drop=True), result_chunk], axis=1)
 
                 # Ordenar result_chunk de forma personalizada las columnas, en caso de no tener columnas del template_columns_coherent no las añade.
                 template_columns_coherent = ['uuid', 'siid', 'id', 'ean', 'gtin', 'url', 'category','internaltype', 'internalcategory', 'internalsubcategory', 'product_type', 'brand', 'product_name', 'model', 'description', 'quantity', 'measure_value', 'format', 'colour', 'weight', 'unit_measure', 'ingredients', 'allergens', 'first_level_components', 'first_component_extra_info', 'second_level_components', 'second_component_extra_info', 'all_components', 'conservation_characteristics', 'manufacturer', 'country_origin', 'store', 'country', 'postcode', 'price', 'price_without_vat', 'vat', 'currency', 'offer', 'price_with_offer', 'shipping_cost', 'days_of_shipping', 'instalation_cost']
@@ -587,14 +622,16 @@ class CSVCompleter:
                 raise
         except Exception as e:
             logger.error(f"Error processing chunk: {e}")
+            raise
  
         
-    def _process_chunk_with_metadata(self, chunk_data: tuple) -> ChunkResult:
+    def _process_chunk_with_metadata(self, chunk_data: tuple, max_retries: int = 3) -> ChunkResult:
         """
-        Process a single chunk and return metadata.
+        Process a single chunk and return metadata with retry logic.
         
         Args:
             chunk_data: Tuple of (chunk_index, chunk_dataframe)
+            max_retries: Maximum number of retry attempts (default: 3)
             
         Returns:
             ChunkResult: Result object with processing metadata
@@ -602,41 +639,55 @@ class CSVCompleter:
 
         chunk_index, chunk = chunk_data
         start_time = time.time()
+        
+        last_error = None
+        
+        # Retry loop
+        for attempt in range(max_retries):
+            try:
+                with self.lock:
+                    if attempt > 0:
+                        logger.info(f"Processing row #{chunk_index + 1} (Retry {attempt}/{max_retries - 1})")
+                    else:
+                        logger.info(f"Processing row #{chunk_index + 1}")
 
-        try:
-            with self.lock:
-                logger.info(f"Processing row #{chunk_index + 1}")
+                # Process the chunk - now returns tuple with success info
+                processed_chunk = self.complete_chunk(chunk)
 
-            # Process the chunk - now returns tuple with success info
-            processed_chunk = self.complete_chunk(chunk)
+                duration = time.time() - start_time
 
-            duration = time.time() - start_time
+                return ChunkResult(
+                    chunk_index=chunk_index,
+                    chunk_data=processed_chunk,
+                    success=True,
+                    rows_processed=len(chunk),
+                    fields_completed=len(chunk) * (len(processed_chunk.columns) - len(chunk.columns)),
+                    error=None,
+                    duration=duration
+                )
 
-            return ChunkResult(
-                chunk_index=chunk_index,
-                chunk_data=processed_chunk,
-                success=True,
-                rows_processed=len(chunk),
-                fields_completed=len(chunk) * (len(processed_chunk.columns) - len(chunk.columns)),
-                error=None,
-                duration=duration
-            )
-
-        except Exception as e:
-            duration = time.time() - start_time
-            with self.lock:
-                logger.error(f"Error processing chunk #{chunk_index + 1}: {e}")
-                print(f"\033[94m{chunk}\033[0m")  # Azul
-
-            return ChunkResult(
-                chunk_index=chunk_index,
-                chunk_data=chunk,  # Return original chunk on error
-                success=False,
-                rows_processed=len(chunk),
-                fields_completed=0,
-                error=str(e),
-                duration=duration
-            )
+            except Exception as e:
+                last_error = e
+                duration = time.time() - start_time
+                with self.lock:
+                    if attempt < max_retries - 1:
+                        logger.warning(f"Error processing chunk #{chunk_index + 1} (attempt {attempt + 1}/{max_retries}): {e}")
+                        logger.info(f"Retrying chunk #{chunk_index + 1}...")
+                    else:
+                        logger.error(f"Error processing chunk #{chunk_index + 1} after {max_retries} attempts: {e}")
+                        print(f"\033[94m{chunk}\033[0m")  # Azul
+        
+        # If all retries failed, return failed result
+        duration = time.time() - start_time
+        return ChunkResult(
+            chunk_index=chunk_index,
+            chunk_data=chunk,  # Return original chunk on error
+            success=False,
+            rows_processed=len(chunk),
+            fields_completed=0,
+            error=str(last_error),
+            duration=duration
+        )
 
     def process_csv(
         self, 

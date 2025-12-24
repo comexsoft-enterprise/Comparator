@@ -384,14 +384,18 @@ class SimilarityAnalysis:
         if not siid_store_pairs:
             return {}
         
-        # Extract unique siids and stores
-        siids = [pair[0] for pair in siid_store_pairs if pair[0]]
-        stores = [pair[1] for pair in siid_store_pairs if pair[1]]
-        
-        if not siids:
+        # Format input pairs (filter invalid)
+        pairs = [
+            {"siid": siid, "store": store}
+            for siid, store in siid_store_pairs
+            if siid and store
+        ]
+
+        if not pairs:
             return {}
-        
-        # Batch query to get all embeddings at once (name and description separate)
+
+        # We'll fetch in chunks to avoid huge parameter payloads and memory spikes
+        CHUNK_SIZE = 8000
         query = """
         UNWIND $siid_store_pairs AS pair
         MATCH (s:Store {name: pair.store})-[:SELLS]->(p:Product {siid: pair.siid})
@@ -399,29 +403,30 @@ class SimilarityAnalysis:
                p.product_name_embedding_openai AS name_embedding,
                p.description_embedding_openai AS description_embedding
         """
-        
-        # Format parameters
-        params = {
-            "siid_store_pairs": [
-                {"siid": siid, "store": store}
-                for siid, store in siid_store_pairs
-                if siid and store
-            ]
-        }
-        
+
+        embedding_map = {}
+
         try:
-            results = self.neo4j_connector.execute_query(query, params)
-            # Create dictionary mapping siid -> {name_embedding, description_embedding}
-            embedding_map = {}
-            for result in results:
-                siid = result.get('siid')
-                name_emb = result.get('name_embedding')
-                desc_emb = result.get('description_embedding')
-                if siid:
-                    embedding_map[siid] = {
-                        'name': name_emb,
-                        'description': desc_emb
-                    }
+            for start in range(0, len(pairs), CHUNK_SIZE):
+                end = start + CHUNK_SIZE
+                chunk = pairs[start:end]
+
+                params = {"siid_store_pairs": chunk}
+                logging.info(f"📥 Fetching embeddings chunk {start}:{end} ({len(chunk)} pairs)")
+
+                results = self.neo4j_connector.execute_query(query, params)
+
+                # Merge results into embedding_map
+                for result in results:
+                    siid = result.get('siid')
+                    name_emb = result.get('name_embedding')
+                    desc_emb = result.get('description_embedding')
+                    if siid and siid not in embedding_map:
+                        embedding_map[siid] = {
+                            'name': name_emb,
+                            'description': desc_emb
+                        }
+
             return embedding_map
         except Exception as e:
             logging.error(f"Error fetching embeddings batch: {e}")

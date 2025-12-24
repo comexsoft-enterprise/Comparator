@@ -170,8 +170,18 @@ class Neo4jCSVIngestor:
         start_time = time.time()
         
         try:
-            # Read CSV file
-            df = pd.read_csv(csv_file_path, sep=";")
+            # Read CSV file with specific dtypes to preserve leading zeros in postcode, id, etc.
+            df = pd.read_csv(
+                csv_file_path, 
+                sep=";",
+                dtype={
+                    'postcode': str,
+                    'id': str,
+                    'ean': str,
+                    'gtin': str,
+                    'siid': str
+                }
+            )
             logging.info(f"Loaded {len(df)} rows from {csv_file_path}")
             
             # Clean data

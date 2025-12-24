@@ -16,7 +16,7 @@ class Neo4jConnector:
     @staticmethod
     def get_neo4j_driver(uri=NEO4J_CONFIG["uri"], user=NEO4J_CONFIG["user"], password=NEO4J_CONFIG["password"]):
         """
-        Establishes a connection to the Neo4j database.
+        Establishes a connection to the Neo4j database with optimized connection pooling.
         """
         # Use provided values or fall back to config defaults
         uri = uri or NEO4J_CONFIG["uri"]
@@ -24,9 +24,17 @@ class Neo4jConnector:
         password = password or NEO4J_CONFIG["password"]
         
         try:
-            driver = GraphDatabase.driver(uri, auth=(user, password))
+            # OPTIMIZATION: Configure connection pool to prevent memory overload
+            driver = GraphDatabase.driver(
+                uri, 
+                auth=(user, password),
+                max_connection_pool_size=50,  # Limit concurrent connections
+                connection_acquisition_timeout=60.0,  # Wait for available connection
+                max_transaction_retry_time=30.0,  # Retry failed transactions
+                encrypted=False  # Disable encryption for local dev (faster)
+            )
             driver.verify_connectivity()
-            logging.info("Connection to Neo4j established successfully.")
+            logging.info("Connection to Neo4j established successfully with optimized pool settings.")
             return driver
         except Exception as err:
             logging.error(f"Connection failed: {err}")

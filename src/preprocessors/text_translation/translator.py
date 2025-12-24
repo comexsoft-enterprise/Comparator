@@ -479,7 +479,7 @@ class Translator:
         columns_with_language: Dict[str, str] = None, 
         predetermined_languages: List[str] = None,
         use_multithreading: bool = True,
-        max_workers: int = 200
+        max_workers: int = 1000
     ) -> Dict[str, Any]:
         """
         Translate specified columns in a CSV file with optional multithreading.

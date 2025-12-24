@@ -85,7 +85,9 @@ class ProductVerifier:
 
     def _collection_name_from_filename(self, filepath: str) -> str:
         """
-        Derive a safe collection name from an input filename.
+        Derive a collection name from an input filename.
+        Returns the base name without versioning (e.g., 'eroski-01013').
+        If a collection with this name exists, it will be reused.
         """
         try:
             p = Path(filepath)
@@ -103,15 +105,33 @@ class ProductVerifier:
             # Remove any leftover processing tags anywhere in the name
             name = re.sub(r'_(validated|verified|translated|enriched|fixed)', '', name)
 
-            # Lowercase, replace spaces and non-alphanumeric with underscore
-            name = re.sub(r"[^0-9a-zA-Z]+", "_", name)
-            # Collapse multiple underscores and strip
-            name = re.sub(r"_+", "_", name).strip('_')
+            # Lowercase, replace spaces and non-alphanumeric with hyphen
+            name = re.sub(r"[^0-9a-zA-Z-]+", "-", name)
+            # Collapse multiple hyphens and strip
+            name = re.sub(r"-+", "-", name).strip('-')
 
-            # Avoid empty name
-            return name or 'products'
+            # Expected format: supermarket_postcode (e.g., eroski-01013)
+            collection_name = name or 'products'
+            
+            logging.info(f"Using collection name: {collection_name}")
+            return collection_name
+            
         except Exception:
             return 'products'
+    
+    def _get_versioned_collection_name(self, base_name: str) -> str:
+        """
+        DEPRECATED: This method is no longer used.
+        Collections are now named directly without versioning.
+        Kept for backward compatibility.
+        
+        Args:
+            base_name: Base collection name (e.g., 'eroski-01013')
+            
+        Returns:
+            The base_name without versioning
+        """
+        return base_name
     
     def connect_to_mongodb(self) -> bool:
         """
@@ -158,7 +178,6 @@ class ProductVerifier:
             self.neo4j_connector = Neo4jConnector()
             if self.neo4j_connector.connect_to_neo4j():
                 self.neo4j_driver = self.neo4j_connector.driver
-                logging.info("✅ Successfully connected to Neo4j database")
                 return True
             else:
                 logging.warning("⚠️  Failed to connect to Neo4j database (will skip deletion)")
@@ -384,14 +403,13 @@ class ProductVerifier:
                 logging.error('MongoDB database not initialized')
                 return False
 
-            # Prefer collection derived from input filename (if set); else fall back to store/brand or 'products'
+            # Use the collection name determined at the start of verification
+            # This ensures all products from the same file go to the same collection
             collection_name = getattr(self, 'current_input_collection', None)
             if not collection_name:
-                store_name = csv_product.get('store') or csv_product.get('brand')
-                if store_name and isinstance(store_name, str) and store_name.strip():
-                    collection_name = store_name.strip().lower().replace(' ', '_')
-                else:
-                    collection_name = 'products'
+                # Fallback: should not happen if verify_products() sets it correctly
+                logging.warning("current_input_collection not set, using default 'products'")
+                collection_name = 'products'
 
             try:
                 collection = self.mongo_db.get_collection(collection_name)
@@ -434,14 +452,13 @@ class ProductVerifier:
                 logging.error('MongoDB database not initialized')
                 return False
 
-            # Prefer collection derived from input filename (if set); else fall back to store/brand or 'products'
+            # Use the collection name determined at the start of verification
+            # This ensures all products from the same file go to the same collection
             collection_name = getattr(self, 'current_input_collection', None)
             if not collection_name:
-                store_name = csv_product.get('store') or csv_product.get('brand')
-                if store_name and isinstance(store_name, str) and store_name.strip():
-                    collection_name = store_name.strip().lower().replace(' ', '_')
-                else:
-                    collection_name = 'products'
+                # Fallback: should not happen if verify_products() sets it correctly
+                logging.warning("current_input_collection not set, using default 'products'")
+                collection_name = 'products'
 
             try:
                 collection = self.mongo_db.get_collection(collection_name)

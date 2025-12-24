@@ -11,21 +11,16 @@ from typing import List, Optional, Dict, Any
 from fastapi import UploadFile
 import pandas as pd
 from pydantic import BaseModel
-from neo4j import GraphDatabase
 
 from src.numeric_variables_postgres.postgresql_data_extraction import VectorDataExtractor, ingest_verified_csv
 from src.preprocessors.data_autocompletion.llm_completion import CSVCompleter
 from src.preprocessors.data_autocompletion.csv_fixing import CSVFixer
 from src.preprocessors.data_formatting.product_verification import verify_products
 from src.preprocessors.text_translation.translator import TranslatorOpenAI
-from config.settings import AZURE_OPENAI_CONFIG, NEO4J_CONFIG
-from src.ingestion.neo4j_embeddings import (
-    get_embedder,
-    generate_embeddings_multithreaded,
-    create_vector_index
-)
+from config.settings import NEO4J_CONFIG, AZURE_OPENAI_CONFIG, LOGGING_CONFIG
 import config.settings as settings
 AWS_TRANSLATE_CONFIG = getattr(settings, 'AWS_TRANSLATE_CONFIG', None)
+from neo4j import GraphDatabase
 
 # Add project root to path
 project_root = Path(__file__).resolve().parent.parent.parent.parent
@@ -42,6 +37,11 @@ from src.preprocessors.data_formatting.path_handling import (
 )
 
 from src.ingestion.neo4j_ingest import Neo4jCSVIngestor
+from src.ingestion.neo4j_embeddings import (
+    get_embedder,
+    generate_embeddings_multithreaded,
+    create_vector_index,
+)
 
 class PreprocessingResponse(BaseModel):
     """Response model for preprocessing pipeline"""
@@ -54,6 +54,230 @@ class PreprocessingResponse(BaseModel):
     message: str
     errors: Optional[List[str]] = None
     ingestion_results: Optional[Dict[str, Any]] = None
+
+
+def process_product_array(
+    products: List[Dict[str, Any]],
+    store_name: Optional[str] = None,
+    postcode: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    Process an array of products through the preprocessing pipeline without file I/O.
+    
+    Args:
+        products: List of product dictionaries
+        store_name: Optional store name for context
+        postcode: Optional postcode for location-based processing
+        
+    Returns:
+        Dictionary with processed products and metadata
+    """
+    
+    translator_llm = TranslatorOpenAI(
+        predetermined_languages=['es', 'en'],
+        llm_api_key=AZURE_OPENAI_CONFIG.get("api_key"),
+        llm_base_url=AZURE_OPENAI_CONFIG.get("api_base"),
+        llm_model=AZURE_OPENAI_CONFIG.get("deployment_name")
+    )
+    
+    errors = []
+    
+    try:
+        # ============================================================
+        # STEP 1: VALIDATION AND STANDARDIZATION
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("STEP 1: VALIDATION AND STANDARDIZATION")
+        print(f"{'='*60}")
+        
+        # Convert product array to DataFrame
+        df = pd.DataFrame(products)
+        print(f"Processing {len(df)} products")
+        
+        # Run standardization
+        df_validated = process_dataframe_standards(df, null_replacement='', filename=f"{store_name}_products")
+        print(f"✓ Validation completed. {len(df_validated)} products validated")
+        
+        # ============================================================
+        # STEP 2: PRODUCT VERIFICATION
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("STEP 2: PRODUCT VERIFICATION")
+        print(f"{'='*60}")
+        
+        # Create temporary file for verification
+        temp_dir = Path(PROJECT_ROOT) / 'data' / 'temp'
+        temp_dir.mkdir(parents=True, exist_ok=True)
+        
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        temp_validated = temp_dir / f"temp_validated_{timestamp}.csv"
+        temp_verified = temp_dir / f"temp_verified_{timestamp}.csv"
+        
+        try:
+            # Save validated DataFrame to temp file
+            df_validated.to_csv(temp_validated, sep=";", index=False, encoding='utf-8')
+            
+            # Run verification
+            success = verify_products(str(temp_validated), str(temp_verified))
+            
+            if success and temp_verified.exists():
+                df_verified = pd.read_csv(temp_verified, sep=';', dtype=str, low_memory=False)
+                print(f"✓ Verification completed. {len(df_verified)} products verified")
+            else:
+                df_verified = df_validated
+                print("⚠️  Verification step skipped, using validated data")
+                
+        except Exception as e:
+            print(f"⚠️  Verification error: {e}")
+            errors.append(f"Verification: {str(e)}")
+            df_verified = df_validated
+        
+        # ============================================================
+        # STEP 3: TRANSLATION
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("STEP 3: TRANSLATION")
+        print(f"{'='*60}")
+        
+        temp_translated = temp_dir / f"temp_translated_{timestamp}.csv"
+        
+        try:
+            # Save verified to temp file
+            df_verified.to_csv(temp_validated, sep=";", index=False, encoding='utf-8')
+            
+            # Translate
+            translator_llm.translate_csv(
+                str(temp_validated),
+                str(temp_translated),
+                columns_with_language={},
+                predetermined_languages=None
+            )
+            
+            if temp_translated.exists():
+                df_translated = pd.read_csv(temp_translated, sep=';', dtype=str, low_memory=False)
+                print(f"✓ Translation completed")
+            else:
+                df_translated = df_verified
+                print("⚠️  Translation file not found, using verified data")
+                
+        except Exception as e:
+            print(f"⚠️  Translation error: {e}")
+            errors.append(f"Translation: {str(e)}")
+            df_translated = df_verified
+        
+        # ============================================================
+        # STEP 4: CSV COMPLETION WITH AZURE OPENAI
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("STEP 4: CSV COMPLETION WITH AZURE OPENAI")
+        print(f"{'='*60}")
+        
+        temp_enriched = temp_dir / f"temp_enriched_{timestamp}.csv"
+        
+        try:
+            # Save translated to temp file
+            df_translated.to_csv(temp_translated, sep=";", index=False, encoding='utf-8')
+            
+            # Initialize CSV Completer
+            completer = CSVCompleter(
+                api_key=AZURE_OPENAI_CONFIG.get("api_key"),
+                deployment_name=AZURE_OPENAI_CONFIG.get("deployment_name"),
+                api_base=AZURE_OPENAI_CONFIG.get("api_base")
+            )
+            
+            # Process the CSV
+            completer.process_csv(
+                input_filepath=str(temp_translated),
+                output_filepath=str(temp_enriched),
+            )
+            
+            if temp_enriched.exists():
+                df_enriched = pd.read_csv(temp_enriched, sep=';', dtype=str, low_memory=False)
+                print(f"✓ CSV Completion finished")
+            else:
+                df_enriched = df_translated
+                print("⚠️  Enrichment file not found, using translated data")
+                
+        except Exception as e:
+            print(f"⚠️  CSV Completion error: {e}")
+            errors.append(f"Completion: {str(e)}")
+            df_enriched = df_translated
+        
+        # ============================================================
+        # STEP 5: CSV FIXING POST LLM COMPLETION
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("STEP 5: CSV FIXING POST LLM COMPLETION")
+        print(f"{'='*60}")
+        
+        temp_fixed = temp_dir / f"temp_fixed_{timestamp}.csv"
+        
+        try:
+            # Save enriched to temp file
+            df_enriched.to_csv(temp_enriched, sep=";", index=False, encoding='utf-8')
+            
+            # Initialize CSV fixer
+            fixer = CSVFixer()
+            
+            # Process the CSV
+            fixer.fix_csv(
+                enriched_file=str(temp_enriched),
+                translated_file=str(temp_translated),
+                output_path=str(temp_fixed),
+                store_name=store_name or "unknown",
+                postcode=postcode
+            )
+            
+            if temp_fixed.exists():
+                df_fixed = pd.read_csv(temp_fixed, sep=';', dtype=str, low_memory=False)
+                print(f"✓ CSV fixing finished")
+            else:
+                df_fixed = df_enriched
+                print("⚠️  Fixed file not found, using enriched data")
+                
+        except Exception as e:
+            print(f"⚠️  CSV Fixing error: {e}")
+            errors.append(f"Fixing: {str(e)}")
+            df_fixed = df_enriched
+        
+        # ============================================================
+        # CLEANUP TEMP FILES
+        # ============================================================
+        try:
+            for temp_file in [temp_validated, temp_verified, temp_translated, temp_enriched, temp_fixed]:
+                if temp_file.exists():
+                    temp_file.unlink()
+            print(f"\n✓ Cleaned up temporary files")
+        except Exception as e:
+            print(f"⚠️  Cleanup warning: {e}")
+        
+        # ============================================================
+        # RETURN PROCESSED PRODUCTS
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("PIPELINE COMPLETED SUCCESSFULLY!")
+        print(f"{'='*60}")
+        print(f"Processed {len(df_fixed)} products")
+        print(f"{'='*60}\n")
+        
+        # Convert DataFrame back to list of dictionaries
+        processed_products = df_fixed.to_dict('records')
+        
+        return {
+            "status": "success",
+            "products": processed_products,
+            "products_count": len(processed_products),
+            "errors": errors if errors else None
+        }
+        
+    except Exception as e:
+        print(f"\n❌ Pipeline Error: {e}")
+        traceback.print_exc()
+        return {
+            "error": str(e),
+            "products": [],
+            "errors": errors + [str(e)]
+        }
 
 
 def process_uploaded_file(
@@ -238,40 +462,13 @@ def process_uploaded_file(
             except Exception as e:
                 print(f"❌ Failed to create fallback translated file: {e}")
                 raise
-        
-        # ============================================================
-        # STEP 4: DATA EXTRACTION (postgresql_data_extraction)
-        # ============================================================
-        print(f"\n{'='*60}")
-        print("STEP 4: POSTGRESQL DATA EXTRACTION")
-        print(f"{'='*60}")
-        print(f"Processing translated file: {translated_path}")
-        
-        try:
-            # Initialize VectorDataExtractor with PostgreSQL mode
-            extractor = VectorDataExtractor(use_csv=False)
-            
-            # Process the translated CSV file
-            records_processed = extractor.process_input(
-                input_path=str(translated_path), 
-                drop_table=False
-            )
-            
-            print("✓ Data extraction completed!")
-            print(f"  - Records processed: {records_processed}")
-            print(f"  - Data saved to PostgreSQL database: product_vector_data table")
-            
-        except Exception as e:
-            print(f"❌ Data extraction step failed: {e}")
-            print(f"  Translated CSV is still available at: {translated_path}")
-            # Continue with pipeline even if extraction fails
-            traceback.print_exc()
+
 
         # ============================================================
-        # STEP 5: CSV COMPLETION WITH AZURE OPENAI
+        # STEP 4: CSV COMPLETION WITH AZURE OPENAI
         # ============================================================
         print(f"\n{'='*60}")
-        print("STEP 5: CSV COMPLETION WITH AZURE OPENAI")
+        print("STEP 4: CSV COMPLETION WITH AZURE OPENAI")
         print(f"{'='*60}")
 
         enriched_ts = datetime.now().strftime("%Y%m%d_%H%M")
@@ -308,10 +505,10 @@ def process_uploaded_file(
             raise
 
         # ============================================================
-        # STEP 6: CSV FIXING POST LLM COMPLETION
+        # STEP 5: CSV FIXING POST LLM COMPLETION
         # ============================================================
         print(f"\n{'='*60}")
-        print("STEP 6: CSV FIXING POST LLM COMPLETION")
+        print("STEP 5: CSV FIXING POST LLM COMPLETION")
         print(f"{'='*60}")
 
         fixed_dir = Path(PROJECT_ROOT) / 'data' / 'processed' / 'fixed'
@@ -354,6 +551,34 @@ def process_uploaded_file(
         # Column name lowercasing moved to CSVFixer.fix_csv implementation
 
         # ============================================================
+        # STEP 6: DATA EXTRACTION (postgresql_data_extraction)
+        # ============================================================
+        print(f"\n{'='*60}")
+        print("STEP 6: POSTGRESQL DATA EXTRACTION")
+        print(f"{'='*60}")
+        print(f"Processing translated file: {fixed_path}")
+        
+        try:
+            # Initialize VectorDataExtractor with PostgreSQL mode
+            extractor = VectorDataExtractor(use_csv=False)
+            
+            # Process the translated CSV file
+            records_processed = extractor.process_input(
+                input_path=str(fixed_path), 
+                drop_table=False
+            )
+            
+            print("✓ Data extraction completed!")
+            print(f"  - Records processed: {records_processed}")
+            print(f"  - Data saved to PostgreSQL database: product_vector_data table")
+            
+        except Exception as e:
+            print(f"❌ Data extraction step failed: {e}")
+            print(f"  Fixed CSV is still available at: {fixed_path}")
+            # Continue with pipeline even if extraction fails
+            traceback.print_exc()
+
+        # ============================================================
         # PIPELINE COMPLETED
         # ============================================================
         print(f"\n{'='*60}")
@@ -369,7 +594,15 @@ def process_uploaded_file(
 
         print(f"{'='*60}\n")
 
-
+        # Read the fixed CSV to get row/column counts
+        try:
+            df_fixed = pd.read_csv(fixed_path, sep=';', dtype=str, low_memory=False)
+            rows_processed = len(df_fixed)
+            columns_processed = len(df_fixed.columns)
+        except Exception as e:
+            print(f"Warning: Could not read fixed file for stats: {e}")
+            rows_processed = None
+            columns_processed = None
 
     except Exception as e:
         print(f"\n❌ Pipeline Error: {e}")
@@ -382,68 +615,89 @@ def process_uploaded_file(
     
     # Create ingestor instance
     ingestor = Neo4jCSVIngestor()
-
-    folder_name = "fixed"
     
-    # Check if CSV files exist
-    csv_files = ingestor.get_csv_files(folder=folder_name)
-    if not csv_files:
-        logging.warning("❌ No CSV files found in the fixed data directory.")
-        logging.info(f"📁 Directory: {ingestor.processed_data_dir}/{folder_name}")
-        return
+    # Only process the specific file that was just created
+    csv_file = str(fixed_path)
     
-    logging.info(f"📄 Found {len(csv_files)} CSV files to process:")
-    for csv_file in csv_files:
-        logging.info(f"   • {Path(csv_file).name}")
+    ingestion_results = {
+        "neo4j_ingested": False,
+        "embeddings_generated": False,
+        "products_already_in_db": 0,
+        "products_ingested": 0
+    }
     
-    logging.info("🔗 Attempting to connect to Neo4j database...")
-    
-    try:
-        # Connect once to use check_value_exists
-        if not ingestor.connect_to_neo4j():
-            logging.error("❌ Could not connect to Neo4j. Aborting checks.")
-            return
-
-        # For each CSV file, check existence by product_hash and decide whether to skip ingestion for that file
-        for csv_file in csv_files:
-            try:
-                df = pd.read_csv(csv_file, sep=";")
-            except Exception as e:
-                logging.error(f"Error reading {csv_file}: {e}")
-                continue
-
-            if 'product_hash' not in df.columns:
-                logging.warning(f"No 'product_hash' column in {Path(csv_file).name}; skipping existence checks for this file.")
-                continue
-
-            total = len(df)
-            existing = 0
-
-            for val in df['product_hash'].dropna().astype(str):
-                if ingestor.check_value_exists('Product', 'product_hash', val):
-                    existing += 1
-
-            logging.info(f"{Path(csv_file).name}: {existing}/{total} products already in DB")
-
-            if existing == total:
-                logging.info(f"Skipping ingestion for {Path(csv_file).name} because all products already exist")
-                # Optionally remove the file from the list to avoid re-processing
-                # csv_files.remove(csv_file)
-
-        # Proceed with the ingestion process (files with all-existing products will be re-checked/skipped inside ingest logic)
-        success = ingestor.ingest_all_csv_files(folder=folder_name, batch_size=500)
+    if not Path(csv_file).exists():
+        logging.warning(f"❌ Fixed CSV file not found: {csv_file}")
+        ingestion_results["error"] = "Fixed CSV file not found"
+    else:
+        logging.info(f"📄 Processing newly created file: {Path(csv_file).name}")
         
-        if success:
-            logging.info("✅ CSV ingestion completed successfully!")
-        else:
-            logging.error("❌ CSV ingestion failed. Check the logs for details.")
-            
-    except KeyboardInterrupt:
-        logging.warning("⚠️  Ingestion interrupted by user")
-    except Exception as e:
-        logging.error(f"❌ Unexpected error: {e}")
-        logging.error("   Check your Neo4j connection settings and ensure the database is running.")
+        logging.info("🔗 Attempting to connect to Neo4j database...")
+        
+        try:
+            # Connect once to use check_value_exists
+            if not ingestor.connect_to_neo4j():
+                logging.error("❌ Could not connect to Neo4j. Aborting checks.")
+                ingestion_results["error"] = "Could not connect to Neo4j"
+            else:
+                # Check existence by product_hash for the specific file
+                try:
+                    df = pd.read_csv(csv_file, sep=";", dtype=str, low_memory=False)
+                    
+                    if 'product_hash' in df.columns:
+                        total = len(df)
+                        existing = 0
 
+                        for val in df['product_hash'].dropna().astype(str):
+                            if ingestor.check_value_exists('Product', 'product_hash', val):
+                                existing += 1
+
+                        logging.info(f"{Path(csv_file).name}: {existing}/{total} products already in DB")
+                        ingestion_results["products_already_in_db"] = existing
+
+                        if existing == total:
+                            logging.info(f"Skipping ingestion for {Path(csv_file).name} because all products already exist")
+                            ingestion_results["message"] = "All products already exist in Neo4j"
+                        else:
+                            # Proceed with the ingestion process for this specific file
+                            success = ingestor.ingest_csv_file(csv_file, batch_size=500)
+                            if success:
+                                ingestion_results["neo4j_ingested"] = True
+                                ingestion_results["products_ingested"] = total - existing
+                                generate_embeddings(embedder="openai")
+                                ingestion_results["embeddings_generated"] = True
+                    else:
+                        logging.warning(f"No 'product_hash' column in {Path(csv_file).name}; proceeding with ingestion.")
+                        success = ingestor.ingest_csv_file(csv_file, batch_size=500)
+                        if success:
+                            ingestion_results["neo4j_ingested"] = True
+                            generate_embeddings(embedder="openai")
+                            ingestion_results["embeddings_generated"] = True
+                        
+                except Exception as e:
+                    logging.error(f"Error reading {csv_file}: {e}")
+                    ingestion_results["error"] = str(e)
+                
+        except KeyboardInterrupt:
+            logging.warning("⚠️  Ingestion interrupted by user")
+            ingestion_results["error"] = "Ingestion interrupted by user"
+        except Exception as e:
+            logging.error(f"❌ Unexpected error: {e}")
+            logging.error("   Check your Neo4j connection settings and ensure the database is running.")
+            ingestion_results["error"] = str(e)
+    
+    # Return the complete response
+    return {
+        "status": "success",
+        "filename": input_file,
+        "original_path": str(input_file_path),
+        "processed_path": str(fixed_path),
+        "rows_processed": rows_processed,
+        "columns_processed": columns_processed,
+        "message": "File processed successfully through complete pipeline",
+        "errors": None,
+        "ingestion_results": ingestion_results
+    }
 
 
 def generate_embeddings(embedder: str = None):
@@ -474,22 +728,22 @@ def generate_embeddings(embedder: str = None):
         logging.info("Generating product_name embeddings")
         logging.info("=" * 70)
         
-        # generate_embeddings_multithreaded(
-        #     driver=driver,
-        #     embedder=embedder,
-        #     node_label="Product",
-        #     text_property="product_name",
-        #     embedding_property=f"product_name_embedding_{suffix}",
-        #     batch_size=batch_size,
-        #     max_workers=max_workers
-        # )
+        generate_embeddings_multithreaded(
+            driver=driver,
+            embedder=embedder,
+            node_label="Product",
+            text_property="product_name",
+            embedding_property=f"product_name_embedding_{suffix}",
+            batch_size=batch_size,
+            max_workers=max_workers
+        )
         
-        # create_vector_index(
-        #     driver=driver,
-        #     index_name=f"product_name_embedding_{suffix}",
-        #     node_label="Product",
-        #     embedding_property=f"product_name_embedding_{suffix}"
-        # )
+        create_vector_index(
+            driver=driver,
+            index_name=f"product_name_embedding_{suffix}",
+            node_label="Product",
+            embedding_property=f"product_name_embedding_{suffix}"
+        )
         
         # Process description embeddings
         logging.info("=" * 70)

@@ -290,6 +290,31 @@ class CSVFixer:
         
         return False, value_clean
     
+    def validate_type_category_consistency(self, type_val: str, category_val: str) -> bool:
+        """
+        Validate that category matches the type (Food categories only for Food type, etc.)
+        Returns True if consistent, False otherwise
+        """
+        if pd.isna(type_val) or pd.isna(category_val):
+            return False
+        
+        type_clean = str(type_val).strip().lower()
+        category_clean = str(category_val).strip().lower()
+        
+        # Check if type is "food"
+        if type_clean == 'food':
+            # Category must be in food categories
+            food_categories_lower = [c.lower() for c in self.valid_categories_food]
+            return category_clean in food_categories_lower
+        
+        # Check if type is "non-food"
+        elif type_clean == 'non-food':
+            # Category must be in non-food categories
+            non_food_categories_lower = [c.lower() for c in self.valid_categories_non_food]
+            return category_clean in non_food_categories_lower
+        
+        return False
+    
     def validate_subcategory_for_category(self, category: str, subcategory: str) -> bool:
         """
         Validate if subcategory is valid for the given category.
@@ -501,11 +526,14 @@ class CSVFixer:
             # Validate category
             cat_valid, cat_clean = self.validate_categorization_value(cat_val, self.valid_categories_all)
             
+            # Validate type-category consistency
+            type_cat_consistent = self.validate_type_category_consistency(type_val, cat_val) if type_valid and cat_valid else False
+            
             # Validate subcategory
             subcat_valid = self.validate_subcategory_for_category(cat_clean, subcat_val) if cat_valid else False
             
             # If any validation fails, mark for fixing
-            if not (type_valid and cat_valid and subcat_valid):
+            if not (type_valid and cat_valid and type_cat_consistent and subcat_valid):
                 invalid_rows.append({
                     'index': idx,
                     'type': type_val,
@@ -513,6 +541,7 @@ class CSVFixer:
                     'internal_subcategory': subcat_val,
                     'type_valid': type_valid,
                     'cat_valid': cat_valid,
+                    'type_cat_consistent': type_cat_consistent,
                     'subcat_valid': subcat_valid
                 })
             else:
@@ -536,6 +565,7 @@ class CSVFixer:
             logger.info(f"  Row {invalid['index']}:")
             logger.info(f"    Type: '{invalid['type']}' (valid: {invalid['type_valid']})")
             logger.info(f"    Category: '{invalid['internal_category']}' (valid: {invalid['cat_valid']})")
+            logger.info(f"    Type-Category consistent: {invalid['type_cat_consistent']}")
             logger.info(f"    Subcategory: '{invalid['internal_subcategory']}' (valid: {invalid['subcat_valid']})")
         
         if invalid_count > 5:
@@ -758,6 +788,104 @@ class CSVFixer:
         
         return stats
 
+    def restore_measure_fields_from_translated(self, df_enriched: pd.DataFrame, df_translated: pd.DataFrame) -> pd.DataFrame:
+        """
+        Restore measure_value and unit_measure from translated CSV when both fields are complete.
+        This prevents LLM completion errors from corrupting these fields.
+        
+        Logic:
+        - If both measure_value AND unit_measure are present in translated -> use translated values
+        - If either is missing in translated -> keep enriched values
+        - Decisions are made jointly for both fields as they depend on each other
+        - Uses product_hash as key to match products between DataFrames
+        
+        Args:
+            df_enriched: Enriched DataFrame (after LLM completion)
+            df_translated: Translated DataFrame (before LLM completion)
+            
+        Returns:
+            pd.DataFrame: Updated enriched DataFrame with corrected measure fields
+        """
+        logger.info(f"\n{'='*60}")
+        logger.info("🔧 Restoring Measure Fields from Translated CSV")
+        logger.info(f"{'='*60}")
+        
+        # Validate product_hash column exists in both DataFrames
+        if 'product_hash' not in df_enriched.columns:
+            logger.error("❌ 'product_hash' column not found in enriched DataFrame")
+            return df_enriched
+        
+        if 'product_hash' not in df_translated.columns:
+            logger.error("❌ 'product_hash' column not found in translated DataFrame")
+            return df_enriched
+        
+        # Check if measure columns exist
+        measure_cols = ['measure_value', 'unit_measure']
+        missing_in_enriched = [col for col in measure_cols if col not in df_enriched.columns]
+        missing_in_translated = [col for col in measure_cols if col not in df_translated.columns]
+        
+        if missing_in_enriched:
+            logger.warning(f"⚠️ Missing columns in enriched: {missing_in_enriched}")
+            return df_enriched
+        
+        if missing_in_translated:
+            logger.warning(f"⚠️ Missing columns in translated: {missing_in_translated}")
+            return df_enriched
+        
+        # Create a copy for modifications
+        df_result = df_enriched.copy()
+        
+        # Set product_hash as index for faster lookups
+        df_translated_indexed = df_translated.set_index('product_hash')
+        
+        # Track statistics
+        restored_count = 0
+        kept_enriched_count = 0
+        missing_in_translated_count = 0
+        
+        # Process each row
+        for idx, row in df_result.iterrows():
+            product_hash = row['product_hash']
+            
+            # Check if product_hash exists in translated DataFrame
+            if pd.isna(product_hash) or product_hash not in df_translated_indexed.index:
+                missing_in_translated_count += 1
+                continue
+            
+            # Get translated values
+            translated_row = df_translated_indexed.loc[product_hash]
+            
+            # Handle case where product_hash has duplicates (returns DataFrame/Series)
+            if isinstance(translated_row, pd.DataFrame):
+                # Multiple rows with same product_hash - take the first one
+                translated_row = translated_row.iloc[0]
+            
+            translated_measure_value = translated_row['measure_value']
+            translated_unit_measure = translated_row['unit_measure']
+            
+            # Check if BOTH fields are present and non-empty in translated
+            measure_value_complete = pd.notna(translated_measure_value) and str(translated_measure_value).strip() != ''
+            unit_measure_complete = pd.notna(translated_unit_measure) and str(translated_unit_measure).strip() != ''
+            
+            if measure_value_complete and unit_measure_complete:
+                # Both fields are complete in translated -> restore them
+                df_result.at[idx, 'measure_value'] = translated_measure_value
+                df_result.at[idx, 'unit_measure'] = translated_unit_measure
+                restored_count += 1
+            else:
+                # Either field is missing in translated -> keep enriched values
+                kept_enriched_count += 1
+        
+        # Print summary
+        logger.info(f"\n📊 Measure Fields Restoration Summary:")
+        logger.info(f"  Total rows: {len(df_result)}")
+        logger.info(f"  ✅ Restored from translated: {restored_count}")
+        logger.info(f"  📝 Kept enriched values: {kept_enriched_count}")
+        logger.info(f"  ⚠️  Missing in translated: {missing_in_translated_count}")
+        logger.info(f"{'='*60}")
+        
+        return df_result
+
     def compare_and_fill(self, df_enriched: pd.DataFrame, df_translated: pd.DataFrame) -> pd.DataFrame:
         """
         Compare enriched and translated DataFrames and fill missing values.
@@ -854,6 +982,144 @@ class CSVFixer:
         
         return df_result
 
+    def normalize_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Normalize DataFrame - standardizes nutritional units
+        Converts all nutritional values to standard units
+        """
+        # Standard units for each nutritional component
+        unit_conversions = {
+            'nutrition_information_calories': {
+                'standard_unit': 'kcal',
+                'conversions': {
+                    'kcal': 1,
+                    'kj': 0.239006,  # kJ to kcal
+                    'cal': 0.001      # cal to kcal
+                }
+            },
+            'nutrition_information_fat': {
+                'standard_unit': 'g',
+                'conversions': {
+                    'g': 1,
+                    'mg': 0.001,      # mg to g
+                    'kg': 1000        # kg to g
+                }
+            },
+            'nutrition_information_carbohydrates': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            },
+            'nutrition_information_fiber': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            },
+            'nutrition_information_protein': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            },
+            'nutrition_information_salt': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            },
+            'nutrition_information_sugars': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            },
+            'nutrition_information_saturatedfattyacids': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            },
+            'nutrition_information_monounsaturatedfattyacids': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            },
+            'nutrition_information_polyunsaturatedgradeacids': {
+                'standard_unit': 'g',
+                'conversions': {'g': 1, 'mg': 0.001, 'kg': 1000}
+            }
+        }
+        
+        # Standardize each nutritional component
+        for nutrient, config in unit_conversions.items():
+            value_col = f"{nutrient}_value"
+            unit_col = f"{nutrient}_unit"
+            
+            # Skip if columns don't exist
+            if value_col not in df.columns or unit_col not in df.columns:
+                continue
+            
+            # Create mask for rows that need conversion
+            needs_conversion = df[unit_col].notna() & (df[unit_col] != '')
+            
+            if not needs_conversion.any():
+                continue
+            
+            # Convert values based on their current unit
+            for current_unit, conversion_factor in config['conversions'].items():
+                mask = needs_conversion & (df[unit_col].str.lower() == current_unit.lower())
+                if mask.any():
+                    # Convert string values to float, handling errors
+                    values = pd.to_numeric(df.loc[mask, value_col], errors='coerce')
+                    df.loc[mask, value_col] = values * conversion_factor
+                    df.loc[mask, unit_col] = config['standard_unit']
+            
+            logger.info(f"Normalized {nutrient} to {config['standard_unit']}")
+        
+        # Normalize product measure (unit_measure and measure_value columns)
+        if 'unit_measure' in df.columns and 'measure_value' in df.columns:
+            logger.info("Normalizing product measures (unit_measure, measure_value)...")
+            
+            # Define conversions for volume (to Liters) and weight (to grams)
+            measure_conversions = {
+                # Volume units → L (liters)
+                'ml': {'target': 'L', 'factor': 0.001},
+                'mililitros': {'target': 'L', 'factor': 0.001},
+                'cl': {'target': 'L', 'factor': 0.01},
+                'centilitros': {'target': 'L', 'factor': 0.01},
+                'dl': {'target': 'L', 'factor': 0.1},
+                'decilitros': {'target': 'L', 'factor': 0.1},
+                'l': {'target': 'L', 'factor': 1},
+                'litros': {'target': 'L', 'factor': 1},
+                'litre': {'target': 'L', 'factor': 1},
+                'litres': {'target': 'L', 'factor': 1},
+                
+                # Weight units → g (grams)
+                'mg': {'target': 'g', 'factor': 0.001},
+                'miligramos': {'target': 'g', 'factor': 0.001},
+                'g': {'target': 'g', 'factor': 1},
+                'gr': {'target': 'g', 'factor': 1},
+                'gramos': {'target': 'g', 'factor': 1},
+                'kg': {'target': 'g', 'factor': 1000},
+                'kilogramos': {'target': 'g', 'factor': 1000},
+                'kgs': {'target': 'g', 'factor': 1000},
+            }
+            
+            # Create mask for rows that need conversion
+            needs_conversion = df['unit_measure'].notna() & (df['unit_measure'] != '')
+            
+            if needs_conversion.any():
+                conversions_made = 0
+                
+                for unit_str, conversion in measure_conversions.items():
+                    # Match unit case-insensitively
+                    mask = needs_conversion & (df['unit_measure'].str.lower().str.strip() == unit_str.lower())
+                    
+                    if mask.any():
+                        # Convert values
+                        values = pd.to_numeric(df.loc[mask, 'measure_value'], errors='coerce')
+                        df.loc[mask, 'measure_value'] = values * conversion['factor']
+                        df.loc[mask, 'unit_measure'] = conversion['target']
+                        conversions_made += mask.sum()
+                
+                if conversions_made > 0:
+                    logger.info(f"Normalized {conversions_made} product measures to standard units (L/g)")
+                else:
+                    logger.info("No product measure conversions needed")
+            else:
+                logger.info("No product measures to normalize")
+        
+        return df
+
     def fix_csv(self, enriched_file: str, translated_file: str, output_path: str, store_name: str = None, postcode: str = None):
         """
         Fix CSV file format and structure.
@@ -945,8 +1211,12 @@ class CSVFixer:
             if duplicates_removed > 0:
                 logger.info(f"  ✅ Removed {duplicates_removed} duplicate rows")
 
-            # Compare and fill data from translated
-            df_result = self.compare_and_fill(df_enriched, df_translated)
+            # PRIORITY 1: Restore measure_value and unit_measure from translated (when both are complete)
+            # This prevents LLM completion errors from corrupting these critical fields
+            df_result = self.restore_measure_fields_from_translated(df_enriched, df_translated)
+
+            # PRIORITY 2: Compare and fill missing values from translated for other columns
+            df_result = self.compare_and_fill(df_result, df_translated)
 
             # --- VALIDACIÓN Y CORRECCIÓN DE CATEGORIZACIÓN ---
             df_result = self.validate_and_fix_categorization(df_result)
@@ -982,12 +1252,21 @@ class CSVFixer:
             # Update postcode column if postcode is provided
             if postcode is not None:
                 if 'postcode' in df_result.columns:
-                    df_result['postcode'] = str(postcode)
-                    logger.info(f"  ✅ Updated 'postcode' column with: {postcode}")
+                    # Ensure postcode is treated as string and preserve leading zeros
+                    postcode_str = str(postcode).zfill(5) if str(postcode).isdigit() else str(postcode)
+                    df_result['postcode'] = postcode_str
+                    logger.info(f"  ✅ Updated 'postcode' column with: {postcode_str}")
                 else:
                     logger.warning(f"  ⚠️  'postcode' column not found in DataFrame")
 
             # --- CALCULAR price_without_vat SI FALTA ---
+            # Normalize nutritional/product measure units first (LLM may have changed units)
+            try:
+                logger.info("\n🔁 Re-normalizing nutritional and measure units (post-LLM)...")
+                df_result = self.normalize_dataframe(df_result)
+            except Exception as e:
+                logger.warning(f"Could not normalize units in CSVFixer: {e}")
+
             if 'price' in df_result.columns and 'vat' in df_result.columns:
                 # Ensure the price_without_vat column exists
                 if 'price_without_vat' not in df_result.columns:

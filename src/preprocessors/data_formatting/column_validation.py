@@ -608,6 +608,29 @@ def process_dataframe_standards(df: pd.DataFrame,
     if "asin" in result_df.columns:
         result_df['id'] = result_df['asin']
 
+    # Ensure only the `id` column is coerced to string (leave other columns' dtypes intact)
+    if 'id' in result_df.columns:
+        def _id_to_str(v):
+            # Convert NaN to empty string
+            if pd.isna(v):
+                return ''
+            # If it's a float that represents an integer, convert to int first
+            try:
+                if isinstance(v, float):
+                    if v.is_integer():
+                        return str(int(v))
+                    # format float without scientific notation, strip trailing zeros
+                    s = format(v, 'f')
+                    if '.' in s:
+                        s = s.rstrip('0').rstrip('.')
+                    return s
+            except Exception:
+                pass
+            # Otherwise, just stringize
+            return str(v)
+
+        result_df['id'] = result_df['id'].apply(_id_to_str)
+
     supername = os.path.splitext(os.path.basename(filename))[0]
     logging.debug(supername)
 
