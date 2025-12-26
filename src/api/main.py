@@ -2,7 +2,6 @@
 FastAPI application for supermarket data comparison and preprocessing.
 """
 import io
-import json
 import hashlib
 from data.schemas.taxonomy import ColumnRegistry
 import uvicorn
@@ -67,6 +66,7 @@ class CompareStoresRequest(BaseModel):
     non_food_super_weights: Optional[NonFoodSuperWeights] = Field(default=None, description="Custom weights for NON-FOOD SUPERMARKET products")
     non_food_elec_weights: Optional[NonFoodElecWeights] = Field(default=None, description="Custom weights for NON-FOOD ELECTRONICS products")
     quality_thresholds: Optional[QualityThresholds] = Field(default=None, description="Custom quality thresholds for filtering")
+    avoid_duplicate_product_b: bool = Field(default=True, description="Whether to clean duplicate Product_B matches across Product_A results")
     
     class Config:
         json_schema_extra = {
@@ -74,13 +74,17 @@ class CompareStoresRequest(BaseModel):
                 "store_a": "store_a",
                 "store_b": "store_b",
                 "list_ids": [],
-                "top_n_results": 1,                
-                "min_graph_score": 0.3,
-                "min_name_similarity": 0.5,
-                "min_description_similarity": 0.5,
-                "min_euclidean_similarity": 0.0,
-                "cat_score_threshold": 0.5,
-                "combined_score_threshold": 0.5   
+                "top_n_results": 1,
+                "quality_thresholds": {
+                    "min_matches": 2,
+                    "cat_score_threshold": 0.5,
+                    "combined_score_threshold": 0.2,
+                    "min_description_similarity": 0.2,
+                    "min_euclidean_similarity": 0.0,
+                    "min_graph_score": 0.1,
+                    "min_name_similarity": 0.2
+                },
+                "avoid_duplicate_product_b": True
             }
         }
 
@@ -579,69 +583,6 @@ async def process_products(
         )
 
 
-@app.post("/products/process", response_model=ProcessProductsResponse)
-async def process_products(
-    request: ProcessProductsRequest
-) -> Dict[str, Any]:
-    """
-    Process an array of products through the preprocessing pipeline:
-    1. Validation and standardization
-    2. Product verification
-    3. Translation
-    4. LLM completion (enrichment)
-    5. Fixing and post-processing
-    
-    Args:
-        request: ProcessProductsRequest containing:
-            - products: Array of product dictionaries
-            - store_name: Optional store name
-            - postcode: Optional postcode
-    
-    Returns:
-        ProcessProductsResponse with processed products array
-    """
-    try:
-        logger.info(f"Processing {len(request.products)} products")
-        
-        if not request.products:
-            raise HTTPException(
-                status_code=400,
-                detail="Products array cannot be empty"
-            )
-        
-        # Process the product array through the pipeline
-        result = process_product_array(
-            products=request.products,
-            store_name=request.store_name,
-            postcode=request.postcode
-        )
-        
-        if "error" in result:
-            raise HTTPException(
-                status_code=500,
-                detail=result["error"]
-            )
-        
-        logger.info(f"Successfully processed {len(result['products'])} products")
-        
-        return ProcessProductsResponse(
-            status="success",
-            products_processed=len(result["products"]),
-            products=result["products"],
-            message=f"Successfully processed {len(result['products'])} products through pipeline",
-            errors=result.get("errors")
-        )
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error processing product array: {e}", exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail=f"Internal server error: {str(e)}"
-        )
-
-
 # 5. Get similar products between two stores.
 @app.post("/compare")
 async def compare_stores(request: CompareStoresRequest) -> Dict[str, List]:
@@ -697,7 +638,8 @@ async def compare_stores(request: CompareStoresRequest) -> Dict[str, List]:
             food_weights=request.food_weights or FoodWeights(),
             non_food_super_weights=request.non_food_super_weights or NonFoodSuperWeights(),
             non_food_elec_weights=request.non_food_elec_weights or NonFoodElecWeights(),
-            quality_thresholds=request.quality_thresholds or QualityThresholds()
+            quality_thresholds=request.quality_thresholds or QualityThresholds(),
+            avoid_duplicate_product_b=request.avoid_duplicate_product_b
         )
 
         # Perform comparison

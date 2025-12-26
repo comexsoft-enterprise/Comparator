@@ -371,7 +371,8 @@ class ModelCombinedSimilarity:
             min_graph_score: float = 0.3,
             min_name_similarity: float = 0.4,
             min_description_similarity: float = 0.4,
-            min_euclidean_similarity: float = 0.0
+            min_euclidean_similarity: float = 0.0,
+            avoid_duplicate_product_b: bool = True
         ) -> Dict[str, Dict[str, Any]]:
             """
             Complete cross-store similarity analysis combining graph structure and embeddings.
@@ -601,7 +602,8 @@ class ModelCombinedSimilarity:
             # ============================================================
             # STEP 6: CLEAN DUPLICATE PRODUCT_B MATCHES
             # ============================================================
-            results = self._clean_duplicate_product_b(results)
+            if avoid_duplicate_product_b:
+                results = self._clean_duplicate_product_b(results)
             
             # ============================================================
             # STEP 7: ADD METADATA
@@ -1137,93 +1139,130 @@ class ModelCombinedSimilarity:
     
     def _clean_duplicate_product_b(self, results: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Clean duplicate Product_B matches across all Product_A results.
-        For each Product_B that appears multiple times, keep only the match with highest Combined_Score.
-        Recalculate ranks after removing duplicates.
+        Clean duplicate Product_B matches across all Product_A results using rank-based logic.
+        Iteratively ensures that rank 1 matches have unique Product_B IDs by:
+        1. Finding duplicate Product_B in rank 1
+        2. Keeping only the match with highest combined_score
+        3. Removing rank 1 from other product_a's (promoting rank 2 to rank 1)
+        4. Re-checking for duplicates after promotions (within same iteration)
+        5. Repeating until no duplicates exist in rank 1
         
         Args:
             results: Dictionary with product_a_id as keys and similarity data as values
             
         Returns:
-            Cleaned results dictionary with unique Product_B matches and recalculated ranks
+            Cleaned results dictionary with unique Product_B in rank 1 and recalculated ranks
         """
-        logging.info("\n🧹 STEP 6: Cleaning duplicate Product_B matches")
+        logging.info("\n🧹 STEP 6: Cleaning duplicate Product_B matches (rank-based)")
         
-        # Build mapping of Product_B_ID -> list of (product_a_id, match_data, index)
-        product_b_to_matches = defaultdict(list)
+        iteration = 0
+        total_removed = 0
         
-        for product_a_id, data in results.items():
-            if product_a_id == '_metadata':
-                continue
+        while True:
+            iteration += 1
+            logging.info(f"\n🔄 Iteration {iteration}: Checking rank 1 for duplicates...")
             
-            similar_products_b = data.get('similar_products_b', [])
+            iteration_removed = 0
             
-            for idx, match in enumerate(similar_products_b):
-                product_b_id = match.get('id')
-                if product_b_id:
-                    combined_score = match.get('combined_score', 0.0)
-                    product_b_to_matches[product_b_id].append({
-                        'product_a_id': product_a_id,
-                        'match_data': match,
-                        'index': idx,
-                        'combined_score': combined_score
-                    })
-        
-        # Find duplicates (Product_B appearing in multiple Product_A)
-        duplicates_found = {
-            b_id: matches 
-            for b_id, matches in product_b_to_matches.items() 
-            if len(matches) > 1
-        }
-        
-        if not duplicates_found:
-            logging.info("✅ No duplicate Product_B matches found")
-            return results
-        
-        logging.info(f"🔍 Found {len(duplicates_found)} Product_B with duplicates")
-        
-        # Track which matches to remove
-        matches_to_remove = []
-        
-        # For each duplicate Product_B, keep only the one with highest combined_score
-        for product_b_id, matches in duplicates_found.items():
-            # Sort by combined_score descending
-            matches.sort(key=lambda x: x['combined_score'], reverse=True)
-            
-            # Keep the first (highest score), remove the rest
-            best_match = matches[0]
-            removed_matches = matches[1:]
-            
-            logging.info(f"   Product_B {product_b_id}:")
-            logging.info(f"      ✅ Keeping: Product_A {best_match['product_a_id']} (score: {best_match['combined_score']:.3f})")
-            
-            for removed in removed_matches:
-                logging.info(f"      ❌ Removing: Product_A {removed['product_a_id']} (score: {removed['combined_score']:.3f})")
-                matches_to_remove.append({
-                    'product_a_id': removed['product_a_id'],
-                    'product_b_id': product_b_id
-                })
-        
-        # Remove duplicate matches from results
-        removed_count = 0
-        for removal in matches_to_remove:
-            product_a_id = removal['product_a_id']
-            product_b_id = removal['product_b_id']
-            
-            if product_a_id in results:
-                similar_products_b = results[product_a_id].get('similar_products_b', [])
-                # Remove the match with this product_b_id
-                original_len = len(similar_products_b)
-                similar_products_b = [m for m in similar_products_b if m.get('id') != product_b_id]
-                results[product_a_id]['similar_products_b'] = similar_products_b
+            # Inner loop: keep checking until no more duplicates in rank 1 after promotions
+            while True:
+                # Step 1: Find all rank 1 matches (first match for each product_a)
+                rank1_matches = {}  # product_b_id -> list of (product_a_id, match_data, combined_score)
                 
-                if len(similar_products_b) < original_len:
-                    removed_count += 1
+                for product_a_id, data in results.items():
+                    if product_a_id == '_metadata':
+                        continue
+                    
+                    similar_products_b = data.get('similar_products_b', [])
+                    
+                    # Check if there's a rank 1 match (first in the sorted list)
+                    if similar_products_b and len(similar_products_b) > 0:
+                        rank1_match = similar_products_b[0]
+                        product_b_id = rank1_match.get('id')
+                        combined_score = rank1_match.get('combined_score', 0.0)
+                        
+                        if product_b_id:
+                            if product_b_id not in rank1_matches:
+                                rank1_matches[product_b_id] = []
+                            
+                            rank1_matches[product_b_id].append({
+                                'product_a_id': product_a_id,
+                                'match_data': rank1_match,
+                                'combined_score': combined_score
+                            })
+                
+                # Step 2: Find duplicates in rank 1
+                duplicates = {
+                    b_id: matches 
+                    for b_id, matches in rank1_matches.items() 
+                    if len(matches) > 1
+                }
+                
+                if not duplicates:
+                    # No more duplicates after promotions
+                    break
+                
+                logging.info(f"   🔍 Found {len(duplicates)} Product_B with duplicates in rank 1")
+                
+                # Step 3: For each duplicate, keep highest score, remove others
+                for product_b_id, matches in duplicates.items():
+                    # Sort by combined_score descending
+                    matches.sort(key=lambda x: x['combined_score'], reverse=True)
+                    
+                    best_match = matches[0]
+                    removed_matches = matches[1:]
+                    
+                    logging.info(f"      Product_B {product_b_id}:")
+                    logging.info(f"         ✅ Keeping: Product_A {best_match['product_a_id']} (score: {best_match['combined_score']:.3f})")
+                    
+                    # Remove the rank 1 match from other product_a's (this promotes rank 2 to rank 1)
+                    for removed in removed_matches:
+                        product_a_id = removed['product_a_id']
+                        
+                        if product_a_id in results:
+                            similar_products_b = results[product_a_id].get('similar_products_b', [])
+                            
+                            # Verify that rank 1 is the product_b we want to remove
+                            if similar_products_b and len(similar_products_b) > 0 and similar_products_b[0].get('id') == product_b_id:
+                                # Check if this will leave Product_A with no matches
+                                remaining_matches = len(similar_products_b) - 1
+                                
+                                if remaining_matches > 0:
+                                    logging.info(f"         ❌ Removing from: Product_A {product_a_id} (score: {removed['combined_score']:.3f}) - {remaining_matches} match(es) remaining")
+                                else:
+                                    logging.info(f"         ⚠️  Removing from: Product_A {product_a_id} (score: {removed['combined_score']:.3f}) - NO MATCHES LEFT!")
+                                
+                                # Remove rank 1 (modifies list in-place)
+                                del similar_products_b[0]
+                                iteration_removed += 1
+                                total_removed += 1
+                            else:
+                                logging.warning(f"         ⚠️  Cannot remove from Product_A {product_a_id}: rank 1 mismatch or empty list")
+                
+                # After removing duplicates, loop back to re-check rank 1
+                # (newly promoted rank 2 -> rank 1 might have duplicates)
+            
+            # If we removed anything in this iteration, continue to next iteration
+            # Otherwise, we're done
+            if iteration_removed > 0:
+                logging.info(f"   ✅ Removed {iteration_removed} rank 1 matches in iteration {iteration}")
+            else:
+                logging.info(f"✅ No duplicates found in rank 1. Cleaning complete after {iteration} iterations.")
+                logging.info(f"   Total matches removed: {total_removed}")
+                break
         
-        logging.info(f"✅ Removed {removed_count} duplicate matches")
+        # Count products with no matches after cleaning
+        products_with_no_matches = sum(
+            1 for product_a_id, data in results.items()
+            if product_a_id != '_metadata' and not data.get('similar_products_b')
+        )
         
-        # Recalculate ranks for each Product_A
-        logging.info("🔢 Recalculating ranks for each Product_A...")
+        if products_with_no_matches > 0:
+            logging.warning(f"⚠️  {products_with_no_matches} Product_A entries have NO MATCHES after duplicate removal!")
+            logging.warning(f"   This happens when a product's only match(es) were duplicates with lower scores.")
+        
+        # Final step: Recalculate ranks for all products
+        logging.info("\n🔢 Recalculating final ranks for all products...")
         
         recalculated_count = 0
         for product_a_id, data in results.items():
@@ -1233,14 +1272,11 @@ class ModelCombinedSimilarity:
             similar_products_b = data.get('similar_products_b', [])
             
             if similar_products_b:
-                # Ranks are already sorted by combined_score (from previous step)
-                # Just need to renumber them sequentially
                 for rank, match in enumerate(similar_products_b, start=1):
                     match['rank'] = rank
-                
                 recalculated_count += 1
         
         logging.info(f"✅ Recalculated ranks for {recalculated_count} products")
-        logging.info("   All Product_B are now unique across all matches\n")
+        logging.info("   All Product_B in rank 1 are now unique\n")
         
         return results

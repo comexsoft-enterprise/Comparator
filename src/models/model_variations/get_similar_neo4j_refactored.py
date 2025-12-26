@@ -152,6 +152,7 @@ class NonFoodElecWeights(BaseModel):
 
 class QualityThresholds(BaseModel):
     """Minimum quality thresholds for filtering results."""
+    min_matches: int = Field(default=3, ge=1, description="Minimum number of shared nodes (Brand, Format, etc.) required in graph to consider a match")
     min_graph_score: float = Field(default=0.5, ge=0, description="Minimum graph-based similarity score")
     min_name_similarity: float = Field(default=0.5, ge=0, le=1, description="Minimum name embedding similarity")
     min_description_similarity: float = Field(default=0.5, ge=0, le=1, description="Minimum description embedding similarity")
@@ -172,6 +173,7 @@ class ModelParameters(BaseModel):
     non_food_elec_weights: NonFoodElecWeights = Field(default_factory=NonFoodElecWeights)
     
     quality_thresholds: QualityThresholds = Field(default_factory=QualityThresholds)
+    avoid_duplicate_product_b: bool = Field(default=True, description="Whether to avoid duplicate product B matches")
 
 
 # ============================================================
@@ -405,7 +407,7 @@ def model(params: ModelParameters):
         results = model.find_cross_store_similarities(
             store_a=params.store_a,
             store_b=params.store_b,
-            min_matches=2,
+            min_matches=params.quality_thresholds.min_matches,
             weights_food=weights_food,
             weights_non_food_super=weights_non_food_super,
             weights_non_food_elec=weights_non_food_elec,
@@ -421,7 +423,8 @@ def model(params: ModelParameters):
             min_graph_score=params.quality_thresholds.min_graph_score,
             min_name_similarity=params.quality_thresholds.min_name_similarity,
             min_description_similarity=params.quality_thresholds.min_description_similarity,
-            min_euclidean_similarity=params.quality_thresholds.min_euclidean_similarity
+            min_euclidean_similarity=params.quality_thresholds.min_euclidean_similarity,
+            avoid_duplicate_product_b=params.avoid_duplicate_product_b
         )
         
         print("✅ Analysis complete!")

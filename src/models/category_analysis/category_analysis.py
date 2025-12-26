@@ -94,7 +94,7 @@ class CategoryAnalysis:
         weights: dict,
         idx: int,
         total: int,
-        score_threshold: float = 0.15,
+        cat_score_threshold: float = 0.15,
         min_graph_score: float = 0.7
     ) -> tuple:
         """
@@ -365,7 +365,7 @@ class CategoryAnalysis:
             max_graph_score = similar_products_b[0].get('weighted_score', 0.0)
             filtered_products = [
                 prod for prod in similar_products_b 
-                if (max_graph_score - prod.get('weighted_score', 0.0)) < score_threshold
+                if (max_graph_score - prod.get('weighted_score', 0.0)) < cat_score_threshold
                 and prod.get('weighted_score', 0.0) >= min_graph_score  # Use parameter instead of hardcoded value
             ]
             similar_products_b = filtered_products

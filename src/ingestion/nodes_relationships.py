@@ -240,6 +240,10 @@ class Neo4jNodesRelationshipsManager:
                 if node_type == NodeTypes.PRODUCT:
                     continue
                 
+                # Skip COUNTRY as it's handled separately below
+                if node_type == NodeTypes.COUNTRY:
+                    continue
+                
                 identifier_value = self.get_value_case_insensitive(product_data, source_column)
                 
                 if self.is_empty_value(identifier_value):
@@ -273,29 +277,33 @@ class Neo4jNodesRelationshipsManager:
                             'properties': properties
                         }
                         nodes_by_type[node_type].append(node_data)
+            
+            # Country nodes (can come from multiple sources, comma-separated, dot-separated, semicolon-separated)
+            # Handle 'country' field
+            country = self.get_value_case_insensitive(product_data, 'country')
+            if not self.is_empty_value(country):
+                # Split by dots, commas, and semicolons
+                countries = [c.strip() for c in str(country).replace(';', ',').replace('.', ',').split(',') if c.strip()]
+                for country_value in countries:
+                    if not self.is_empty_value(country_value) and country_value.lower() != 'nan':
+                        if country_value not in seen_identifiers[NodeTypes.COUNTRY]:
+                            seen_identifiers[NodeTypes.COUNTRY].add(country_value)
+                            properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
+                            node_data = {'identifier': country_value, 'properties': properties}
+                            nodes_by_type[NodeTypes.COUNTRY].append(node_data)
 
-                # Country nodes (can come from multiple sources, comma-separated, dot-separated)
-                country = self.get_value_case_insensitive(product_data, 'country')
-                if not self.is_empty_value(country):
-                    countries = [c.strip() for c in str(country).replace(';', ',').replace('.', ',').split(',') if c.strip()]
-                    for country_value in countries:
-                        if not self.is_empty_value(country_value) and country_value.lower() != 'nan':
-                            if country_value not in seen_identifiers[NodeTypes.COUNTRY]:
-                                seen_identifiers[NodeTypes.COUNTRY].add(country_value)
-                                properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
-                                node_data = {'identifier': country_value, 'properties': properties}
-                                nodes_by_type[NodeTypes.COUNTRY].append(node_data)
-
-                country_origin = self.get_value_case_insensitive(product_data, 'country_origin')
-                if not self.is_empty_value(country_origin):
-                    country_origins = [c.strip() for c in str(country_origin).replace(';', ',').replace('.', ',').split(',') if c.strip()]
-                    for origin_value in country_origins:
-                        if not self.is_empty_value(origin_value) and origin_value.lower() != 'nan':
-                            if origin_value not in seen_identifiers[NodeTypes.COUNTRY]:
-                                seen_identifiers[NodeTypes.COUNTRY].add(origin_value)
-                                properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
-                                node_data = {'identifier': origin_value, 'properties': properties}
-                                nodes_by_type[NodeTypes.COUNTRY].append(node_data)
+            # Handle 'country_origin' field
+            country_origin = self.get_value_case_insensitive(product_data, 'country_origin')
+            if not self.is_empty_value(country_origin):
+                # Split by dots, commas, and semicolons
+                country_origins = [c.strip() for c in str(country_origin).replace(';', ',').replace('.', ',').split(',') if c.strip()]
+                for origin_value in country_origins:
+                    if not self.is_empty_value(origin_value) and origin_value.lower() != 'nan':
+                        if origin_value not in seen_identifiers[NodeTypes.COUNTRY]:
+                            seen_identifiers[NodeTypes.COUNTRY].add(origin_value)
+                            properties = self._collect_node_properties(NodeTypes.COUNTRY, product_data)
+                            node_data = {'identifier': origin_value, 'properties': properties}
+                            nodes_by_type[NodeTypes.COUNTRY].append(node_data)
                 
             # Ingredients/Components
             is_food = self._is_food_product(product_data)
@@ -441,12 +449,17 @@ class Neo4jNodesRelationshipsManager:
                 if self.is_empty_value(source_value) or self.is_empty_value(target_value):
                     continue
                 
-                # Check if target node type should split by comma
+                # Check if target node type should split by comma/dot/semicolon
                 should_split_target = target_node_type in [NodeTypes.BRAND, NodeTypes.STORE, NodeTypes.FORMAT, NodeTypes.COUNTRY]
                 
                 if should_split_target:
                     # Split target values and create separate relationships
-                    target_values = [v.strip() for v in str(target_value).replace(';', ',').split(',') if v.strip()]
+                    # For Country nodes, also split by dots
+                    if target_node_type == NodeTypes.COUNTRY:
+                        target_values = [v.strip() for v in str(target_value).replace(';', ',').replace('.', ',').split(',') if v.strip()]
+                    else:
+                        target_values = [v.strip() for v in str(target_value).replace(';', ',').split(',') if v.strip()]
+                    
                     for t_value in target_values:
                         if not self.is_empty_value(t_value) and t_value.lower() != 'nan':
                             properties = self._collect_relationship_properties(rel_type, product_data)
