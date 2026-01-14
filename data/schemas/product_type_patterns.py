@@ -19,12 +19,93 @@ ENABLE_PRODUCT_TYPE_DETECTION = True
 # Based on original Cypher CASE statement for oil type detection
 PRODUCT_TYPE_PATTERNS = {
     "olive_oil": {
-        "patterns_en": ["extra virgin olive oil", "extra-virgin olive oil", "olive oil", "oil olive"]
+        "patterns_en": [
+            "olive oil",
+            "oil olive",
+            "extra virgin olive oil",
+            "extra-virgin olive oil",
+            "extra virgin olive",
+            "virgin olive oil",
+            "pure olive oil",
+            "refined olive oil",
+            "aove",
+            "cold pressed olive oil",
+            "cold-pressed olive oil",
+            "first cold press olive oil"
+        ]
     },
+
     "sunflower_oil": {
-        "patterns_en": ["sunflower oil", "oil sunflower"],
+        "patterns_en": [
+            "sunflower oil",
+            "oil sunflower",
+            "high oleic sunflower oil",
+            "refined sunflower oil",
+            "cold pressed sunflower oil",
+            "cold-pressed sunflower oil"
+        ]
+    },
+
+    "sugar_free": {
+        "patterns_en": [
+            "sugar free",
+            "sugar-free",
+            "no sugar",
+            "zero sugar",
+            "without sugar",
+            "0g sugar",
+            "0 g sugar",
+            "no added sugar",
+            "without added sugar",
+            "unsweetened",
+            "with sweetener",
+            "contains sweeteners"
+        ]
+    },
+
+    "alcohol_free": {
+        "patterns_en": [
+            "alcohol free",
+            "alcohol-free",
+            "non alcoholic",
+            "non-alcoholic",
+            "0% alcohol",
+            "0% alc",
+            "dealcoholized",
+            "de-alcoholized"
+        ]
+    },
+
+    "truffle": {
+        "patterns_en": [
+            "truffle",
+            "with truffle",
+            "truffle flavored",
+            "truffle-flavored",
+            "truffle flavour",
+            "truffle-flavour",
+            "black truffle",
+            "white truffle",
+            "truffle oil",
+            "oil with truffle",
+            "truffle aroma",
+            "truffle infused",
+            "truffle-infused"
+        ]
+    },
+    "light": {
+        "patterns_en": [
+            " light ",
+            "low calorie",
+            "low-calorie",
+            "reduced calorie",
+            "reduced calories",
+            "light sugar",
+            "reduced sugar"
+        ]
     }
 }
+
 
 
 def get_product_type_list():
