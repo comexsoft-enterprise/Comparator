@@ -621,6 +621,11 @@ class Neo4jNodesRelationshipsManager:
                     # Do not overwrite existing product property if already present
                     if source_column not in properties:
                         properties[source_column] = value
+            
+            # Manually include price_history if present (enrichment from Postgres)
+            price_history = self.get_value_case_insensitive(product_data, 'price_history')
+            if not self.is_empty_value(price_history) and str(price_history).lower() != 'nan':
+                properties['price_history'] = price_history
         
         return properties
 

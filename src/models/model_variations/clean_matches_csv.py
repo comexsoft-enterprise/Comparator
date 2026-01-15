@@ -41,11 +41,17 @@ def load_dataframe(path: Path) -> pd.DataFrame:
 
 
 def write_outputs(df_out: pd.DataFrame, src_path: Path):
-    out_csv = src_path.with_name(src_path.stem + '_cleaned').with_suffix('.csv')
+    # out_csv = src_path.with_name(src_path.stem + '_cleaned').with_suffix('.csv')
+    # Only write Excel output, CSV generation disabled
     out_xlsx = src_path.with_name(src_path.stem + '_cleaned').with_suffix('.xlsx')
-    df_out.to_csv(out_csv, sep=';', index=False)
+    # df_out.to_csv(out_csv, sep=';', index=False)
     df_out.to_excel(out_xlsx, index=False)
-    return out_csv, out_xlsx
+    # return out_csv, out_xlsx
+    # CSV generation disabled to avoid creating files in repo
+    # out_csv = src_path.with_name(src_path.stem + '_cleaned').with_suffix('.csv')
+    # df_out.to_csv(out_csv, sep=';', index=False)
+    # return out_csv, out_xlsx
+    return None, out_xlsx
 
 
 def main(csv_path: str):
@@ -176,7 +182,10 @@ def main(csv_path: str):
     df_out = df_out[final_cols]
 
     out_csv, out_xlsx = write_outputs(df_out, src)
-    print(f'Wrote cleaned CSV: {out_csv}')
+    if out_csv:
+        print(f'Wrote cleaned CSV: {out_csv}')
+    else:
+        print('CSV generation disabled')
     print(f'Wrote cleaned Excel: {out_xlsx}')
     return 0
 

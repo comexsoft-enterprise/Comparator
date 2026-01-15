@@ -520,23 +520,23 @@ def model(params: ModelParameters):
         print(f"✅ Excel file created: {excel_file}")
         
         # Export to CSV
-        csv_file = export_cross_store_results_to_csv(
-            results=results,
-            store_a=params.store_a,
-            store_b=params.store_b
-        )
-        print(f"✅ CSV file created: {csv_file}")
+        # csv_file = export_cross_store_results_to_csv(
+        #     results=results,
+        #     store_a=params.store_a,
+        #     store_b=params.store_b
+        # )
+        # print(f"✅ CSV file created: {csv_file}")
         
         # Export SIID pairs (ranks 1-3 only)
-        siid_csv = export_siid_pairs_csv(
-            results=results,
-            store_a=params.store_a,
-            store_b=params.store_b,
-            metadata=metadata
-        )
-        if siid_csv:
-            print(f"✅ SIID pairs CSV created: {siid_csv}")
-            print("   (Contains only ranks 1, 2, and 3)")
+        # siid_csv = export_siid_pairs_csv(
+        #     results=results,
+        #     store_a=params.store_a,
+        #     store_b=params.store_b,
+        #     metadata=metadata
+        # )
+        # if siid_csv:
+        #     print(f"✅ SIID pairs CSV created: {siid_csv}")
+        #     print("   (Contains only ranks 1, 2, and 3)")
         
     except Exception as e:
         logging.error(f"Error during export: {e}")

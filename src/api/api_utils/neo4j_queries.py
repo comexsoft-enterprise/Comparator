@@ -893,13 +893,13 @@ def generate_query_for_filter_triplets(
         logging.info(f"  Property name: {canonical_ref}")
         logging.info(f"  Parent relationship: {ref_rel_type}")
 
-    # Initialize schema cache if connector provided
-    schema = None
-    if connector is not None:
-        schema = get_graph_schema(connector)
-        logging.info(f"Using cached graph schema with {len(schema)} connections")
-    else:
-        logging.warning("No connector provided, will use variable-length paths (slower)")
+    # # Initialize schema cache if connector provided
+    # schema = None
+    # if connector is not None:
+    #     schema = get_graph_schema(connector)
+    #     logging.info(f"Using cached graph schema with {len(schema)} connections")
+    # else:
+    #     logging.warning("No connector provided, will use variable-length paths (slower)")
 
     match_clauses: List[str] = []
     where_clauses: List[str] = []
@@ -1351,6 +1351,7 @@ def generate_query_for_filter_triplets(
     for i, w in enumerate(where_clauses):
         logging.info(f"  {i+1}. {w}")
     logging.info(f"\nParameters: {params}")
+    logging.info(f"Total parameters: {len(params)}")
 
     # Optimize query using indexed properties
     # Reorder MATCH clauses to leverage indexes - put indexed property filters first
@@ -1394,11 +1395,13 @@ def generate_query_for_filter_triplets(
     # Build final query
     query = "\n".join(deduped_matches)
 
+    # Initialize indexed_where outside the conditional block to avoid scope issues
+    indexed_where = []
+
     if where_clauses:
         op = " OR " if logical_operator.upper() == "OR" else " AND "
         
         # Separate WHERE clauses using indexed properties from others
-        indexed_where = []
         other_where = []
         
         for w in where_clauses:
@@ -1417,7 +1420,11 @@ def generate_query_for_filter_triplets(
         if indexed_where:
             logging.info(f"\n✓ Query optimization: Using {len(indexed_where)} indexed property filters")
         
+        logging.info(f"\n✓ Joining {len(ordered_where)} WHERE clauses with operator: {op.strip()}")
         query += "\nWHERE " + op.join(ordered_where)
+        logging.info(f"✓ WHERE clause added to query")
+    else:
+        logging.info(f"\n⚠ No WHERE clauses to add")
     
     # Apply early LIMIT optimization for multiple filters to reduce intermediate result sets
     # This works best when we have selective indexed property filters

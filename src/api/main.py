@@ -436,7 +436,7 @@ async def search_products(
 
     try:
         connector = get_neo4j_connection()
-        query = generate_query_for_filter_triplets("Product", filters, limit=limit)
+        query = generate_query_for_filter_triplets("Product", filters, limit=limit, connector=connector)
         results = run_query(connector, query)
         nodes = []
         if results:
@@ -629,6 +629,76 @@ async def compare_stores(request: CompareStoresRequest) -> Dict[str, List]:
             )
         logger.info(f"Store '{request.store_b}' found in database")
         
+        # Check if we need batch processing for openfoodfacts
+        if request.store_b.lower() == "openfoodfacts":
+            logger.info("Detected openfoodfacts - enabling batch processing mode")
+            
+            # If list_ids is empty or None, get all product SIIDs from store_a
+            if not request.list_ids or len(request.list_ids) == 0:
+                logger.info(f"No product IDs provided - fetching all products from {request.store_a}")
+                
+                # Query to get all product relationship IDs (r.id) from store_a
+                # The model expects r.id format: {store}-{postcode}-{product_id}
+                get_all_products_query = """
+                MATCH (s:Store {name: $store_name})-[r:SELLS]->(p:Product)
+                WHERE r.id IS NOT NULL
+                RETURN r.id AS id
+                """
+                all_products_result = run_query(connector, (get_all_products_query, {"store_name": request.store_a}))
+                product_ids_to_process = [record["id"] for record in all_products_result if record.get("id")]
+                
+                logger.info(f"Found {len(product_ids_to_process)} products in {request.store_a}")
+            else:
+                product_ids_to_process = request.list_ids
+            
+            batch_size = 100
+            total_products = len(product_ids_to_process)
+            num_batches = (total_products + batch_size - 1) // batch_size
+            
+            logger.info(f"Processing {total_products} products in {num_batches} batches of {batch_size}")
+            
+            # Process all batches and accumulate results
+            all_results = {}
+            
+            for batch_idx in range(num_batches):
+                batch_start = batch_idx * batch_size
+                batch_end = min(batch_start + batch_size, total_products)
+                batch_ids = product_ids_to_process[batch_start:batch_end]
+                
+                logger.info(f"Processing batch {batch_idx + 1}/{num_batches} ({len(batch_ids)} products)")
+                
+                # Build ModelParameters for this batch
+                batch_params = ModelParameters(
+                    store_a=request.store_a,
+                    store_b=request.store_b,
+                    list_ids=batch_ids,
+                    top_n_results=request.top_n_results,
+                    food_weights=request.food_weights or FoodWeights(),
+                    non_food_super_weights=request.non_food_super_weights or NonFoodSuperWeights(),
+                    non_food_elec_weights=request.non_food_elec_weights or NonFoodElecWeights(),
+                    quality_thresholds=request.quality_thresholds or QualityThresholds(),
+                    avoid_duplicate_product_b=request.avoid_duplicate_product_b
+                )
+                
+                # Run model for this batch
+                batch_results = model(batch_params)
+                
+                # Merge batch results into accumulated results (excluding _metadata)
+                for key, value in batch_results.items():
+                    if key != '_metadata':
+                        all_results[key] = value
+                
+                # Count actual product results (excluding _metadata)
+                product_count = len([k for k in batch_results.keys() if k != '_metadata'])
+                logger.info(f"Batch {batch_idx + 1}/{num_batches} complete ({product_count} product results)")
+            
+            # Count total product results (excluding _metadata)
+            total_product_results = len([k for k in all_results.keys() if k != '_metadata'])
+            logger.info(f"All {num_batches} batches processed - returning {total_product_results} total product results")
+            
+            return all_results
+        
+        # Standard processing for non-openfoodfacts stores
         # Build ModelParameters from request
         model_params = ModelParameters(
             store_a=request.store_a,

@@ -293,6 +293,7 @@ Crea un resumen completo del producto con las siguientes secciones:
 
 Incluye solo los campos si la información está disponible. Usa viñetas para mayor claridad.
 Formatea la respuesta en markdown claro con encabezados y viñetas apropiados. Sé conciso pero informativo. Si falta alguna información, no la menciones.
+No añadas comentarios adicionales fuera del resumen solicitado.
 """
         
         # Create user prompt with the product data

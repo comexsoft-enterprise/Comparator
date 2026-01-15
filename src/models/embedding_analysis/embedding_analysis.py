@@ -91,6 +91,16 @@ class SimilarityAnalysis:
                     self.embeddings_cache = {}
                     return
     
+    def clear_embeddings_cache(self):
+        """
+        Clear embeddings cache from memory to free up RAM.
+        Should be called after processing each batch to prevent memory overflow.
+        """
+        with self.cache_lock:
+            cache_size = len(self.embeddings_cache)
+            self.embeddings_cache.clear()
+        logging.info(f"🧹 Cleared {cache_size} embeddings from memory cache")
+    
     def save_embeddings_cache(self):
         """
         Save embeddings cache to pickle file using atomic write.
@@ -323,24 +333,24 @@ class SimilarityAnalysis:
 
         return details
 
-    def preload_embeddings_for_results(
+    def preload_embeddings_for_batch(
         self,
-        results: Dict[str, Dict[str, Any]]
+        batch_results: Dict[str, Dict[str, Any]]
     ) -> Dict[str, list]:
         """
-        Preload ALL embeddings needed for the entire result set in a single query.
-        This is the fastest approach - one query for everything.
+        Preload embeddings ONLY for the current batch to minimize memory usage.
+        This prevents memory overflow when dealing with hundreds of thousands of products.
         
         Args:
-            results: Complete results dictionary with all products A and their similar products B
+            batch_results: Batch of results (subset of complete results dictionary)
             
         Returns:
             Dictionary mapping siid -> {'name': embedding, 'description': embedding}
         """
-        # Collect all unique (siid, store) pairs from results
+        # Collect all unique (siid, store) pairs from THIS BATCH only
         siid_store_pairs = set()
         
-        for product_a_id, data in results.items():
+        for product_a_id, data in batch_results.items():
             if product_a_id == '_metadata':
                 continue
             
@@ -361,12 +371,12 @@ class SimilarityAnalysis:
         # Convert set to list
         siid_store_list = list(siid_store_pairs)
         
-        logging.info(f"📥 Preloading {len(siid_store_list)} unique embeddings from Neo4j...")
+        logging.info(f"📥 Preloading {len(siid_store_list)} embeddings for current batch...")
         
         # Use the existing batch method
         embedding_map = self._fetch_embeddings_batch(siid_store_list)
         
-        logging.info(f"✅ Preloaded {len(embedding_map)} embeddings successfully")
+        logging.info(f"✅ Preloaded {len(embedding_map)} embeddings for batch")
         
         return embedding_map
     
@@ -395,7 +405,8 @@ class SimilarityAnalysis:
             return {}
 
         # We'll fetch in chunks to avoid huge parameter payloads and memory spikes
-        CHUNK_SIZE = 8000
+        # Reduced chunk size to minimize memory usage when dealing with large datasets
+        CHUNK_SIZE = 2000
         query = """
         UNWIND $siid_store_pairs AS pair
         MATCH (s:Store {name: pair.store})-[:SELLS]->(p:Product {siid: pair.siid})

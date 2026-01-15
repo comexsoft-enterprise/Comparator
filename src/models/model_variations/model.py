@@ -1,5 +1,6 @@
 import logging
 import json
+import gc
 from datetime import datetime
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -1029,9 +1030,9 @@ class ModelCombinedSimilarity:
                 for product_id in batch_product_ids
             }
             
-            # Load embeddings only for this batch
+            # Load embeddings only for this batch (memory-efficient)
             logging.info(f"   ⬇️  Loading embeddings for batch {batch_idx + 1}...")
-            embedding_cache = self.similarity_analysis.preload_embeddings_for_results(batch_results)
+            embedding_cache = self.similarity_analysis.preload_embeddings_for_batch(batch_results)
             logging.info(f"   ✅ Loaded {len(embedding_cache)} embeddings for batch {batch_idx + 1}")
             
             # Process this batch in parallel
@@ -1074,6 +1075,7 @@ class ModelCombinedSimilarity:
             logging.info(f"   🧹 Clearing embedding cache for batch {batch_idx + 1}...")
             del embedding_cache
             del batch_results
+            self.similarity_analysis.clear_embeddings_cache()  # Clear in-memory cache
             gc.collect()  # Force garbage collection
             logging.info(f"   ✅ Memory cleared for batch {batch_idx + 1}")
         

@@ -82,28 +82,32 @@ def export_siid_pairs_csv(
                 })
     
     # Write to CSV
-    try:
-        with open(output_path, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f, delimiter=';')
-            
-            # Write header
-            writer.writerow(['siid_a', 'siid_b', 'rank'])
-            
-            # Write data
-            for pair in siid_pairs:
-                writer.writerow([pair['siid_a'], pair['siid_b'], pair['rank']])
-        
-        logging.info(f"✅ SIID pairs CSV created: {output_path}")
-        logging.info(f"   Total pairs exported: {len(siid_pairs)}")
-        
-        if metadata:
-            logging.info(f"   Score threshold: {metadata.get('score_threshold', 'N/A')}")
-        
-        return output_path
-        
-    except Exception as e:
-        logging.error(f"❌ Error creating SIID pairs CSV: {e}")
-        return None
+    # DISABLED: CSV generation commented out to avoid creating files in repo
+    # try:
+    #     with open(output_path, 'w', newline='', encoding='utf-8') as f:
+    #         writer = csv.writer(f, delimiter=';')
+    #         
+    #         # Write header
+    #         writer.writerow(['siid_a', 'siid_b', 'rank'])
+    #         
+    #         # Write data
+    #         for pair in siid_pairs:
+    #             writer.writerow([pair['siid_a'], pair['siid_b'], pair['rank']])
+    #     
+    #     logging.info(f"✅ SIID pairs CSV created: {output_path}")
+    #     logging.info(f"   Total pairs exported: {len(siid_pairs)}")
+    #     
+    #     if metadata:
+    #         logging.info(f"   Score threshold: {metadata.get('score_threshold', 'N/A')}")
+    #     
+    #     return output_path
+    #     
+    # except Exception as e:
+    #     logging.error(f"❌ Error creating SIID pairs CSV: {e}")
+    #     return None
+    
+    logging.info(f"⚠️ SIID pairs CSV export disabled - {len(siid_pairs)} pairs would have been exported")
+    return None
 
 
 def export_cross_store_results_to_csv(
@@ -225,10 +229,12 @@ def export_cross_store_results_to_csv(
     df.fillna('', inplace=True)
     
     # Export to CSV with semicolon delimiter
-    df.to_csv(output_path, index=False, sep=';', encoding='utf-8')
+    # DISABLED: CSV generation commented out to avoid creating files in repo
+    # df.to_csv(output_path, index=False, sep=';', encoding='utf-8')
     
-    logging.info(f"✅ CSV file created: {output_path}")
-    return output_path
+    # logging.info(f"✅ CSV file created: {output_path}")
+    logging.info(f"⚠️ CSV export disabled - only Excel exports will be generated")
+    return None  # Return None instead of path since CSV not created
 
 
 

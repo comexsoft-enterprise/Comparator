@@ -10,7 +10,8 @@ import os
 import pandas as pd
 import time
 from pathlib import Path
-from typing import List
+from typing import List, Dict
+import json
 
 import sys
 
@@ -23,7 +24,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from src.connectors.neo4j_connector import Neo4jConnector
 from src.ingestion.nodes_relationships import Neo4jNodesRelationshipsManager
 from config.settings import PROJECT_ROOT
-
+from src.connectors.postgresql_connector import get_postgresql_connection
 
 NEO4J_URI = os.getenv("NEO4J_URI")
 NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
@@ -64,7 +65,7 @@ class Neo4jCSVIngestor:
             bool: True if connection successful, False otherwise.
         """
         try:
-            self.driver = self.neo4j_connector.get_neo4j_driver(NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD)
+            self.driver = self.neo4j_connector.get_neo4j_driver()
             if self.driver:
                 logging.info("Successfully connected to Neo4j database")
                 return True
@@ -74,6 +75,51 @@ class Neo4jCSVIngestor:
         except Exception as e:
             logging.error(f"Error connecting to Neo4j: {e}")
             return False
+
+    def get_price_history_map(self, product_hashes: List[str]) -> Dict[str, str]:
+        """
+        Fetch price_history from PostgreSQL for a list of product hashes.
+        Returns a map from product_hash to price_history (as JSON string).
+        """
+        if not product_hashes:
+            return {}
+        
+        conn = None
+        try:
+            conn = get_postgresql_connection()
+            if not conn:
+                logging.error("Could not connect to PostgreSQL to fetch price history")
+                return {}
+                
+            with conn.cursor() as cursor:
+                # Use parameterized query with ANY
+                query = "SELECT product_hash, price_history FROM product_vector_data WHERE product_hash = ANY(%s)"
+                cursor.execute(query, (product_hashes,))
+                results = cursor.fetchall()
+                
+                # Convert results to map. Serialize JSONB/list/dict to JSON string for Neo4j property
+                price_map = {}
+                for row in results:
+                    p_hash = row[0]
+                    p_hist = row[1]
+                    
+                    if p_hist is None:
+                        continue
+                        
+                    if isinstance(p_hist, (list, dict)):
+                        price_map[p_hash] = json.dumps(p_hist)
+                    else:
+                        price_map[p_hash] = str(p_hist)
+                        
+                logging.info(f"Fetched price history for {len(price_map)} products from PostgreSQL")
+                return price_map
+                
+        except Exception as e:
+            logging.error(f"Error fetching price history: {e}")
+            return {}
+        finally:
+            if conn:
+                conn.close()
 
     def get_csv_files(self, folder: str) -> List[str]:
         """
@@ -186,6 +232,24 @@ class Neo4jCSVIngestor:
             
             # Clean data
             df = self.clean_data(df)
+            
+            # --- Enrich with price_history from PostgreSQL ---
+            if 'product_hash' in df.columns:
+                logging.info("Enriching data with price_history from PostgreSQL...")
+                product_hashes = df['product_hash'].dropna().unique().tolist()
+                price_history_map = self.get_price_history_map(product_hashes)
+                
+                if price_history_map:
+                    # Map price_history to DataFrame
+                    df['price_history'] = df['product_hash'].map(price_history_map)
+                    
+                    # Fill NaN values with None (so they are ignored in Neo4j)
+                    # Note: map returns NaN for missing keys
+                    # We need to make sure we don't introduce string 'nan'
+                    df['price_history'] = df['price_history'].where(pd.notnull(df['price_history']), None)
+                else:
+                    logging.info("No price history found for these products.")
+            # -----------------------------------------------
             
             if len(df) == 0:
                 logging.warning("⚠️ No valid rows to process after filtering. Skipping file.")
