@@ -18,94 +18,162 @@ ENABLE_PRODUCT_TYPE_DETECTION = True
 # Each type has patterns in English only
 # Based on original Cypher CASE statement for oil type detection
 PRODUCT_TYPE_PATTERNS = {
-    "olive_oil": {
-        "patterns_en": [
-            "olive oil",
-            "oil olive",
-            "extra virgin olive oil",
-            "extra-virgin olive oil",
-            "extra virgin olive",
-            "virgin olive oil",
-            "pure olive oil",
-            "refined olive oil",
-            "aove",
-            "cold pressed olive oil",
-            "cold-pressed olive oil",
-            "first cold press olive oil"
-        ]
-    },
+  "olive_oil": {
+    "patterns_en": [
+      "olive",
+      "olive oil",
+      "oil olive",
+    ]
+  },
 
-    "sunflower_oil": {
-        "patterns_en": [
-            "sunflower oil",
-            "oil sunflower",
-            "high oleic sunflower oil",
-            "refined sunflower oil",
-            "cold pressed sunflower oil",
-            "cold-pressed sunflower oil"
-        ]
-    },
+  "sunflower_oil": {
+    "patterns_en": [
+      "sunflower",
+      "sunflower oil",
+      "oil sunflower"
+    ]
+  },
 
-    "sugar_free": {
-        "patterns_en": [
-            "sugar free",
-            "sugar-free",
-            "no sugar",
-            "zero sugar",
-            "without sugar",
-            "0g sugar",
-            "0 g sugar",
-            "no added sugar",
-            "without added sugar",
-            "unsweetened",
-            "with sweetener",
-            "contains sweeteners"
-        ]
-    },
+  "sugar_free": {
+    "patterns_en": [
+      "sugar free",
+      "sugar-free",
+      "no sugar",
+      "zero sugar",
+      "without sugar",
+      "0g sugar",
+      "0 g sugar",
+      "no added sugar",
+      "without added sugar",
+      "unsweetened",
+      "zero",
+      "0.0"
+    ]
+  },
 
-    "alcohol_free": {
-        "patterns_en": [
-            "alcohol free",
-            "alcohol-free",
-            "non alcoholic",
-            "non-alcoholic",
-            "0% alcohol",
-            "0% alc",
-            "dealcoholized",
-            "de-alcoholized"
-        ]
-    },
+  "alcohol_free": {
+    "patterns_en": [
+      "alcohol free",
+      "alcohol-free",
+      "non alcoholic",
+      "non-alcoholic",
+      "0% alcohol",
+      "0% alc",
+      "dealcoholized",
+      "de-alcoholized"
+    ]
+  },
 
-    "truffle": {
-        "patterns_en": [
-            "truffle",
-            "with truffle",
-            "truffle flavored",
-            "truffle-flavored",
-            "truffle flavour",
-            "truffle-flavour",
-            "black truffle",
-            "white truffle",
-            "truffle oil",
-            "oil with truffle",
-            "truffle aroma",
-            "truffle infused",
-            "truffle-infused"
-        ]
-    },
-    "light": {
-        "patterns_en": [
-            " light ",
-            "low calorie",
-            "low-calorie",
-            "reduced calorie",
-            "reduced calories",
-            "light sugar",
-            "reduced sugar"
-        ]
-    }
+  "gluten_free": {
+    "patterns_en": [
+      "gluten free",
+      "gluten-free",
+      "no gluten",
+      "without gluten",
+      "free from gluten",
+      "glutenfree",
+    ]
+  },
+
+  "truffle": {
+    "patterns_en": [
+      "truffle",
+      "truffle-flavored",
+      "truffle-flavour",
+      "truffle-infused"
+    ]
+  },
+
+  "light": {
+    "patterns_en": [
+      "light",
+      "low calorie",
+      "low-calorie",
+      "reduced calorie",
+      "reduced calories",
+      "light sugar",
+      "reduced sugar"
+    ]
+  },
+
+  "sparkling_wine": {
+    "patterns_en": [
+      "sparkling wine",
+      "sparkling",
+      "cava",
+      "champagne",
+      "prosecco"
+    ]
+  },
+
+  "crianza": {
+    "patterns_en": [
+      "crianza"
+    ]
+  },
+
+  "reserva": {
+    "patterns_en": [
+      "reserva",
+      "reserve"
+    ]
+  },
+
+  "decaffeinated": {
+    "patterns_en": [
+      "decaffeinated",
+      "decaf",
+      "caffeine free",
+      "caffeine-free",
+      "no caffeine",
+      "without caffeine"
+    ]
+  },
+
+  "lactose_free": {
+    "patterns_en": [
+      "lactose free",
+      "lactose-free",
+      "no lactose",
+      "without lactose",
+      "dairy free",
+      "dairy-free"
+    ]
+  },
+
+  "vegan": {
+    "patterns_en": [
+      "vegan",
+      "plant based",
+      "plant-based"
+    ]
+  },
+
+  "whole": {
+    "patterns_en": [
+      "whole",
+    ]
+  },
+
+  "skimmed": {
+    "patterns_en": [
+      "skimmed",
+      "skim",
+      "non-fat",
+      "fat free",
+      "0% fat"
+    ]
+  },
+
+  "semi_skimmed": {
+    "patterns_en": [
+      "semi skimmed",
+      "semi-skimmed",
+      "semi-skim",
+      "low fat"
+    ]
+  }
 }
-
 
 
 def get_product_type_list():

@@ -11,6 +11,8 @@ import numpy as np
 
 from sklearn.metrics.pairwise import manhattan_distances, cosine_similarity, euclidean_distances
 
+import faiss
+
 from config.settings import PROJECT_ROOT
 from src.connectors.neo4j_connector import Neo4jConnector
 from src.models.embedding_analysis.embedding_generation import generate_single_embedding
@@ -30,6 +32,11 @@ class SimilarityAnalysis:
         self.embeddings_cache = {}
         self.cache_lock = threading.Lock()  # Thread-safe lock for cache access
         self.load_embeddings_cache()
+        
+        # Configuration for vector search method
+        # If True, use FAISS for local similarity calculation. 
+        # If False, use sklearn (default) or potentially Neo4j vector functions in the future.
+        self.use_faiss = True
 
     # -------------------------------
     # Embedding cache management
@@ -275,6 +282,9 @@ class SimilarityAnalysis:
 
     # Helper function to calculate similarity based on metric
     def calculate_similarity(self, target_emb, candidate_embs, metric):
+        if self.use_faiss and faiss is not None:
+            return self.calculate_similarity_with_faiss(target_emb, candidate_embs, metric)
+
         if metric == 'cosine':
             return cosine_similarity([target_emb], candidate_embs)[0]
         elif metric == 'euclidean':
@@ -290,7 +300,59 @@ class SimilarityAnalysis:
             max_dist = distances.max() if distances.max() > 0 else 1
             return 1 - (distances / max_dist)
         else:
-            return cosine_similarity([target_emb], candidate_embs)[0]     
+            return cosine_similarity([target_emb], candidate_embs)[0]
+
+    def calculate_similarity_with_faiss(self, target_emb: np.ndarray, candidate_embs: np.ndarray, metric: str) -> np.ndarray:
+        """
+        Calculate similarity using FAISS.
+        FAISS is optimized for vector similarity search and clustering.
+        Here we use it to calculate similarity scores for the candidate embeddings.
+        """
+        if not candidate_embs.size:
+            return np.array([])
+            
+        # Ensure float32 for FAISS
+        target_emb_32 = target_emb.astype(np.float32).reshape(1, -1)
+        candidate_embs_32 = candidate_embs.astype(np.float32)
+        
+        d = target_emb_32.shape[1]
+        n_candidates = candidate_embs_32.shape[0]
+        
+        try:
+            if metric == 'cosine' or metric == 'dot_product':
+                # IndexFlatIP uses Inner Product (dot product)
+                index = faiss.IndexFlatIP(d)
+                
+                # For cosine similarity, vectors must be normalized
+                if metric == 'cosine':
+                    faiss.normalize_L2(target_emb_32)
+                    faiss.normalize_L2(candidate_embs_32)
+                
+                index.add(candidate_embs_32)
+                
+                # Search for all candidates to get scores
+                # We search for k=n_candidates to get scores for all of them
+                D, I = index.search(target_emb_32, k=n_candidates)
+                
+                # FAISS returns results sorted by similarity (nearest first)
+                # We need to map these scores back to the original order of candidate_embs
+                scores = np.zeros(n_candidates, dtype=np.float32)
+                
+                # D[0] contains scores, I[0] contains original indices
+                scores[I[0]] = D[0]
+                
+                return scores
+                
+            else:
+                logging.warning(f"Metric '{metric}' not directly supported by FAISS wrapper, falling back to sklearn")
+                # Remove use_faiss temporarily to avoid infinite recursion if calculate_similarity calls this
+                # But here we just copy the sklearn logic or call the original method carefully.
+                # Simplest is to return cosine_similarity using sklearn
+                return cosine_similarity(target_emb.reshape(1, -1), candidate_embs)[0]
+                
+        except Exception as e:
+            logging.error(f"Error in FAISS calculation: {e}, falling back to sklearn")
+            return cosine_similarity(target_emb.reshape(1, -1), candidate_embs)[0]     
         
 
     def get_product_details(self, product_id: int, print_details: bool = False) -> Dict[str, Any]:

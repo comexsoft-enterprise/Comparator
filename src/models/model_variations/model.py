@@ -4,13 +4,15 @@ import gc
 from datetime import datetime
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Tuple
 from collections import defaultdict
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from src.models.category_analysis.category_analysis import CategoryAnalysis
 from src.models.embedding_analysis.embedding_analysis import SimilarityAnalysis
 from src.models.postgresql_analysis.euclidean_distance_calculator import process_product_euclidean
+# Alternative: Use PostgreSQL-native directly for all batches
+# from src.models.postgresql_analysis.euclidean_helpers import process_product_euclidean_native as process_product_euclidean
 from src.models.model_variations.insert_match_posgres import insert_to_validate
 from config.settings import POSTGRES_DB_CONFIG
 
@@ -237,6 +239,611 @@ class ModelCombinedSimilarity:
         self.category_analysis = CategoryAnalysis()
         self.similarity_analysis = SimilarityAnalysis()
         # falta la clase de los valores numéricos
+
+    def _run_embedding_hf(
+        self,
+        products_a: List[Dict[str, Any]],
+        store_a: str,
+        store_b: str,
+        top_k: int = 140,
+        name_weight: float = 0.5,
+        description_weight: float = 0.5,
+        batch_size: int = 2048,
+        max_workers: int = 20,
+        widen_factor: int = 3,
+        index_cache_dir: Optional[str] = None,
+        rebuild_index: bool = False,
+        faiss_threads: int = 10,
+        approximate: bool = True,
+        hnsw_m: int = 32,
+        hnsw_ef_construction: int = 200,
+        hnsw_ef_search: int = 64,
+        store_b_fetch_workers: int = 10,
+        store_b_fetch_batch_size: int = 1000,
+        store_a_fetch_workers: int = 10,
+        store_a_fetch_batch_size: int = 1000,
+    ) -> Dict[str, List[Dict[str, float]]]:
+        """Compute embedding similarity using FAISS (cosine via normalized dot product).
+
+        Uses embeddings stored in Neo4j on Product nodes:
+        - product_name_embedding_openai
+        - description_embedding_openai
+
+        Performance notes:
+        - Builds two FAISS indexes for store B (name + description).
+        - Uses batched FAISS search for all products A.
+        - Uses a MapReduce-style fetch from Neo4j: parallel batch reads (map) + single-thread FAISS add (reduce).
+        - Optional on-disk FAISS cache via `index_cache_dir` to avoid rebuilding indexes on repeated runs.
+        - If `approximate=True`, uses an approximate HNSW index (when supported by your FAISS build).
+
+        Returns:
+            Dict mapping product_a_id -> list of top-k results (most similar first).
+
+            Each entry includes ONLY the separated scores:
+            - product_name_embedding_similarity
+            - description_embedding_similarity
+
+            Note: ranking/top_k selection is done by the mean of the two similarities.
+        """
+
+        # ------------------------------
+        # 0) Basic guards + local imports
+        # ------------------------------
+        top_k = int(top_k)
+        if top_k <= 0:
+            return {p.get("id"): [] for p in products_a if p.get("id")}
+        import numpy as np
+        import os
+        import pickle
+        import hashlib
+        import time
+
+        try:
+            import faiss
+        except Exception as e:
+            raise RuntimeError(
+                "faiss is required for _run_embedding_hf. Install with `pip install faiss-cpu` (or faiss-gpu)."
+            ) from e
+
+        # Embedding property names in Neo4j
+        name_prop = "product_name_embedding_openai"
+        desc_prop = "description_embedding_openai"
+
+        # Note: keep typing simple inside this function (Pylance disallows local aliases in annotations).
+
+        def _normalize(vec: np.ndarray) -> Optional[np.ndarray]:
+            """Normalize vector to unit length (so dot-product equals cosine similarity)."""
+            if vec.size == 0:
+                return None
+            norm = np.linalg.norm(vec)
+            if norm == 0:
+                return None
+            return (vec / norm).astype(np.float32, copy=False)
+
+        # Kept for API compatibility; ranking is currently based on the mean of both similarities.
+        # (Weights are not used for ranking to match the pipeline requirement.)
+        _ = float(name_weight)
+        _ = float(description_weight)
+        _ = int(max_workers)
+
+        driver = self.category_analysis.driver
+
+        def _chunks(items: List[str], size: int) -> List[List[str]]:
+            """Split a list into fixed-size chunks."""
+            if not items:
+                return []
+            size = max(1, int(size))
+            return [items[i : i + size] for i in range(0, len(items), size)]
+
+        def _fetch_embeddings_for_ids(
+            *,
+            store_name: str,
+            ids: List[str],
+            fetch_batch_size: int,
+            fetch_workers: int,
+            store_param_name: str,
+        ) -> Dict[str, Tuple[Optional[np.ndarray], Optional[np.ndarray]]]:
+            """MapReduce fetch: map = parallel batch query, reduce = merge into a dict.
+
+            Each worker uses its own Neo4j session.
+            """
+            out: Dict[str, Tuple[Optional[np.ndarray], Optional[np.ndarray]]] = {}
+            if not ids:
+                return out
+
+            query = f"""
+            MATCH (s:Store {{name: ${store_param_name}}})-[r:SELLS]->(p:Product)
+            WHERE r.id IN $batch_ids
+            RETURN r.id AS id,
+                   p.`{name_prop}` AS name_emb,
+                   p.`{desc_prop}` AS desc_emb
+            """
+
+            def _map_one(batch_ids: List[str]) -> Dict[str, Tuple[Optional[np.ndarray], Optional[np.ndarray]]]:
+                local: Dict[str, Tuple[Optional[np.ndarray], Optional[np.ndarray]]] = {}
+                with driver.session() as session:
+                    result = session.run(query, {store_param_name: store_name, "batch_ids": batch_ids})
+                    for record in result:
+                        pid = record.get("id")
+                        if not pid:
+                            continue
+                        name_emb = record.get("name_emb")
+                        desc_emb = record.get("desc_emb")
+                        name_vec = (
+                            _normalize(np.asarray(name_emb, dtype=np.float32))
+                            if isinstance(name_emb, list) and name_emb
+                            else None
+                        )
+                        desc_vec = (
+                            _normalize(np.asarray(desc_emb, dtype=np.float32))
+                            if isinstance(desc_emb, list) and desc_emb
+                            else None
+                        )
+                        local[pid] = (name_vec, desc_vec)
+                return local
+
+            batches = _chunks(ids, int(fetch_batch_size))
+            workers = max(1, int(fetch_workers))
+            if workers == 1 or len(batches) <= 1:
+                for b in batches:
+                    out.update(_map_one(b))
+                return out
+
+            with ThreadPoolExecutor(max_workers=min(workers, len(batches))) as ex:
+                futures = [ex.submit(_map_one, b) for b in batches]
+                for f in as_completed(futures):
+                    out.update(f.result())
+            return out
+
+        # --------------------------------------------
+        # 1) Build or load FAISS indexes for store B
+        # --------------------------------------------
+        t_build0 = time.perf_counter()
+
+        # We do batched FAISS searches (no per-product ThreadPool), so allow a few FAISS threads.
+        try:
+            faiss.omp_set_num_threads(max(1, int(faiss_threads)))
+        except Exception:
+            pass
+
+        def _new_faiss_index(d: int):
+            """Create the FAISS index used for store B.
+
+            Prefer approximate HNSW (inner product) when available; fall back to exact flat IP.
+            """
+            if approximate:
+                try:
+                    idx = faiss.IndexHNSWFlat(int(d), int(hnsw_m), faiss.METRIC_INNER_PRODUCT)
+                    try:
+                        idx.hnsw.efConstruction = int(hnsw_ef_construction)
+                    except Exception:
+                        pass
+                    return idx
+                except Exception:
+                    # Some faiss builds don't support the 3-arg ctor or inner-product HNSW.
+                    logging.warning("⚠️ HNSW (inner product) not available; falling back to IndexFlatIP")
+            return faiss.IndexFlatIP(int(d))
+
+        # We keep a stable global ID space across the two indexes.
+        # The FAISS internal row index differs between name/desc indexes, so we store a mapping
+        # from FAISS row -> global_id (and then global_id -> product_id).
+        store_b_name_global: List[int] = []  # per-row global_id for name_index
+        store_b_desc_global: List[int] = []  # per-row global_id for desc_index
+        global_to_product_id: List[str] = []  # global_id -> product_b_id
+        global_id_by_product_id: Dict[str, int] = {}  # product_b_id -> global_id
+        name_dim: Optional[int] = None
+        desc_dim: Optional[int] = None
+        name_index: Optional[faiss.Index] = None
+        desc_index: Optional[faiss.Index] = None
+
+        store_b_name_global_arr: Optional[np.ndarray] = None
+        store_b_desc_global_arr: Optional[np.ndarray] = None
+
+        cache_key = None
+        name_index_path = None
+        desc_index_path = None
+        meta_path = None
+        if index_cache_dir:
+            os.makedirs(index_cache_dir, exist_ok=True)
+            cache_key = hashlib.md5(
+                f"embedding_hf|{store_b}|{name_prop}|{desc_prop}".encode("utf-8")
+            ).hexdigest()
+            name_index_path = os.path.join(index_cache_dir, f"{cache_key}_name.index")
+            desc_index_path = os.path.join(index_cache_dir, f"{cache_key}_desc.index")
+            meta_path = os.path.join(index_cache_dir, f"{cache_key}_meta.pkl")
+
+            if (
+                not rebuild_index
+                and os.path.exists(name_index_path)
+                and os.path.exists(desc_index_path)
+                and os.path.exists(meta_path)
+            ):
+                try:
+                    logging.info(f"⚡ Loading FAISS indexes from cache: {index_cache_dir}")
+                    name_index = faiss.read_index(name_index_path)
+                    desc_index = faiss.read_index(desc_index_path)
+                    with open(meta_path, "rb") as f:
+                        meta = pickle.load(f)
+
+                    global_to_product_id = list(meta["global_to_product_id"])
+                    store_b_name_global_arr = np.asarray(meta["store_b_name_global"], dtype=np.int64)
+                    store_b_desc_global_arr = np.asarray(meta["store_b_desc_global"], dtype=np.int64)
+
+                    name_dim = int(name_index.d)
+                    desc_dim = int(desc_index.d)
+                except Exception as e:
+                    logging.warning(f"⚠️ Failed to load FAISS cache, rebuilding: {e}")
+                    name_index = None
+                    desc_index = None
+                    store_b_name_global_arr = None
+                    store_b_desc_global_arr = None
+                    global_to_product_id = []
+                    global_id_by_product_id = {}
+
+        needs_build = (
+            name_index is None
+            or desc_index is None
+            or store_b_name_global_arr is None
+            or store_b_desc_global_arr is None
+        )
+        if needs_build:
+            logging.info(f"🏗️  Building FAISS indexes for store_b='{store_b}'...")
+
+        build_name_batch_global: List[int] = []
+        build_name_batch_vecs: List[np.ndarray] = []
+        build_desc_batch_global: List[int] = []
+        build_desc_batch_vecs: List[np.ndarray] = []
+
+        def _flush_name_build_batch():
+            nonlocal name_index
+            if not build_name_batch_global:
+                return
+            mat = np.vstack(build_name_batch_vecs).astype(np.float32, copy=False)
+            if name_index is None:
+                name_index = _new_faiss_index(mat.shape[1])
+            name_index.add(mat)
+            store_b_name_global.extend(build_name_batch_global)
+            build_name_batch_global.clear()
+            build_name_batch_vecs.clear()
+
+        def _flush_desc_build_batch():
+            nonlocal desc_index
+            if not build_desc_batch_global:
+                return
+            mat = np.vstack(build_desc_batch_vecs).astype(np.float32, copy=False)
+            if desc_index is None:
+                desc_index = _new_faiss_index(mat.shape[1])
+            desc_index.add(mat)
+            store_b_desc_global.extend(build_desc_batch_global)
+            build_desc_batch_global.clear()
+            build_desc_batch_vecs.clear()
+
+        # MapReduce-style build: map = fetch embeddings in parallel batches, reduce = add to FAISS.
+        # This keeps FAISS writes single-threaded while using multi-worker sessions to Neo4j.
+        def _reduce_records(records: List[Tuple[str, Any, Any]]) -> None:
+            nonlocal name_dim, desc_dim
+            for product_b_id, name_emb, desc_emb in records:
+                if not product_b_id:
+                    continue
+
+                global_id = global_id_by_product_id.get(product_b_id)
+                if global_id is None:
+                    global_id = len(global_to_product_id)
+                    global_id_by_product_id[product_b_id] = global_id
+                    global_to_product_id.append(product_b_id)
+
+                name_vec = (
+                    _normalize(np.asarray(name_emb, dtype=np.float32))
+                    if isinstance(name_emb, list) and name_emb
+                    else None
+                )
+                desc_vec = (
+                    _normalize(np.asarray(desc_emb, dtype=np.float32))
+                    if isinstance(desc_emb, list) and desc_emb
+                    else None
+                )
+
+                if name_vec is not None:
+                    if name_dim is None:
+                        name_dim = int(name_vec.shape[0])
+                    if int(name_vec.shape[0]) == int(name_dim):
+                        build_name_batch_global.append(int(global_id))
+                        build_name_batch_vecs.append(name_vec)
+                        if len(build_name_batch_global) >= batch_size:
+                            _flush_name_build_batch()
+                    else:
+                        logging.warning(
+                            f"⚠️ Name embedding dim mismatch for product_b {product_b_id}: {int(name_vec.shape[0])} vs expected {name_dim}"
+                        )
+
+                if desc_vec is not None:
+                    if desc_dim is None:
+                        desc_dim = int(desc_vec.shape[0])
+                    if int(desc_vec.shape[0]) == int(desc_dim):
+                        build_desc_batch_global.append(int(global_id))
+                        build_desc_batch_vecs.append(desc_vec)
+                        if len(build_desc_batch_global) >= batch_size:
+                            _flush_desc_build_batch()
+                    else:
+                        logging.warning(
+                            f"⚠️ Description embedding dim mismatch for product_b {product_b_id}: {int(desc_vec.shape[0])} vs expected {desc_dim}"
+                        )
+
+        def _fetch_store_b_ids() -> List[str]:
+            """Fetch all relationship IDs (rb.id) for store B once."""
+            query_ids = """
+            MATCH (sb:Store {name: $store_b})-[rb:SELLS]->(b:Product)
+            RETURN rb.id AS id
+            """
+            ids: List[str] = []
+            with driver.session() as session:
+                result = session.run(query_ids, {"store_b": store_b})
+                for record in result:
+                    pid = record.get("id")
+                    if pid:
+                        ids.append(pid)
+            return ids
+
+        def _fetch_store_b_batch(batch_ids: List[str]) -> List[Tuple[str, Any, Any]]:
+            """Fetch name/desc embeddings for a batch of store B product IDs."""
+            query_batch = f"""
+            MATCH (sb:Store {{name: $store_b}})-[rb:SELLS]->(b:Product)
+            WHERE rb.id IN $batch_ids
+            RETURN rb.id AS id,
+                   b.`{name_prop}` AS name_emb,
+                   b.`{desc_prop}` AS desc_emb
+            """
+            rows: List[Tuple[str, Any, Any]] = []
+            with driver.session() as session:
+                result = session.run(query_batch, {"store_b": store_b, "batch_ids": batch_ids})
+                for record in result:
+                    rows.append((record.get("id"), record.get("name_emb"), record.get("desc_emb")))
+            return rows
+
+        # If cache wasn't loaded, build from Neo4j.
+        if needs_build:
+            ids = _fetch_store_b_ids()
+            if not ids:
+                logging.warning(f"⚠️ No products found for store_b='{store_b}'.")
+                return {p.get("id"): [] for p in products_a if p.get("id")}
+
+            fbw = max(1, int(store_b_fetch_workers))
+            fbs = max(100, int(store_b_fetch_batch_size))
+            batches = _chunks(ids, fbs)
+            logging.info(
+                f"🧩 MapReduce build: {len(ids)} products in {len(batches)} batches (workers={min(fbw, len(batches))})"
+            )
+
+            # Map: fetch embeddings concurrently.
+            # Reduce: normalize + add to FAISS in the main thread.
+            if fbw == 1 or len(batches) <= 1:
+                for b in batches:
+                    rows = _fetch_store_b_batch(b)
+                    if rows:
+                        _reduce_records(rows)
+            else:
+                with ThreadPoolExecutor(max_workers=min(fbw, len(batches))) as ex:
+                    futures = [ex.submit(_fetch_store_b_batch, b) for b in batches]
+                    for future in as_completed(futures):
+                        rows = future.result()
+                        if rows:
+                            _reduce_records(rows)
+
+            _flush_name_build_batch()
+            _flush_desc_build_batch()
+
+        if name_index is None and desc_index is None:
+            logging.warning(f"⚠️ No valid embeddings found for store_b='{store_b}'.")
+            return {p.get("id"): [] for p in products_a if p.get("id")}
+
+        if name_index is not None:
+            logging.info(f"✅ FAISS name index built: {len(store_b_name_global)} vectors (dim={name_index.d})")
+        else:
+            logging.warning(f"⚠️ No name embeddings found for store_b='{store_b}'.")
+
+        if desc_index is not None:
+            logging.info(f"✅ FAISS description index built: {len(store_b_desc_global)} vectors (dim={desc_index.d})")
+        else:
+            logging.warning(f"⚠️ No description embeddings found for store_b='{store_b}'.")
+
+        # If we don't have both indexes, we cannot compute the mean as required.
+        if name_index is None or desc_index is None or name_dim is None or desc_dim is None:
+            logging.warning(
+                "⚠️ Both name and description embedding indexes are required for mean-based ranking. Returning no candidates."
+            )
+            return {p.get("id"): [] for p in products_a if p.get("id")}
+
+        if store_b_name_global_arr is None:
+            store_b_name_global_arr = np.asarray(store_b_name_global, dtype=np.int64)
+        if store_b_desc_global_arr is None:
+            store_b_desc_global_arr = np.asarray(store_b_desc_global, dtype=np.int64)
+
+        # Save cache after building (so next run doesn't hit Neo4j at all).
+        if needs_build and index_cache_dir and cache_key and name_index_path and desc_index_path and meta_path and not rebuild_index:
+            try:
+                faiss.write_index(name_index, name_index_path)
+                faiss.write_index(desc_index, desc_index_path)
+                with open(meta_path, "wb") as f:
+                    pickle.dump(
+                        {
+                            "global_to_product_id": global_to_product_id,
+                            "store_b_name_global": store_b_name_global_arr,
+                            "store_b_desc_global": store_b_desc_global_arr,
+                        },
+                        f,
+                        protocol=pickle.HIGHEST_PROTOCOL,
+                    )
+                logging.info(f"💾 FAISS cache saved to: {index_cache_dir}")
+            except Exception as e:
+                logging.warning(f"⚠️ Failed saving FAISS cache: {e}")
+
+        t_build1 = time.perf_counter()
+        logging.info(f"⏱️  FAISS index ready in {(t_build1 - t_build0):.2f}s")
+
+        # --------------------------------------------
+        # 2) Fetch embeddings for store A (batched)
+        # --------------------------------------------
+        product_a_ids = [p.get("id") for p in products_a if p.get("id")]
+        a_embeddings = _fetch_embeddings_for_ids(
+            store_name=store_a,
+            ids=product_a_ids,
+            fetch_batch_size=int(store_a_fetch_batch_size),
+            fetch_workers=int(store_a_fetch_workers),
+            store_param_name="store_a",
+        )
+
+        # --------------------------------------------
+        # 3) Batched FAISS search (name + description)
+        # --------------------------------------------
+        a_ids: List[str] = []
+        a_name_mat_rows: List[np.ndarray] = []
+        a_desc_mat_rows: List[np.ndarray] = []
+        for a_id in product_a_ids:
+            a_name_vec, a_desc_vec = a_embeddings.get(a_id, (None, None))
+            if a_name_vec is None or a_desc_vec is None:
+                continue
+            if int(a_name_vec.shape[0]) != int(name_dim) or int(a_desc_vec.shape[0]) != int(desc_dim):
+                continue
+            a_ids.append(a_id)
+            a_name_mat_rows.append(a_name_vec)
+            a_desc_mat_rows.append(a_desc_vec)
+
+        if not a_ids:
+            return {p.get("id"): [] for p in products_a if p.get("id")}
+
+        a_name_mat = np.vstack(a_name_mat_rows).astype(np.float32, copy=False)
+        a_desc_mat = np.vstack(a_desc_mat_rows).astype(np.float32, copy=False)
+
+        # Search wider than top_k, then take the INTERSECTION of name+desc candidates.
+        # Intersection guarantees both similarities are available for every exported candidate,
+        # avoiding placeholder 0.0 values.
+        wf = max(1, int(widen_factor))
+        k_name = min(max(int(top_k) * wf, int(top_k)), int(store_b_name_global_arr.shape[0]))
+        k_desc = min(max(int(top_k) * wf, int(top_k)), int(store_b_desc_global_arr.shape[0]))
+
+        logging.info(
+            f"🔎 FAISS batched querying: {len(a_ids)} products (k_name={k_name}, k_desc={k_desc}, top_k={top_k})"
+        )
+
+        # If using HNSW, set efSearch (higher = better recall, slower queries).
+        try:
+            if hasattr(name_index, "hnsw"):
+                name_index.hnsw.efSearch = int(hnsw_ef_search)
+            if hasattr(desc_index, "hnsw"):
+                desc_index.hnsw.efSearch = int(hnsw_ef_search)
+        except Exception:
+            pass
+
+        Dn, In = name_index.search(a_name_mat, k_name)
+        Dd, Id = desc_index.search(a_desc_mat, k_desc)
+
+        results: Dict[str, List[Dict[str, float]]] = {a_id: [] for a_id in product_a_ids}
+
+        t_query0 = time.perf_counter()
+        
+        # --------------------------------------------
+        # 4) Per-A intersection + mean ranking (Parallelized)
+        # --------------------------------------------
+        logging.info(f"⚡ Processing intersection and ranking for {len(a_ids)} products (Parallelized)...")
+        
+        def _process_batch_intersection(start_idx: int, end_idx: int) -> Dict[str, List[Dict[str, float]]]:
+            batch_results = {}
+            
+            for row_idx in range(start_idx, end_idx):
+                a_id = a_ids[row_idx]
+
+                in_n = In[row_idx]
+                dn = Dn[row_idx]
+                # Filter invalid indices (-1)
+                mask_n = in_n >= 0
+                in_n = in_n[mask_n]
+                dn = dn[mask_n]
+
+                in_d = Id[row_idx]
+                dd = Dd[row_idx]
+                # Filter invalid indices (-1)
+                mask_d = in_d >= 0
+                in_d = in_d[mask_d]
+                dd = dd[mask_d]
+
+                if in_n.size == 0 or in_d.size == 0:
+                    continue
+
+                # Map FAISS indices to Global IDs
+                ng = store_b_name_global_arr[in_n.astype(np.int64, copy=False)]
+                dg = store_b_desc_global_arr[in_d.astype(np.int64, copy=False)]
+
+                # Intersect: find candidates present in BOTH lists (Name AND Description)
+                # This ensures we have both scores for the mean calculation
+                common_g, idx_n, idx_d = np.intersect1d(ng, dg, return_indices=True)
+                if common_g.size == 0:
+                    continue
+
+                n_sim = dn[idx_n].astype(np.float32, copy=False)
+                d_sim = dd[idx_d].astype(np.float32, copy=False)
+                
+                # Filter out zero similarities if any (though unlikely with cosine unless orthogonal)
+                valid = (n_sim != 0.0) & (d_sim != 0.0)
+                if not np.any(valid):
+                    continue
+
+                common_g = common_g[valid]
+                n_sim = n_sim[valid]
+                d_sim = d_sim[valid]
+
+                # Rank by mean of scores
+                mean = (n_sim + d_sim) / 2.0
+                
+                # Top K selection
+                limit = min(top_k, mean.size)
+                if mean.size > limit:
+                    # Partial sort for top K (faster than full sort)
+                    sel = np.argpartition(-mean, limit - 1)[: limit]
+                    # Sort the top K exactly
+                    sel = sel[np.argsort(-mean[sel])]
+                else:
+                    sel = np.argsort(-mean)
+
+                out_list: List[Dict[str, float]] = []
+                for k in sel:
+                    gid = int(common_g[k])
+                    out_list.append(
+                        {
+                            "id": global_to_product_id[gid],
+                            "product_name_embedding_similarity": float(n_sim[k]),
+                            "description_embedding_similarity": float(d_sim[k]),
+                        }
+                    )
+                batch_results[a_id] = out_list
+            
+            return batch_results
+
+        # Execute in parallel chunks
+        # Use a larger chunk size to reduce threading overhead
+        chunk_size = max(100, len(a_ids) // (max_workers * 4))
+        futures = []
+        
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            for i in range(0, len(a_ids), chunk_size):
+                end = min(i + chunk_size, len(a_ids))
+                futures.append(executor.submit(_process_batch_intersection, i, end))
+                
+            for future in as_completed(futures):
+                try:
+                    res = future.result()
+                    results.update(res)
+                except Exception as e:
+                    logging.error(f"Error in intersection batch: {e}")
+
+        t_query1 = time.perf_counter()
+        logging.info(f"⏱️  FAISS query+rank time: {(t_query1 - t_query0):.2f}s")
+
+        return results
+
+        t_query1 = time.perf_counter()
+        logging.info(f"⏱️  FAISS query+rank time: {(t_query1 - t_query0):.2f}s")
+
+        return results
     
     def _get_ean_matches(
         self, 
@@ -661,16 +1268,29 @@ class ModelCombinedSimilarity:
                 all_matches = {**ean_matches, **existing_perfect_matches}
                 return all_matches
             
+             # ============================================================
+            # STEP 5: EMBEDDING-BASED SIMILARITY
             # ============================================================
-            # STEP 5: GRAPH-BASED SIMILARITY (CATEGORY ANALYSIS)
+            logging.info(f"\n🤖 STEP 5: Embedding-based similarity analysis")
+            logging.info(f"   Calculating text similarities using {distance_metric} distance...")
+            embedding_candidates = self._run_embedding_hf(
+                products_a=products_to_process,
+                store_a=store_a,
+                store_b=store_b
+                )
+
+
             # ============================================================
-            logging.info(f"\n🔍 STEP 5: Graph-based similarity analysis for {len(products_to_process)} products")
+            # STEP 6: GRAPH-BASED SIMILARITY (CATEGORY ANALYSIS)
+            # ============================================================
+            logging.info(f"\n🔍 STEP 6: Graph-based similarity analysis for {len(products_to_process)} products")
             logging.info(f"   Finding similar products using graph structure...")
-            
+
             results = self._run_category_analysis(
                 products_a=products_to_process,  # Use filtered list
                 store_a=store_a,
                 store_b=store_b,
+                candidates_by_product=embedding_candidates,
                 min_matches=min_matches,
                 graph_weights=graph_weights_food,
                 graph_weights_non_food_super=graph_weights_non_food_super,
@@ -680,23 +1300,25 @@ class ModelCombinedSimilarity:
                 cat_score_threshold=cat_score_threshold,
                 min_graph_score=min_graph_score
             )
+
+
             # ============================================================
             # STEP 6: EMBEDDING-BASED SIMILARITY
             # ============================================================
-            logging.info(f"\n🤖 STEP 6: Embedding-based similarity analysis")
-            logging.info(f"   Calculating text similarities using {distance_metric} distance...")
-            results = self._run_embedding_analysis(
-                results=results,
-                combined_weights_food=combined_weights_food,
-                combined_weights_non_food_super=combined_weights_non_food_super,
-                combined_weights_non_food_elec=combined_weights_non_food_elec,
-                distance_metric=distance_metric,
-                max_workers=max_workers,
-                max_embedding_workers=max_embedding_workers,
-                store_a=store_a,
-                min_name_similarity=min_name_similarity,
-                min_description_similarity=min_description_similarity
-            )
+            # logging.info(f"\n🤖 STEP 6: Embedding-based similarity analysis")
+            # logging.info(f"   Calculating text similarities using {distance_metric} distance...")
+            # results = self._run_embedding_analysis(
+            #     results=results,
+            #     combined_weights_food=combined_weights_food,
+            #     combined_weights_non_food_super=combined_weights_non_food_super,
+            #     combined_weights_non_food_elec=combined_weights_non_food_elec,
+            #     distance_metric=distance_metric,
+            #     max_workers=max_workers,
+            #     max_embedding_workers=max_embedding_workers,
+            #     store_a=store_a,
+            #     min_name_similarity=min_name_similarity,
+            #     min_description_similarity=min_description_similarity
+            # )
             # ============================================================
             # STEP 7: EUCLIDEAN DISTANCE CALCULATION
             # ============================================================
@@ -708,6 +1330,7 @@ class ModelCombinedSimilarity:
                 max_workers=max_workers,
                 min_euclidean_similarity=min_euclidean_similarity
             )
+
             # ============================================================
             # STEP 8: COMBINE ALL SCORES
             # ============================================================
@@ -786,6 +1409,22 @@ class ModelCombinedSimilarity:
             # ============================================================
             # STEP 11: EXPORT AND PERSIST RESULTS (WITH CLEANED DATA)
             # ============================================================
+
+            # Ensure similarity display fields exist in the output dict
+            for _product_a_id, _data in results.items():
+                if _product_a_id == '_metadata':
+                    continue
+                for prod_b in _data.get('similar_products_b', []) or []:
+                    name_val = prod_b.get('name_similarity', None)
+                    if name_val is None:
+                        name_val = prod_b.get('product_name_embedding_similarity', None)
+
+                    desc_val = prod_b.get('description_similarity', None)
+                    if desc_val is None:
+                        desc_val = prod_b.get('description_embedding_similarity', None)
+
+                    prod_b['Name_Similarity'] = round(float(name_val), 3) if name_val is not None else ''
+                    prod_b['Description_Similarity'] = round(float(desc_val), 3) if desc_val is not None else ''
             
             # Insert to PostgreSQL for validation (with cleaned data)
             insert_to_validate(results)
@@ -797,6 +1436,7 @@ class ModelCombinedSimilarity:
         products_a: List[Dict[str, Any]],
         store_a: str,
         store_b: str,
+        candidates_by_product: Dict[str, List[Dict[str, float]]],
         min_matches: int,
         graph_weights: Dict[str, float],
         graph_weights_non_food_super: Dict[str, float],
@@ -807,11 +1447,12 @@ class ModelCombinedSimilarity:
         min_graph_score: float = 0.8
     ) -> Dict[str, Dict[str, Any]]:
         """
-        Run category-based (graph) analysis to find similar products.
+        Run category-based (graph) analysis to score a provided candidate set.
         
-        Uses CategoryAnalysis to find products in store B that share graph neighbors
-        with products from store A. Automatically selects appropriate weights based on
-        product's Internal_Type and Internal_Category (food vs non-food supermarket vs electronics).
+        For each product A, this scores ONLY the candidate product B IDs provided by
+        `candidates_by_product` (e.g. top-200 from `_run_embedding_hf`). It does not
+        apply additional filtering/limiting; it returns the graph score (`weighted_score`)
+        for the provided candidates.
         """
         total = len(products_a)
         logging.info(f"🚀 Processing {total} products with {max_workers} workers...")
@@ -836,25 +1477,47 @@ class ModelCombinedSimilarity:
                         selected_weights = graph_weights_non_food_super
                 else:
                     selected_weights = graph_weights
+
+                product_a_id = product_a.get('id')
+                candidate_entries = candidates_by_product.get(product_a_id, []) if product_a_id else []
+                candidate_ids = [c.get('id') for c in candidate_entries if c.get('id')]
+                name_embedding_sim_map = {
+                    c.get('id'): float(c.get('product_name_embedding_similarity', 0.0))
+                    for c in candidate_entries
+                    if c.get('id')
+                }
+
+                desc_embedding_sim_map = {
+                    c.get('id'): float(c.get('description_embedding_similarity', 0.0))
+                    for c in candidate_entries
+                    if c.get('id')
+                }
                 
                 future = executor.submit(
-                    self.category_analysis.find_matches_by_category,
+                    self.category_analysis.score_candidates_by_category,
                     product_a,
                     store_a,
                     store_b,
-                    min_matches,
-                    selected_weights,
-                    idx,
-                    total,
-                    cat_score_threshold,
-                    min_graph_score
+                    candidate_ids,
+                    selected_weights
                 )
-                future_to_product[future] = product_a
+                future_to_product[future] = (product_a, name_embedding_sim_map, desc_embedding_sim_map)
             
             # Collect results as they complete
             for future in as_completed(future_to_product):
                 try:
-                    product_a_id, product_a, similar_products_b = future.result()
+                    similar_products_b = future.result()
+                    product_a, name_embedding_sim_map, desc_embedding_sim_map = future_to_product[future]
+                    product_a_id = product_a.get('id')
+
+                    # Attach embedding similarity from the prefilter stage (if available)
+                    for prod in similar_products_b:
+                        b_id = prod.get('id')
+                        if b_id in name_embedding_sim_map:
+                            prod['product_name_embedding_similarity'] = name_embedding_sim_map[b_id]
+                        if b_id in desc_embedding_sim_map:
+                            prod['description_embedding_similarity'] = desc_embedding_sim_map[b_id]
+
                     results[product_a_id] = {
                         'product_a': product_a,
                         'similar_products_b': similar_products_b,
@@ -868,7 +1531,7 @@ class ModelCombinedSimilarity:
                         logging.info(f"📊 Progress: {completed_count}/{total} ({pct:.1f}%) products processed")
                         
                 except Exception as e:
-                    product_a = future_to_product[future]
+                    product_a, _ = future_to_product[future]
                     logging.error(f"❌ Error processing product {product_a.get('id', 'N/A')}: {e}")
 
         # Add not-found products to results
@@ -1138,6 +1801,7 @@ class ModelCombinedSimilarity:
                     data['product_a'],
                     data['similar_products_b'],
                     min_euclidean_similarity
+                    # Auto-selects: NumPy for <100 products, PostgreSQL-native for >=100
                 ): product_a_id
                 for product_a_id, data in products_to_process.items()
             }
@@ -1243,6 +1907,26 @@ class ModelCombinedSimilarity:
             
             for product_b in similar_products_b:
                 graph_score = product_b.get('weighted_score', 0.0)
+                # Prefer the separated embedding similarities produced by `_run_embedding_hf`.
+                # Fall back to legacy fields if present.
+                name_sim = product_b.get('product_name_embedding_similarity', None)
+                if name_sim is None:
+                    name_sim = product_b.get('name_similarity', 0.0)
+
+                desc_sim = product_b.get('description_embedding_similarity', None)
+                if desc_sim is None:
+                    desc_sim = product_b.get('description_similarity', 0.0)
+
+                # Normalize into the legacy keys as well so downstream/export stays consistent.
+                try:
+                    product_b['name_similarity'] = float(name_sim)
+                except Exception:
+                    product_b['name_similarity'] = 0.0
+                try:
+                    product_b['description_similarity'] = float(desc_sim)
+                except Exception:
+                    product_b['description_similarity'] = 0.0
+
                 name_sim = product_b.get('name_similarity', 0.0)
                 desc_sim = product_b.get('description_similarity', 0.0)
                 euclidean_sim = product_b.get('euclidean_similarity', 0.0)
@@ -1328,94 +2012,83 @@ class ModelCombinedSimilarity:
             iteration += 1
             logging.info(f"\n🔄 Iteration {iteration}: Checking rank 1 for duplicates...")
             
-            iteration_removed = 0
+            # Step 1: Find all rank 1 matches (first match for each product_a)
+            rank1_matches = {}  # product_b_id -> list of (product_a_id, match_data, combined_score)
             
-            # Inner loop: keep checking until no more duplicates in rank 1 after promotions
-            while True:
-                # Step 1: Find all rank 1 matches (first match for each product_a)
-                rank1_matches = {}  # product_b_id -> list of (product_a_id, match_data, combined_score)
+            for product_a_id, data in results.items():
+                if product_a_id == '_metadata':
+                    continue
                 
-                for product_a_id, data in results.items():
-                    if product_a_id == '_metadata':
-                        continue
+                similar_products_b = data.get('similar_products_b', [])
+                
+                # Check if there's a rank 1 match (first in the sorted list)
+                if similar_products_b and len(similar_products_b) > 0:
+                    rank1_match = similar_products_b[0]
+                    product_b_id = rank1_match.get('id')
+                    combined_score = rank1_match.get('combined_score', 0.0)
                     
-                    similar_products_b = data.get('similar_products_b', [])
-                    
-                    # Check if there's a rank 1 match (first in the sorted list)
-                    if similar_products_b and len(similar_products_b) > 0:
-                        rank1_match = similar_products_b[0]
-                        product_b_id = rank1_match.get('id')
-                        combined_score = rank1_match.get('combined_score', 0.0)
+                    if product_b_id:
+                        if product_b_id not in rank1_matches:
+                            rank1_matches[product_b_id] = []
                         
-                        if product_b_id:
-                            if product_b_id not in rank1_matches:
-                                rank1_matches[product_b_id] = []
-                            
-                            rank1_matches[product_b_id].append({
-                                'product_a_id': product_a_id,
-                                'match_data': rank1_match,
-                                'combined_score': combined_score
-                            })
-                
-                # Step 2: Find duplicates in rank 1
-                duplicates = {
-                    b_id: matches 
-                    for b_id, matches in rank1_matches.items() 
-                    if len(matches) > 1
-                }
-                
-                if not duplicates:
-                    # No more duplicates after promotions
-                    break
-                
-                logging.info(f"   🔍 Found {len(duplicates)} Product_B with duplicates in rank 1")
-                
-                # Step 3: For each duplicate, keep highest score, remove others
-                for product_b_id, matches in duplicates.items():
-                    # Sort by combined_score descending
-                    matches.sort(key=lambda x: x['combined_score'], reverse=True)
-                    
-                    best_match = matches[0]
-                    removed_matches = matches[1:]
-                    
-                    logging.info(f"      Product_B {product_b_id}:")
-                    logging.info(f"         ✅ Keeping: Product_A {best_match['product_a_id']} (score: {best_match['combined_score']:.3f})")
-                    
-                    # Remove the rank 1 match from other product_a's (this promotes rank 2 to rank 1)
-                    for removed in removed_matches:
-                        product_a_id = removed['product_a_id']
-                        
-                        if product_a_id in results:
-                            similar_products_b = results[product_a_id].get('similar_products_b', [])
-                            
-                            # Verify that rank 1 is the product_b we want to remove
-                            if similar_products_b and len(similar_products_b) > 0 and similar_products_b[0].get('id') == product_b_id:
-                                # Check if this will leave Product_A with no matches
-                                remaining_matches = len(similar_products_b) - 1
-                                
-                                if remaining_matches > 0:
-                                    logging.info(f"         ❌ Removing from: Product_A {product_a_id} (score: {removed['combined_score']:.3f}) - {remaining_matches} match(es) remaining")
-                                else:
-                                    logging.info(f"         ⚠️  Removing from: Product_A {product_a_id} (score: {removed['combined_score']:.3f}) - NO MATCHES LEFT!")
-                                
-                                # Remove rank 1 (modifies list in-place)
-                                del similar_products_b[0]
-                                iteration_removed += 1
-                                total_removed += 1
-                            else:
-                                logging.warning(f"         ⚠️  Cannot remove from Product_A {product_a_id}: rank 1 mismatch or empty list")
-                
-                # After removing duplicates, loop back to re-check rank 1
-                # (newly promoted rank 2 -> rank 1 might have duplicates)
+                        rank1_matches[product_b_id].append({
+                            'product_a_id': product_a_id,
+                            'match_data': rank1_match,
+                            'combined_score': combined_score
+                        })
             
-            # If we removed anything in this iteration, continue to next iteration
-            # Otherwise, we're done
-            if iteration_removed > 0:
-                logging.info(f"   ✅ Removed {iteration_removed} rank 1 matches in iteration {iteration}")
-            else:
+            # Step 2: Find duplicates in rank 1
+            duplicates = {
+                b_id: matches 
+                for b_id, matches in rank1_matches.items() 
+                if len(matches) > 1
+            }
+            
+            if not duplicates:
                 logging.info(f"✅ No duplicates found in rank 1. Cleaning complete after {iteration} iterations.")
                 logging.info(f"   Total matches removed: {total_removed}")
                 break
+            
+            logging.info(f"   🔍 Found {len(duplicates)} Product_B with duplicates in rank 1")
+            
+            iteration_removed = 0
+            
+            # Step 3: For each duplicate, keep highest score, remove others
+            for product_b_id, matches in duplicates.items():
+                # Sort by combined_score descending
+                matches.sort(key=lambda x: x['combined_score'], reverse=True)
+                
+                best_match = matches[0]
+                removed_matches = matches[1:]
+                
+                logging.info(f"      Product_B {product_b_id}:")
+                logging.info(f"         ✅ Keeping: Product_A {best_match['product_a_id']} (score: {best_match['combined_score']:.3f})")
+                
+                # Remove the rank 1 match from other product_a's (this promotes rank 2 to rank 1)
+                for removed in removed_matches:
+                    product_a_id = removed['product_a_id']
+                    
+                    if product_a_id in results:
+                        similar_products_b = results[product_a_id].get('similar_products_b', [])
+                        
+                        # Verify that rank 1 is the product_b we want to remove
+                        if similar_products_b and len(similar_products_b) > 0 and similar_products_b[0].get('id') == product_b_id:
+                            # Check if this will leave Product_A with no matches
+                            remaining_matches = len(similar_products_b) - 1
+                            
+                            if remaining_matches > 0:
+                                logging.info(f"         ❌ Removing from: Product_A {product_a_id} (score: {removed['combined_score']:.3f}) - {remaining_matches} match(es) remaining")
+                            else:
+                                logging.info(f"         ⚠️  Removing from: Product_A {product_a_id} (score: {removed['combined_score']:.3f}) - NO MATCHES LEFT!")
+                            
+                            # Remove rank 1 (modifies list in-place)
+                            del similar_products_b[0]
+                            iteration_removed += 1
+                            total_removed += 1
+                        else:
+                            logging.warning(f"         ⚠️  Cannot remove from Product_A {product_a_id}: rank 1 mismatch or empty list")
+            
+            logging.info(f"   ✅ Removed {iteration_removed} rank 1 matches in iteration {iteration}")
         
         # Count products with no matches after cleaning
         products_with_no_matches = sum(

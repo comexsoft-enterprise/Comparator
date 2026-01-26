@@ -22,7 +22,7 @@ from src.connectors.postgresql_connector import get_postgresql_connection
 
 from src.api.api_utils.upload_file import PreprocessingResponse, process_uploaded_file, process_product_array
 from src.api.api_utils.neo4j_queries import FilterTriplets, get_nodes_by_label, generate_query_for_filter_triplets, verify_node_exists_query
-from src.api.api_utils.product_files import get_product_file_by_siid
+from src.api.api_utils.product_files import get_product_file_by_siid, get_product_from_mongodb_by_siid
 
 from src.models.model_variations.get_similar_neo4j_refactored import (
     model,
@@ -274,7 +274,7 @@ def _serialize_doc(doc):
     Handles ObjectId and datetime conversion.
     
     Args:
-        doc: MongoDB document (dict)
+        doc: MongoDB document (dict) or list/value
         
     Returns:
         JSON-serializable dict
@@ -282,19 +282,22 @@ def _serialize_doc(doc):
     if doc is None:
         return None
     
-    serialized = {}
-    for key, value in doc.items():
-        if isinstance(value, ObjectId):
-            serialized[key] = str(value)
-        elif isinstance(value, datetime):
-            serialized[key] = value.isoformat()
-        elif isinstance(value, dict):
+    if isinstance(doc, list):
+        return [_serialize_doc(item) for item in doc]
+        
+    if isinstance(doc, ObjectId):
+        return str(doc)
+    
+    if isinstance(doc, datetime):
+        return doc.isoformat()
+    
+    if isinstance(doc, dict):
+        serialized = {}
+        for key, value in doc.items():
             serialized[key] = _serialize_doc(value)
-        elif isinstance(value, list):
-            serialized[key] = [_serialize_doc(item) if isinstance(item, dict) else item for item in value]
-        else:
-            serialized[key] = value
-    return serialized
+        return serialized
+
+    return doc
 
 
 def _extract_first_value_from_record(record):
@@ -978,6 +981,51 @@ async def delete_product_by_hash(product_hash: str) -> Dict[str, Any]:
         results["message"] = "Failed to delete product from all databases"
     
     return results
+
+
+# 9. Get price_history by siid from MongoDB
+@app.get("/mongodb/price-history/{siid}")
+async def get_price_history(siid: str) -> Dict[str, Any]:
+    """
+    Get price_history for a product by its siid from MongoDB.
+    This also retrieves price_history from PostgreSQL if available (linked via product_hash).
+    
+    Args:
+        siid: Product's siid identifier
+        
+    Returns:
+        Dict with siid and price_history
+    """
+    try:
+        # Use the utility function that handles searching all collections
+        # and fetching price_history from PostgreSQL
+        product = get_product_from_mongodb_by_siid(siid)
+        
+        if product:
+            price_history = product.get("price_history", [])
+            # Serialize to ensure proper JSON format (e.g. datetimes)
+            serialized_history = _serialize_doc(price_history)
+            
+            return {
+                "siid": siid,
+                "store": product.get("store"),
+                "price_history": serialized_history
+            }
+        
+        # If not found
+        raise HTTPException(
+            status_code=404,
+            detail=f"Product with siid '{siid}' not found in any collection"
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching price_history for siid {siid}: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error fetching price_history: {str(e)}"
+        )
 
 
 @app.get("/health")

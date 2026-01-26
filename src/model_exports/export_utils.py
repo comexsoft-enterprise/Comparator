@@ -13,10 +13,31 @@ Date: November 27, 2025
 import csv
 import logging
 from datetime import datetime
-from typing import Dict, Optional
+from pathlib import Path
+from typing import Dict, Optional, Union
 
 import numpy as np
 import pandas as pd
+
+
+def _get_results_dir() -> Path:
+    """Return the canonical results directory and ensure it exists."""
+    try:
+        from config.settings import PROJECT_ROOT  # type: ignore
+
+        base_dir = Path(PROJECT_ROOT)
+    except Exception:
+        base_dir = Path.cwd()
+
+    results_dir = base_dir / "data" / "results"
+    results_dir.mkdir(parents=True, exist_ok=True)
+    return results_dir
+
+
+def _ensure_parent_dir(path: Union[str, Path]) -> str:
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return str(p)
 
 
 def export_siid_pairs_csv(
@@ -46,7 +67,9 @@ def export_siid_pairs_csv(
     # Generate filename if not provided
     if output_path is None:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        output_path = f"siid_pairs_{store_a}_to_{store_b}_{timestamp}.csv"
+        output_path = str(_get_results_dir() / f"siid_pairs_{store_a}_to_{store_b}_{timestamp}.csv")
+    else:
+        output_path = _ensure_parent_dir(output_path)
     
     # Collect SIID pairs for ranks 1-3
     siid_pairs = []
@@ -132,7 +155,9 @@ def export_cross_store_results_to_csv(
     # Generate filename if not provided
     if output_path is None:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        output_path = f"cross_store_similarity_{store_a}_to_{store_b}_{timestamp}.csv"
+        output_path = str(_get_results_dir() / f"cross_store_similarity_{store_a}_to_{store_b}_{timestamp}.csv")
+    else:
+        output_path = _ensure_parent_dir(output_path)
     
     # Prepare data for CSV
     rows = []
@@ -265,7 +290,9 @@ def export_cross_store_results_to_excel(
     # Generate filename if not provided
     if output_path is None:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        output_path = f"cross_store_similarity_{store_a}_to_{store_b}_{timestamp}.xlsx"
+        output_path = str(_get_results_dir() / f"cross_store_similarity_{store_a}_to_{store_b}_{timestamp}.xlsx")
+    else:
+        output_path = _ensure_parent_dir(output_path)
     
     # Prepare data for Excel
     rows = []
