@@ -1,4 +1,9 @@
 {
   "aliases": {},
-  "canonical_terms": []
+  "canonical_terms": [
+    "bag",
+    "bottle",
+    "box",
+    "can"
+  ]
 }

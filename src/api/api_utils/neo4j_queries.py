@@ -59,7 +59,7 @@ def get_graph_schema(connector):
     """
     Query and cache the actual graph structure from Neo4j.
     Returns a dictionary mapping node label pairs to their relationship info.
-    
+
     Returns:
         Dict with structure:
         {
@@ -71,14 +71,14 @@ def get_graph_schema(connector):
         }
     """
     global _GRAPH_SCHEMA_CACHE
-    
+
     if _GRAPH_SCHEMA_CACHE is not None:
         return _GRAPH_SCHEMA_CACHE
-    
+
     if connector is None:
         logging.warning("No connector provided to get_graph_schema, cannot cache schema")
         return {}
-    
+
     try:
         # Query the actual graph structure
         schema_query = """
@@ -88,31 +88,31 @@ def get_graph_schema(connector):
         UNWIND target_labels as target_label
         RETURN DISTINCT source_label, rel_type, target_label
         """
-        
+
         result = connector.execute_query(schema_query)
-        
+
         schema = {}
         for record in result:
             source = record['source_label']
             rel_type = record['rel_type']
             target = record['target_label']
-            
+
             # Add outgoing relationship from source to target
             key_out = (source, target)
             if key_out not in schema:
                 schema[key_out] = []
             schema[key_out].append({'rel_type': rel_type, 'direction': 'outgoing'})
-            
+
             # Add incoming relationship from target to source
             key_in = (target, source)
             if key_in not in schema:
                 schema[key_in] = []
             schema[key_in].append({'rel_type': rel_type, 'direction': 'incoming'})
-        
+
         _GRAPH_SCHEMA_CACHE = schema
         logging.info(f"Graph schema cached with {len(schema)} node pair connections")
         return schema
-        
+
     except Exception as e:
         logging.error(f"Error querying graph schema: {e}")
         return {}
@@ -121,77 +121,86 @@ def get_graph_schema(connector):
 def find_shortest_path_in_schema(start_node: str, end_node: str, schema: Dict, max_depth: int = 5):
     """
     Use BFS to find the shortest path between two node types using the cached schema.
-    
+
     Args:
         start_node: Starting node label
         end_node: Ending node label
         schema: Cached graph schema from get_graph_schema()
         max_depth: Maximum path length to search
-    
+
     Returns:
         List of tuples: [(source, target, rel_type, direction), ...] or None if no path found
     """
     if start_node == end_node:
         return None
-    
+
     # BFS to find shortest path
     queue = deque([(start_node, [])])
     visited = {start_node}
-    
+
     while queue:
         current_node, path = queue.popleft()
-        
+
         if len(path) >= max_depth:
             continue
-        
+
         # Check all possible next nodes from current node
         for (source, target), rels in schema.items():
             if source == current_node and target not in visited:
                 for rel_info in rels:
                     new_path = path + [(source, target, rel_info['rel_type'], rel_info['direction'])]
-                    
+
                     if target == end_node:
                         return new_path
-                    
+
                     visited.add(target)
                     queue.append((target, new_path))
-    
+
     return None
 
 
 def build_path_pattern_from_schema(path_info: List[Tuple], start_var: str = 'n', end_var: str = 'm'):
     """
     Build a precise Cypher path pattern from schema path information.
-    
+
     Args:
         path_info: List of tuples from find_shortest_path_in_schema
         start_var: Variable name for start node
         end_var: Variable name for end node
-    
+
     Returns:
         Cypher pattern string
     """
     if not path_info:
         return None
-    
+
     # Build pattern by connecting segments
     # Don't use separate parts and join - build as one continuous pattern
     pattern = f"({start_var})"
     current_var = start_var
-    
+
     for idx, (source, target, rel_type, direction) in enumerate(path_info):
         next_var = end_var if idx == len(path_info) - 1 else f"p{idx}"
-        
+
         if direction == 'outgoing':
             pattern += f"-[:{rel_type}]->({next_var})"
         elif direction == 'incoming':
             pattern += f"<-[:{rel_type}]-({next_var})"
         else:
             pattern += f"-[:{rel_type}]-({next_var})"
-        
+
         current_var = next_var
-    
+
     return pattern
+
+
+def get_all_labels(limit: int = 100):
+    """
+    Return a Cypher query string to fetch all existing labels in the database.
+    Uses the built-in Neo4j procedure.
+    """
+    query = f"CALL db.labels() YIELD label RETURN label LIMIT {limit}"
+    return query
 
 
 def get_nodes_by_label(label: str, limit: int = 10):
@@ -217,7 +226,7 @@ def get_nodes_by_label(label: str, limit: int = 10):
             if pname and pname.lower() == lbl.lower():
                 query = f"MATCH (n:{node.node_label}) WHERE n.`{pname}` IS NOT NULL RETURN DISTINCT n.`{pname}` AS value LIMIT {limit}"
                 return query
-    
+
     for rel in NEO4J_ONTOLOGY.relationships:
         # 2) Is it a relationship type?
         if rel.rel_type.lower() == lbl.lower():
@@ -229,7 +238,7 @@ def get_nodes_by_label(label: str, limit: int = 10):
             if pname and pname.lower() == lbl.lower():
                 # match any relationship that has this property
                 query = f"MATCH ()-[r:{rel.rel_type}]-() WHERE r.`{pname}` IS NOT NULL RETURN DISTINCT r.`{pname}` AS value LIMIT {limit}"
-                return query       
+                return query
 
     logging.error(f"Label '{label}' not found in NEO4J_ONTOLOGY")
     return None
@@ -237,7 +246,7 @@ def get_nodes_by_label(label: str, limit: int = 10):
 
 def find_in_ontology(lbl: str):
     key = lbl.strip().lower()
-    
+
     for node in NEO4J_ONTOLOGY.nodes:
         # 1) node label
         if getattr(node, "node_label", "").strip().lower() == key:
@@ -247,7 +256,7 @@ def find_in_ontology(lbl: str):
             pname = (getattr(prop, "property_name", None) or getattr(prop, "source_column", "")).strip().lower()
             if pname == key:
                 return "node_property", (node, prop)
-    
+
     for rel in NEO4J_ONTOLOGY.relationships:
         # 2) relationship type
         if getattr(rel, "rel_type", "").strip().lower() == key:
@@ -262,11 +271,11 @@ def find_in_ontology(lbl: str):
 def get_relationships_from_ontology(from_node: str, to_node: str) -> List[str]:
     """
     Get all relationship types connecting two nodes from the ontology.
-    
+
     Args:
         from_node: Source node label
         to_node: Target node label
-    
+
     Returns:
         List of relationship types (may be empty if no direct connection)
     """
@@ -281,47 +290,47 @@ def build_path_from_ontology(start_node: str, end_node: str, max_depth: int = 4)
     """
     Build a path pattern from start_node to end_node using ontology relationships.
     Uses BFS to find shortest path.
-    
+
     Args:
         start_node: Starting node label
         end_node: Target node label
         max_depth: Maximum path length
-    
+
     Returns:
         Cypher path pattern or None if no path found
     """
     if start_node == end_node:
         return None
-    
+
     # Direct connection check
     direct_rels = get_relationships_from_ontology(start_node, end_node)
     if direct_rels:
         rel_str = "|".join(direct_rels)
         return f"-[:{rel_str}]->"
-    
+
     # BFS to find path through ontology
     from collections import deque
     queue = deque([(start_node, [])])
     visited = {start_node}
-    
+
     while queue:
         current, path = queue.popleft()
-        
+
         if len(path) >= max_depth:
             continue
-        
+
         # Check all relationships from current node
         for rel in NEO4J_ONTOLOGY.relationships:
             if rel.from_node == current and rel.to_node not in visited:
                 new_path = path + [(rel.from_node, rel.rel_type, rel.to_node)]
-                
+
                 if rel.to_node == end_node:
                     # Build pattern from path
                     return _build_pattern_from_path(new_path)
-                
+
                 visited.add(rel.to_node)
                 queue.append((rel.to_node, new_path))
-    
+
     return None
 
 
@@ -332,13 +341,13 @@ def _build_pattern_from_path(path: List[Tuple[str, str, str]]) -> str:
     """
     if not path:
         return ""
-    
+
     pattern_parts = []
     for i, (from_node, rel_type, to_node) in enumerate(path):
         pattern_parts.append(f"-[:{rel_type}]->")
         if i < len(path) - 1:  # Add intermediate node
             pattern_parts.append(f"(:{to_node})")
-    
+
     return "".join(pattern_parts)
 
 
@@ -349,11 +358,11 @@ def can_use_product_centric_optimization(ref_label: str, filters: List[FilterTri
     """
     if not filters or len(filters) < 2:
         return False
-    
+
     ref_rep, ref_obj = find_in_ontology(ref_label)
     if not ref_rep:
         return False
-    
+
     # Get reference node label
     if ref_rep == "node":
         ref_node_label = getattr(ref_obj, "node_label", ref_label)
@@ -362,7 +371,7 @@ def can_use_product_centric_optimization(ref_label: str, filters: List[FilterTri
     else:
         # Relationships not supported for product-centric optimization
         return False
-    
+
     # Check if reference and all filters connect to Product using ontology
     def connects_to_product(node_label: str) -> bool:
         """Check if a node has direct or multi-hop connection to Product."""
@@ -374,16 +383,16 @@ def can_use_product_centric_optimization(ref_label: str, filters: List[FilterTri
             return True
         # Check multi-hop (up to 4 hops)
         return build_path_from_ontology("Product", node_label, max_depth=4) is not None
-    
+
     if not connects_to_product(ref_node_label):
         return False
-    
+
     # Check if all filters can connect through Product
     for filt in filters:
         f_rep, f_obj = find_in_ontology(filt.field)
         if not f_rep:
             return False
-        
+
         # Get filter node label
         if f_rep == "node":
             filter_label = getattr(f_obj, "node_label", "")
@@ -407,7 +416,7 @@ def can_use_product_centric_optimization(ref_label: str, filters: List[FilterTri
                 return False
         else:
             return False
-    
+
     return True
 
 
@@ -425,34 +434,34 @@ def build_product_centric_query(
     logging.info(f"\n{'='*60}")
     logging.info(f"BUILDING PRODUCT-CENTRIC OPTIMIZED QUERY")
     logging.info(f"{'='*60}")
-    
+
     ref_rep, ref_obj = find_in_ontology(ref_label)
     params = {}
     stages = []
-    
+
     # Determine reference node label
     if ref_rep == "node":
         ref_node_label = getattr(ref_obj, "node_label", ref_label)
     elif ref_rep == "node_property":
         ref_node_label = getattr(ref_obj[0], "node_label", "")
-        canonical_ref = (getattr(ref_obj[1], "property_name", None) or 
+        canonical_ref = (getattr(ref_obj[1], "property_name", None) or
                         getattr(ref_obj[1], "source_column", ref_label))
     else:
         ref_node_label = None
-    
+
     # Stage 0: Start with Product
     stages.append("MATCH (p:Product)")
     logging.info("Stage 0: MATCH (p:Product)")
-    
+
     # Build filter stages - each filter progressively narrows Product set
     for idx, filt in enumerate(filters):
         logging.info(f"\nProcessing filter {idx}: {filt.field} {filt.filter_type} {filt.value}")
-        
+
         f_rep, f_obj = find_in_ontology(filt.field)
         if not f_rep:
             logging.warning(f"Filter field '{filt.field}' not found, skipping")
             continue
-        
+
         # Extract filter metadata
         filter_prop_name = None
         filter_prop_type = None
@@ -460,12 +469,12 @@ def build_product_centric_query(
         filter_rel_type = None
         filter_rel_from = None
         filter_rel_to = None
-        
+
         if f_rep == "node":
             filter_node_label = getattr(f_obj, "node_label", filt.field)
         elif f_rep == "node_property":
             parent_f_node, fprop = f_obj
-            filter_prop_name = (getattr(fprop, "property_name", None) or 
+            filter_prop_name = (getattr(fprop, "property_name", None) or
                                getattr(fprop, "source_column", "")).strip()
             filter_prop_type = getattr(fprop, "type", None)
             filter_node_label = getattr(parent_f_node, "node_label", "")
@@ -476,26 +485,26 @@ def build_product_centric_query(
             filter_rel_to = getattr(f_obj, "to_node", None)
         elif f_rep == "relationship_property":
             parent_f_rel, fprop = f_obj
-            filter_prop_name = (getattr(fprop, "property_name", None) or 
+            filter_prop_name = (getattr(fprop, "property_name", None) or
                                getattr(fprop, "source_column", "")).strip()
             filter_prop_type = getattr(fprop, "type", None)
             # Get the relationship details from ontology
             filter_rel_from = getattr(parent_f_rel, "from_node", None)
             filter_rel_to = getattr(parent_f_rel, "to_node", None)
             filter_rel_type = getattr(parent_f_rel, "rel_type", None)
-        
+
         # Build stage pattern and WHERE clause
         stage_match = None
         stage_where = None
         prop_expr = None
         param_name = f"p{idx}"
-        
+
         # Handle relationship filters (e.g., ALLERGENS existence check)
         if f_rep == "relationship":
             # Check if this is a relationship existence check
-            is_existence_check = (filt.filter_type == FilterTypes.EQUAL and 
+            is_existence_check = (filt.filter_type == FilterTypes.EQUAL and
                                  str(filt.value).upper() == filter_rel_type.upper())
-            
+
             if is_existence_check:
                 # For existence check, just match the specific relationship
                 if filter_rel_from == "Product":
@@ -517,7 +526,7 @@ def build_product_centric_query(
                     stage_match = f"MATCH (p)-[:{filter_rel_type}]-({var_name})"
                 prop_expr = f"{var_name}.name"
                 logging.info(f"  Relationship with property filter: {stage_match}")
-        
+
         # Handle relationship properties (e.g., price on SELLS)
         elif f_rep == "relationship_property":
             # Find which node connects via this relationship to Product
@@ -530,11 +539,11 @@ def build_product_centric_query(
                 stage_match = f"MATCH (p)-[{filter_rel_type.lower()}{idx}:{filter_rel_type}]->({filter_rel_to.lower()}{idx}:{filter_rel_to})"
                 prop_expr = f"{filter_rel_type.lower()}{idx}.`{filter_prop_name}`"
             logging.info(f"  Relationship property: {stage_match}")
-        
+
         # Handle node filters - use ontology to build path
         elif filter_node_label and filter_node_label != "Product":
             var_name = filter_node_label.lower()[:4] + str(idx)  # e.g., "brand0", "icat1"
-            
+
             # Check for incoming relationships (to Product)
             incoming_rels = get_relationships_from_ontology(filter_node_label, "Product")
             if incoming_rels:
@@ -560,23 +569,23 @@ def build_product_centric_query(
                     else:
                         logging.warning(f"No path found from Product to {filter_node_label}")
                         continue
-        
+
         # Product property filter
         elif filter_node_label == "Product" and filter_prop_name:
             stage_match = None  # No additional MATCH needed
             prop_expr = f"p.`{filter_prop_name}`"
             logging.info(f"  Product property: {prop_expr}")
-        
+
         # Fallback for node properties without explicit label
         elif f_rep == "node_property" and not stage_match and filter_prop_name:
             stage_match = None
             prop_expr = f"p.`{filter_prop_name}`"
             logging.info(f"  Assumed Product property: {prop_expr}")
-        
+
         else:
             logging.warning(f"Unsupported filter type for product-centric: {filter_node_label or f_rep}")
             continue
-        
+
         # For relationship existence checks, prop_expr is None - no WHERE clause needed
         if not prop_expr:
             if f_rep == "relationship" and filt.filter_type == FilterTypes.EQUAL:
@@ -590,37 +599,37 @@ def build_product_centric_query(
             else:
                 logging.warning(f"No property expression determined for filter {idx}: {filt.field}")
                 continue
-        
+
         # Build WHERE clause based on filter_type
         ft = filt.filter_type
-        
+
         if ft == FilterTypes.EQUAL:
             params[param_name] = filt.value
-            prop_type_str = (str(getattr(filter_prop_type, "value", filter_prop_type)).lower() 
+            prop_type_str = (str(getattr(filter_prop_type, "value", filter_prop_type)).lower()
                            if filter_prop_type else "")
             is_numeric = prop_type_str in ("float", "int", "integer", "numeric") or isinstance(filt.value, (int, float))
-            
+
             if is_numeric:
                 stage_where = f"toFloat({prop_expr}) = toFloat(${param_name})"
             else:
                 stage_where = f"toLower(coalesce(toString({prop_expr}), '')) = toLower(${param_name})"
-        
+
         elif ft == FilterTypes.CONTAINS:
             params[param_name] = str(filt.value)
             stage_where = f"toLower(coalesce(toString({prop_expr}), '')) CONTAINS toLower(${param_name})"
-        
+
         elif ft == FilterTypes.IN:
             params[param_name] = filt.value if isinstance(filt.value, list) else [filt.value]
             stage_where = f"{prop_expr} IN ${param_name}"
-        
+
         elif ft == FilterTypes.GREATER_THAN:
             params[param_name] = filt.value
             stage_where = f"toFloat({prop_expr}) > toFloat(${param_name})"
-        
+
         elif ft == FilterTypes.LESS_THAN:
             params[param_name] = filt.value
             stage_where = f"toFloat({prop_expr}) < toFloat(${param_name})"
-        
+
         elif ft == FilterTypes.BETWEEN:
             if isinstance(filt.value, (list, tuple)):
                 v1, v2 = filt.value[0], filt.value[1]
@@ -630,24 +639,24 @@ def build_product_centric_query(
             param_name1, param_name2 = f"{param_name}_1", f"{param_name}_2"
             params[param_name1], params[param_name2] = v1, v2
             stage_where = f"toFloat({prop_expr}) >= toFloat(${param_name1}) AND toFloat({prop_expr}) <= toFloat(${param_name2})"
-        
+
         # Add stage to pipeline
         if stage_match:
             stages.append(stage_match)
         if stage_where:
             stages.append(f"WHERE {stage_where}")
         stages.append("WITH DISTINCT p")
-        
+
         logging.info(f"  Stage {idx+1}: {stage_match or 'Product property filter'}")
         logging.info(f"  WHERE: {stage_where}")
-    
+
     # Final stage: Navigate from Product to target entity using ontology
     if ref_node_label == "Product":
         if ref_rep == "node":
             stages.append(f"RETURN DISTINCT p AS m LIMIT {limit}")
         else:  # node_property
             stages.append(f"RETURN DISTINCT p.`{canonical_ref}` AS value LIMIT {limit}")
-    
+
     elif ref_node_label:
         # Use ontology to determine navigation path
         # Check for incoming relationships (to Product)
@@ -682,21 +691,21 @@ def build_product_centric_query(
                     # Fallback: return products
                     logging.warning(f"No path found from Product to {ref_node_label}, returning products")
                     stages.append(f"RETURN DISTINCT p AS m LIMIT {limit}")
-    
+
     else:
         # Fallback: if ref_node_label not determined, return products
         logging.warning(f"Reference label could not be determined, returning products")
         stages.append(f"RETURN DISTINCT p AS m LIMIT {limit}")
-    
+
     query = "\n".join(stages)
-    
+
     logging.info(f"\n{'='*60}")
     logging.info(f"PRODUCT-CENTRIC OPTIMIZED QUERY:")
     logging.info(f"{'='*60}")
     logging.info(f"\n{query}\n")
     logging.info(f"Parameters: {params}")
     logging.info(f"{'='*60}\n")
-    
+
     return query, params
 
 
@@ -704,24 +713,24 @@ def find_path_between_entities(start_label: str, end_label: str, max_depth: int 
     """
     Find if there's a path between two entities in the ontology.
     Uses cached graph schema for precise path patterns instead of variable-length paths.
-    
+
     Args:
         start_label: Starting entity (node/relationship label or property name)
         end_label: Target entity (node/relationship label or property name)
         max_depth: Maximum relationship depth to search
         schema: Cached graph schema (optional, will use global cache if not provided)
-    
+
     Returns:
         Tuple of (path_pattern, start_var, end_var, is_relationship_target) or (None, None, None, False)
     """
     start_rep, start_obj = find_in_ontology(start_label)
     end_rep, end_obj = find_in_ontology(end_label)
-    
+
     if not start_rep or not end_rep:
         return None, None, None, False
-    
+
     is_rel_target = False
-    
+
     # Get node labels for both entities
     if start_rep == "node":
         start_node_label = getattr(start_obj, "node_label", start_label)
@@ -729,7 +738,7 @@ def find_path_between_entities(start_label: str, end_label: str, max_depth: int 
         start_node_label = getattr(start_obj[0], "node_label", "")
     else:
         return None, None, None, False  # Can't start from relationship
-    
+
     if end_rep == "node":
         end_node_label = getattr(end_obj, "node_label", end_label)
     elif end_rep == "node_property":
@@ -740,12 +749,12 @@ def find_path_between_entities(start_label: str, end_label: str, max_depth: int 
         # Find which node labels are connected by this relationship
         rel_from = getattr(end_obj, "from_node", None)
         rel_to = getattr(end_obj, "to_node", None)
-        
+
         # Check if start node directly participates in this relationship
         if start_node_label in (rel_from, rel_to):
             path_pattern = f"(m)-[r:{end_rel_type}]-()"
             return path_pattern, "m", "r", True
-        
+
         # Otherwise, need to find path to a node that participates in this relationship
         # Try to find path to either from_node or to_node
         if schema:
@@ -759,23 +768,23 @@ def find_path_between_entities(start_label: str, end_label: str, max_depth: int 
                             # Add the relationship at the end
                             pattern = f"{pattern}-[r:{end_rel_type}]-()"
                             return pattern, "n", "r", True
-        
+
         # Fallback: use variable-length path to find connection
         path_pattern = f"(n:{start_node_label})-[*1..{max_depth}]-(p)-[r:{end_rel_type}]-()"
         return path_pattern, "n", "r", True
-        
+
     elif end_rep == "relationship_property":
         # Target is a relationship property
         parent_rel, _ = end_obj
         end_rel_type = getattr(parent_rel, "rel_type", "")
         rel_from = getattr(parent_rel, "from_node", None)
         rel_to = getattr(parent_rel, "to_node", None)
-        
+
         # Check if start node directly participates in this relationship
         if start_node_label in (rel_from, rel_to):
             path_pattern = f"(m)-[r:{end_rel_type}]-()"
             return path_pattern, "m", "r", True
-        
+
         # Otherwise, need to find path to a node that participates in this relationship
         if schema:
             for target_node in [rel_from, rel_to]:
@@ -788,20 +797,20 @@ def find_path_between_entities(start_label: str, end_label: str, max_depth: int 
                             # Add the relationship at the end
                             pattern = f"{pattern}-[r:{end_rel_type}]-()"
                             return pattern, "n", "r", True
-        
+
         # Fallback: use variable-length path to find connection
         path_pattern = f"(n:{start_node_label})-[*1..{max_depth}]-(p)-[r:{end_rel_type}]-()"
         return path_pattern, "n", "r", True
     else:
         return None, None, None, False
-    
+
     if start_node_label == end_node_label:
         return None, None, None, False  # Same node type, should be handled differently
-    
+
     # Use cached schema to find precise path
     if schema is None:
         schema = _GRAPH_SCHEMA_CACHE or {}
-    
+
     if schema:
         path_info = find_shortest_path_in_schema(start_node_label, end_node_label, schema, max_depth)
         if path_info:
@@ -812,7 +821,7 @@ def find_path_between_entities(start_label: str, end_label: str, max_depth: int 
                 # Don't add label to 'm' as it's already defined in base MATCH
                 logging.info(f"Using precise path from schema: {pattern}")
                 return pattern, "n", "m", False
-    
+
     # Fallback to variable-length path if schema not available
     # Use max_depth of 5 to handle paths like Internal_Category -> Brand (4 hops)
     logging.warning(f"Schema not available, using variable-length path (slower)")
@@ -842,7 +851,7 @@ def generate_query_for_filter_triplets(
     logging.info(f"Number of filters: {len(filters)}")
     for i, f in enumerate(filters):
         logging.info(f"  Filter {i}: field={f.field}, type={f.filter_type}, value={f.value}")
-    
+
     # Initialize schema cache if connector provided
     schema = None
     if connector is not None:
@@ -850,28 +859,28 @@ def generate_query_for_filter_triplets(
         logging.info(f"Using cached graph schema with {len(schema)} connections")
     else:
         logging.warning("No connector provided, will use variable-length paths (slower)")
-    
+
     # Check if Product-centric optimization can be applied
-    if (len(filters) >= 1 and 
-        logical_operator.upper() == "AND" and 
-        schema and 
+    if (len(filters) >= 1 and
+        logical_operator.upper() == "AND" and
+        schema and
         can_use_product_centric_optimization(ref_label, filters, schema)):
         logging.info("✓✓✓ USING PRODUCT-CENTRIC OPTIMIZATION ✓✓✓")
         return build_product_centric_query(ref_label, filters, limit, logical_operator, schema)
-    
+
     # Determine reference label type and canonical name
     ref_rep, ref_obj = find_in_ontology(ref_label)
     if not ref_rep:
         logging.error(f"Reference label '{ref_label}' not found in ontology")
         return "", {}
-    
+
     logging.info(f"\nReference label analysis:")
     logging.info(f"  Representation: {ref_rep}")
-    
+
     # Get canonical reference name from ontology
     ref_node_label = None
     ref_rel_type = None
-    
+
     if ref_rep == "node":
         canonical_ref = getattr(ref_obj, "node_label", ref_label)
         logging.info(f"  Node label: {canonical_ref}")
@@ -880,14 +889,14 @@ def generate_query_for_filter_triplets(
         logging.info(f"  Relationship type: {canonical_ref}")
     elif ref_rep == "node_property":
         parent_node, prop = ref_obj
-        canonical_ref = (getattr(prop, "property_name", None) or 
+        canonical_ref = (getattr(prop, "property_name", None) or
                         getattr(prop, "source_column", ref_label))
         ref_node_label = getattr(parent_node, "node_label", "")
         logging.info(f"  Property name: {canonical_ref}")
         logging.info(f"  Parent node: {ref_node_label}")
     elif ref_rep == "relationship_property":
         parent_rel, prop = ref_obj
-        canonical_ref = (getattr(prop, "property_name", None) or 
+        canonical_ref = (getattr(prop, "property_name", None) or
                         getattr(prop, "source_column", ref_label))
         ref_rel_type = getattr(parent_rel, "rel_type", "")
         logging.info(f"  Property name: {canonical_ref}")
@@ -904,7 +913,7 @@ def generate_query_for_filter_triplets(
     match_clauses: List[str] = []
     where_clauses: List[str] = []
     params: Dict[str, Any] = {}
-    
+
     # Track used variables to avoid conflicts
     used_vars = {'m'}  # 'm' is always used for the reference node
 
@@ -920,7 +929,7 @@ def generate_query_for_filter_triplets(
     elif ref_rep == "relationship_property":
         base_match = f"MATCH ()-[m:{ref_rel_type}]-()"
         where_clauses.append(f"m.`{canonical_ref}` IS NOT NULL")
-    
+
     match_clauses.append(base_match)
     logging.info(f"\nBase MATCH clause: {base_match}")
 
@@ -932,7 +941,7 @@ def generate_query_for_filter_triplets(
         logging.info(f"Field: {filt.field}")
         logging.info(f"Filter type: {filt.filter_type}")
         logging.info(f"Value: {filt.value}")
-        
+
         f_rep, f_obj = find_in_ontology(filt.field)
         if not f_rep:
             logging.error(f"❌ Filter field '{filt.field}' not found in ontology; SKIPPING")
@@ -945,7 +954,7 @@ def generate_query_for_filter_triplets(
         filter_prop_type = None
         filter_node_label = None
         filter_rel_type = None
-        
+
         if f_rep == "node":
             filter_label = getattr(f_obj, "node_label", filt.field)
             filter_node_label = filter_label
@@ -956,7 +965,7 @@ def generate_query_for_filter_triplets(
             logging.info(f"  → Filter is a RELATIONSHIP with type: {filter_rel_type}")
         elif f_rep == "node_property":
             parent_f_node, fprop = f_obj
-            filter_prop_name = (getattr(fprop, "property_name", None) or 
+            filter_prop_name = (getattr(fprop, "property_name", None) or
                                getattr(fprop, "source_column", "")).strip()
             filter_prop_type = getattr(fprop, "type", None)
             filter_label = getattr(parent_f_node, "node_label", "")
@@ -967,7 +976,7 @@ def generate_query_for_filter_triplets(
             logging.info(f"     Property type: {filter_prop_type}")
         elif f_rep == "relationship_property":
             parent_f_rel, fprop = f_obj
-            filter_prop_name = (getattr(fprop, "property_name", None) or 
+            filter_prop_name = (getattr(fprop, "property_name", None) or
                                getattr(fprop, "source_column", "")).strip()
             filter_prop_type = getattr(fprop, "type", None)
             filter_label = getattr(parent_f_rel, "rel_type", "")
@@ -986,11 +995,11 @@ def generate_query_for_filter_triplets(
         # Build filter expression based on ref_label and field combination
         prop_expr = None
         needs_path = False
-        
+
         logging.info(f"\nBuilding filter expression...")
         logging.info(f"  Reference type: {ref_rep}")
         logging.info(f"  Filter type: {f_rep}")
-        
+
         # REF: NODE
         if ref_rep == "node":
             if f_rep == "node":
@@ -1000,7 +1009,7 @@ def generate_query_for_filter_triplets(
                     logging.info(f"  Looking for path from {filt.field} to {ref_label}...")
                     path_pattern, start_var, end_var, is_rel_target = find_path_between_entities(filt.field, ref_label, schema=schema)
                     logging.info(f"  Path result: {path_pattern}")
-                    
+
                     if path_pattern:
                         # Replace generic variables with filter-specific ones
                         path_pattern = path_pattern.replace("(n:", f"({filter_node_var}:")
@@ -1021,18 +1030,18 @@ def generate_query_for_filter_triplets(
                     prop_expr = f"{filter_node_var}.name"
                     logging.info(f"  ✓ Finding {canonical_ref} nodes connected to filtered {canonical_ref} node")
                     logging.info(f"  ✓ Property expression: {prop_expr}")
-                    
+
             elif f_rep == "relationship":
                 logging.info(f"  Case: REF=NODE, FILTER=RELATIONSHIP")
                 # Get target node from ontology to build proper pattern
                 rel_obj = f_obj
                 rel_from = getattr(rel_obj, "from_node", None)
                 rel_to = getattr(rel_obj, "to_node", None)
-                
+
                 # Check if this is a relationship existence check (value == relationship type name)
-                is_existence_check = (filt.filter_type == FilterTypes.EQUAL and 
+                is_existence_check = (filt.filter_type == FilterTypes.EQUAL and
                                      str(filt.value).upper() == filter_rel_type.upper())
-                
+
                 if is_existence_check:
                     # For existence check, just verify the relationship exists (no prop_expr needed)
                     if rel_from == canonical_ref:
@@ -1055,7 +1064,7 @@ def generate_query_for_filter_triplets(
                         match_clauses.append(f"MATCH (m)-[{filter_rel_var}:{filter_rel_type}]-({filter_node_var})")
                         prop_expr = f"{filter_node_var}.name"
                     logging.info(f"  ✓ Property expression: {prop_expr}")
-                
+
             elif f_rep == "node_property":
                 logging.info(f"  Case: REF=NODE, FILTER=NODE_PROPERTY")
                 if filter_node_label and filter_node_label != canonical_ref:
@@ -1063,7 +1072,7 @@ def generate_query_for_filter_triplets(
                     logging.info(f"  Looking for path from {filt.field} to {ref_label}...")
                     path_pattern, start_var, end_var, is_rel_target = find_path_between_entities(filt.field, ref_label, schema=schema)
                     logging.info(f"  Path result: {path_pattern}")
-                    
+
                     if path_pattern:
                         # Replace generic variables with filter-specific ones
                         path_pattern = path_pattern.replace("(n:", f"({filter_node_var}:")
@@ -1079,19 +1088,19 @@ def generate_query_for_filter_triplets(
                 else:
                     prop_expr = f"m.`{filter_prop_name}`" if filter_prop_name else "m.name"
                     logging.info(f"  Same node type, property expression: {prop_expr}")
-                    
+
             elif f_rep == "relationship_property":
                 logging.info(f"  Case: REF=NODE, FILTER=RELATIONSHIP_PROPERTY")
                 logging.info(f"  Looking for path from {ref_label} to {filt.field}...")
                 path_pattern, start_var, end_var, is_rel_target = find_path_between_entities(ref_label, filt.field, schema=schema)
                 logging.info(f"  Path result: {path_pattern}")
-                
+
                 if path_pattern and is_rel_target:
                     # Replace generic variables with filter-specific ones
                     # Replace all intermediate p variables with filter-specific ones to avoid conflicts
                     import re
                     if start_var == 'n':
-                        # Pattern like (n:Brand)-...(p0)-...(p)-[r:SELLS]-() 
+                        # Pattern like (n:Brand)-...(p0)-...(p)-[r:SELLS]-()
                         # needs unique variables for this filter
                         path_pattern = path_pattern.replace(f"({start_var}:", "(m:")
                         # Replace intermediate p0, p1, etc. with unique variables
@@ -1108,7 +1117,7 @@ def generate_query_for_filter_triplets(
                     prop_expr = f"{filter_rel_var}.`{filter_prop_name}`" if filter_prop_name else f"{filter_rel_var}.name"
                     logging.info(f"  ✓ Using direct connection to relationship")
                 logging.info(f"  ✓ Property expression: {prop_expr}")
-        
+
         # REF: RELATIONSHIP
         elif ref_rep == "relationship":
             if f_rep == "node":
@@ -1137,7 +1146,7 @@ def generate_query_for_filter_triplets(
                     match_clauses.append(f"MATCH ()-[{filter_rel_var}:{filter_rel_type}]-()")
                     prop_expr = f"{filter_rel_var}.`{filter_prop_name}`" if filter_prop_name else f"{filter_rel_var}.name"
                     logging.info(f"  Different relationship, property expression: {prop_expr}")
-        
+
         # REF: NODE_PROPERTY
         elif ref_rep == "node_property":
             if f_rep == "node":
@@ -1163,7 +1172,7 @@ def generate_query_for_filter_triplets(
                 rel_obj = f_obj
                 rel_from = getattr(rel_obj, "from_node", None)
                 rel_to = getattr(rel_obj, "to_node", None)
-                
+
                 # Match the relationship and connected node
                 if rel_from == ref_node_label:
                     match_clauses.append(f"MATCH (m)-[{filter_rel_var}:{filter_rel_type}]->({filter_node_var}:{rel_to})")
@@ -1196,7 +1205,7 @@ def generate_query_for_filter_triplets(
                 match_clauses.append(f"MATCH (m)-[{filter_rel_var}:{filter_rel_type}]-()")
                 prop_expr = f"{filter_rel_var}.`{filter_prop_name}`" if filter_prop_name else f"{filter_rel_var}.name"
                 logging.info(f"  ✓ Property expression: {prop_expr}")
-        
+
         # REF: RELATIONSHIP_PROPERTY
         elif ref_rep == "relationship_property":
             if f_rep == "node":
@@ -1281,11 +1290,11 @@ def generate_query_for_filter_triplets(
                 parts = str(filt.value).split(",")
                 v1, v2 = parts[0].strip(), parts[1].strip()
             params[p1], params[p2] = v1, v2
-            
-            is_numeric = (filter_prop_type and 
-                         str(getattr(filter_prop_type, "value", filter_prop_type)).lower() 
+
+            is_numeric = (filter_prop_type and
+                         str(getattr(filter_prop_type, "value", filter_prop_type)).lower()
                          in ("float", "int", "integer", "numeric"))
-            
+
             if is_numeric or (isinstance(v1, (int, float)) and isinstance(v2, (int, float))):
                 where_clause = f"toFloat({prop_expr}) >= toFloat(${p1}) AND toFloat({prop_expr}) <= toFloat(${p2})"
             else:
@@ -1313,11 +1322,11 @@ def generate_query_for_filter_triplets(
 
         elif ft == FilterTypes.EQUAL:
             params[p] = filt.value
-            prop_type_str = (str(getattr(filter_prop_type, "value", filter_prop_type)).lower() 
+            prop_type_str = (str(getattr(filter_prop_type, "value", filter_prop_type)).lower()
                            if filter_prop_type else "")
             is_numeric = prop_type_str in ("float", "int", "integer", "numeric")
             is_list = "list" in prop_type_str or "array" in prop_type_str
-            
+
             # Handle type() function calls (for relationship type matching)
             if prop_expr.startswith("type("):
                 where_clause = f"toLower({prop_expr}) = toLower(${p})"
@@ -1358,34 +1367,34 @@ def generate_query_for_filter_triplets(
     if len(deduped_matches) > 1:
         base_match = deduped_matches[0]
         other_matches = deduped_matches[1:]
-        
+
         # Categorize matches by whether they use indexed properties
         indexed_matches = []
         path_matches = []
         other_simple_matches = []
-        
+
         for m in other_matches:
             # Check if this match uses indexed properties (name, product_hash, value)
             # These are matches with WHERE clauses on indexed properties
             has_indexed_prop = False
             match_lower = m.lower()
-            
+
             # Check for indexed property patterns in match
             if 'name' in match_lower or 'product_hash' in match_lower or 'value' in match_lower:
                 # This match likely benefits from indexes
                 indexed_matches.append(m)
                 has_indexed_prop = True
-            
+
             if not has_indexed_prop:
                 # Check if it's a path pattern (more expensive)
                 if '-[' in m and ']-' in m and ('*' in m or 'p0' in m or 'pf' in m):
                     path_matches.append(m)
                 else:
                     other_simple_matches.append(m)
-        
+
         # Reorder: base → indexed matches → simple matches → path matches
         deduped_matches = [base_match] + indexed_matches + other_simple_matches + path_matches
-        
+
         logging.info(f"\n✓ Query optimization: Reordered MATCH clauses")
         logging.info(f"  - Base match: 1")
         logging.info(f"  - Indexed matches: {len(indexed_matches)}")
@@ -1400,32 +1409,32 @@ def generate_query_for_filter_triplets(
 
     if where_clauses:
         op = " OR " if logical_operator.upper() == "OR" else " AND "
-        
+
         # Separate WHERE clauses using indexed properties from others
         other_where = []
-        
+
         for w in where_clauses:
             w_lower = w.lower()
             # Check if WHERE clause uses indexed properties
             # Patterns: m.name, m.product_hash, m.value, n0.name, etc.
-            if ('.name' in w_lower or '.product_hash' in w_lower or '.value' in w_lower or 
+            if ('.name' in w_lower or '.product_hash' in w_lower or '.value' in w_lower or
                 '(`name`' in w_lower or '(`product_hash`' in w_lower or '(`value`' in w_lower):
                 indexed_where.append(w)
             else:
                 other_where.append(w)
-        
+
         # Combine: indexed filters first (better selectivity)
         ordered_where = indexed_where + other_where
-        
+
         if indexed_where:
             logging.info(f"\n✓ Query optimization: Using {len(indexed_where)} indexed property filters")
-        
+
         logging.info(f"\n✓ Joining {len(ordered_where)} WHERE clauses with operator: {op.strip()}")
         query += "\nWHERE " + op.join(ordered_where)
         logging.info(f"✓ WHERE clause added to query")
     else:
         logging.info(f"\n⚠ No WHERE clauses to add")
-    
+
     # Apply early LIMIT optimization for multiple filters to reduce intermediate result sets
     # This works best when we have selective indexed property filters
     if len(filters) > 1 and indexed_where:
@@ -1434,7 +1443,7 @@ def generate_query_for_filter_triplets(
         early_limit = limit * 10
         query += f"\nWITH DISTINCT m LIMIT {early_limit}"
         logging.info(f"\n✓ Query optimization: Early LIMIT {early_limit} after indexed filters")
-    
+
     # Return appropriate variable based on ref type
     if ref_rep == "node":
         query += f"\nRETURN DISTINCT m LIMIT {limit}"

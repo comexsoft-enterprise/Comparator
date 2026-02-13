@@ -456,3 +456,47 @@ Aprovecha fortalezas de cada tecnología:
 - Validación visual de matches
 - Gestión de reglas de similitud
 
+
+
+////
+
+/////Crear la key para el tunel////// (¿¿Obsoleto??)
+
+cat > ec2_ssh.pem <<'EOF'
+sed -i 's/\r$//' ec2_ssh.pem 2>/dev/null || true
+chmod 400 ec2_ssh.pem
+ssh-keygen -y -f ec2_ssh.pem | head
+
+
+/////Entrar en la maquina con el/////
+
+mv /<la ruta en la que esta el .pem>/ec2_ssh.pem ~/.ssh/
+chmod 400 ~/.ssh/ec2_ssh.pem
+
+ssh -i ~/.ssh/ec2_ssh.pem ubuntu@54.237.55.135
+
+
+////Ejecutar capa API de EY///////////
+
+/mnt/data/projects/Comparator/venv/bin/uvicorn src.api.main:app --reload
+ --host 0.0.0.0 --port 8000
+
+
+desde local: ssh -i ~/.ssh/ec2_ssh.pem -N   -L 27017:127.0.0.1:27017   -L 3000:127.0.0.1:3000   -L 7687:127.0.0.1:7687   ubuntu@54.237.55.135 -L 8000:127.0.0.1:8000
+
+
+--> MongoDB:
+	Descargar MongoDB Compass > create connection > uri: mongodb://localhost:27017 > Advanced Connection Options > user: admin, password: secretpass
+
+--> Neo4j: http://localhost:3000 > auth: neo4j/testpass
+
+--> VS Code: para WINDOWS mediante extensión "Remote Explorer"
+	notepad C:\Users\<usuario>\.ssh\config >
+	pegar 	Host ec2-dev
+		    HostName 54.237.55.135
+		    User ubuntu
+		    IdentityFile C:/Users/<usuario>/.ssh/ec2_ssh.pem
+		    IdentitiesOnly yes
+	> Contenido exacto: IdentityFile C:/Users/<usuario>/.ssh/ec2_ssh.pem > ejecutamos el tunnel: ssh ec2-dev >
+	una vez instalada la extension de VSCode: ctrl + shift + P > Remote-SSH: Connect to Host > Seleccionar ec2-dev > clicar en el host que aparecerá en el sidebar > Sistema remoto: Linux
+
