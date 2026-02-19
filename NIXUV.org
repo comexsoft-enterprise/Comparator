@@ -1,0 +1,154 @@
+#+title: Nix + uv (comexsoft approach)
+#+options: toc:nil
+
+* Overview
+This repo uses a “Nix + uv” setup designed to work the same way on:
+- NixOS (and other Nix-based environments)
+- other Linux distros (Ubuntu/Debian/Fedora/etc.)
+
+This assumes you’re using the repo’s *Nix dev shell* (flakes + devenv) even on non-NixOS.
+
+The core idea is: *Nix provides the OS/runtime layer and developer shell; uv provides the Python environment and dependency graph.*
+
+* Goals (why configure it this way)
+- *Portability*: one workflow for both NixOS and non-Nix machines.
+- *Reproducibility*: Nix pins system libraries/tooling; uv pins Python deps via a lockfile.
+- *Isolation*: avoid “two Python worlds” fighting each other (Nix site-packages vs venv).
+- *Fast iteration*: uv resolves and syncs quickly; Nix handles only what it’s good at.
+
+* Division of responsibilities (Nix/devenv vs uv)
+** Nix + devenv (system layer)
+Responsible for:
+- Python *interpreter* availability (a python executable exists in the dev shell)
+- system libraries needed by wheels/ctypes (e.g., openssl, libffi, sqlite, zlib, gcc)
+- non-Python tools that truly are “system” tools (git, curl, etc.)
+- consistent dev shell entry via direnv
+
+Not responsible for:
+- installing Python packages into Nix’s python site-packages for the app
+
+** uv (Python layer)
+Responsible for:
+- Python dependency resolution + lockfile (*uv.lock*)
+- creating and managing the project venv (*.venv/*)
+- installing runtime + dev dependencies into that venv
+- keeping Python tooling (ruff/pytest/etc.) aligned with project deps
+
+* Benefits and tradeoffs
+** Benefits
+- One dependency model for Python (uv lockfile) regardless of distro.
+- Avoids Nix Python packaging overhead for application deps.
+- Easier onboarding: “enter shell, uv sync, run”.
+- Fewer “works on my machine” issues caused by ambient system Python packages.
+
+** Tradeoffs
+- You must be disciplined about *not* adding Python packages via Nix.
+- Some uv behaviors need extra environment variables under Nix (see below).
+- Debugging “which python am I using?” becomes a first-class habit.
+
+* Key anti-pattern (do not do this)
+*Mixing Nix-provided Python site-packages (via PYTHONPATH) with an uv-managed venv.*
+
+** Why it’s bad
+This usually happens when the dev shell uses =python.withPackages= or other Nix-wrapped Python
+tools that export =PYTHONPATH= pointing at =/nix/store/.../site-packages=. Python may then import
+modules from =/nix/store= instead of from =.venv=. This creates version skew inside one process.
+
+** Concrete failure mode (we saw this)
+- =pydantic= imported =typing_extensions= from =/nix/store/...= (Nix site-packages)
+- The =typing_extensions= version from Nix lacked the newer =Sentinel= symbol
+- Result: runtime import error in pydantic (e.g., failing on =typing_extensions.Sentinel=)
+
+This is especially nasty because it *looks* like “pydantic is broken”, but the real problem is:
+*the interpreter is seeing two different dependency universes.*
+
+* The comexsoft pattern: keep Nix “apiPackages” free of Python deps
+In comexsoft-style repos, a list like =apiPackages= exists for “runtime/system” dependencies,
+*but it intentionally excludes Python packages* to avoid =PYTHONPATH= conflicts.
+
+Practical rule:
+- Nix/devenv: interpreter + system libs + OS tools
+- uv: *all* Python packages (runtime + dev), including linters/test tools
+
+* Recommended setup (day-to-day)
+** 1) Enter the dev shell (direnv/devenv)
+#+begin_src sh
+direnv allow
+# (direnv will load the devenv shell automatically when you cd into the repo)
+#+end_src
+
+After changing =flake.nix= or =.envrc=, reload:
+#+begin_src sh
+direnv reload
+#+end_src
+
+** 2) Sync Python dependencies with uv
+#+begin_src sh
+# Helpful when debugging interpreter selection:
+uv python find
+
+# Optional: explicitly bind the venv to the shell’s Python interpreter
+uv venv --python "$(which python)"
+
+uv sync
+# optionally:
+uv sync --dev
+#+end_src
+
+** 3) Run the API (examples)
+(Use whatever entrypoint this repo provides; typical patterns:)
+#+begin_src sh
+uv run python -m your_package.api
+# or:
+uv run uvicorn your_package.api:app --reload
+#+end_src
+
+** 4) Verify which Python is being used (important)
+Prefer running diagnostics inside uv’s environment:
+#+begin_src sh
+uv run python -c "import sys; print(sys.executable); print(sys.path)"
+uv run python -c "import site; print(site.getsitepackages()); print(site.getusersitepackages())"
+
+# Verify module origins (should point into .venv)
+uv run python -c "import typing_extensions, pydantic; print(typing_extensions.__file__); print(pydantic.__file__)"
+
+# Sanity checks for env pollution
+echo "PYTHONPATH=${PYTHONPATH}"
+echo "PYTHONHOME=${PYTHONHOME}"
+echo "PYTHONNOUSERSITE=${PYTHONNOUSERSITE}"
+#+end_src
+
+* Nix-specific environment variables (often needed)
+Under Nix, these settings commonly prevent uv from fighting the filesystem/store model:
+
+#+begin_src sh
+# Often helpful when hardlinks/symlinks are problematic (NFS/overlayfs/Nix-y environments).
+# Trades disk space for predictability.
+export UV_LINK_MODE=copy
+
+# Prefer the interpreter provided by the dev shell.
+export UV_PYTHON_DOWNLOADS=never
+
+# Hardening: avoid importing user-site packages.
+export PYTHONNOUSERSITE=1
+
+# Hardening: should generally be unset for uv/venv usage.
+unset PYTHONHOME
+#+end_src
+
+(Where to put them: devenv shell env, direnv config, or your local shell—depending on repo policy.)
+
+* NixOS note: wheels that ship executables (nix-ld)
+On NixOS, some wheels (or tools) ship ELF executables that expect the dynamic loader at
+=/lib64/ld-linux-x86-64.so.2=. A common symptom is an error like “No such file or directory”
+when executing a binary that clearly exists.
+
+This is separate from the =PYTHONPATH= mixing issue above. The typical fix is enabling
+=nix-ld= (system-level):
+- Set =programs.nix-ld.enable = true;= in your NixOS configuration.
+
+* TODO (future refactors to keep this clean)
+- Split Nix packages into a “no-Python runtime” set (system libs/tools only).
+- Move ruff/pytest/black/isort into uv *dev dependencies* (not Nix).
+- Ensure =PYTHONPATH= is empty in the dev shell (no Nix python site-packages injection).
+- Make import paths package-friendly (prefer =src/= layout / proper packaging over ad-hoc paths).

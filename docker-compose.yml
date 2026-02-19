@@ -1,4 +1,4 @@
-version: "3.8"
+name: comparator
 
 services:
   # --- PostgreSQL: Vector Storage ---

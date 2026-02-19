@@ -1,18 +1,24 @@
-"""
-FastAPI application for supermarket data comparison and preprocessing.
-"""
-import io
+"""FastAPI application for supermarket data comparison and preprocessing."""
+
 import hashlib
+import io
+import logging
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+# Allow running via: `python src/api/main.py` or `cd src/api && python main.py`
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from data.schemas.taxonomy import ColumnRegistry
 import uvicorn
-import logging
-from pathlib import Path
-from typing import Dict, Any, List, Optional
-from datetime import datetime
-from fastapi import FastAPI, HTTPException, UploadFile, File
-from pydantic import BaseModel, Field
-from neo4j.graph import Node, Relationship
 from bson import ObjectId
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from neo4j.graph import Node, Relationship
+from pydantic import BaseModel, Field
 
 from config.settings import NEO4J_CONFIG, AZURE_OPENAI_CONFIG, PROJECT_ROOT
 

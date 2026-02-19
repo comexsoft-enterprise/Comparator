@@ -239,3 +239,4 @@ nohup.out
 *.json
 *.csv
 *.xlsx
+.envrc

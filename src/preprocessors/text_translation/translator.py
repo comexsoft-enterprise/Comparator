@@ -14,7 +14,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 from tqdm import tqdm
 from dataclasses import dataclass
-from openai import OpenAI
+from openai import AzureOpenAI
 
 from data.schemas.taxonomy import ColumnRegistry, create_default_registry
 from config.settings import PROJECT_ROOT
@@ -636,9 +636,10 @@ class TranslatorOpenAI(Translator):
         if not llm_base_url:
             raise ValueError("LLM base URL is required. Set AZURE_OPENAI_API_BASE environment variable or pass llm_base_url parameter.")
         
-        self.llm_client = OpenAI(
+        self.llm_client = AzureOpenAI(
             base_url=llm_base_url,
-            api_key=llm_api_key
+            api_key=llm_api_key,
+            api_version=os.environ.get("AZURE_OPENAI_API_VERSION")
         )
         logger.info(f"✅ LLM client initialized (model: {self.llm_model})")
         logger.info(f"   Base URL: {llm_base_url}")

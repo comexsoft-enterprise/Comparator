@@ -46,6 +46,8 @@ MONGO_CONFIG = {
     "user": os.getenv("MONGO_USER1", "admin"),
     "password": os.getenv("MONGO_USER1_PASSWORD", ""),
     "database": os.getenv("MONGO_DATABASE", "test"),
+    # Where MongoDB authenticates users (commonly "admin")
+    "auth_source": os.getenv("MONGO_AUTH_SOURCE", "admin"),
 }
 
 POSTGRES_DB_CONFIG = {

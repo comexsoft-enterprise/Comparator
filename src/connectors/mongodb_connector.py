@@ -10,6 +10,7 @@ def get_mongo_client(
     user=MONGO_CONFIG["user"],
     password=MONGO_CONFIG["password"],
     database=MONGO_CONFIG["database"],
+    auth_source=MONGO_CONFIG.get("auth_source", "admin"),
 ):
     """
     Establishes a connection to the MongoDB database.
@@ -46,6 +47,7 @@ def diagnostic_get_mongo_client(
     user=MONGO_CONFIG["user"],
     password=MONGO_CONFIG["password"],
     database=MONGO_CONFIG["database"],
+    auth_source=MONGO_CONFIG.get("auth_source", "admin"),
 ):
     """
     Diagnostic wrapper: build/redact the URI, attempt to connect and ping MongoDB,

@@ -349,12 +349,12 @@ class CSVFixer:
         Fix a single row's categorization using LLM.
         Returns dict with corrected values: {type, internal_category, internal_subcategory}
         """
-        from openai import OpenAI
+        from openai import AzureOpenAI
         import json
         
-        client = OpenAI(api_key=api_key, base_url=api_base)
+        client = AzureOpenAI(api_key=api_key, base_url=api_base, api_version=os.environ.get("AZURE_OPENAI_API_VERSION"))
         
-        # Build subcategory prompt section
+        # Build subcaAzuretegory prompt section
         subcategory_prompt = "\n"
         for category, subcat_enum in self.category_subcategory_map.items():
             subcats = [sc.value for sc in subcat_enum]
