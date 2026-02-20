@@ -109,6 +109,7 @@
         PREFECT_VPC_ID = "vpc-0ea48a8d1995cf5c8";
         # Private subnets (with NAT): preferred for production
         PREFECT_SUBNETS = ''["subnet-01df359b4892fbc21","subnet-070cbd2f9c16e236c"]'';
+        PREFECT_PUBLIC_SUBNETS = ''["subnet-05953ba81bec246a8","subnet-0e23873c47a75fb73"]'';
         PREFECT_SECURITY_GROUP = "sg-0a01508c2dc292254";
         PREFECT_ECS_EXECUTION_ROLE_ARN = "arn:aws:iam::990187902980:role/comexsoft-prod-ecs-task-execution-role-86f3933";
         PREFECT_ECS_TASK_ROLE_ARN = "arn:aws:iam::990187902980:role/comexsoft-prod-ecs-task-execution-role-86f3933";
@@ -139,9 +140,10 @@
       };
 
       baseLibraryPath = {
-        # Add any missing library pkg to PATH
+        # Shared libraries for Python wheels (grpc/pulumi/etc.)
         LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
           pkgs.stdenv.cc.cc
+          pkgs.stdenv.cc.cc.lib
           pkgs.zlib
         ];
       };

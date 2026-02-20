@@ -1,0 +1,9 @@
+name: comparator
+runtime:
+  name: python
+  options:
+    # Use devenv's uv-managed venv (has pip)
+    virtualenv: .devenv/state/venv
+config:
+  aws:region: us-east-1
+description: Comparator EC2 bootstrap (ssh-only)

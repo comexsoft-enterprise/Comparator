@@ -155,7 +155,12 @@ dependencies = [
     "xlsxwriter==3.2.9",
     "yarl==1.22.0",
     "zstandard==0.25.0",
-    "faiss-cpu==1.11.0"
+    "faiss-cpu==1.11.0",
+
+    # Infra (Pulumi)
+    "pulumi==3.192.0",
+    "pulumi-aws==7.6.0",
+    "pulumi-tls==5.2.2"
 ]
 
 # [tool.uv.workspace]
